@@ -31,4 +31,11 @@ public class Book {
         result = 31 * result + year;
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "name='" + name + '\'' +
+                ", author='" + author + '\'' +
+                ", year=" + year;
+    }
 }
