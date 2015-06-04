@@ -9,9 +9,17 @@ import static org.junit.Assert.*;
 public class BookDAOTest {
 
     @Test
-    public void shouldGetInstanceOfBookDAO() throws Exception {
+    public void shouldGetInstanceOfBookDAO() {
         BookDAO bookDAO = BookDAO.getInstance();
 
         assertThat(bookDAO, instanceOf(BookDAO.class));
+    }
+
+    @Test
+    public void shouldGetSingletonInstanceOfBookDAO() {
+        BookDAO firstBookDAO = BookDAO.getInstance();
+        BookDAO secondBookDAO = BookDAO.getInstance();
+
+        assertThat(firstBookDAO, is(secondBookDAO));
     }
 }
