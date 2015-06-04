@@ -33,7 +33,7 @@
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>1.4.0</version>
                 <configuration>
-                    <mainClass>com.biblioteca.app.App</mainClass>
+                    <mainClass>com.biblioteca.app.Main</mainClass>
                 </configuration>
             </plugin>
             <plugin>
