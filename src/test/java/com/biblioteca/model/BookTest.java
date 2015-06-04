@@ -7,7 +7,7 @@ public class BookTest {
 
     @Test
     public void equalsContract() {
-        EqualsVerifier.forClass (Book.class).usingGetClass().verify();
+        EqualsVerifier.forClass(Book.class).usingGetClass().verify();
     }
 
 }

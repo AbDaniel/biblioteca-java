@@ -3,13 +3,13 @@ package com.biblioteca.model;
 public class Book {
 
     private final String name;
+    private final String author;
+    private final int year;
 
-    public Book(String name) {
+    public Book(String name, String author, int year) {
         this.name = name;
-    }
-
-    public String getName() {
-        return name;
+        this.author = author;
+        this.year = year;
     }
 
     @Override
@@ -19,11 +19,16 @@ public class Book {
 
         Book book = (Book) o;
 
-        return !(name != null ? !name.equals(book.name) : book.name != null);
+        if (year != book.year) return false;
+        if (name != null ? !name.equals(book.name) : book.name != null) return false;
+        return !(author != null ? !author.equals(book.author) : book.author != null);
     }
 
     @Override
     public int hashCode() {
-        return name != null ? name.hashCode() : 0;
+        int result = name != null ? name.hashCode() : 0;
+        result = 31 * result + (author != null ? author.hashCode() : 0);
+        result = 31 * result + year;
+        return result;
     }
 }
