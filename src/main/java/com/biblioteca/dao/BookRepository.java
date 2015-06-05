@@ -7,18 +7,18 @@ import java.util.List;
 
 public class BookRepository {
 
-    private List<Book> bookList;
+    private List<Book> books;
 
     private BookRepository() {
-        bookList = new ArrayList<>();
-        bookList.add(new Book("Lord of the Rings", "JR Toliken", 1930));
-        bookList.add(new Book("Harry Potter", "JK Rowling", 1992));
-        bookList.add(new Book("Catch-22", "Joesph Heller", 1950));
-        bookList.add(new Book("Winds of Winter", "George RR Martin", 2017));
+        books = new ArrayList<>();
+        books.add(new Book("Lord of the Rings", "JR Toliken", 1930));
+        books.add(new Book("Harry Potter", "JK Rowling", 1992));
+        books.add(new Book("Catch-22", "Joesph Heller", 1950));
+        books.add(new Book("Winds of Winter", "George RR Martin", 2017));
     }
 
     public List<Book> books() {
-        return bookList;
+        return books;
     }
 
     private static BookRepository bookRepository;
