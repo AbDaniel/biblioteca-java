@@ -1,37 +1,34 @@
 package com.biblioteca.dao;
 
-import com.biblioteca.model.Book;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.util.List;
 
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
-public class BookDAOTest {
+public class BooksTest {
 
-    BookDAO bookDAO;
+    Books books;
 
     @Before
     public void setUp() {
-        bookDAO = BookDAO.getInstance();
+        books = Books.getInstance();
     }
 
     @Test
     public void shouldGetInstanceOfBookDAO() {
-        bookDAO = BookDAO.getInstance();
+        books = Books.getInstance();
 
-        assertThat(bookDAO, instanceOf(BookDAO.class));
+        assertThat(books, instanceOf(Books.class));
     }
 
     @Test
     public void shouldGetSingletonInstanceOfBookDAO() {
-        bookDAO = BookDAO.getInstance();
-        BookDAO secondBookDAO = BookDAO.getInstance();
+        books = Books.getInstance();
+        Books secondBooks = Books.getInstance();
 
-        assertThat(bookDAO, is(secondBookDAO));
+        assertThat(books, is(secondBooks));
     }
 
 }
