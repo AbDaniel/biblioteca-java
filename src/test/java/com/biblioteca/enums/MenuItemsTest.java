@@ -4,10 +4,10 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.contrib.java.lang.system.SystemOutRule;
 
-import static com.biblioteca.enums.MenuEnum.*;
+import static com.biblioteca.enums.MenuItems.*;
 import static org.junit.Assert.*;
 
-public class MenuEnumTest {
+public class MenuItemsTest {
 
     @Rule
     public final SystemOutRule systemOutRule = new SystemOutRule().enableLog();

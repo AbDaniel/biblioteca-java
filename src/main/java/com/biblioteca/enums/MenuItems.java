@@ -1,14 +1,14 @@
 package com.biblioteca.enums;
 
-public enum MenuEnum {
+public enum MenuItems {
 
     LIST_BOOKS(1, "List all books"),
-    QUIT(2, "Quit Biblioteca!! (Highly Recommended!!)");
+    QUIT(2, "Quit Biblioteca");
 
     private int code;
     private String text;
 
-    MenuEnum(int code, String text) {
+    MenuItems(int code, String text) {
         this.code = code;
         this.text = text;
     }

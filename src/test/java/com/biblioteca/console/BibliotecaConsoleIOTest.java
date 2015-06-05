@@ -48,4 +48,12 @@ public class BibliotecaConsoleIOTest {
         assertEquals(expected, systemOutRule.getLog());
     }
 
+    @Test
+    public void shouldDisplayMenu() {
+        bibliotecaConsoleIO.displayMenu();
+
+        assertEquals("1. List all books\n" +
+                "2. Quit Biblioteca\n", systemOutRule.getLog());
+       }
+
 }
