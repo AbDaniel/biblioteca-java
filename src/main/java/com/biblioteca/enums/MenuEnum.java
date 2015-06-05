@@ -18,7 +18,7 @@ public enum MenuEnum {
     }
 
     public String getText() {
-        return text;
+        return code + ". " + text;
     }
 
 }
