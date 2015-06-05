@@ -1,7 +1,7 @@
 package com.biblioteca.app;
 
 import com.biblioteca.console.BibliotecaConsoleIO;
-import com.biblioteca.dao.Books;
+import com.biblioteca.dao.BookRepository;
 import com.biblioteca.model.Book;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,7 +15,7 @@ import static com.biblioteca.app.BibliotecaApp.WELCOME_TEXT;
 public class BibliotecaAppTest {
 
     @Mock
-    Books books;
+    BookRepository bookRepository;
     @Mock
     BibliotecaConsoleIO bibliotecaConsoleIO;
 
@@ -24,7 +24,7 @@ public class BibliotecaAppTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        bibliotecaApp = new BibliotecaApp(WELCOME_TEXT, books, bibliotecaConsoleIO);
+        bibliotecaApp = new BibliotecaApp(WELCOME_TEXT, bookRepository, bibliotecaConsoleIO);
     }
 
     @Test

@@ -1,25 +1,25 @@
 package com.biblioteca.app;
 
 import com.biblioteca.console.BibliotecaConsoleIO;
-import com.biblioteca.dao.Books;
+import com.biblioteca.dao.BookRepository;
 
 public class BibliotecaApp {
 
     public static final String WELCOME_TEXT = "Hello! Welcome to Biblioteca";
 
     private String welcomeMessage;
-    private Books books;
+    private BookRepository bookRepository;
     private BibliotecaConsoleIO bibliotecaConsoleIO;
 
-    public BibliotecaApp(String welcomeMessage, Books books, BibliotecaConsoleIO bibliotecaConsoleIO) {
+    public BibliotecaApp(String welcomeMessage, BookRepository bookRepository, BibliotecaConsoleIO bibliotecaConsoleIO) {
         this.welcomeMessage = welcomeMessage;
-        this.books = books;
+        this.bookRepository = bookRepository;
         this.bibliotecaConsoleIO = bibliotecaConsoleIO;
     }
 
     public void start() {
         bibliotecaConsoleIO.displayWelcomeMessage(welcomeMessage);
-        bibliotecaConsoleIO.displayListOfBooks(books.books());
+        bibliotecaConsoleIO.displayListOfBooks(bookRepository.books());
     }
 
 }

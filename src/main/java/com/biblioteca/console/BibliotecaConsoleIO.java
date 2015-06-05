@@ -1,5 +1,6 @@
 package com.biblioteca.console;
 
+import com.biblioteca.dao.BookRepository;
 import com.biblioteca.model.Book;
 
 import java.util.List;

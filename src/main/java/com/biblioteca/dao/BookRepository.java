@@ -5,11 +5,11 @@ import com.biblioteca.model.Book;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Books {
+public class BookRepository {
 
     private List<Book> bookList;
 
-    private Books() {
+    private BookRepository() {
         bookList = new ArrayList<>();
         bookList.add(new Book("Lord of the Rings", "JR Toliken", 1930));
         bookList.add(new Book("Harry Potter", "JK Rowling", 1992));
@@ -21,12 +21,12 @@ public class Books {
         return bookList;
     }
 
-    private static Books books;
+    private static BookRepository bookRepository;
 
-    public static Books getInstance() {
-        if (books == null)
-            books = new Books();
-        return books;
+    public static BookRepository getInstance() {
+        if (bookRepository == null)
+            bookRepository = new BookRepository();
+        return bookRepository;
     }
 
 }
