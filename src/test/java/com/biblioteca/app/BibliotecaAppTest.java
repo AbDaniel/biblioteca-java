@@ -2,8 +2,10 @@ package com.biblioteca.app;
 
 import com.biblioteca.console.BibliotecaConsoleIO;
 import com.biblioteca.dao.BookDAO;
+import com.biblioteca.model.Book;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
@@ -26,10 +28,17 @@ public class BibliotecaAppTest {
     }
 
     @Test
-    public void shouldPrintWelcomeMessage() {
+    public void shouldPrintWelcomeMessageAtStart() {
         bibliotecaApp.start();
 
         Mockito.verify(bibliotecaConsoleIO).displayWelcomeMessage(WELCOME_TEXT);
+    }
+
+    @Test
+    public void shouldListAllBooksAtStart() {
+        bibliotecaApp.start();
+
+        Mockito.verify(bibliotecaConsoleIO).displayListOfBooks(Matchers.anyListOf(Book.class));
     }
 
 }
