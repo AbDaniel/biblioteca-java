@@ -1,9 +1,10 @@
 package com.biblioteca.console;
 
-import com.biblioteca.enums.MenuItems;
+import com.biblioteca.enums.MenuItem;
 import com.biblioteca.model.Book;
 
 import java.util.List;
+import java.util.Scanner;
 
 public class BibliotecaConsoleIO {
 
@@ -18,9 +19,14 @@ public class BibliotecaConsoleIO {
     }
 
     public void displayMenu() {
-        for (MenuItems menuItems : MenuItems.values()) {
-            System.out.println(menuItems.getText());
+        for (MenuItem menuItem : MenuItem.values()) {
+            System.out.println(menuItem.getText());
         }
     }
 
+    public MenuItem getMenuItemFromConsole() {
+        Scanner scanner = new Scanner(System.in);
+        int choice = scanner.nextInt();
+        return MenuItem.valueOf(choice);
+    }
 }

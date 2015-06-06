@@ -1,10 +1,12 @@
 package com.biblioteca.console;
 
+import com.biblioteca.enums.MenuItem;
 import com.biblioteca.model.Book;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.contrib.java.lang.system.SystemOutRule;
+import org.junit.contrib.java.lang.system.TextFromStandardInputStream;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +18,9 @@ public class BibliotecaConsoleIOTest {
 
     @Rule
     public final SystemOutRule systemOutRule = new SystemOutRule().enableLog();
+    @Rule
+    public final TextFromStandardInputStream systemInMock
+            = TextFromStandardInputStream.emptyStandardInputStream();
 
     BibliotecaConsoleIO bibliotecaConsoleIO;
 
@@ -54,6 +59,15 @@ public class BibliotecaConsoleIOTest {
 
         assertEquals("1. List all books\n" +
                 "2. Quit Biblioteca\n", systemOutRule.getLog());
-       }
+    }
+
+    @Test
+    public void shouldGetListBooksChoiceFromUser() {
+        systemInMock.provideText("1\n");
+
+        MenuItem actualMenuItem = bibliotecaConsoleIO.getMenuItemFromConsole();
+
+        assertEquals(MenuItem.LIST_BOOKS, actualMenuItem);
+    }
 
 }
