@@ -19,7 +19,7 @@ public class BibliotecaApp {
 
     public void start() {
         bibliotecaConsoleIO.displayWelcomeMessage(welcomeMessage);
-        bibliotecaConsoleIO.displayListOfBooks(books.all());
+        bibliotecaConsoleIO.displayMenu();
     }
 
 }

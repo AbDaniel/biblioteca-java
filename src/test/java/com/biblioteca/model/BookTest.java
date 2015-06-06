@@ -1,6 +1,5 @@
 package com.biblioteca.model;
 
-import com.biblioteca.enums.MenuItem;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.Test;
 

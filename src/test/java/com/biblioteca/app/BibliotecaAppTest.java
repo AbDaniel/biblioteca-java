@@ -35,10 +35,10 @@ public class BibliotecaAppTest {
     }
 
     @Test
-    public void shouldListAllBooksAtStart() {
+    public void shouldListAllMenuOptions() {
         bibliotecaApp.start();
 
-        Mockito.verify(bibliotecaConsoleIO).displayListOfBooks(Matchers.anyListOf(Book.class));
+        Mockito.verify(bibliotecaConsoleIO).displayMenu();
     }
 
 }
