@@ -9,6 +9,7 @@ import org.junit.contrib.java.lang.system.TextFromStandardInputStream;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import static com.biblioteca.app.BibliotecaApp.*;
 import static org.junit.Assert.assertEquals;
@@ -26,7 +27,7 @@ public class BibliotecaConsoleIOTest {
 
     @Before
     public void setUp() {
-        bibliotecaConsoleIO = new BibliotecaConsoleIO();
+        bibliotecaConsoleIO = new BibliotecaConsoleIO(new Scanner(System.in));
     }
 
     @Test

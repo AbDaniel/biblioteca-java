@@ -8,6 +8,12 @@ import java.util.Scanner;
 
 public class BibliotecaConsoleIO {
 
+    private Scanner scanner;
+
+    public BibliotecaConsoleIO(Scanner scanner) {
+        this.scanner = scanner;
+    }
+
     public void displayWelcomeMessage(String welcomeMessage) {
         System.out.println(welcomeMessage);
     }
@@ -25,7 +31,6 @@ public class BibliotecaConsoleIO {
     }
 
     public int getUserChoice() {
-        Scanner scanner = new Scanner(System.in);
         return scanner.nextInt();
     }
 }

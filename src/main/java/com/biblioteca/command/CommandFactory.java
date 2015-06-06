@@ -6,6 +6,7 @@ import com.biblioteca.enums.MenuItem;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 
 import static com.biblioteca.command.QuitCommand.EXIT_MESSAGE;
 import static com.biblioteca.enums.MenuItem.LIST_BOOKS;
@@ -16,7 +17,8 @@ public class CommandFactory {
     private Map<MenuItem, Command> commandMap = new HashMap<>();
 
     public CommandFactory() {
-        commandMap.put(LIST_BOOKS, new ListBooksCommand(Books.getInstance(), new BibliotecaConsoleIO()));
+        commandMap.put(LIST_BOOKS, new ListBooksCommand(Books.getInstance(), new BibliotecaConsoleIO(new Scanner
+                (System.in))));
         commandMap.put(QUIT, new QuitCommand(EXIT_MESSAGE));
     }
 
