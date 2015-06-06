@@ -41,4 +41,11 @@ public class BibliotecaAppTest {
         Mockito.verify(bibliotecaConsoleIO).displayMenu();
     }
 
+    @Test
+    public void shouldGetMenuOptionFromUser() {
+        bibliotecaApp.start();
+
+        Mockito.verify(bibliotecaConsoleIO).getMenuItemFromConsole();
+    }
+
 }

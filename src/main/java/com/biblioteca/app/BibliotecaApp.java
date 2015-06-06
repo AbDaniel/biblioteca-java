@@ -2,6 +2,9 @@ package com.biblioteca.app;
 
 import com.biblioteca.console.BibliotecaConsoleIO;
 import com.biblioteca.dao.Books;
+import com.biblioteca.enums.MenuItem;
+
+import static com.biblioteca.enums.MenuItem.*;
 
 public class BibliotecaApp {
 
@@ -20,6 +23,7 @@ public class BibliotecaApp {
     public void start() {
         bibliotecaConsoleIO.displayWelcomeMessage(welcomeMessage);
         bibliotecaConsoleIO.displayMenu();
+        MenuItem selectedMenuItem = bibliotecaConsoleIO.getMenuItemFromConsole();
     }
 
 }
