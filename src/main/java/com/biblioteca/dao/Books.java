@@ -7,18 +7,18 @@ import java.util.List;
 
 public class Books {
 
-    private List<Book> bookList;
+    private List<Book> availableBooks;
 
     private Books() {
-        bookList = new ArrayList<>();
-        bookList.add(new Book("Lord of the Rings", "JR Toliken", 1930));
-        bookList.add(new Book("Harry Potter", "JK Rowling", 1992));
-        bookList.add(new Book("Catch-22", "Joesph Heller", 1950));
-        bookList.add(new Book("Winds of Winter", "George RR Martin", 2017));
+        availableBooks = new ArrayList<>();
+        availableBooks.add(new Book("Lord of the Rings", "JR Toliken", 1930));
+        availableBooks.add(new Book("Harry Potter", "JK Rowling", 1992));
+        availableBooks.add(new Book("Catch-22", "Joesph Heller", 1950));
+        availableBooks.add(new Book("Winds of Winter", "George RR Martin", 2017));
     }
 
     public List<Book> all() {
-        return bookList;
+        return availableBooks;
     }
 
     private static Books books;
@@ -30,6 +30,9 @@ public class Books {
     }
 
     public Book findByName(String bookName) {
-        return null;
+        int index = availableBooks.indexOf(new Book(bookName));
+        if (index == -1)
+            return null;
+        return availableBooks.get(index);
     }
 }

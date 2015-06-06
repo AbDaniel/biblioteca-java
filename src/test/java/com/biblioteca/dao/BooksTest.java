@@ -43,4 +43,17 @@ public class BooksTest {
 
         assertNull(actualBook);
     }
+
+    @Test
+    public void shouldFindGivenBookByName() {
+        String bookName = "Lord of the Rings";
+        String author = "JRR Tolkien";
+        int year = 1930;
+
+        Book actualBook = books.findByName(bookName);
+        Book expectedBook = new Book(bookName, author, year);
+
+        assertEquals(actualBook, expectedBook);
+    }
+
 }

@@ -3,13 +3,19 @@ package com.biblioteca.model;
 public class Book {
 
     private final String name;
-    private final String author;
-    private final int year;
+    private String author;
+    private int year;
 
     public Book(String name, String author, int year) {
         this.name = name;
         this.author = author;
         this.year = year;
+    }
+
+    public Book(String name) {
+        this.name = name;
+        this.author = "";
+        this.year = 0;
     }
 
     @Override
