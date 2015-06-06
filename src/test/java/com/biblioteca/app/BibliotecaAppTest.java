@@ -2,6 +2,7 @@ package com.biblioteca.app;
 
 import com.biblioteca.command.Command;
 import com.biblioteca.command.CommandFactory;
+import com.biblioteca.command.QuitCommand;
 import com.biblioteca.console.BibliotecaConsoleIO;
 import com.biblioteca.dao.Books;
 import com.biblioteca.enums.MenuItem;
@@ -14,7 +15,10 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
+import static com.biblioteca.app.BibliotecaApp.INVALID_INPUT_TEXT;
 import static com.biblioteca.app.BibliotecaApp.WELCOME_TEXT;
+import static com.biblioteca.command.QuitCommand.EXIT_MESSAGE;
+import static com.biblioteca.console.BibliotecaConsoleIO.INVALID_INPUT;
 import static org.mockito.Mockito.when;
 
 public class BibliotecaAppTest {
@@ -31,45 +35,22 @@ public class BibliotecaAppTest {
     @Mock
     CommandFactory commandFactory;
 
-    @Mock
-    Command command;
-
     BibliotecaApp bibliotecaApp;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        bibliotecaApp = new BibliotecaApp(WELCOME_TEXT, books, bibliotecaConsoleIO, commandFactory);
+        bibliotecaApp = new BibliotecaApp(WELCOME_TEXT, bibliotecaConsoleIO, commandFactory);
         when(bibliotecaConsoleIO.getUserChoice()).thenReturn(2);
-        when(commandFactory.getCommand(Matchers.any(MenuItem.class))).thenReturn(command);
+        when(commandFactory.getCommand(Matchers.any(MenuItem.class))).thenReturn(new QuitCommand(EXIT_MESSAGE));
     }
 
     @Test
     public void shouldPrintWelcomeMessageAtStart() {
+        exit.expectSystemExitWithStatus(0);
         bibliotecaApp.start();
 
         Mockito.verify(bibliotecaConsoleIO).displayMessage(WELCOME_TEXT);
-    }
-
-    @Test
-    public void shouldListAllMenuOptions() {
-        bibliotecaApp.start();
-
-        Mockito.verify(bibliotecaConsoleIO).displayMenu();
-    }
-
-    @Test
-    public void shouldGetMenuOptionFromUser() {
-        bibliotecaApp.start();
-
-        Mockito.verify(bibliotecaConsoleIO).getUserChoice();
-    }
-
-    @Test
-    public void shouldExecuteCommandAssociatedWithMenuItem() {
-        bibliotecaApp.start();
-
-        Mockito.verify(command).execute();
     }
 
 }
