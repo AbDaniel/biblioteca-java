@@ -26,7 +26,6 @@ public class BibliotecaConsoleIO {
 
     public int getUserChoice() {
         Scanner scanner = new Scanner(System.in);
-        int choice = scanner.nextInt();
-        return choice;
+        return scanner.nextInt();
     }
 }
