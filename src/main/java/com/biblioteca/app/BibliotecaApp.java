@@ -5,6 +5,8 @@ import com.biblioteca.console.BibliotecaConsoleIO;
 import com.biblioteca.dao.Books;
 import com.biblioteca.enums.MenuItem;
 
+import static com.biblioteca.enums.MenuItem.*;
+
 public class BibliotecaApp {
 
     public static final String WELCOME_TEXT = "Hello! Welcome to Biblioteca";
@@ -24,10 +26,14 @@ public class BibliotecaApp {
 
     public void start() {
         bibliotecaConsoleIO.displayWelcomeMessage(welcomeMessage);
-        bibliotecaConsoleIO.displayMenu();
-        int userChoice = bibliotecaConsoleIO.getUserChoice();
-        MenuItem selectedMenuItem = MenuItem.valueOf(userChoice);
-        commandFactory.getCommand(selectedMenuItem).execute();
+        do {
+            bibliotecaConsoleIO.displayMenu();
+            int userChoice = bibliotecaConsoleIO.getUserChoice();
+            MenuItem selectedMenuItem = valueOf(userChoice);
+            commandFactory.getCommand(selectedMenuItem).execute();
+            if (selectedMenuItem == QUIT)
+                break;
+        } while (true);
     }
 
 }

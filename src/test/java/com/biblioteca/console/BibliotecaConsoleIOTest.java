@@ -17,6 +17,7 @@ public class BibliotecaConsoleIOTest {
 
     @Rule
     public final SystemOutRule systemOutRule = new SystemOutRule().enableLog();
+
     @Rule
     public final TextFromStandardInputStream systemInMock
             = TextFromStandardInputStream.emptyStandardInputStream();

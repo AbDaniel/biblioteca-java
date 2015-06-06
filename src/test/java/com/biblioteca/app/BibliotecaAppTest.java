@@ -41,7 +41,7 @@ public class BibliotecaAppTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         bibliotecaApp = new BibliotecaApp(WELCOME_TEXT, books, bibliotecaConsoleIO, commandFactory);
-        when(bibliotecaConsoleIO.getUserChoice()).thenReturn(1);
+        when(bibliotecaConsoleIO.getUserChoice()).thenReturn(2);
         when(commandFactory.getCommand(Matchers.any(MenuItem.class))).thenReturn(command);
     }
 
