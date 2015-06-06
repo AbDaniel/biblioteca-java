@@ -15,6 +15,9 @@ public class QuitCommandTest {
     @Rule
     public final SystemOutRule systemOutRule = new SystemOutRule().enableLog();
 
+    @Rule
+    public final ExpectedSystemExit exit = ExpectedSystemExit.none();
+
     Command command;
 
     @Before
@@ -24,9 +27,9 @@ public class QuitCommandTest {
 
     @Test
     public void shouldPrintExitMessage() {
+        exit.expectSystemExitWithStatus(0);
         command.execute();
 
         assertEquals(EXIT_MESSAGE + "\n", systemOutRule.getLog());
-
     }
 }
