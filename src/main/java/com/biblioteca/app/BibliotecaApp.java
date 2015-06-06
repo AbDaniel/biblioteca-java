@@ -6,9 +6,6 @@ import com.biblioteca.console.BibliotecaConsoleIO;
 
 public class BibliotecaApp {
 
-    public static final String WELCOME_TEXT = "Hello! Welcome to Biblioteca";
-    public static final String INVALID_INPUT_TEXT = "Select a valid option!";
-
     private String welcomeMessage;
     private BibliotecaConsoleIO bibliotecaConsoleIO;
     private CommandFactory commandFactory;

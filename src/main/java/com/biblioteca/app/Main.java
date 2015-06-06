@@ -5,10 +5,12 @@ import com.biblioteca.console.BibliotecaConsoleIO;
 
 import java.util.Scanner;
 
+import static com.biblioteca.console.BibliotecaConsoleIO.*;
+
 public class Main {
 
     public static void main(String[] args) {
-        BibliotecaApp bibliotecaApp = new BibliotecaApp(BibliotecaApp.WELCOME_TEXT, new
+        BibliotecaApp bibliotecaApp = new BibliotecaApp(WELCOME_TEXT, new
                 BibliotecaConsoleIO(new Scanner(System.in)), new CommandFactory());
         bibliotecaApp.start();
     }

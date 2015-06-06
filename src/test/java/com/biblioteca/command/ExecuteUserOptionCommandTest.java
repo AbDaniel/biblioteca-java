@@ -9,6 +9,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
+import static com.biblioteca.console.BibliotecaConsoleIO.*;
 import static org.mockito.Mockito.when;
 
 public class ExecuteUserOptionCommandTest {
@@ -51,6 +52,14 @@ public class ExecuteUserOptionCommandTest {
         exceuteUserOptionsCommand.execute();
 
         Mockito.verify(mockCommand).execute();
+    }
+
+    @Test
+    public void shouldSayInvalidInputOnInvalidInput() {
+        when(bibliotecaConsoleIO.getUserChoice()).thenReturn(INVALID_INPUT);
+        exceuteUserOptionsCommand.execute();
+
+        Mockito.verify(bibliotecaConsoleIO).displayMessage(INVALID_INPUT_TEXT);
     }
 
 }

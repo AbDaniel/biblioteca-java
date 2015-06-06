@@ -3,8 +3,8 @@ package com.biblioteca.command;
 import com.biblioteca.console.BibliotecaConsoleIO;
 import com.biblioteca.enums.MenuItem;
 
-import static com.biblioteca.app.BibliotecaApp.INVALID_INPUT_TEXT;
 import static com.biblioteca.console.BibliotecaConsoleIO.INVALID_INPUT;
+import static com.biblioteca.console.BibliotecaConsoleIO.INVALID_INPUT_TEXT;
 import static com.biblioteca.enums.MenuItem.valueOf;
 
 public class ExecuteUserOptionCommand implements Command {

@@ -1,6 +1,5 @@
 package com.biblioteca.app;
 
-import com.biblioteca.command.Command;
 import com.biblioteca.command.CommandFactory;
 import com.biblioteca.command.QuitCommand;
 import com.biblioteca.console.BibliotecaConsoleIO;
@@ -15,10 +14,8 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
-import static com.biblioteca.app.BibliotecaApp.INVALID_INPUT_TEXT;
-import static com.biblioteca.app.BibliotecaApp.WELCOME_TEXT;
+import static com.biblioteca.console.BibliotecaConsoleIO.WELCOME_TEXT;
 import static com.biblioteca.command.QuitCommand.EXIT_MESSAGE;
-import static com.biblioteca.console.BibliotecaConsoleIO.INVALID_INPUT;
 import static org.mockito.Mockito.when;
 
 public class BibliotecaAppTest {

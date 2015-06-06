@@ -6,9 +6,8 @@ import org.junit.Test;
 import org.junit.contrib.java.lang.system.ExpectedSystemExit;
 import org.junit.contrib.java.lang.system.SystemOutRule;
 
-import static com.biblioteca.app.BibliotecaApp.WELCOME_TEXT;
 import static com.biblioteca.command.QuitCommand.EXIT_MESSAGE;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class QuitCommandTest {
 

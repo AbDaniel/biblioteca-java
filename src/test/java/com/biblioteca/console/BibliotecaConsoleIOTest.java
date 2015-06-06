@@ -11,8 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import static com.biblioteca.app.BibliotecaApp.*;
 import static com.biblioteca.console.BibliotecaConsoleIO.INVALID_INPUT;
+import static com.biblioteca.console.BibliotecaConsoleIO.WELCOME_TEXT;
+
 import static org.junit.Assert.assertEquals;
 
 public class BibliotecaConsoleIOTest {
