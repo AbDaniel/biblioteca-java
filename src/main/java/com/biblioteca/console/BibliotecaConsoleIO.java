@@ -3,10 +3,13 @@ package com.biblioteca.console;
 import com.biblioteca.enums.MenuItem;
 import com.biblioteca.model.Book;
 
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
 public class BibliotecaConsoleIO {
+
+    public static int INVALID_INPUT = -1;
 
     private Scanner scanner;
 
@@ -31,6 +34,15 @@ public class BibliotecaConsoleIO {
     }
 
     public int getUserChoice() {
-        return scanner.nextInt();
+        int choice;
+        try {
+            choice = scanner.nextInt();
+            if (MenuItem.isInvalidMenuItem(choice)) {
+                throw new InputMismatchException();
+            }
+        } catch (InputMismatchException e) {
+            choice = INVALID_INPUT;
+        }
+        return choice;
     }
 }

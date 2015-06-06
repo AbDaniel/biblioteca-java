@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import static com.biblioteca.app.BibliotecaApp.*;
+import static com.biblioteca.console.BibliotecaConsoleIO.INVALID_INPUT;
 import static org.junit.Assert.assertEquals;
 
 public class BibliotecaConsoleIOTest {
@@ -69,6 +70,24 @@ public class BibliotecaConsoleIOTest {
         int actualUserChoice = bibliotecaConsoleIO.getUserChoice();
 
         assertEquals(1, actualUserChoice);
+    }
+
+    @Test
+    public void shouldReturnInvalidInputIfUserInputsNotANumber() {
+        systemInMock.provideText("Gondor\n");
+
+        int actualUserChoice = bibliotecaConsoleIO.getUserChoice();
+
+        assertEquals(INVALID_INPUT, actualUserChoice);
+    }
+
+    @Test
+    public void shouldReturnInvalidInputIfUserInputsAInvalidNumber() {
+        systemInMock.provideText("6\n");
+
+        int actualUserChoice = bibliotecaConsoleIO.getUserChoice();
+
+        assertEquals(INVALID_INPUT, actualUserChoice);
     }
 
 }

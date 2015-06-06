@@ -16,11 +16,22 @@ public enum MenuItem {
         this.text = text;
     }
 
+    public static boolean isInvalidMenuItem(int code) {
+        boolean isInvalid = true;
+        for (MenuItem menuItem : MenuItem.values()) {
+            if (menuItem.code == code) {
+                isInvalid = false;
+                break;
+            }
+        }
+        return isInvalid;
+    }
+
     public String getText() {
         return code + ". " + text;
     }
 
-    private static Map<Integer, MenuItem> map = new HashMap<Integer, MenuItem>();
+    private static Map<Integer, MenuItem> map = new HashMap<>();
 
     static {
         for (MenuItem menuItem : MenuItem.values()) {
