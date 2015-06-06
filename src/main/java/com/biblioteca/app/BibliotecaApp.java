@@ -25,7 +25,7 @@ public class BibliotecaApp {
     }
 
     public void start() {
-        bibliotecaConsoleIO.displayWelcomeMessage(welcomeMessage);
+        bibliotecaConsoleIO.displayMessage(welcomeMessage);
         do {
             bibliotecaConsoleIO.displayMenu();
             int userChoice = bibliotecaConsoleIO.getUserChoice();

@@ -5,7 +5,6 @@ import com.biblioteca.command.CommandFactory;
 import com.biblioteca.console.BibliotecaConsoleIO;
 import com.biblioteca.dao.Books;
 import com.biblioteca.enums.MenuItem;
-import com.biblioteca.model.Book;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -49,7 +48,7 @@ public class BibliotecaAppTest {
     public void shouldPrintWelcomeMessageAtStart() {
         bibliotecaApp.start();
 
-        Mockito.verify(bibliotecaConsoleIO).displayWelcomeMessage(WELCOME_TEXT);
+        Mockito.verify(bibliotecaConsoleIO).displayMessage(WELCOME_TEXT);
     }
 
     @Test

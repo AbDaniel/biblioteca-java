@@ -14,8 +14,8 @@ public class BibliotecaConsoleIO {
         this.scanner = scanner;
     }
 
-    public void displayWelcomeMessage(String welcomeMessage) {
-        System.out.println(welcomeMessage);
+    public void displayMessage(String message) {
+        System.out.println(message);
     }
 
     public void displayListOfBooks(List<Book> books) {

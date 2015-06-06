@@ -32,7 +32,7 @@ public class BibliotecaConsoleIOTest {
 
     @Test
     public void shouldDisplayWelcomeMessage() {
-        bibliotecaConsoleIO.displayWelcomeMessage(WELCOME_TEXT);
+        bibliotecaConsoleIO.displayMessage(WELCOME_TEXT);
 
         assertEquals(WELCOME_TEXT + "\n", systemOutRule.getLog());
     }
