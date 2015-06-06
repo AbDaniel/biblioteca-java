@@ -2,6 +2,7 @@ package com.biblioteca.app;
 
 import com.biblioteca.console.BibliotecaConsoleIO;
 import com.biblioteca.dao.Books;
+import com.biblioteca.enums.MenuItem;
 import com.biblioteca.model.Book;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,6 +12,7 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import static com.biblioteca.app.BibliotecaApp.WELCOME_TEXT;
+import static org.mockito.Mockito.when;
 
 public class BibliotecaAppTest {
 
@@ -46,6 +48,14 @@ public class BibliotecaAppTest {
         bibliotecaApp.start();
 
         Mockito.verify(bibliotecaConsoleIO).getMenuItemFromConsole();
+    }
+
+    @Test
+    public void shouldListAllBooksWhenListBookIsChosenFromMenu() {
+        bibliotecaApp.start();
+        when(bibliotecaConsoleIO.getMenuItemFromConsole()).thenReturn(MenuItem.LIST_BOOKS);
+
+        Mockito.verify(bibliotecaConsoleIO).displayListOfBooks(Matchers.anyListOf(Book.class));
     }
 
 }

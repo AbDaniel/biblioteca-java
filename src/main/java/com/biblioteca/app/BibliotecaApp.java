@@ -24,6 +24,7 @@ public class BibliotecaApp {
         bibliotecaConsoleIO.displayWelcomeMessage(welcomeMessage);
         bibliotecaConsoleIO.displayMenu();
         MenuItem selectedMenuItem = bibliotecaConsoleIO.getMenuItemFromConsole();
+        bibliotecaConsoleIO.displayListOfBooks(books.all());
     }
 
 }
