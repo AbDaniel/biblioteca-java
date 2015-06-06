@@ -1,5 +1,6 @@
 package com.biblioteca.app;
 
+import com.biblioteca.command.CommandFactory;
 import com.biblioteca.console.BibliotecaConsoleIO;
 import com.biblioteca.dao.Books;
 import com.biblioteca.enums.MenuItem;
@@ -11,11 +12,14 @@ public class BibliotecaApp {
     private String welcomeMessage;
     private Books books;
     private BibliotecaConsoleIO bibliotecaConsoleIO;
+    private CommandFactory commandFactory;
 
-    public BibliotecaApp(String welcomeMessage, Books books, BibliotecaConsoleIO bibliotecaConsoleIO) {
+    public BibliotecaApp(String welcomeMessage, Books books, BibliotecaConsoleIO bibliotecaConsoleIO,
+                         CommandFactory commandFactory) {
         this.welcomeMessage = welcomeMessage;
         this.books = books;
         this.bibliotecaConsoleIO = bibliotecaConsoleIO;
+        this.commandFactory = commandFactory;
     }
 
     public void start() {
@@ -23,14 +27,7 @@ public class BibliotecaApp {
         bibliotecaConsoleIO.displayMenu();
         int userChoice = bibliotecaConsoleIO.getUserChoice();
         MenuItem selectedMenuItem = MenuItem.valueOf(userChoice);
-        switch (selectedMenuItem) {
-            case LIST_BOOKS:
-                bibliotecaConsoleIO.displayListOfBooks(books.all());
-                break;
-            case QUIT:
-                System.exit(0);
-                break;
-        }
+        commandFactory.getCommand(selectedMenuItem).execute();
     }
 
 }

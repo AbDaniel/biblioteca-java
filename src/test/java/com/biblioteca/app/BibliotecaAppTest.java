@@ -1,7 +1,10 @@
 package com.biblioteca.app;
 
+import com.biblioteca.command.Command;
+import com.biblioteca.command.CommandFactory;
 import com.biblioteca.console.BibliotecaConsoleIO;
 import com.biblioteca.dao.Books;
+import com.biblioteca.enums.MenuItem;
 import com.biblioteca.model.Book;
 import org.junit.Before;
 import org.junit.Rule;
@@ -22,16 +25,24 @@ public class BibliotecaAppTest {
 
     @Mock
     Books books;
+
     @Mock
     BibliotecaConsoleIO bibliotecaConsoleIO;
+
+    @Mock
+    CommandFactory commandFactory;
+
+    @Mock
+    Command command;
 
     BibliotecaApp bibliotecaApp;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        bibliotecaApp = new BibliotecaApp(WELCOME_TEXT, books, bibliotecaConsoleIO);
+        bibliotecaApp = new BibliotecaApp(WELCOME_TEXT, books, bibliotecaConsoleIO, commandFactory);
         when(bibliotecaConsoleIO.getUserChoice()).thenReturn(1);
+        when(commandFactory.getCommand(Matchers.any(MenuItem.class))).thenReturn(command);
     }
 
     @Test
@@ -56,19 +67,10 @@ public class BibliotecaAppTest {
     }
 
     @Test
-    public void shouldListAllBooksWhenListBookIsChosenFromMenu() {
-        when(bibliotecaConsoleIO.getUserChoice()).thenReturn(1);
+    public void shouldExecuteCommandAssociatedWithMenuItem() {
         bibliotecaApp.start();
 
-        Mockito.verify(bibliotecaConsoleIO).displayListOfBooks(Matchers.anyListOf(Book.class));
-    }
-
-    @Test
-    public void shouldQuitWhenQuitIsChosenFromTheMenu() {
-        exit.expectSystemExitWithStatus(0);
-        when(bibliotecaConsoleIO.getUserChoice()).thenReturn(2);
-
-        bibliotecaApp.start();
+        Mockito.verify(command).execute();
     }
 
 }
