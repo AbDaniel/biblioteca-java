@@ -19,7 +19,7 @@ public class QuitCommandTest {
 
     @Before
     public void setUp() throws Exception {
-        command = new QuitCommand();
+        command = new QuitCommand(EXIT_MESSAGE);
     }
 
     @Test
