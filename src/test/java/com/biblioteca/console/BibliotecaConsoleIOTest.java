@@ -1,6 +1,5 @@
 package com.biblioteca.console;
 
-import com.biblioteca.enums.MenuItem;
 import com.biblioteca.model.Book;
 import org.junit.Before;
 import org.junit.Rule;
@@ -65,9 +64,9 @@ public class BibliotecaConsoleIOTest {
     public void shouldGetListBooksChoiceFromUser() {
         systemInMock.provideText("1\n");
 
-        MenuItem actualMenuItem = bibliotecaConsoleIO.getMenuItemFromConsole();
+        int actualUserChoice = bibliotecaConsoleIO.getUserChoice();
 
-        assertEquals(MenuItem.LIST_BOOKS, actualMenuItem);
+        assertEquals(1, actualUserChoice);
     }
 
 }

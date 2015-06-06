@@ -24,9 +24,9 @@ public class BibliotecaConsoleIO {
         }
     }
 
-    public MenuItem getMenuItemFromConsole() {
+    public int getUserChoice() {
         Scanner scanner = new Scanner(System.in);
         int choice = scanner.nextInt();
-        return MenuItem.valueOf(choice);
+        return choice;
     }
 }

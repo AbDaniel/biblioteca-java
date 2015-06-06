@@ -21,7 +21,8 @@ public class BibliotecaApp {
     public void start() {
         bibliotecaConsoleIO.displayWelcomeMessage(welcomeMessage);
         bibliotecaConsoleIO.displayMenu();
-        MenuItem selectedMenuItem = bibliotecaConsoleIO.getMenuItemFromConsole();
+        int userChoice = bibliotecaConsoleIO.getUserChoice();
+        MenuItem selectedMenuItem = MenuItem.valueOf(userChoice);
         switch (selectedMenuItem) {
             case LIST_BOOKS:
                 bibliotecaConsoleIO.displayListOfBooks(books.all());
@@ -30,7 +31,6 @@ public class BibliotecaApp {
                 System.exit(0);
                 break;
         }
-
     }
 
 }

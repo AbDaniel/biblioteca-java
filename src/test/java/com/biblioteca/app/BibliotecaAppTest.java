@@ -13,8 +13,6 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import static com.biblioteca.app.BibliotecaApp.WELCOME_TEXT;
-import static com.biblioteca.enums.MenuItem.LIST_BOOKS;
-import static com.biblioteca.enums.MenuItem.QUIT;
 import static org.mockito.Mockito.when;
 
 public class BibliotecaAppTest {
@@ -33,7 +31,7 @@ public class BibliotecaAppTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         bibliotecaApp = new BibliotecaApp(WELCOME_TEXT, books, bibliotecaConsoleIO);
-        when(bibliotecaConsoleIO.getMenuItemFromConsole()).thenReturn(LIST_BOOKS);
+        when(bibliotecaConsoleIO.getUserChoice()).thenReturn(1);
     }
 
     @Test
@@ -54,12 +52,12 @@ public class BibliotecaAppTest {
     public void shouldGetMenuOptionFromUser() {
         bibliotecaApp.start();
 
-        Mockito.verify(bibliotecaConsoleIO).getMenuItemFromConsole();
+        Mockito.verify(bibliotecaConsoleIO).getUserChoice();
     }
 
     @Test
     public void shouldListAllBooksWhenListBookIsChosenFromMenu() {
-        when(bibliotecaConsoleIO.getMenuItemFromConsole()).thenReturn(LIST_BOOKS);
+        when(bibliotecaConsoleIO.getUserChoice()).thenReturn(1);
         bibliotecaApp.start();
 
         Mockito.verify(bibliotecaConsoleIO).displayListOfBooks(Matchers.anyListOf(Book.class));
@@ -68,7 +66,7 @@ public class BibliotecaAppTest {
     @Test
     public void shouldQuitWhenQuitIsChosenFromTheMenu() {
         exit.expectSystemExitWithStatus(0);
-        when(bibliotecaConsoleIO.getMenuItemFromConsole()).thenReturn(QUIT);
+        when(bibliotecaConsoleIO.getUserChoice()).thenReturn(2);
 
         bibliotecaApp.start();
     }
