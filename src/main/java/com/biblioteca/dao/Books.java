@@ -29,4 +29,7 @@ public class Books {
         return books;
     }
 
+    public Book findByName(String bookName) {
+        return null;
+    }
 }

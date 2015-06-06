@@ -1,7 +1,9 @@
 package com.biblioteca.dao;
 
+import com.biblioteca.model.Book;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.core.Is.is;
@@ -31,4 +33,14 @@ public class BooksTest {
         assertThat(books, is(secondBooks));
     }
 
+    @Test
+    public void shouldReturnNullIfBookIsNotAvailable() {
+        String bookName = "The Fellowship Of the Ring";
+        String author = "JRR Tolkien";
+        int year = 1930;
+
+        Book actualBook = books.findByName(bookName);
+
+        assertNull(actualBook);
+    }
 }
