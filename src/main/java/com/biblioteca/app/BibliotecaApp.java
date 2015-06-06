@@ -4,8 +4,6 @@ import com.biblioteca.console.BibliotecaConsoleIO;
 import com.biblioteca.dao.Books;
 import com.biblioteca.enums.MenuItem;
 
-import static com.biblioteca.enums.MenuItem.*;
-
 public class BibliotecaApp {
 
     public static final String WELCOME_TEXT = "Hello! Welcome to Biblioteca";
@@ -24,7 +22,15 @@ public class BibliotecaApp {
         bibliotecaConsoleIO.displayWelcomeMessage(welcomeMessage);
         bibliotecaConsoleIO.displayMenu();
         MenuItem selectedMenuItem = bibliotecaConsoleIO.getMenuItemFromConsole();
-        bibliotecaConsoleIO.displayListOfBooks(books.all());
+        switch (selectedMenuItem) {
+            case LIST_BOOKS:
+                bibliotecaConsoleIO.displayListOfBooks(books.all());
+                break;
+            case QUIT:
+                System.exit(0);
+                break;
+        }
+
     }
 
 }
