@@ -54,7 +54,7 @@ public class ReturnCommandTest {
     }
 
     @Test
-    public void shouldNotifyIfBookSearchedIsNotPresent() {
+    public void shouldNotifyIfUserInputsInvalidBookName() {
         String bookName = "123";
         when(bibliotecaConsoleIO.getBookNameFromUser()).thenReturn(bookName);
         when(books.returnBook(bookName)).thenReturn(false);
@@ -62,6 +62,17 @@ public class ReturnCommandTest {
         command.execute();
 
         Mockito.verify(bibliotecaConsoleIO).displayMessage(BOOK_NOT_VALID_TEXT);
+    }
+
+    @Test
+    public void shouldNotifyUserOnSuccessfulReturn() {
+        String bookName = "Lord of the Rings";
+        when(bibliotecaConsoleIO.getBookNameFromUser()).thenReturn(bookName);
+        when(books.returnBook(bookName)).thenReturn(true);
+
+        command.execute();
+
+        Mockito.verify(bibliotecaConsoleIO).displayMessage(SUCCESSFULL_RETURN_TEXT);
     }
 
 }

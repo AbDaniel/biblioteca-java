@@ -63,7 +63,7 @@ public class CheckoutCommandTest {
     }
 
     @Test
-    public void shouldNotifyIfBookSearchedIsPresent() {
+    public void shouldNotifyUserOnSuccessfulCheckout() {
         String bookName = "Lord of the Rings";
         when(bibliotecaConsoleIO.getBookNameFromUser()).thenReturn(bookName);
         when(books.checkout(bookName)).thenReturn(true);

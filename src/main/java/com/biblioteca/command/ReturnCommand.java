@@ -21,7 +21,7 @@ public class ReturnCommand implements Command {
         bibliotecaConsoleIO.displayMessage(CHECKOUT_PROMPT_TEXT);
         String bookName = bibliotecaConsoleIO.getBookNameFromUser();
         if (books.returnBook(bookName)) {
-
+            bibliotecaConsoleIO.displayMessage(SUCCESSFULL_RETURN_TEXT);
         } else {
             bibliotecaConsoleIO.displayMessage(BOOK_NOT_VALID_TEXT);
         }
