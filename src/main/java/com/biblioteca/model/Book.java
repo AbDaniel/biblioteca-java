@@ -12,12 +12,6 @@ public class Book {
         this.year = year;
     }
 
-    public Book(String name) {
-        this.name = name;
-        this.author = "";
-        this.year = 0;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -68,7 +68,7 @@ public class CheckoutCommandTest {
     public void shouldNotifyIfBookSearchedIsPresent() {
         String bookName = "Lord of the Rings";
         when(bibliotecaConsoleIO.getBookNameFromUser()).thenReturn(bookName);
-        when(books.findByName(bookName)).thenReturn(new Book("Lord of the Rings"));
+        when(books.findByName(bookName)).thenReturn(new Book("Lord of the Rings", null, 0));
 
         command.execute();
 

@@ -3,13 +3,14 @@ package com.biblioteca.dao;
 import com.biblioteca.model.Book;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.mock;
 
 public class BooksTest {
 
@@ -45,6 +46,18 @@ public class BooksTest {
         Book expectedBook = new Book(bookName, author, year);
 
         assertEquals(actualBook, expectedBook);
+    }
+
+    @Test
+    public void shouldRemoveBookFromAvailableListDuringCheckout() {
+        Book book = new Book("Lord of the Rings", null, 0);
+        List availableBooks = mock(List.class);
+        List checkedOutBooks = mock(List.class);
+        books = new Books(availableBooks, checkedOutBooks);
+
+        books.moveToCheckout(book);
+
+        Mockito.verify(availableBooks).remove(book);
     }
 
 }

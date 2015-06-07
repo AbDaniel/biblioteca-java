@@ -15,23 +15,19 @@ public class Books {
         this.checkedOutBooks = checkedOutBooks;
     }
 
-    //    public Books() {
-//        availableBooks = new ArrayList<>();
-//        availableBooks.add(new Book("Lord of the Rings", "JR Toliken", 1930));
-//        availableBooks.add(new Book("Harry Potter", "JK Rowling", 1992));
-//        availableBooks.add(new Book("Catch-22", "Joesph Heller", 1950));
-//        availableBooks.add(new Book("Winds of Winter", "George RR Martin", 2017));
-//    }
-
     public List<Book> allAvialableBooks() {
-        return availableBooks;
+        return new ArrayList<>(availableBooks);
     }
 
     public Book findByName(String bookName) {
-        int index = availableBooks.indexOf(new Book(bookName));
+        int index = availableBooks.indexOf(new Book(bookName, null, 0));
         if (index == -1)
             return null;
         return availableBooks.get(index);
     }
 
+    public void moveToCheckout(Book book) {
+        availableBooks.remove(book);
+        checkedOutBooks.add(book);
+    }
 }
