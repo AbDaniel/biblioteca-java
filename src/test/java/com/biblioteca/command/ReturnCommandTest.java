@@ -44,4 +44,11 @@ public class ReturnCommandTest {
         Mockito.verify(books).findInCheckedOutBooks(bookName);
     }
 
+    @Test
+    public void shouldGetBookNameFromUser() {
+        command.execute();
+
+        Mockito.verify(bibliotecaConsoleIO).getBookNameFromUser();
+    }
+
 }
