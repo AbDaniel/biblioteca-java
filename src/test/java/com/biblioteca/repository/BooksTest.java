@@ -36,4 +36,12 @@ public class BooksTest {
         assertEquals(4, actualSize);
     }
 
+    @Test
+    public void shouldReturnZeroSizedListIfNoAvailableBooks() {
+        this.books = new Books(null);
+        int actualSize = books.allAvailableBooks().size();
+
+        assertEquals(0, actualSize);
+    }
+
 }

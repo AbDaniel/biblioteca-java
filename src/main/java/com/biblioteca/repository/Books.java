@@ -15,9 +15,11 @@ public class Books {
 
     public List<Book> allAvailableBooks() {
         List<Book> availableBooks = new ArrayList<>();
-        for (Book book : books) {
-            if (!book.isCheckedOut())
-                availableBooks.add(book);
+        if (books != null) {
+            for (Book book : books) {
+                if (!book.isCheckedOut())
+                    availableBooks.add(book);
+            }
         }
         return availableBooks;
     }
