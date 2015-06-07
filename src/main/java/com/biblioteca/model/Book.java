@@ -5,11 +5,13 @@ public class Book {
     private final String name;
     private String author;
     private int year;
+    private boolean isCheckedOut;
 
     public Book(String name, String author, int year) {
         this.name = name;
         this.author = author;
         this.year = year;
+        this.isCheckedOut = false;
     }
 
     @Override
@@ -33,5 +35,9 @@ public class Book {
         return "name='" + name + '\'' +
                 ", author='" + author + '\'' +
                 ", year=" + year;
+    }
+
+    public boolean checkout() {
+        return true;
     }
 }
