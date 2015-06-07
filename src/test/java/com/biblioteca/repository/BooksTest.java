@@ -79,7 +79,7 @@ public class BooksTest {
         List checkedOutBooks = mock(List.class);
         books = new Books(availableBooks, checkedOutBooks);
 
-        books.moveToCheckout(book);
+        books.checkout(book);
 
         Mockito.verify(availableBooks).remove(book);
     }
@@ -92,7 +92,7 @@ public class BooksTest {
         when(availableBooks.remove(book)).thenReturn(true);
         books = new Books(availableBooks, checkedOutBooks);
 
-        books.moveToCheckout(book);
+        books.checkout(book);
 
         Mockito.verify(checkedOutBooks).add(book);
     }
@@ -101,7 +101,7 @@ public class BooksTest {
     public void shouldReturnFalseIfBookGivenWasNotPresentInAvailableList() {
         Book book = new Book("Autobiography", "Daniel", 2025);
 
-        assertFalse(books.moveToCheckout(book));
+        assertFalse(books.checkout(book));
     }
 
     @Test
@@ -111,7 +111,7 @@ public class BooksTest {
         List checkedOutBooks = mock(List.class);
         books = new Books(availableBooks, checkedOutBooks);
 
-        books.moveToCheckout(book);
+        books.checkout(book);
 
         Mockito.verify(checkedOutBooks, never()).add(book);
     }
@@ -120,7 +120,7 @@ public class BooksTest {
     public void shouldReturnTrueIfBookWasCheckedOut() {
         Book book = new Book("Lord of the Rings", null, 0);
 
-        assertTrue(books.moveToCheckout(book));
+        assertTrue(books.checkout(book));
     }
 
     @Test
@@ -130,7 +130,7 @@ public class BooksTest {
         List checkedOutBooks = mock(List.class);
         books = new Books(availableBooks, checkedOutBooks);
 
-        books.moveToAvailable(book);
+        books.returnBook(book);
 
         Mockito.verify(checkedOutBooks).remove(book);
     }
@@ -143,7 +143,7 @@ public class BooksTest {
         when(checkedOutBooks.remove(book)).thenReturn(true);
         books = new Books(availableBooks, checkedOutBooks);
 
-        books.moveToAvailable(book);
+        books.returnBook(book);
 
         Mockito.verify(availableBooks).add(book);
     }
@@ -152,7 +152,7 @@ public class BooksTest {
     public void shouldReturnFalseIfBookGivenWasNotPresentInCheckoutList() {
         Book book = new Book("Autobiography", "Daniel", 2025);
 
-        assertFalse(books.moveToAvailable(book));
+        assertFalse(books.returnBook(book));
     }
 
     @Test
@@ -162,7 +162,7 @@ public class BooksTest {
         List checkedOutBooks = mock(List.class);
         books = new Books(availableBooks, checkedOutBooks);
 
-        books.moveToAvailable(book);
+        books.returnBook(book);
 
         Mockito.verify(availableBooks, never()).add(book);
     }
@@ -171,7 +171,7 @@ public class BooksTest {
     public void shouldReturnTrueIfBookWasReturned() {
         Book book = new Book("1984", null, 0);
 
-        assertTrue(books.moveToAvailable(book));
+        assertTrue(books.returnBook(book));
     }
 
 }

@@ -26,7 +26,7 @@ public class Books {
         return availableBooks.get(index);
     }
 
-    public boolean moveToCheckout(Book book) {
+    public boolean checkout(Book book) {
         if (availableBooks.remove(book)) {
             checkedOutBooks.add(book);
             return true;
@@ -34,7 +34,7 @@ public class Books {
         return false;
     }
 
-    public boolean moveToAvailable(Book book) {
+    public boolean returnBook(Book book) {
         if (checkedOutBooks.remove(book)) {
             availableBooks.add(book);
             return true;
@@ -48,4 +48,5 @@ public class Books {
             return null;
         return checkedOutBooks.get(index);
     }
+
 }

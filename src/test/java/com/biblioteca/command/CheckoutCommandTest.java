@@ -84,7 +84,7 @@ public class CheckoutCommandTest {
 
         command.execute();
 
-        Mockito.verify(books).moveToCheckout(book);
+        Mockito.verify(books).checkout(book);
     }
 
 
@@ -97,7 +97,7 @@ public class CheckoutCommandTest {
 
         command.execute();
 
-        Mockito.verify(books, never()).moveToCheckout(book);
+        Mockito.verify(books, never()).checkout(book);
     }
 
 }
