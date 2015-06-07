@@ -11,6 +11,7 @@ import org.mockito.MockitoAnnotations;
 
 import static com.biblioteca.console.BibliotecaConsoleIO.*;
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.when;
 
 public class CheckoutCommandTest {
@@ -73,6 +74,31 @@ public class CheckoutCommandTest {
         command.execute();
 
         Mockito.verify(bibliotecaConsoleIO).displayMessage(BOOK_PRESENT_TEXT);
+    }
+
+    @Test
+    public void shouldCallMoveToCheckoutOnBooksIfBookIsValid() {
+        String bookName = "Lord of the Rings";
+        Book book = new Book("Lord of the Rings", null, 0);
+        when(bibliotecaConsoleIO.getBookNameFromUser()).thenReturn(bookName);
+        when(books.findByName(bookName)).thenReturn(book);
+
+        command.execute();
+
+        Mockito.verify(books).moveToCheckout(book);
+    }
+
+
+    @Test
+    public void shouldNotCallMoveToCheckoutOnBooksIfBookIsInValid() {
+        String bookName = "Autobiography";
+        Book book = new Book(bookName, "Daniel", 2025);
+        when(bibliotecaConsoleIO.getBookNameFromUser()).thenReturn(bookName);
+        when(books.findByName(bookName)).thenReturn(null);
+
+        command.execute();
+
+        Mockito.verify(books, never()).moveToCheckout(book);
     }
 
 }
