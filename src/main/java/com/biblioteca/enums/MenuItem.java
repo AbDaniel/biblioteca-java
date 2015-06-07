@@ -7,7 +7,8 @@ public enum MenuItem {
 
     LIST_BOOKS(1, "List all books"),
     CHECKOUT_BOOK(2, "Checkout a book"),
-    QUIT(3, "Quit Biblioteca");
+    RETURN_BOOK(3, "Return a book"),
+    QUIT(4, "Quit Biblioteca");
 
     private final int code;
     private final String text;

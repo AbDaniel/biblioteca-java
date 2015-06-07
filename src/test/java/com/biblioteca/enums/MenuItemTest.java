@@ -18,7 +18,7 @@ public class MenuItemTest {
     public void shouldBeAbleToGetEnumObjectUsingCode() {
         int code = 1;
 
-        MenuItem actualMenuItem = MenuItem.valueOf(1);
+        MenuItem actualMenuItem = MenuItem.valueOf(code);
 
         assertEquals(LIST_BOOKS, actualMenuItem);
     }

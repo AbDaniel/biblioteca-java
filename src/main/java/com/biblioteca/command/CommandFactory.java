@@ -17,6 +17,7 @@ public class CommandFactory {
     public CommandFactory(Books books, BibliotecaConsoleIO bibliotecaConsoleIO) {
         commandMap.put(LIST_BOOKS, new ListBooksCommand(books, bibliotecaConsoleIO));
         commandMap.put(CHECKOUT_BOOK, new CheckoutCommand(books, bibliotecaConsoleIO));
+        commandMap.put(RETURN_BOOK, new ReturnCommand(books, bibliotecaConsoleIO));
         commandMap.put(QUIT, new QuitCommand(EXIT_MESSAGE));
     }
 
