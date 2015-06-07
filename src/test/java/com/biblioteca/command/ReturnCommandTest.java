@@ -74,4 +74,17 @@ public class ReturnCommandTest {
         Mockito.verify(bibliotecaConsoleIO).displayMessage(SUCCESSFULL_RETURN_TEXT);
     }
 
+    @Test
+    public void shouldCallMoveToAvailableOnBooksIfBookIsValid() {
+        String bookName = "Lord of the Rings";
+        Book book = new Book("Lord of the Rings", null, 0);
+        when(bibliotecaConsoleIO.getBookNameFromUser()).thenReturn(bookName);
+        when(books.findInCheckedOutBooks(bookName)).thenReturn(book);
+
+        command.execute();
+
+        Mockito.verify(books).moveToAvailable(book);
+    }
+
+
 }
