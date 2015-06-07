@@ -72,7 +72,7 @@ public class BooksTest {
     public void shouldFindTheBookWithGivenNameDuringCheckout() {
         String name = "Lord of the Rings";
         Book book = new Book(name, null, 0);
-        when(bookList.get(Matchers.any(Integer.class))).thenReturn(new Book("My Own Book", null, 0));
+        when(bookList.get(Matchers.any(Integer.class))).thenReturn(book);
 
         books.checkout(name);
 
@@ -88,11 +88,33 @@ public class BooksTest {
     }
 
     @Test
+    public void shouldGetBookByIndexDuringSuccessfulCheckout() {
+        String name = "Lord of the Rings";
+        Book book = new Book(name, null, 0);
+        when(bookList.get(Matchers.any(Integer.class))).thenReturn(book);
+
+        books.checkout(name);
+
+        Mockito.verify(bookList).get(Matchers.any(Integer.class));
+    }
+
+    @Test
     public void shouldReturnFalseIfBookIsValidDuringReturn() {
         setUpWithData();
         String bookName = "Lord of the Rings";
 
         assertFalse(books.returnBook(bookName));
+    }
+
+    @Test
+    public void shouldFindTheBookWithGivenNameDuringReturn() {
+        String name = "Lord of the Rings";
+        Book book = new Book(name, null, 0);
+        when(bookList.get(Matchers.any(Integer.class))).thenReturn(book);
+
+        books.returnBook(name);
+
+        Mockito.verify(bookList).indexOf(book);
     }
 
 }
