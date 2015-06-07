@@ -1,5 +1,6 @@
 package com.biblioteca.command;
 
+import com.biblioteca.console.BibliotecaConsoleIO;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -7,6 +8,7 @@ import org.junit.contrib.java.lang.system.ExpectedSystemExit;
 import org.junit.contrib.java.lang.system.SystemOutRule;
 
 import static com.biblioteca.command.QuitCommand.EXIT_MESSAGE;
+import static com.biblioteca.console.BibliotecaConsoleIO.EXIT_STATUS;
 import static org.junit.Assert.assertEquals;
 
 public class QuitCommandTest {
@@ -26,7 +28,7 @@ public class QuitCommandTest {
 
     @Test
     public void shouldPrintExitMessage() {
-        exit.expectSystemExitWithStatus(0);
+        exit.expectSystemExitWithStatus(EXIT_STATUS);
         command.execute();
 
         assertEquals(EXIT_MESSAGE + "\n", systemOutRule.getLog());

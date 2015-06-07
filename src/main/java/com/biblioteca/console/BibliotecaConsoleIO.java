@@ -10,6 +10,8 @@ import java.util.Scanner;
 public class BibliotecaConsoleIO {
 
     public static final int INVALID_INPUT = -1;
+    public static final int EXIT_STATUS = 0;
+
     public static final String WELCOME_TEXT = "Hello! Welcome to Biblioteca";
     public static final String INVALID_INPUT_TEXT = "Select a valid option!";
     public static final String BOOK_NAME_TEXT = "Enter a book name : ";

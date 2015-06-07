@@ -10,6 +10,7 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import static com.biblioteca.console.BibliotecaConsoleIO.*;
+import static com.biblioteca.enums.MenuItem.LIST_BOOKS;
 import static org.mockito.Mockito.when;
 
 public class ExecuteUserOptionCommandTest {
@@ -29,7 +30,7 @@ public class ExecuteUserOptionCommandTest {
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
         exceuteUserOptionsCommand = new ExecuteUserOptionCommand(bibliotecaConsoleIO, commandFactory);
-        when(bibliotecaConsoleIO.getUserChoice()).thenReturn(1);
+        when(bibliotecaConsoleIO.getUserChoice()).thenReturn(LIST_BOOKS.getCode());
         when(commandFactory.getCommand(Matchers.any(MenuItem.class))).thenReturn(mockCommand);
     }
 

@@ -14,8 +14,11 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
-import static com.biblioteca.console.BibliotecaConsoleIO.WELCOME_TEXT;
 import static com.biblioteca.command.QuitCommand.EXIT_MESSAGE;
+import static com.biblioteca.console.BibliotecaConsoleIO.EXIT_STATUS;
+import static com.biblioteca.console.BibliotecaConsoleIO.INVALID_INPUT;
+import static com.biblioteca.console.BibliotecaConsoleIO.WELCOME_TEXT;
+import static com.biblioteca.enums.MenuItem.QUIT;
 import static org.mockito.Mockito.when;
 
 public class BibliotecaAppTest {
@@ -38,13 +41,13 @@ public class BibliotecaAppTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         bibliotecaApp = new BibliotecaApp(WELCOME_TEXT, bibliotecaConsoleIO, commandFactory);
-        when(bibliotecaConsoleIO.getUserChoice()).thenReturn(2);
+        when(bibliotecaConsoleIO.getUserChoice()).thenReturn(QUIT.getCode());
         when(commandFactory.getCommand(Matchers.any(MenuItem.class))).thenReturn(new QuitCommand(EXIT_MESSAGE));
     }
 
     @Test
     public void shouldPrintWelcomeMessageAtStart() {
-        exit.expectSystemExitWithStatus(0);
+        exit.expectSystemExitWithStatus(EXIT_STATUS);
         bibliotecaApp.start();
 
         Mockito.verify(bibliotecaConsoleIO).displayMessage(WELCOME_TEXT);

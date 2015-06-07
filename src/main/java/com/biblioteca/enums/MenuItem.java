@@ -16,6 +16,10 @@ public enum MenuItem {
         this.text = text;
     }
 
+    public int getCode() {
+        return code;
+    }
+
     public static boolean isInvalidMenuItem(int code) {
         boolean isInvalid = true;
         for (MenuItem menuItem : MenuItem.values()) {
