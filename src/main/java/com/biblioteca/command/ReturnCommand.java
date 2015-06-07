@@ -24,7 +24,7 @@ public class ReturnCommand implements Command {
         if (book == null) {
             bibliotecaConsoleIO.displayMessage(BOOK_NOT_VALID_TEXT);
         } else {
-            books.moveToAvailable(book);
+            books.returnBook(book);
             bibliotecaConsoleIO.displayMessage(SUCCESSFULL_RETURN_TEXT);
         }
     }

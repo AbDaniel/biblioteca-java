@@ -26,8 +26,9 @@ public class CheckoutCommand implements Command {
         if (book == null) {
             bibliotecaConsoleIO.displayMessage(BOOK_NOT_PRESENT_TEXT);
         } else {
-            books.moveToCheckout(book);
+            books.checkout(book);
             bibliotecaConsoleIO.displayMessage(SUCCESSFULL_CHECKOUT_TEXT);
         }
     }
+
 }

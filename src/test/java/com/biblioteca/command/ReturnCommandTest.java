@@ -84,7 +84,7 @@ public class ReturnCommandTest {
 
         command.execute();
 
-        Mockito.verify(books).moveToAvailable(book);
+        Mockito.verify(books).returnBook(book);
     }
 
     @Test
@@ -95,7 +95,7 @@ public class ReturnCommandTest {
 
         command.execute();
 
-        Mockito.verify(books, never()).moveToAvailable(book);
+        Mockito.verify(books, never()).returnBook(book);
     }
 
 }
