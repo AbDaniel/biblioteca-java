@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class BookTest {
@@ -32,6 +33,20 @@ public class BookTest {
     @Test
     public void shouldReturnTrueIfCurrentCheckoutStateIsFalseDuringCheckout() {
         assertTrue(book.checkout());
+    }
+
+    @Test
+    public void shouldReturnFalseIfCurrentCheckoutStateIsTrueDuringCheckout() {
+        book.checkout();
+
+        assertFalse(book.checkout());
+    }
+
+    @Test
+    public void shouldReturnTrueIfCurrentCheckoutStateIsTrueDuringReturn() {
+        book.checkout();
+
+        assertTrue(book.returnBook());
     }
 
 }

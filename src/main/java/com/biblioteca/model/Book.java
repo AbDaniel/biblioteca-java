@@ -38,6 +38,15 @@ public class Book {
     }
 
     public boolean checkout() {
+        if (isCheckedOut) {
+            return false;
+        } else {
+            isCheckedOut = true;
+            return true;
+        }
+    }
+
+    public boolean returnBook() {
         return true;
     }
 }
