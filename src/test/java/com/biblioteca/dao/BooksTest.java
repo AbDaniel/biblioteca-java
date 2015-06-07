@@ -60,4 +60,16 @@ public class BooksTest {
         Mockito.verify(availableBooks).remove(book);
     }
 
+    @Test
+    public void shouldAddBookToCheckoutListDuringCheckout() {
+        Book book = new Book("Lord of the Rings", null, 0);
+        List availableBooks = mock(List.class);
+        List checkedOutBooks = mock(List.class);
+        books = new Books(availableBooks, checkedOutBooks);
+
+        books.moveToCheckout(book);
+
+        Mockito.verify(checkedOutBooks).add(book);
+    }
+
 }
