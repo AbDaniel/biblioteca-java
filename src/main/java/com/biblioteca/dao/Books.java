@@ -17,7 +17,7 @@ public class Books {
         availableBooks.add(new Book("Winds of Winter", "George RR Martin", 2017));
     }
 
-    public List<Book> all() {
+    public List<Book> allAvialableBooks() {
         return availableBooks;
     }
 

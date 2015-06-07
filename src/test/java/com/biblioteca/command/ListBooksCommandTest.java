@@ -7,10 +7,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Matchers;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.verify;
 
 public class ListBooksCommandTest {
@@ -32,7 +30,7 @@ public class ListBooksCommandTest {
     public void shouldListAllBooks() {
         command.execute();
 
-        verify(books).all();
+        verify(books).allAvialableBooks();
         verify(bibliotecaConsoleIO).displayListOfBooks(Matchers.anyListOf(Book.class));
     }
 
