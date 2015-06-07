@@ -25,6 +25,8 @@ public class BooksTest {
         availableBooks.add(new Book("Catch-22", "Joesph Heller", 1950));
         availableBooks.add(new Book("Winds of Winter", "George RR Martin", 2017));
         List<Book> checkedOutBooks = new ArrayList<>();
+        checkedOutBooks.add(new Book("Death in the Nile", "Agatha Christie", 1925));
+        checkedOutBooks.add(new Book("1984", "George Orwell", 1950));
         books = new Books(availableBooks, checkedOutBooks);
     }
 
@@ -123,5 +125,12 @@ public class BooksTest {
         books.moveToAvailable(book);
 
         Mockito.verify(availableBooks).add(book);
+    }
+
+    @Test
+    public void shouldReturnFalseIfBookGivenWasNotPresentInCheckoutList() {
+        Book book = new Book("Autobiography", "Daniel", 2025);
+
+        assertFalse(books.moveToAvailable(book));
     }
 }
