@@ -3,6 +3,7 @@ package com.biblioteca.repository;
 import com.biblioteca.model.Book;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 
@@ -11,6 +12,8 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
 
 public class BooksTest {
@@ -69,10 +72,19 @@ public class BooksTest {
     public void shouldFindTheBookWithGivenNameDuringCheckout() {
         String name = "Lord of the Rings";
         Book book = new Book(name, null, 0);
+        when(bookList.get(Matchers.any(Integer.class))).thenReturn(new Book("My Own Book", null, 0));
 
         books.checkout(name);
 
         Mockito.verify(bookList).indexOf(book);
+    }
+
+    @Test
+    public void shouldReturnTrueOnSuccessfulCheckOut() {
+        setUpWithData();
+        String name = "Lord of the Rings";
+
+        assertTrue(books.checkout(name));
     }
 
 }
