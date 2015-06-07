@@ -23,7 +23,7 @@ public class Main {
         List<Book> checkedOutBooks = new ArrayList<>();
 
         BibliotecaConsoleIO bibliotecaConsoleIO = new BibliotecaConsoleIO(new Scanner(in));
-        CommandFactory commandFactory = new CommandFactory(new Books(availableBooks, checkedOutBooks), bibliotecaConsoleIO);
+        CommandFactory commandFactory = new CommandFactory(new Books(availableBooks), bibliotecaConsoleIO);
         BibliotecaApp bibliotecaApp = new BibliotecaApp(WELCOME_TEXT, bibliotecaConsoleIO, commandFactory);
         bibliotecaApp.start();
     }

@@ -5,13 +5,13 @@ public class Book {
     private final String name;
     private String author;
     private int year;
-    private boolean isCheckedOut;
+    private boolean checkedOut;
 
     public Book(String name, String author, int year) {
         this.name = name;
         this.author = author;
         this.year = year;
-        this.isCheckedOut = false;
+        this.checkedOut = false;
     }
 
     @Override
@@ -38,20 +38,24 @@ public class Book {
     }
 
     public boolean checkout() {
-        if (isCheckedOut) {
+        if (checkedOut) {
             return false;
         } else {
-            isCheckedOut = true;
+            checkedOut = true;
             return true;
         }
     }
 
     public boolean returnBook() {
-        if (isCheckedOut) {
-            isCheckedOut = false;
+        if (checkedOut) {
+            checkedOut = false;
             return true;
         } else {
             return false;
         }
+    }
+
+    public boolean isCheckedOut() {
+        return checkedOut;
     }
 }

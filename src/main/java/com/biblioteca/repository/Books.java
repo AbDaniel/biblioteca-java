@@ -7,46 +7,18 @@ import java.util.List;
 
 public class Books {
 
-    private List<Book> availableBooks;
-    private List<Book> checkedOutBooks;
+    private List<Book> books;
 
-    public Books(List<Book> availableBooks, List<Book> checkedOutBooks) {
-        this.availableBooks = availableBooks;
-        this.checkedOutBooks = checkedOutBooks;
+    public Books(List<Book> books) {
+        this.books = books;
     }
 
     public List<Book> allAvailableBooks() {
-        return new ArrayList<>(availableBooks);
-    }
-
-    public Book findInAvailableBooks(String bookName) {
-        int index = availableBooks.indexOf(new Book(bookName, null, 0));
-        if (index == -1)
-            return null;
-        return availableBooks.get(index);
-    }
-
-    public boolean checkout(Book book) {
-        if (availableBooks.remove(book)) {
-            checkedOutBooks.add(book);
-            return true;
+        List<Book> availableBooks = new ArrayList<>();
+        for (Book book : books) {
+            if (!book.isCheckedOut())
+                availableBooks.add(book);
         }
-        return false;
+        return availableBooks;
     }
-
-    public boolean returnBook(Book book) {
-        if (checkedOutBooks.remove(book)) {
-            availableBooks.add(book);
-            return true;
-        }
-        return false;
-    }
-
-    public Book findInCheckedOutBooks(String bookName) {
-        int index = checkedOutBooks.indexOf(new Book(bookName, null, 0));
-        if (index == -1)
-            return null;
-        return checkedOutBooks.get(index);
-    }
-
 }

@@ -18,15 +18,15 @@ public class ReturnCommand implements Command {
 
     @Override
     public void execute() {
-        bibliotecaConsoleIO.displayMessage(CHECKOUT_PROMPT_TEXT);
-        String bookName = bibliotecaConsoleIO.getBookNameFromUser();
-        Book book = books.findInCheckedOutBooks(bookName);
-        if (book == null) {
-            bibliotecaConsoleIO.displayMessage(BOOK_NOT_VALID_TEXT);
-        } else {
-            books.returnBook(book);
-            bibliotecaConsoleIO.displayMessage(SUCCESSFULL_RETURN_TEXT);
-        }
+//        bibliotecaConsoleIO.displayMessage(CHECKOUT_PROMPT_TEXT);
+//        String bookName = bibliotecaConsoleIO.getBookNameFromUser();
+//        Book book = books.findInCheckedOutBooks(bookName);
+//        if (book == null) {
+//            bibliotecaConsoleIO.displayMessage(BOOK_NOT_VALID_TEXT);
+//        } else {
+//            books.returnBook(book);
+//            bibliotecaConsoleIO.displayMessage(SUCCESSFULL_RETURN_TEXT);
+//        }
     }
 
 }
