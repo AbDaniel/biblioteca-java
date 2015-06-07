@@ -2,7 +2,7 @@ package com.biblioteca.app;
 
 import com.biblioteca.command.CommandFactory;
 import com.biblioteca.console.BibliotecaConsoleIO;
-import com.biblioteca.dao.Books;
+import com.biblioteca.repository.Books;
 import com.biblioteca.model.Book;
 
 import java.util.ArrayList;

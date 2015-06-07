@@ -1,7 +1,7 @@
 package com.biblioteca.command;
 
 import com.biblioteca.console.BibliotecaConsoleIO;
-import com.biblioteca.dao.Books;
+import com.biblioteca.repository.Books;
 import com.biblioteca.enums.MenuItem;
 
 import java.util.HashMap;

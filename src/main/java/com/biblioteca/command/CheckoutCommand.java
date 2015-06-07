@@ -1,7 +1,7 @@
 package com.biblioteca.command;
 
 import com.biblioteca.console.BibliotecaConsoleIO;
-import com.biblioteca.dao.Books;
+import com.biblioteca.repository.Books;
 import com.biblioteca.model.Book;
 
 import static com.biblioteca.console.BibliotecaConsoleIO.BOOK_NAME_TEXT;

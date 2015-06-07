@@ -1,4 +1,4 @@
-package com.biblioteca.dao;
+package com.biblioteca.repository;
 
 import com.biblioteca.model.Book;
 import org.junit.Before;

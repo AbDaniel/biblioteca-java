@@ -3,7 +3,7 @@ package com.biblioteca.app;
 import com.biblioteca.command.CommandFactory;
 import com.biblioteca.command.QuitCommand;
 import com.biblioteca.console.BibliotecaConsoleIO;
-import com.biblioteca.dao.Books;
+import com.biblioteca.repository.Books;
 import com.biblioteca.enums.MenuItem;
 import org.junit.Before;
 import org.junit.Rule;
@@ -16,7 +16,6 @@ import org.mockito.MockitoAnnotations;
 
 import static com.biblioteca.command.QuitCommand.EXIT_MESSAGE;
 import static com.biblioteca.console.BibliotecaConsoleIO.EXIT_STATUS;
-import static com.biblioteca.console.BibliotecaConsoleIO.INVALID_INPUT;
 import static com.biblioteca.console.BibliotecaConsoleIO.WELCOME_TEXT;
 import static com.biblioteca.enums.MenuItem.QUIT;
 import static org.mockito.Mockito.when;
