@@ -43,4 +43,14 @@ public class ReturnCommandTest {
         Mockito.verify(bibliotecaConsoleIO).getBookNameFromUser();
     }
 
+    @Test
+    public void shouldCallReturnBookWithGivenInput() {
+        String bookName = "Lord of the Rings";
+        when(bibliotecaConsoleIO.getBookNameFromUser()).thenReturn(bookName);
+
+        command.execute();
+
+        Mockito.verify(books).returnBook(bookName);
+    }
+
 }

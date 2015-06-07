@@ -20,6 +20,9 @@ public class ReturnCommand implements Command {
     public void execute() {
         bibliotecaConsoleIO.displayMessage(CHECKOUT_PROMPT_TEXT);
         String bookName = bibliotecaConsoleIO.getBookNameFromUser();
+        if (books.returnBook(bookName)) {
+
+        }
     }
 
 }

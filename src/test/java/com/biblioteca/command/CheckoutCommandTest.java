@@ -2,7 +2,6 @@ package com.biblioteca.command;
 
 import com.biblioteca.console.BibliotecaConsoleIO;
 import com.biblioteca.repository.Books;
-import com.biblioteca.model.Book;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -10,7 +9,6 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import static com.biblioteca.console.BibliotecaConsoleIO.*;
-import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.when;
 
 public class CheckoutCommandTest {
@@ -46,7 +44,6 @@ public class CheckoutCommandTest {
     @Test
     public void shouldCallCheckoutWithGivenInput() {
         String bookName = "Lord of the Rings";
-        Book book = new Book("Lord of the Rings", null, 0);
         when(bibliotecaConsoleIO.getBookNameFromUser()).thenReturn(bookName);
 
         command.execute();
