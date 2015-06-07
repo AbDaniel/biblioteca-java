@@ -1,6 +1,7 @@
 package com.biblioteca.command;
 
 import com.biblioteca.console.BibliotecaConsoleIO;
+import com.biblioteca.model.Book;
 import com.biblioteca.repository.Books;
 import org.junit.Before;
 import org.junit.Test;
@@ -8,9 +9,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
-import static com.biblioteca.console.BibliotecaConsoleIO.BOOK_NOT_PRESENT_TEXT;
-import static com.biblioteca.console.BibliotecaConsoleIO.BOOK_NOT_VALID_TEXT;
-import static com.biblioteca.console.BibliotecaConsoleIO.CHECKOUT_PROMPT_TEXT;
+import static com.biblioteca.console.BibliotecaConsoleIO.*;
 import static org.mockito.Mockito.when;
 
 public class ReturnCommandTest {
@@ -62,6 +61,17 @@ public class ReturnCommandTest {
         command.execute();
 
         Mockito.verify(bibliotecaConsoleIO).displayMessage(BOOK_NOT_VALID_TEXT);
+    }
+
+    @Test
+    public void shouldNotifyIfBookSearchedIsPresent() {
+        String bookName = "Lord of the Rings";
+        when(bibliotecaConsoleIO.getBookNameFromUser()).thenReturn(bookName);
+        when(books.findInCheckedOutBooks(bookName)).thenReturn(new Book("Lord of the Rings", null, 0));
+
+        command.execute();
+
+        Mockito.verify(bibliotecaConsoleIO).displayMessage(SUCCESSFULL_RETURN_TEXT);
     }
 
 }
