@@ -57,10 +57,22 @@ public class CheckoutCommandTest {
     public void shouldNotifyIfBookSearchedIsNotPresent() {
         String bookName = "123";
         when(bibliotecaConsoleIO.getBookNameFromUser()).thenReturn(bookName);
+        when(books.findByName(bookName)).thenReturn(null);
 
         command.execute();
 
         Mockito.verify(bibliotecaConsoleIO).displayMessage(BOOK_NOT_PRESENT_TEXT);
+    }
+
+    @Test
+    public void shouldNotifyIfBookSearchedIsPresent() {
+        String bookName = "Lord of the Rings";
+        when(bibliotecaConsoleIO.getBookNameFromUser()).thenReturn(bookName);
+        when(books.findByName(bookName)).thenReturn(new Book("Lord of the Rings"));
+
+        command.execute();
+
+        Mockito.verify(bibliotecaConsoleIO).displayMessage(BOOK_PRESENT_TEXT);
     }
 
 }

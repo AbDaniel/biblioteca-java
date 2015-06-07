@@ -14,6 +14,7 @@ public class BibliotecaConsoleIO {
     public static final String INVALID_INPUT_TEXT = "Select a valid option!";
     public static final String BOOK_NAME_TEXT = "Enter a book name : ";
     public static final String BOOK_NOT_PRESENT_TEXT = "That book is not available.";
+    public static final String BOOK_PRESENT_TEXT = "Thank you! Enjoy the book.";
 
     private Scanner scanner;
 
