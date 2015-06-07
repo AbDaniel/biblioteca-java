@@ -20,15 +20,8 @@ public class CheckoutCommand implements Command {
 
     @Override
     public void execute() {
-//        bibliotecaConsoleIO.displayMessage(CHECKOUT_PROMPT_TEXT);
-//        String bookName = bibliotecaConsoleIO.getBookNameFromUser();
-//        Book book = books.findInAvailableBooks(bookName);
-//        if (book == null) {
-//            bibliotecaConsoleIO.displayMessage(BOOK_NOT_PRESENT_TEXT);
-//        } else {
-//            books.checkout(book);
-//            bibliotecaConsoleIO.displayMessage(SUCCESSFULL_CHECKOUT_TEXT);
-//        }
+        bibliotecaConsoleIO.displayMessage(CHECKOUT_PROMPT_TEXT);
+        String bookName = bibliotecaConsoleIO.getBookNameFromUser();
     }
 
 }
