@@ -91,4 +91,13 @@ public class BibliotecaConsoleIOTest {
         assertEquals(INVALID_INPUT, actualUserChoice);
     }
 
+    @Test
+    public void shouldGetBookNameFromUser() {
+        systemInMock.provideText("Lord of the Rings\n");
+
+        String actualBookName = bibliotecaConsoleIO.getBookNameFromUser();
+
+        assertEquals("Lord of the Rings", actualBookName);
+    }
+
 }

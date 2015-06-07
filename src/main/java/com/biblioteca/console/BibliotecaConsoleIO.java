@@ -47,4 +47,8 @@ public class BibliotecaConsoleIO {
         }
         return choice;
     }
+
+    public String getBookNameFromUser() {
+        return scanner.nextLine();
+    }
 }
