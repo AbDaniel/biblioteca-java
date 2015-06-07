@@ -63,7 +63,7 @@ public class BooksTest {
     @Test
     public void shouldReturnFalseIfBookIsNotAvailableDuringCheckout() {
         setUpWithData();
-        String bookName = "1984";
+        String bookName = "1234";
 
         assertFalse(books.checkout(bookName));
     }
@@ -99,12 +99,21 @@ public class BooksTest {
     }
 
     @Test
-    public void shouldReturnFalseIfBookIsValidDuringReturn() {
+    public void shouldReturnFalseIfBookIsValidButCheckStateIsFalseDuringReturn() {
         setUpWithData();
         String bookName = "Lord of the Rings";
 
         assertFalse(books.returnBook(bookName));
     }
+
+    @Test
+    public void shouldReturnFalseIfBookIsInValidDuringReturn() {
+        setUpWithData();
+        String bookName = "1234";
+
+        assertFalse(books.returnBook(bookName));
+    }
+
 
     @Test
     public void shouldFindTheBookWithGivenNameDuringReturn() {
