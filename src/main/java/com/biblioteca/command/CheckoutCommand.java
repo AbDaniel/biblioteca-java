@@ -19,6 +19,7 @@ public class CheckoutCommand implements Command {
     @Override
     public void execute() {
         bibliotecaConsoleIO.displayMessage(BOOK_NAME_TEXT);
-        Book book = books.findByName("Lord of the Rings");
+        String bookName = bibliotecaConsoleIO.getBookNameFromUser();
+        Book book = books.findByName(bookName);
     }
 }

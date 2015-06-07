@@ -29,19 +29,17 @@ public class CheckoutCommandTest {
     }
 
     @Test
-    public void shouldFindGivenBookInBooks() {
-        String bookName = "Lord of the Rings";
-
-        command.execute();
-
-        Mockito.verify(books).findByName(bookName);
-    }
-
-    @Test
-    public void shouldPromptUserForBookName() {
+    public void shouldDisplayMessageAskingUserToInputBookName() {
         command.execute();
 
         Mockito.verify(bibliotecaConsoleIO).displayMessage(BOOK_NAME_TEXT);
+    }
+
+    @Test
+    public void shouldGetBookNameFromUser() {
+        command.execute();
+
+        Mockito.verify(bibliotecaConsoleIO).getBookNameFromUser();
     }
 
 }
