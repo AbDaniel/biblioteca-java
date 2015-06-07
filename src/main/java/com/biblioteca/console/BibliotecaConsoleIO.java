@@ -13,6 +13,7 @@ public class BibliotecaConsoleIO {
     public static final String WELCOME_TEXT = "Hello! Welcome to Biblioteca";
     public static final String INVALID_INPUT_TEXT = "Select a valid option!";
     public static final String BOOK_NAME_TEXT = "Enter a book name : ";
+    public static final String BOOK_NOT_PRESENT_TEXT = "That book is not available.";
 
     private Scanner scanner;
 

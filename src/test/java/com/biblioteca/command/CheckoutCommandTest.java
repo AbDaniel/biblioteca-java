@@ -53,4 +53,14 @@ public class CheckoutCommandTest {
         Mockito.verify(bibliotecaConsoleIO).getBookNameFromUser();
     }
 
+    @Test
+    public void shouldNotifyIfCheckoutIsUnSuccessFull() {
+        String bookName = "123";
+        when(bibliotecaConsoleIO.getBookNameFromUser()).thenReturn(bookName);
+
+        command.execute();
+
+        Mockito.verify(bibliotecaConsoleIO).displayMessage(BOOK_NOT_PRESENT_TEXT);
+    }
+
 }
