@@ -48,9 +48,9 @@ public class BibliotecaConsoleIO {
                 throw new InputMismatchException();
             }
         } catch (InputMismatchException e) {
-            scanner.nextLine();
             choice = INVALID_INPUT;
         }
+        scanner.nextLine();
         return choice;
     }
 

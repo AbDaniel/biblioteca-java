@@ -6,22 +6,17 @@ import com.biblioteca.enums.MenuItem;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
 
 import static com.biblioteca.command.QuitCommand.EXIT_MESSAGE;
-import static com.biblioteca.enums.MenuItem.CHECKOUT_BOOK;
-import static com.biblioteca.enums.MenuItem.LIST_BOOKS;
-import static com.biblioteca.enums.MenuItem.QUIT;
+import static com.biblioteca.enums.MenuItem.*;
 
 public class CommandFactory {
 
     private Map<MenuItem, Command> commandMap = new HashMap<>();
 
-    public CommandFactory(Books books) {
-        commandMap.put(LIST_BOOKS, new ListBooksCommand(books, new BibliotecaConsoleIO(new Scanner
-                (System.in))));
-        commandMap.put(CHECKOUT_BOOK, new CheckoutCommand(books, new BibliotecaConsoleIO(new Scanner
-                (System.in))));
+    public CommandFactory(Books books, BibliotecaConsoleIO bibliotecaConsoleIO) {
+        commandMap.put(LIST_BOOKS, new ListBooksCommand(books, bibliotecaConsoleIO));
+        commandMap.put(CHECKOUT_BOOK, new CheckoutCommand(books, bibliotecaConsoleIO));
         commandMap.put(QUIT, new QuitCommand(EXIT_MESSAGE));
     }
 

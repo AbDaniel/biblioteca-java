@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import static com.biblioteca.console.BibliotecaConsoleIO.*;
+import static java.lang.System.*;
 
 public class Main {
 
@@ -21,8 +22,9 @@ public class Main {
         availableBooks.add(new Book("Winds of Winter", "George RR Martin", 2017));
         List<Book> checkedOutBooks = new ArrayList<>();
 
-        BibliotecaApp bibliotecaApp = new BibliotecaApp(WELCOME_TEXT, new
-                BibliotecaConsoleIO(new Scanner(System.in)), new CommandFactory(new Books(availableBooks, checkedOutBooks)));
+        BibliotecaConsoleIO bibliotecaConsoleIO = new BibliotecaConsoleIO(new Scanner(in));
+        CommandFactory commandFactory = new CommandFactory(new Books(availableBooks, checkedOutBooks), bibliotecaConsoleIO);
+        BibliotecaApp bibliotecaApp = new BibliotecaApp(WELCOME_TEXT, bibliotecaConsoleIO, commandFactory);
         bibliotecaApp.start();
     }
 
