@@ -22,6 +22,8 @@ public class ReturnCommand implements Command {
         String bookName = bibliotecaConsoleIO.getBookNameFromUser();
         if (books.returnBook(bookName)) {
 
+        } else {
+            bibliotecaConsoleIO.displayMessage(BOOK_NOT_VALID_TEXT);
         }
     }
 

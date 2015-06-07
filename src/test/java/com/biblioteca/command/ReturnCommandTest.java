@@ -53,4 +53,15 @@ public class ReturnCommandTest {
         Mockito.verify(books).returnBook(bookName);
     }
 
+    @Test
+    public void shouldNotifyIfBookSearchedIsNotPresent() {
+        String bookName = "123";
+        when(bibliotecaConsoleIO.getBookNameFromUser()).thenReturn(bookName);
+        when(books.returnBook(bookName)).thenReturn(false);
+
+        command.execute();
+
+        Mockito.verify(bibliotecaConsoleIO).displayMessage(BOOK_NOT_VALID_TEXT);
+    }
+
 }
