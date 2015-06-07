@@ -15,7 +15,7 @@ public class ListBooksCommand implements Command {
 
     @Override
     public void execute() {
-        bibliotecaConsoleIO.displayListOfBooks(books.allAvialableBooks());
+        bibliotecaConsoleIO.displayListOfBooks(books.allAvailableBooks());
     }
 
 }

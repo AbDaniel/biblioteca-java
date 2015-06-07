@@ -15,7 +15,7 @@ public class Books {
         this.checkedOutBooks = checkedOutBooks;
     }
 
-    public List<Book> allAvialableBooks() {
+    public List<Book> allAvailableBooks() {
         return new ArrayList<>(availableBooks);
     }
 

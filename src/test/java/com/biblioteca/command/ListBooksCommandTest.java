@@ -30,7 +30,7 @@ public class ListBooksCommandTest {
     public void shouldListAllBooks() {
         command.execute();
 
-        verify(books).allAvialableBooks();
+        verify(books).allAvailableBooks();
         verify(bibliotecaConsoleIO).displayListOfBooks(Matchers.anyListOf(Book.class));
     }
 
