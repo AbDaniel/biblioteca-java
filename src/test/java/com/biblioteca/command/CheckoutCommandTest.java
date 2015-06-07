@@ -11,6 +11,7 @@ import org.mockito.MockitoAnnotations;
 
 import static com.biblioteca.console.BibliotecaConsoleIO.*;
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.when;
 
 public class CheckoutCommandTest {
 
@@ -26,6 +27,16 @@ public class CheckoutCommandTest {
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
         command = new CheckoutCommand(books, bibliotecaConsoleIO);
+    }
+
+    @Test
+    public void shouldFindGivenBookInBooks() {
+        String bookName = "Lord of the Rings";
+        when(bibliotecaConsoleIO.getBookNameFromUser()).thenReturn(bookName);
+
+        command.execute();
+
+        Mockito.verify(books).findByName(bookName);
     }
 
     @Test
