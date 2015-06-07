@@ -54,7 +54,7 @@ public class CheckoutCommandTest {
     }
 
     @Test
-    public void shouldNotifyIfCheckoutIsUnSuccessFull() {
+    public void shouldNotifyIfBookSearchedIsNotPresent() {
         String bookName = "123";
         when(bibliotecaConsoleIO.getBookNameFromUser()).thenReturn(bookName);
 
