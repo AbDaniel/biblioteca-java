@@ -133,4 +133,17 @@ public class BooksTest {
 
         assertFalse(books.moveToAvailable(book));
     }
+
+    @Test
+    public void shouldNotAddToAvailableListIfBookWasNotRemovedInCheckoutList() {
+        Book book = new Book("Autobiography", "Daniel", 2025);
+        List availableBooks = mock(List.class);
+        List checkedOutBooks = mock(List.class);
+        books = new Books(availableBooks, checkedOutBooks);
+
+        books.moveToAvailable(book);
+
+        Mockito.verify(availableBooks, never()).add(book);
+    }
+
 }

@@ -35,8 +35,8 @@ public class Books {
     }
 
     public boolean moveToAvailable(Book book) {
-        checkedOutBooks.remove(book);
-        availableBooks.add(book);
+        if (checkedOutBooks.remove(book))
+            availableBooks.add(book);
         return false;
     }
 }
