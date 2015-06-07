@@ -65,4 +65,15 @@ public class CheckoutCommandTest {
         Mockito.verify(bibliotecaConsoleIO).displayMessage(BOOK_NOT_PRESENT_TEXT);
     }
 
+    @Test
+    public void shouldNotifyIfBookSearchedIsPresent() {
+        String bookName = "Lord of the Rings";
+        when(bibliotecaConsoleIO.getBookNameFromUser()).thenReturn(bookName);
+        when(books.checkout(bookName)).thenReturn(true);
+
+        command.execute();
+
+        Mockito.verify(bibliotecaConsoleIO).displayMessage(SUCCESSFULL_CHECKOUT_TEXT);
+    }
+
 }

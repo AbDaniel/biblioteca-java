@@ -23,7 +23,7 @@ public class CheckoutCommand implements Command {
         bibliotecaConsoleIO.displayMessage(CHECKOUT_PROMPT_TEXT);
         String bookName = bibliotecaConsoleIO.getBookNameFromUser();
         if (books.checkout(bookName)) {
-
+            bibliotecaConsoleIO.displayMessage(SUCCESSFULL_CHECKOUT_TEXT);
         } else {
             bibliotecaConsoleIO.displayMessage(BOOK_NOT_PRESENT_TEXT);
         }
