@@ -8,6 +8,8 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
+import static com.biblioteca.console.BibliotecaConsoleIO.BOOK_NOT_PRESENT_TEXT;
+import static com.biblioteca.console.BibliotecaConsoleIO.BOOK_NOT_VALID_TEXT;
 import static com.biblioteca.console.BibliotecaConsoleIO.CHECKOUT_PROMPT_TEXT;
 import static org.mockito.Mockito.when;
 
@@ -49,6 +51,17 @@ public class ReturnCommandTest {
         command.execute();
 
         Mockito.verify(bibliotecaConsoleIO).getBookNameFromUser();
+    }
+
+    @Test
+    public void shouldNotifyIfBookSearchedIsNotPresent() {
+        String bookName = "123";
+        when(bibliotecaConsoleIO.getBookNameFromUser()).thenReturn(bookName);
+        when(books.findInCheckedOutBooks(bookName)).thenReturn(null);
+
+        command.execute();
+
+        Mockito.verify(bibliotecaConsoleIO).displayMessage(BOOK_NOT_VALID_TEXT);
     }
 
 }

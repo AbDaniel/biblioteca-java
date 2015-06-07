@@ -17,6 +17,8 @@ public class BibliotecaConsoleIO {
     public static final String CHECKOUT_PROMPT_TEXT = "Enter a book name : ";
     public static final String BOOK_NOT_PRESENT_TEXT = "That book is not available.";
     public static final String SUCCESSFULL_CHECKOUT_TEXT = "Thank you! Enjoy the book.";
+    public static final String BOOK_NOT_VALID_TEXT = "That is not a valid book to return.";
+    public static final String SUCCESSFULL_RETURN_TEXT = "Thank you for returning the book.";
 
     private Scanner scanner;
 
