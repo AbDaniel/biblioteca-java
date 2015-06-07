@@ -87,4 +87,12 @@ public class BooksTest {
         assertTrue(books.checkout(name));
     }
 
+    @Test
+    public void shouldReturnFalseIfBookIsValidDuringReturn() {
+        setUpWithData();
+        String bookName = "Lord of the Rings";
+
+        assertFalse(books.returnBook(bookName));
+    }
+
 }

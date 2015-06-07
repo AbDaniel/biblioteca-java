@@ -34,4 +34,7 @@ public class Books {
         }
     }
 
+    public boolean returnBook(String bookName) {
+        return false;
+    }
 }
