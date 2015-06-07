@@ -3,7 +3,10 @@ package com.biblioteca.app;
 import com.biblioteca.command.CommandFactory;
 import com.biblioteca.console.BibliotecaConsoleIO;
 import com.biblioteca.dao.Books;
+import com.biblioteca.model.Book;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import static com.biblioteca.console.BibliotecaConsoleIO.*;
@@ -11,8 +14,15 @@ import static com.biblioteca.console.BibliotecaConsoleIO.*;
 public class Main {
 
     public static void main(String[] args) {
+        List<Book> availableBooks = new ArrayList<>();
+        availableBooks.add(new Book("Lord of the Rings", "JR Toliken", 1930));
+        availableBooks.add(new Book("Harry Potter", "JK Rowling", 1992));
+        availableBooks.add(new Book("Catch-22", "Joesph Heller", 1950));
+        availableBooks.add(new Book("Winds of Winter", "George RR Martin", 2017));
+        List<Book> checkedOutBooks = new ArrayList<>();
+
         BibliotecaApp bibliotecaApp = new BibliotecaApp(WELCOME_TEXT, new
-                BibliotecaConsoleIO(new Scanner(System.in)), new CommandFactory(new Books()));
+                BibliotecaConsoleIO(new Scanner(System.in)), new CommandFactory(new Books(availableBooks, checkedOutBooks)));
         bibliotecaApp.start();
     }
 

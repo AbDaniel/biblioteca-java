@@ -4,10 +4,12 @@ import com.biblioteca.model.Book;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertThat;
 
 public class BooksTest {
 
@@ -15,7 +17,13 @@ public class BooksTest {
 
     @Before
     public void setUp() {
-        books = new Books();
+        List<Book> availableBooks = new ArrayList<>();
+        availableBooks.add(new Book("Lord of the Rings", "JR Toliken", 1930));
+        availableBooks.add(new Book("Harry Potter", "JK Rowling", 1992));
+        availableBooks.add(new Book("Catch-22", "Joesph Heller", 1950));
+        availableBooks.add(new Book("Winds of Winter", "George RR Martin", 2017));
+        List<Book> checkedOutBooks = new ArrayList<>();
+        books = new Books(availableBooks, checkedOutBooks);
     }
 
     @Test
