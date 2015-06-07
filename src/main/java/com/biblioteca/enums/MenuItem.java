@@ -6,7 +6,8 @@ import java.util.Map;
 public enum MenuItem {
 
     LIST_BOOKS(1, "List all books"),
-    QUIT(2, "Quit Biblioteca");
+    CHECKOUT_BOOK(2, "Checkout a book"),
+    QUIT(3, "Quit Biblioteca");
 
     private final int code;
     private final String text;
