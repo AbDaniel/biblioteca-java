@@ -116,10 +116,10 @@ public class BooksTest {
 
     @Test
     public void shouldAddBookToAvailableListDuringReturn() {
-        Book book = new Book("Lord of the Rings", null, 0);
+        Book book = new Book("1984", null, 0);
         List availableBooks = mock(List.class);
         List checkedOutBooks = mock(List.class);
-        when(availableBooks.remove(book)).thenReturn(true);
+        when(checkedOutBooks.remove(book)).thenReturn(true);
         books = new Books(availableBooks, checkedOutBooks);
 
         books.moveToAvailable(book);
@@ -144,6 +144,13 @@ public class BooksTest {
         books.moveToAvailable(book);
 
         Mockito.verify(availableBooks, never()).add(book);
+    }
+
+    @Test
+    public void shouldReturnTrueIfBookWasReturned() {
+        Book book = new Book("1984", null, 0);
+
+        assertTrue(books.moveToAvailable(book));
     }
 
 }
