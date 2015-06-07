@@ -16,8 +16,8 @@ public class CommandFactory {
 
     private Map<MenuItem, Command> commandMap = new HashMap<>();
 
-    public CommandFactory() {
-        commandMap.put(LIST_BOOKS, new ListBooksCommand(Books.getInstance(), new BibliotecaConsoleIO(new Scanner
+    public CommandFactory(Books books) {
+        commandMap.put(LIST_BOOKS, new ListBooksCommand(books, new BibliotecaConsoleIO(new Scanner
                 (System.in))));
         commandMap.put(QUIT, new QuitCommand(EXIT_MESSAGE));
     }

@@ -9,7 +9,7 @@ public class Books {
 
     private List<Book> availableBooks;
 
-    private Books() {
+    public Books() {
         availableBooks = new ArrayList<>();
         availableBooks.add(new Book("Lord of the Rings", "JR Toliken", 1930));
         availableBooks.add(new Book("Harry Potter", "JK Rowling", 1992));
@@ -19,14 +19,6 @@ public class Books {
 
     public List<Book> all() {
         return availableBooks;
-    }
-
-    private static Books books;
-
-    public static Books getInstance() {
-        if (books == null)
-            books = new Books();
-        return books;
     }
 
     public Book findByName(String bookName) {

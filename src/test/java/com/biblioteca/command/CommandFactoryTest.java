@@ -1,5 +1,6 @@
 package com.biblioteca.command;
 
+import com.biblioteca.dao.Books;
 import com.biblioteca.enums.MenuItem;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,7 +16,7 @@ public class CommandFactoryTest {
 
     @Before
     public void setUp() throws Exception {
-        commandFactory = new CommandFactory();
+        commandFactory = new CommandFactory(new Books());
     }
 
     @Test
