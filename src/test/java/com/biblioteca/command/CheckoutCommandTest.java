@@ -36,14 +36,14 @@ public class CheckoutCommandTest {
 
         command.execute();
 
-        Mockito.verify(books).findByName(bookName);
+        Mockito.verify(books).findInAvailableBooks(bookName);
     }
 
     @Test
     public void shouldDisplayMessageAskingUserToInputBookName() {
         command.execute();
 
-        Mockito.verify(bibliotecaConsoleIO).displayMessage(BOOK_NAME_TEXT);
+        Mockito.verify(bibliotecaConsoleIO).displayMessage(CHECKOUT_PROMPT_TEXT);
     }
 
     @Test
@@ -57,7 +57,7 @@ public class CheckoutCommandTest {
     public void shouldNotifyIfBookSearchedIsNotPresent() {
         String bookName = "123";
         when(bibliotecaConsoleIO.getBookNameFromUser()).thenReturn(bookName);
-        when(books.findByName(bookName)).thenReturn(null);
+        when(books.findInAvailableBooks(bookName)).thenReturn(null);
 
         command.execute();
 
@@ -68,11 +68,11 @@ public class CheckoutCommandTest {
     public void shouldNotifyIfBookSearchedIsPresent() {
         String bookName = "Lord of the Rings";
         when(bibliotecaConsoleIO.getBookNameFromUser()).thenReturn(bookName);
-        when(books.findByName(bookName)).thenReturn(new Book("Lord of the Rings", null, 0));
+        when(books.findInAvailableBooks(bookName)).thenReturn(new Book("Lord of the Rings", null, 0));
 
         command.execute();
 
-        Mockito.verify(bibliotecaConsoleIO).displayMessage(BOOK_PRESENT_TEXT);
+        Mockito.verify(bibliotecaConsoleIO).displayMessage(SUCCESSFULL_CHECKOUT_TEXT);
     }
 
     @Test
@@ -80,7 +80,7 @@ public class CheckoutCommandTest {
         String bookName = "Lord of the Rings";
         Book book = new Book("Lord of the Rings", null, 0);
         when(bibliotecaConsoleIO.getBookNameFromUser()).thenReturn(bookName);
-        when(books.findByName(bookName)).thenReturn(book);
+        when(books.findInAvailableBooks(bookName)).thenReturn(book);
 
         command.execute();
 
@@ -93,7 +93,7 @@ public class CheckoutCommandTest {
         String bookName = "Autobiography";
         Book book = new Book(bookName, "Daniel", 2025);
         when(bibliotecaConsoleIO.getBookNameFromUser()).thenReturn(bookName);
-        when(books.findByName(bookName)).thenReturn(null);
+        when(books.findInAvailableBooks(bookName)).thenReturn(null);
 
         command.execute();
 

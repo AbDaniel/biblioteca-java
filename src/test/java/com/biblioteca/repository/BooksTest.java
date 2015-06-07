@@ -34,21 +34,42 @@ public class BooksTest {
     public void shouldReturnNullIfBookIsNotAvailable() {
         String bookName = "The Fellowship Of the Ring";
 
-        Book actualBook = books.findByName(bookName);
+        Book actualBook = books.findInAvailableBooks(bookName);
 
         assertNull(actualBook);
     }
 
     @Test
-    public void shouldFindGivenBookByName() {
+    public void shouldFindGivenBookByNameInAvailableList() {
         String bookName = "Lord of the Rings";
         String author = "JRR Tolkien";
         int year = 1930;
 
-        Book actualBook = books.findByName(bookName);
+        Book actualBook = books.findInAvailableBooks(bookName);
         Book expectedBook = new Book(bookName, author, year);
 
         assertEquals(actualBook, expectedBook);
+    }
+
+    @Test
+    public void shouldFindGivenBookByNameInCheckedOutList() {
+        String bookName = "1984";
+        String author = "George Orwell";
+        int year = 1950;
+
+        Book actualBook = books.findInCheckedOutBooks(bookName);
+        Book expectedBook = new Book(bookName, author, year);
+
+        assertEquals(actualBook, expectedBook);
+    }
+
+    @Test
+    public void shouldReturnNullIfBookIsNotPresentInCheckedOutList() {
+        String bookName = "The Fellowship Of the Ring";
+
+        Book actualBook = books.findInCheckedOutBooks(bookName);
+
+        assertNull(actualBook);
     }
 
     @Test

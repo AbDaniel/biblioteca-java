@@ -19,7 +19,7 @@ public class Books {
         return new ArrayList<>(availableBooks);
     }
 
-    public Book findByName(String bookName) {
+    public Book findInAvailableBooks(String bookName) {
         int index = availableBooks.indexOf(new Book(bookName, null, 0));
         if (index == -1)
             return null;
@@ -40,5 +40,12 @@ public class Books {
             return true;
         }
         return false;
+    }
+
+    public Book findInCheckedOutBooks(String bookName) {
+        int index = checkedOutBooks.indexOf(new Book(bookName, null, 0));
+        if (index == -1)
+            return null;
+        return checkedOutBooks.get(index);
     }
 }
