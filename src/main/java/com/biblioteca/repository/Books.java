@@ -23,4 +23,8 @@ public class Books {
         }
         return availableBooks;
     }
+
+    public boolean checkout(String bookName) {
+        return false;
+    }
 }

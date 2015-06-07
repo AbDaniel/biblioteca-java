@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 public class BooksTest {
 
@@ -42,6 +43,13 @@ public class BooksTest {
         int actualSize = books.allAvailableBooks().size();
 
         assertEquals(0, actualSize);
+    }
+
+    @Test
+    public void shouldReturnFalseIfBookIsNotAvailableDuringCheckout() {
+        String bookName = "1984";
+
+        assertFalse(books.checkout(bookName));
     }
 
 }
