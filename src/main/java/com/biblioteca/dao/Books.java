@@ -27,8 +27,10 @@ public class Books {
     }
 
     public boolean moveToCheckout(Book book) {
-        if (availableBooks.remove(book))
+        if (availableBooks.remove(book)) {
             checkedOutBooks.add(book);
+            return true;
+        }
         return false;
     }
 

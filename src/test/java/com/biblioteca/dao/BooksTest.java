@@ -8,9 +8,7 @@ import org.mockito.Mockito;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.when;
@@ -93,6 +91,13 @@ public class BooksTest {
         books.moveToCheckout(book);
 
         Mockito.verify(checkedOutBooks, never()).add(book);
+    }
+
+    @Test
+    public void shouldReturnTrueIfBookWasCheckedOut() {
+        Book book = new Book("Lord of the Rings", null, 0);
+
+        assertTrue(books.moveToCheckout(book));
     }
 
 }
