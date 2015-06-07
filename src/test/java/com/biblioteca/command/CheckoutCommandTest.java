@@ -43,4 +43,26 @@ public class CheckoutCommandTest {
         Mockito.verify(bibliotecaConsoleIO).getBookNameFromUser();
     }
 
+    @Test
+    public void shouldCallCheckoutWithGivenInput() {
+        String bookName = "Lord of the Rings";
+        Book book = new Book("Lord of the Rings", null, 0);
+        when(bibliotecaConsoleIO.getBookNameFromUser()).thenReturn(bookName);
+
+        command.execute();
+
+        Mockito.verify(books).checkout(bookName);
+    }
+
+    @Test
+    public void shouldNotifyIfBookIsNotValid() {
+        String bookName = "123";
+        when(bibliotecaConsoleIO.getBookNameFromUser()).thenReturn(bookName);
+        when(books.checkout(bookName)).thenReturn(false);
+
+        command.execute();
+
+        Mockito.verify(bibliotecaConsoleIO).displayMessage(BOOK_NOT_PRESENT_TEXT);
+    }
+
 }
