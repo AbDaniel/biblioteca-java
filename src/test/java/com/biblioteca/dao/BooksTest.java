@@ -9,8 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.when;
 
 public class BooksTest {
 
@@ -65,11 +68,31 @@ public class BooksTest {
         Book book = new Book("Lord of the Rings", null, 0);
         List availableBooks = mock(List.class);
         List checkedOutBooks = mock(List.class);
+        when(availableBooks.remove(book)).thenReturn(true);
         books = new Books(availableBooks, checkedOutBooks);
 
         books.moveToCheckout(book);
 
         Mockito.verify(checkedOutBooks).add(book);
+    }
+
+    @Test
+    public void shouldReturnFalseIfBookGivenWasNotPresentInAvailableList() {
+        Book book = new Book("Autobiography", "Daniel", 2025);
+
+        assertFalse(books.moveToCheckout(book));
+    }
+
+    @Test
+    public void shouldNotAddToCheckoutListIfBookWasNotRemovedInAvailableList() {
+        Book book = new Book("Autobiography", "Daniel", 2025);
+        List availableBooks = mock(List.class);
+        List checkedOutBooks = mock(List.class);
+        books = new Books(availableBooks, checkedOutBooks);
+
+        books.moveToCheckout(book);
+
+        Mockito.verify(checkedOutBooks, never()).add(book);
     }
 
 }

@@ -26,8 +26,10 @@ public class Books {
         return availableBooks.get(index);
     }
 
-    public void moveToCheckout(Book book) {
-        availableBooks.remove(book);
-        checkedOutBooks.add(book);
+    public boolean moveToCheckout(Book book) {
+        if (availableBooks.remove(book))
+            checkedOutBooks.add(book);
+        return false;
     }
+
 }
