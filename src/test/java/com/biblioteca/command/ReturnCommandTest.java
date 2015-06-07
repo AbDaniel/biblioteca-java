@@ -10,6 +10,7 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import static com.biblioteca.console.BibliotecaConsoleIO.*;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.when;
 
 public class ReturnCommandTest {
@@ -86,5 +87,15 @@ public class ReturnCommandTest {
         Mockito.verify(books).moveToAvailable(book);
     }
 
+    @Test
+    public void shouldNotCallMoveToAvailableOnBooksIfBookIsInValid() {
+        String bookName = "Autobiography";
+        Book book = new Book(bookName, "Daniel", 2025);
+        when(bibliotecaConsoleIO.getBookNameFromUser()).thenReturn(bookName);
+
+        command.execute();
+
+        Mockito.verify(books, never()).moveToAvailable(book);
+    }
 
 }
