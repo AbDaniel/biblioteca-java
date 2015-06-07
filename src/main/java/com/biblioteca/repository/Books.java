@@ -36,6 +36,11 @@ public class Books {
 
     public boolean returnBook(String bookName) {
         int index = books.indexOf(new Book(bookName, null, 0));
-        return false;
+        if (index == -1)
+            return false;
+        else {
+            Book book = books.get(index);
+            return book.returnBook();
+        }
     }
 }

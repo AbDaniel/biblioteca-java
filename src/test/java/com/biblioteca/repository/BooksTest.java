@@ -117,4 +117,23 @@ public class BooksTest {
         Mockito.verify(bookList).indexOf(book);
     }
 
+    @Test
+    public void shouldGetBookByIndexDuringSuccessfulReturn() {
+        String name = "Lord of the Rings";
+        Book book = new Book(name, null, 0);
+        when(bookList.get(Matchers.any(Integer.class))).thenReturn(book);
+
+        books.returnBook(name);
+
+        Mockito.verify(bookList).get(Matchers.any(Integer.class));
+    }
+
+    @Test
+    public void shouldReturnTrueOnSuccessfulReturn() {
+        setUpWithData();
+        String name = "1984";
+
+        assertTrue(books.returnBook(name));
+    }
+
 }
