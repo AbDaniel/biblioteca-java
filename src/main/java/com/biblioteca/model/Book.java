@@ -47,6 +47,11 @@ public class Book {
     }
 
     public boolean returnBook() {
-        return true;
+        if (isCheckedOut) {
+            isCheckedOut = false;
+            return true;
+        } else {
+            return false;
+        }
     }
 }
