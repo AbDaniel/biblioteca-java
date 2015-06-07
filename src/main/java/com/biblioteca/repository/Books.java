@@ -34,4 +34,8 @@ public class Books {
         return false;
     }
 
+    public void moveToAvailable(Book book) {
+        checkedOutBooks.remove(book);
+        availableBooks.add(book);
+    }
 }

@@ -100,4 +100,28 @@ public class BooksTest {
         assertTrue(books.moveToCheckout(book));
     }
 
+    @Test
+    public void shouldRemoveBookFromCheckoutListDuringReturn() {
+        Book book = new Book("Lord of the Rings", null, 0);
+        List availableBooks = mock(List.class);
+        List checkedOutBooks = mock(List.class);
+        books = new Books(availableBooks, checkedOutBooks);
+
+        books.moveToAvailable(book);
+
+        Mockito.verify(checkedOutBooks).remove(book);
+    }
+
+    @Test
+    public void shouldAddBookToAvailableListDuringReturn() {
+        Book book = new Book("Lord of the Rings", null, 0);
+        List availableBooks = mock(List.class);
+        List checkedOutBooks = mock(List.class);
+        when(availableBooks.remove(book)).thenReturn(true);
+        books = new Books(availableBooks, checkedOutBooks);
+
+        books.moveToAvailable(book);
+
+        Mockito.verify(availableBooks).add(book);
+    }
 }
