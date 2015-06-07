@@ -34,4 +34,14 @@ public class ReturnCommandTest {
         Mockito.verify(bibliotecaConsoleIO).displayMessage(CHECKOUT_PROMPT_TEXT);
     }
 
+    @Test
+    public void shouldFindGivenBookInBooks() {
+        String bookName = "Lord of the Rings";
+        when(bibliotecaConsoleIO.getBookNameFromUser()).thenReturn(bookName);
+
+        command.execute();
+
+        Mockito.verify(books).findInCheckedOutBooks(bookName);
+    }
+
 }
