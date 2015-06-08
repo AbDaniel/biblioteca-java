@@ -24,6 +24,7 @@ public class Main {
 
         BibliotecaConsoleIO bibliotecaConsoleIO = new BibliotecaConsoleIO(new Scanner(in));
         CommandFactory commandFactory = new CommandFactory(new Books(availableBooks), bibliotecaConsoleIO);
+
         BibliotecaApp bibliotecaApp = new BibliotecaApp(WELCOME_TEXT, bibliotecaConsoleIO, commandFactory);
         bibliotecaApp.start();
     }
