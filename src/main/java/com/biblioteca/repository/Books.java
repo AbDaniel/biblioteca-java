@@ -18,7 +18,7 @@ public class Books {
         if (books != null) {
             for (Book book : books) {
                 if (!book.isCheckedOut())
-                    availableBooks.add(book);
+                    availableBooks.add(new Book(book));
             }
         }
         return availableBooks;

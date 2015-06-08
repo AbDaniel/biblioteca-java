@@ -14,6 +14,13 @@ public class Book {
         this.checkedOut = false;
     }
 
+    public Book(Book book) {
+        this.name = book.name;
+        this.author = book.author;
+        this.year = book.year;
+        this.checkedOut = book.isCheckedOut();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
