@@ -40,7 +40,7 @@ public class Books {
             return false;
         else {
             Book book = books.get(index);
-            return book.returnBook();
+            return book.returnItem();
         }
     }
 }

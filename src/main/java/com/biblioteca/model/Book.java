@@ -29,7 +29,6 @@ public class Book {
         Book book = (Book) o;
 
         return !(name != null ? !name.equals(book.name) : book.name != null);
-
     }
 
     @Override
@@ -53,7 +52,7 @@ public class Book {
         }
     }
 
-    public boolean returnBook() {
+    public boolean returnItem() {
         if (checkedOut) {
             checkedOut = false;
             return true;

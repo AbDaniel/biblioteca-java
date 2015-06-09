@@ -46,12 +46,12 @@ public class BookTest {
     public void shouldReturnTrueIfCurrentCheckoutStateIsTrueDuringReturn() {
         book.checkout();
 
-        assertTrue(book.returnBook());
+        assertTrue(book.returnItem());
     }
 
     @Test
     public void shouldReturnFalseIfCurrentCheckoutStateIsFalseDuringReturn() {
-        assertFalse(book.returnBook());
+        assertFalse(book.returnItem());
     }
 
 }
