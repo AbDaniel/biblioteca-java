@@ -1,14 +1,18 @@
 package com.biblioteca.command;
 
 import com.biblioteca.console.BibliotecaConsoleIO;
+import com.biblioteca.model.Owner;
 import com.biblioteca.repository.Borrowables;
+import org.hamcrest.Matcher;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import static com.biblioteca.console.BibliotecaConsoleIO.*;
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.when;
 
 public class CheckoutCommandTest {
@@ -18,6 +22,9 @@ public class CheckoutCommandTest {
 
     @Mock
     private Borrowables borrowables;
+
+    @Mock
+    private Owner owner;
 
     private CheckoutCommand command;
 
@@ -48,14 +55,14 @@ public class CheckoutCommandTest {
 
         command.execute();
 
-        Mockito.verify(borrowables).checkout(bookName);
+        Mockito.verify(borrowables).checkout(eq(bookName), Matchers.any(Owner.class));
     }
 
     @Test
     public void shouldNotifyIfBookIsNotValid() {
         String bookName = "123";
         when(bibliotecaConsoleIO.getBookNameFromUser()).thenReturn(bookName);
-        when(borrowables.checkout(bookName)).thenReturn(false);
+        when(borrowables.checkout(bookName, owner)).thenReturn(false);
 
         command.execute();
 
@@ -66,7 +73,7 @@ public class CheckoutCommandTest {
     public void shouldNotifyUserOnSuccessfulCheckout() {
         String bookName = "Lord of the Rings";
         when(bibliotecaConsoleIO.getBookNameFromUser()).thenReturn(bookName);
-        when(borrowables.checkout(bookName)).thenReturn(true);
+        when(borrowables.checkout(eq(bookName), Matchers.any(Owner.class))).thenReturn(true);
 
         command.execute();
 

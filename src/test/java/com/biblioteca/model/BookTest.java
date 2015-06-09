@@ -3,14 +3,21 @@ package com.biblioteca.model;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+@RunWith(MockitoJUnitRunner.class)
 public class BookTest {
 
     Book book;
+
+    @Mock
+    Owner owner;
 
     @Before
     public void setUp() {
@@ -32,26 +39,26 @@ public class BookTest {
 
     @Test
     public void shouldReturnTrueIfCurrentCheckoutStateIsFalseDuringCheckout() {
-        assertTrue(book.checkout());
+        assertTrue(book.checkout(owner));
     }
 
     @Test
     public void shouldReturnFalseIfCurrentCheckoutStateIsTrueDuringCheckout() {
-        book.checkout();
+        book.checkout(owner);
 
-        assertFalse(book.checkout());
+        assertFalse(book.checkout(owner));
     }
 
     @Test
     public void shouldReturnTrueIfCurrentCheckoutStateIsTrueDuringReturn() {
-        book.checkout();
+        book.checkout(owner);
 
-        assertTrue(book.returnItem());
+        assertTrue(book.returnItem(owner));
     }
 
     @Test
     public void shouldReturnFalseIfCurrentCheckoutStateIsFalseDuringReturn() {
-        assertFalse(book.returnItem());
+        assertFalse(book.returnItem(owner));
     }
 
 }

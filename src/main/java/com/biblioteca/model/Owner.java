@@ -4,4 +4,6 @@ public interface Owner {
 
     void addOwnable(Ownable ownable);
 
+    void removeOwnable(Ownable ownable);
+
 }

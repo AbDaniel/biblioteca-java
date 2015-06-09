@@ -4,9 +4,9 @@ public interface Borrowable {
 
     String getName();
 
-    boolean checkout();
+    boolean checkout(Owner owner);
 
-    boolean returnItem();
+    boolean returnItem(Owner owner);
 
     boolean isCheckedOut();
 
