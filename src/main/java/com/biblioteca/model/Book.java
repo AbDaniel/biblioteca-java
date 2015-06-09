@@ -1,6 +1,6 @@
 package com.biblioteca.model;
 
-public class Book implements Borrowable {
+public class Book implements Borrowable, Ownable {
 
     private final String name;
     private String author;
