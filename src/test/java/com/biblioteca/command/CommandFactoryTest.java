@@ -1,6 +1,7 @@
 package com.biblioteca.command;
 
 import com.biblioteca.console.BibliotecaConsoleIO;
+import com.biblioteca.model.Owner;
 import com.biblioteca.repository.Borrowables;
 import com.biblioteca.enums.MenuItem;
 import org.junit.Before;
@@ -20,20 +21,23 @@ public class CommandFactoryTest {
     Borrowables borrowables;
 
     @Mock
+    Owner owner;
+
+    @Mock
     BibliotecaConsoleIO bibliotecaConsoleIO;
 
     @Before
     public void setUp() throws Exception {
-        commandFactory = new CommandFactory(borrowables, bibliotecaConsoleIO);
+        commandFactory = new CommandFactory(borrowables, bibliotecaConsoleIO, owner);
     }
 
     @Test
     public void shouldReturnNecessaryCommand() {
         MenuItem item = LIST_BOOKS;
 
-        ListBooksCommand actualCommoand = (ListBooksCommand) commandFactory.getCommand(item);
+        ListBooksCommand actualCommand = (ListBooksCommand) commandFactory.getCommand(item);
 
-        assertThat(actualCommoand, is(any(ListBooksCommand.class)));
+        assertThat(actualCommand, is(any(ListBooksCommand.class)));
     }
 
 }

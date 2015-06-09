@@ -1,6 +1,7 @@
 package com.biblioteca.command;
 
 import com.biblioteca.console.BibliotecaConsoleIO;
+import com.biblioteca.model.Owner;
 import com.biblioteca.repository.Borrowables;
 import com.biblioteca.enums.MenuItem;
 
@@ -12,12 +13,14 @@ import static com.biblioteca.enums.MenuItem.*;
 
 public class CommandFactory {
 
+    private final Owner owner;
     private Map<MenuItem, Command> commandMap = new HashMap<>();
 
-    public CommandFactory(Borrowables borrowables, BibliotecaConsoleIO bibliotecaConsoleIO) {
+    public CommandFactory(Borrowables borrowables, BibliotecaConsoleIO bibliotecaConsoleIO, Owner owner) {
+        this.owner = owner;
         commandMap.put(LIST_BOOKS, new ListBooksCommand(borrowables, bibliotecaConsoleIO));
-        commandMap.put(CHECKOUT_BOOK, new CheckoutCommand(borrowables, bibliotecaConsoleIO));
-        commandMap.put(RETURN_BOOK, new ReturnCommand(borrowables, bibliotecaConsoleIO));
+        commandMap.put(CHECKOUT_BOOK, new CheckoutCommand(borrowables, bibliotecaConsoleIO, this.owner));
+        commandMap.put(RETURN_BOOK, new ReturnCommand(borrowables, bibliotecaConsoleIO, this.owner));
         commandMap.put(QUIT, new QuitCommand(EXIT_MESSAGE));
     }
 

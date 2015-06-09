@@ -12,9 +12,10 @@ public class CheckoutCommand implements Command {
     private BibliotecaConsoleIO bibliotecaConsoleIO;
     private Owner owner;
 
-    public CheckoutCommand(Borrowables borrowables, BibliotecaConsoleIO bibliotecaConsoleIO) {
+    public CheckoutCommand(Borrowables borrowables, BibliotecaConsoleIO bibliotecaConsoleIO, Owner owner) {
         this.borrowables = borrowables;
         this.bibliotecaConsoleIO = bibliotecaConsoleIO;
+        this.owner = owner;
     }
 
     @Override

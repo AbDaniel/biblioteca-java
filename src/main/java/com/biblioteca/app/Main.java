@@ -2,6 +2,8 @@ package com.biblioteca.app;
 
 import com.biblioteca.command.CommandFactory;
 import com.biblioteca.console.BibliotecaConsoleIO;
+import com.biblioteca.model.Ownable;
+import com.biblioteca.model.Owner;
 import com.biblioteca.repository.Borrowables;
 import com.biblioteca.model.Book;
 
@@ -23,7 +25,18 @@ public class Main {
         List<Book> checkedOutBooks = new ArrayList<>();
 
         BibliotecaConsoleIO bibliotecaConsoleIO = new BibliotecaConsoleIO(new Scanner(in));
-        CommandFactory commandFactory = new CommandFactory(new Borrowables<>(availableBooks), bibliotecaConsoleIO);
+        Owner owner = new Owner() {
+            @Override
+            public void addOwnable(Ownable ownable) {
+
+            }
+
+            @Override
+            public void removeOwnable(Ownable ownable) {
+
+            }
+        };
+        CommandFactory commandFactory = new CommandFactory(new Borrowables<>(availableBooks), bibliotecaConsoleIO, owner);
 
         BibliotecaApp bibliotecaApp = new BibliotecaApp(WELCOME_TEXT, bibliotecaConsoleIO, commandFactory);
         bibliotecaApp.start();

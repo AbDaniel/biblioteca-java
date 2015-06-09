@@ -3,7 +3,6 @@ package com.biblioteca.command;
 import com.biblioteca.console.BibliotecaConsoleIO;
 import com.biblioteca.model.Owner;
 import com.biblioteca.repository.Borrowables;
-import org.hamcrest.Matcher;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Matchers;
@@ -31,7 +30,7 @@ public class CheckoutCommandTest {
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        command = new CheckoutCommand(borrowables, bibliotecaConsoleIO);
+        command = new CheckoutCommand(borrowables, bibliotecaConsoleIO, owner);
     }
 
     @Test

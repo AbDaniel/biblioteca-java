@@ -30,7 +30,7 @@ public class ReturnCommandTest {
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        command = new ReturnCommand(borrowables, bibliotecaConsoleIO);
+        command = new ReturnCommand(borrowables, bibliotecaConsoleIO, owner);
     }
 
     @Test

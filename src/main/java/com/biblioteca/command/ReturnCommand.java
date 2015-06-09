@@ -12,9 +12,10 @@ public class ReturnCommand implements Command {
     private BibliotecaConsoleIO bibliotecaConsoleIO;
     private Owner owner;
 
-    public ReturnCommand(Borrowables borrowables, BibliotecaConsoleIO bibliotecaConsoleIO) {
+    public ReturnCommand(Borrowables borrowables, BibliotecaConsoleIO bibliotecaConsoleIO, Owner owner) {
         this.borrowables = borrowables;
         this.bibliotecaConsoleIO = bibliotecaConsoleIO;
+        this.owner = owner;
     }
 
     @Override
