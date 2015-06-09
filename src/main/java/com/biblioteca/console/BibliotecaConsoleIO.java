@@ -30,8 +30,8 @@ public class BibliotecaConsoleIO {
         System.out.println(message);
     }
 
-    public void displayListOfBooks(List<Book> books) {
-        for (Book book : books) {
+    public void displayListOfBooks(List books) {
+        for (Object book : books) {
             System.out.println(book);
         }
     }

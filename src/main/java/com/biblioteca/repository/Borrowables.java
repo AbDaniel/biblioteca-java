@@ -14,17 +14,17 @@ public class Borrowables<T extends Borrowable> {
         this.borrowables = borrowables;
     }
 
-    public List<T> allAvailableBooks() {
+    public List<Object> allAvailableBooks() {
         return borrowables.stream().filter(p -> !p.isCheckedOut()).collect(Collectors.toCollection(ArrayList::new));
     }
 
-    public boolean checkout(final String bookName) {
-        Borrowable borrowable = borrowables.stream().filter(p -> p.getName().equals(bookName)).findFirst().orElse(null);
+    public boolean checkout(final String itemName) {
+        Borrowable borrowable = borrowables.stream().filter(p -> p.getName().equals(itemName)).findFirst().orElse(null);
         return borrowable != null && borrowable.checkout();
     }
 
-    public boolean returnItem(String bookName) {
-        Borrowable borrowable = borrowables.stream().filter(p -> p.getName().equals(bookName)).findFirst().orElse(null);
+    public boolean returnItem(String itemName) {
+        Borrowable borrowable = borrowables.stream().filter(p -> p.getName().equals(itemName)).findFirst().orElse(null);
         return borrowable != null && borrowable.returnItem();
     }
 

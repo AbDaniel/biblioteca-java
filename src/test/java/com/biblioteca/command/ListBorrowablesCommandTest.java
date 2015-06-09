@@ -31,7 +31,7 @@ public class ListBorrowablesCommandTest {
         command.execute();
 
         verify(borrowables).allAvailableBooks();
-        verify(bibliotecaConsoleIO).displayListOfBooks(Matchers.anyListOf(Book.class));
+        verify(bibliotecaConsoleIO).displayListOfBooks(Matchers.anyListOf(Object.class));
     }
 
 }
