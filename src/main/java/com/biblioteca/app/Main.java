@@ -2,7 +2,7 @@ package com.biblioteca.app;
 
 import com.biblioteca.command.CommandFactory;
 import com.biblioteca.console.BibliotecaConsoleIO;
-import com.biblioteca.repository.Books;
+import com.biblioteca.repository.Borrowables;
 import com.biblioteca.model.Book;
 
 import java.util.ArrayList;
@@ -23,7 +23,7 @@ public class Main {
         List<Book> checkedOutBooks = new ArrayList<>();
 
         BibliotecaConsoleIO bibliotecaConsoleIO = new BibliotecaConsoleIO(new Scanner(in));
-        CommandFactory commandFactory = new CommandFactory(new Books(availableBooks), bibliotecaConsoleIO);
+        CommandFactory commandFactory = new CommandFactory(new Borrowables<>(availableBooks), bibliotecaConsoleIO);
 
         BibliotecaApp bibliotecaApp = new BibliotecaApp(WELCOME_TEXT, bibliotecaConsoleIO, commandFactory);
         bibliotecaApp.start();

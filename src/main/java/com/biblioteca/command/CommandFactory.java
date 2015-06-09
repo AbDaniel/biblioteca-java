@@ -1,7 +1,7 @@
 package com.biblioteca.command;
 
 import com.biblioteca.console.BibliotecaConsoleIO;
-import com.biblioteca.repository.Books;
+import com.biblioteca.repository.Borrowables;
 import com.biblioteca.enums.MenuItem;
 
 import java.util.HashMap;
@@ -14,10 +14,10 @@ public class CommandFactory {
 
     private Map<MenuItem, Command> commandMap = new HashMap<>();
 
-    public CommandFactory(Books books, BibliotecaConsoleIO bibliotecaConsoleIO) {
-        commandMap.put(LIST_BOOKS, new ListBooksCommand(books, bibliotecaConsoleIO));
-        commandMap.put(CHECKOUT_BOOK, new CheckoutCommand(books, bibliotecaConsoleIO));
-        commandMap.put(RETURN_BOOK, new ReturnCommand(books, bibliotecaConsoleIO));
+    public CommandFactory(Borrowables borrowables, BibliotecaConsoleIO bibliotecaConsoleIO) {
+        commandMap.put(LIST_BOOKS, new ListBooksCommand(borrowables, bibliotecaConsoleIO));
+        commandMap.put(CHECKOUT_BOOK, new CheckoutCommand(borrowables, bibliotecaConsoleIO));
+        commandMap.put(RETURN_BOOK, new ReturnCommand(borrowables, bibliotecaConsoleIO));
         commandMap.put(QUIT, new QuitCommand(EXIT_MESSAGE));
     }
 

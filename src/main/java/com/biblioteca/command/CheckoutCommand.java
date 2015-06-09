@@ -1,17 +1,17 @@
 package com.biblioteca.command;
 
 import com.biblioteca.console.BibliotecaConsoleIO;
-import com.biblioteca.repository.Books;
+import com.biblioteca.repository.Borrowables;
 
 import static com.biblioteca.console.BibliotecaConsoleIO.*;
 
 public class CheckoutCommand implements Command {
 
-    private Books books;
+    private Borrowables borrowables;
     private BibliotecaConsoleIO bibliotecaConsoleIO;
 
-    public CheckoutCommand(Books books, BibliotecaConsoleIO bibliotecaConsoleIO) {
-        this.books = books;
+    public CheckoutCommand(Borrowables borrowables, BibliotecaConsoleIO bibliotecaConsoleIO) {
+        this.borrowables = borrowables;
         this.bibliotecaConsoleIO = bibliotecaConsoleIO;
     }
 
@@ -19,7 +19,7 @@ public class CheckoutCommand implements Command {
     public void execute() {
         bibliotecaConsoleIO.displayMessage(CHECKOUT_PROMPT_TEXT);
         String bookName = bibliotecaConsoleIO.getBookNameFromUser();
-        if (books.checkout(bookName)) {
+        if (borrowables.checkout(bookName)) {
             bibliotecaConsoleIO.displayMessage(SUCCESSFULL_CHECKOUT_TEXT);
         } else {
             bibliotecaConsoleIO.displayMessage(BOOK_NOT_PRESENT_TEXT);

@@ -3,7 +3,7 @@ package com.biblioteca.app;
 import com.biblioteca.command.CommandFactory;
 import com.biblioteca.command.QuitCommand;
 import com.biblioteca.console.BibliotecaConsoleIO;
-import com.biblioteca.repository.Books;
+import com.biblioteca.repository.Borrowables;
 import com.biblioteca.enums.MenuItem;
 import org.junit.Before;
 import org.junit.Rule;
@@ -26,7 +26,7 @@ public class BibliotecaAppTest {
     public final ExpectedSystemExit exit = ExpectedSystemExit.none();
 
     @Mock
-    Books books;
+    Borrowables borrowables;
 
     @Mock
     BibliotecaConsoleIO bibliotecaConsoleIO;

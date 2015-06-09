@@ -16,9 +16,9 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
 
-public class BooksTest {
+public class BorrowablesTest {
 
-    Books books;
+    Borrowables borrowables;
 
     @Mock
     List<Book> bookList;
@@ -26,7 +26,7 @@ public class BooksTest {
     @Before
     public void setUp() {
         initMocks(this);
-        books = new Books(bookList);
+        borrowables = new Borrowables<>(bookList);
     }
 
     void setUpWithData() {
@@ -41,21 +41,22 @@ public class BooksTest {
         book = new Book("Alchemist", "Paulo Coelho", 1988);
         book.checkout();
         bookList.add(book);
-        this.books = new Books(bookList);
+        this.borrowables = new Borrowables<>(bookList);
     }
 
     @Test
     public void shouldReturnListOfAvailableBooksOfRightSize() {
         setUpWithData();
-        int actualSize = books.allAvailableBooks().size();
+        int actualSize = borrowables.allAvailableBooks().size();
 
         assertEquals(4, actualSize);
     }
 
     @Test
     public void shouldReturnZeroSizedListIfNoAvailableBooks() {
-        this.books = new Books(null);
-        int actualSize = books.allAvailableBooks().size();
+        this.borrowables = new Borrowables<>(new ArrayList<>());
+
+        int actualSize = borrowables.allAvailableBooks().size();
 
         assertEquals(0, actualSize);
     }
@@ -65,18 +66,7 @@ public class BooksTest {
         setUpWithData();
         String bookName = "1234";
 
-        assertFalse(books.checkout(bookName));
-    }
-
-    @Test
-    public void shouldFindTheBookWithGivenNameDuringCheckout() {
-        String name = "Lord of the Rings";
-        Book book = new Book(name, null, 0);
-        when(bookList.get(Matchers.any(Integer.class))).thenReturn(book);
-
-        books.checkout(name);
-
-        Mockito.verify(bookList).indexOf(book);
+        assertFalse(borrowables.checkout(bookName));
     }
 
     @Test
@@ -84,18 +74,7 @@ public class BooksTest {
         setUpWithData();
         String name = "Lord of the Rings";
 
-        assertTrue(books.checkout(name));
-    }
-
-    @Test
-    public void shouldGetBookByIndexDuringSuccessfulCheckout() {
-        String name = "Lord of the Rings";
-        Book book = new Book(name, null, 0);
-        when(bookList.get(Matchers.any(Integer.class))).thenReturn(book);
-
-        books.checkout(name);
-
-        Mockito.verify(bookList).get(Matchers.any(Integer.class));
+        assertTrue(borrowables.checkout(name));
     }
 
     @Test
@@ -103,7 +82,7 @@ public class BooksTest {
         setUpWithData();
         String bookName = "Lord of the Rings";
 
-        assertFalse(books.returnBook(bookName));
+        assertFalse(borrowables.returnItem(bookName));
     }
 
     @Test
@@ -111,30 +90,7 @@ public class BooksTest {
         setUpWithData();
         String bookName = "1234";
 
-        assertFalse(books.returnBook(bookName));
-    }
-
-
-    @Test
-    public void shouldFindTheBookWithGivenNameDuringReturn() {
-        String name = "Lord of the Rings";
-        Book book = new Book(name, null, 0);
-        when(bookList.get(Matchers.any(Integer.class))).thenReturn(book);
-
-        books.returnBook(name);
-
-        Mockito.verify(bookList).indexOf(book);
-    }
-
-    @Test
-    public void shouldGetBookByIndexDuringSuccessfulReturn() {
-        String name = "Lord of the Rings";
-        Book book = new Book(name, null, 0);
-        when(bookList.get(Matchers.any(Integer.class))).thenReturn(book);
-
-        books.returnBook(name);
-
-        Mockito.verify(bookList).get(Matchers.any(Integer.class));
+        assertFalse(borrowables.returnItem(bookName));
     }
 
     @Test
@@ -142,7 +98,7 @@ public class BooksTest {
         setUpWithData();
         String name = "1984";
 
-        assertTrue(books.returnBook(name));
+        assertTrue(borrowables.returnItem(name));
     }
 
 }

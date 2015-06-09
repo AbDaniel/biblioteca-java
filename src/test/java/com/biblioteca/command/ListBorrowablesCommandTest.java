@@ -1,7 +1,7 @@
 package com.biblioteca.command;
 
 import com.biblioteca.console.BibliotecaConsoleIO;
-import com.biblioteca.repository.Books;
+import com.biblioteca.repository.Borrowables;
 import com.biblioteca.model.Book;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,10 +11,10 @@ import org.mockito.MockitoAnnotations;
 
 import static org.mockito.Mockito.verify;
 
-public class ListBooksCommandTest {
+public class ListBorrowablesCommandTest {
 
     @Mock
-    Books books;
+    Borrowables borrowables;
     @Mock
     BibliotecaConsoleIO bibliotecaConsoleIO;
 
@@ -23,14 +23,14 @@ public class ListBooksCommandTest {
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        command = new ListBooksCommand(books, bibliotecaConsoleIO);
+        command = new ListBooksCommand(borrowables, bibliotecaConsoleIO);
     }
 
     @Test
     public void shouldListAllBooks() {
         command.execute();
 
-        verify(books).allAvailableBooks();
+        verify(borrowables).allAvailableBooks();
         verify(bibliotecaConsoleIO).displayListOfBooks(Matchers.anyListOf(Book.class));
     }
 

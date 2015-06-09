@@ -1,7 +1,7 @@
 package com.biblioteca.command;
 
 import com.biblioteca.console.BibliotecaConsoleIO;
-import com.biblioteca.repository.Books;
+import com.biblioteca.repository.Borrowables;
 import com.biblioteca.enums.MenuItem;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,14 +17,14 @@ public class CommandFactoryTest {
     CommandFactory commandFactory;
 
     @Mock
-    Books books;
+    Borrowables borrowables;
 
     @Mock
     BibliotecaConsoleIO bibliotecaConsoleIO;
 
     @Before
     public void setUp() throws Exception {
-        commandFactory = new CommandFactory(books, bibliotecaConsoleIO);
+        commandFactory = new CommandFactory(borrowables, bibliotecaConsoleIO);
     }
 
     @Test

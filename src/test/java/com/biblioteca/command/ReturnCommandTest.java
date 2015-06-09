@@ -1,8 +1,7 @@
 package com.biblioteca.command;
 
 import com.biblioteca.console.BibliotecaConsoleIO;
-import com.biblioteca.model.Book;
-import com.biblioteca.repository.Books;
+import com.biblioteca.repository.Borrowables;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -10,7 +9,6 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import static com.biblioteca.console.BibliotecaConsoleIO.*;
-import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.when;
 
 public class ReturnCommandTest {
@@ -19,14 +17,14 @@ public class ReturnCommandTest {
     BibliotecaConsoleIO bibliotecaConsoleIO;
 
     @Mock
-    private Books books;
+    private Borrowables borrowables;
 
     private ReturnCommand command;
 
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        command = new ReturnCommand(books, bibliotecaConsoleIO);
+        command = new ReturnCommand(borrowables, bibliotecaConsoleIO);
     }
 
     @Test
@@ -50,14 +48,14 @@ public class ReturnCommandTest {
 
         command.execute();
 
-        Mockito.verify(books).returnBook(bookName);
+        Mockito.verify(borrowables).returnItem(bookName);
     }
 
     @Test
     public void shouldNotifyIfUserInputsInvalidBookName() {
         String bookName = "123";
         when(bibliotecaConsoleIO.getBookNameFromUser()).thenReturn(bookName);
-        when(books.returnBook(bookName)).thenReturn(false);
+        when(borrowables.returnItem(bookName)).thenReturn(false);
 
         command.execute();
 
@@ -68,7 +66,7 @@ public class ReturnCommandTest {
     public void shouldNotifyUserOnSuccessfulReturn() {
         String bookName = "Lord of the Rings";
         when(bibliotecaConsoleIO.getBookNameFromUser()).thenReturn(bookName);
-        when(books.returnBook(bookName)).thenReturn(true);
+        when(borrowables.returnItem(bookName)).thenReturn(true);
 
         command.execute();
 

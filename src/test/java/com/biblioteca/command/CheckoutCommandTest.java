@@ -1,7 +1,7 @@
 package com.biblioteca.command;
 
 import com.biblioteca.console.BibliotecaConsoleIO;
-import com.biblioteca.repository.Books;
+import com.biblioteca.repository.Borrowables;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -17,14 +17,14 @@ public class CheckoutCommandTest {
     BibliotecaConsoleIO bibliotecaConsoleIO;
 
     @Mock
-    private Books books;
+    private Borrowables borrowables;
 
     private CheckoutCommand command;
 
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        command = new CheckoutCommand(books, bibliotecaConsoleIO);
+        command = new CheckoutCommand(borrowables, bibliotecaConsoleIO);
     }
 
     @Test
@@ -48,14 +48,14 @@ public class CheckoutCommandTest {
 
         command.execute();
 
-        Mockito.verify(books).checkout(bookName);
+        Mockito.verify(borrowables).checkout(bookName);
     }
 
     @Test
     public void shouldNotifyIfBookIsNotValid() {
         String bookName = "123";
         when(bibliotecaConsoleIO.getBookNameFromUser()).thenReturn(bookName);
-        when(books.checkout(bookName)).thenReturn(false);
+        when(borrowables.checkout(bookName)).thenReturn(false);
 
         command.execute();
 
@@ -66,7 +66,7 @@ public class CheckoutCommandTest {
     public void shouldNotifyUserOnSuccessfulCheckout() {
         String bookName = "Lord of the Rings";
         when(bibliotecaConsoleIO.getBookNameFromUser()).thenReturn(bookName);
-        when(books.checkout(bookName)).thenReturn(true);
+        when(borrowables.checkout(bookName)).thenReturn(true);
 
         command.execute();
 

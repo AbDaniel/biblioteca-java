@@ -1,21 +1,21 @@
 package com.biblioteca.command;
 
 import com.biblioteca.console.BibliotecaConsoleIO;
-import com.biblioteca.repository.Books;
+import com.biblioteca.repository.Borrowables;
 
 public class ListBooksCommand implements Command {
 
-    private final Books books;
+    private final Borrowables borrowables;
     private final BibliotecaConsoleIO bibliotecaConsoleIO;
 
-    public ListBooksCommand(Books books, BibliotecaConsoleIO bibliotecaConsoleIO) {
-        this.books = books;
+    public ListBooksCommand(Borrowables borrowables, BibliotecaConsoleIO bibliotecaConsoleIO) {
+        this.borrowables = borrowables;
         this.bibliotecaConsoleIO = bibliotecaConsoleIO;
     }
 
     @Override
     public void execute() {
-        bibliotecaConsoleIO.displayListOfBooks(books.allAvailableBooks());
+        bibliotecaConsoleIO.displayListOfBooks(borrowables.allAvailableBooks());
     }
 
 }

@@ -1,6 +1,6 @@
 package com.biblioteca.model;
 
-public class Book {
+public class Book implements Borrowable {
 
     private final String name;
     private String author;
@@ -43,6 +43,12 @@ public class Book {
                 ", year=" + year;
     }
 
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
     public boolean checkout() {
         if (checkedOut) {
             return false;
@@ -52,6 +58,7 @@ public class Book {
         }
     }
 
+    @Override
     public boolean returnItem() {
         if (checkedOut) {
             checkedOut = false;
@@ -61,6 +68,7 @@ public class Book {
         }
     }
 
+    @Override
     public boolean isCheckedOut() {
         return checkedOut;
     }
