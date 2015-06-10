@@ -1,10 +1,9 @@
 package com.biblioteca.command;
 
 import com.biblioteca.console.BibliotecaConsoleIO;
+import com.biblioteca.constants.Constants;
 import com.biblioteca.model.Owner;
 import com.biblioteca.repository.Borrowables;
-
-import static com.biblioteca.console.BibliotecaConsoleIO.*;
 
 public class ReturnCommand implements Command {
 
@@ -20,12 +19,12 @@ public class ReturnCommand implements Command {
 
     @Override
     public void execute() {
-        bibliotecaConsoleIO.displayMessage(CHECKOUT_PROMPT_TEXT);
+        bibliotecaConsoleIO.displayMessage(Constants.CHECKOUT_PROMPT_TEXT);
         String bookName = bibliotecaConsoleIO.getBookNameFromUser();
         if (borrowables.returnItem(bookName, owner)) {
-            bibliotecaConsoleIO.displayMessage(SUCCESSFULL_RETURN_TEXT);
+            bibliotecaConsoleIO.displayMessage(Constants.SUCCESSFUL_RETURN_TEXT);
         } else {
-            bibliotecaConsoleIO.displayMessage(BOOK_NOT_VALID_TEXT);
+            bibliotecaConsoleIO.displayMessage(Constants.BOOK_NOT_VALID_TEXT);
         }
     }
 

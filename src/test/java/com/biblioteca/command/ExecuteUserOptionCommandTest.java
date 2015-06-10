@@ -1,6 +1,7 @@
 package com.biblioteca.command;
 
 import com.biblioteca.console.BibliotecaConsoleIO;
+import com.biblioteca.constants.Constants;
 import com.biblioteca.enums.MenuItem;
 import org.junit.Before;
 import org.junit.Test;
@@ -9,7 +10,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
-import static com.biblioteca.console.BibliotecaConsoleIO.*;
 import static com.biblioteca.enums.MenuItem.LIST_BOOKS;
 import static org.mockito.Mockito.when;
 
@@ -57,10 +57,10 @@ public class ExecuteUserOptionCommandTest {
 
     @Test
     public void shouldSayInvalidInputOnInvalidInput() {
-        when(bibliotecaConsoleIO.getUserChoice()).thenReturn(INVALID_INPUT);
+        when(bibliotecaConsoleIO.getUserChoice()).thenReturn(Constants.INVALID_INPUT);
         exceuteUserOptionsCommand.execute();
 
-        Mockito.verify(bibliotecaConsoleIO).displayMessage(INVALID_INPUT_TEXT);
+        Mockito.verify(bibliotecaConsoleIO).displayMessage(Constants.INVALID_INPUT_TEXT);
     }
 
 }

@@ -11,8 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import static com.biblioteca.console.BibliotecaConsoleIO.INVALID_INPUT;
-import static com.biblioteca.console.BibliotecaConsoleIO.WELCOME_TEXT;
+import static com.biblioteca.constants.Constants.INVALID_INPUT;
+import static com.biblioteca.constants.Constants.WELCOME_TEXT;
 
 import static org.junit.Assert.assertEquals;
 

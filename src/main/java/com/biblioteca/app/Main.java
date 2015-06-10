@@ -2,6 +2,7 @@ package com.biblioteca.app;
 
 import com.biblioteca.command.CommandFactory;
 import com.biblioteca.console.BibliotecaConsoleIO;
+import com.biblioteca.constants.Constants;
 import com.biblioteca.model.Ownable;
 import com.biblioteca.model.Owner;
 import com.biblioteca.repository.Borrowables;
@@ -11,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import static com.biblioteca.console.BibliotecaConsoleIO.*;
 import static java.lang.System.*;
 
 public class Main {
@@ -38,7 +38,7 @@ public class Main {
         };
         CommandFactory commandFactory = new CommandFactory(new Borrowables<>(availableBooks), bibliotecaConsoleIO, owner);
 
-        BibliotecaApp bibliotecaApp = new BibliotecaApp(WELCOME_TEXT, bibliotecaConsoleIO, commandFactory);
+        BibliotecaApp bibliotecaApp = new BibliotecaApp(Constants.WELCOME_TEXT, bibliotecaConsoleIO, commandFactory);
         bibliotecaApp.start();
     }
 

@@ -1,10 +1,9 @@
 package com.biblioteca.command;
 
 import com.biblioteca.console.BibliotecaConsoleIO;
+import com.biblioteca.constants.Constants;
 import com.biblioteca.model.Owner;
 import com.biblioteca.repository.Borrowables;
-
-import static com.biblioteca.console.BibliotecaConsoleIO.*;
 
 public class CheckoutCommand implements Command {
 
@@ -20,12 +19,12 @@ public class CheckoutCommand implements Command {
 
     @Override
     public void execute() {
-        bibliotecaConsoleIO.displayMessage(CHECKOUT_PROMPT_TEXT);
+        bibliotecaConsoleIO.displayMessage(Constants.CHECKOUT_PROMPT_TEXT);
         String bookName = bibliotecaConsoleIO.getBookNameFromUser();
         if (borrowables.checkout(bookName, owner)) {
-            bibliotecaConsoleIO.displayMessage(SUCCESSFULL_CHECKOUT_TEXT);
+            bibliotecaConsoleIO.displayMessage(Constants.SUCCESSFUL_CHECKOUT_TEXT);
         } else {
-            bibliotecaConsoleIO.displayMessage(BOOK_NOT_PRESENT_TEXT);
+            bibliotecaConsoleIO.displayMessage(Constants.BOOK_NOT_PRESENT_TEXT);
         }
     }
 

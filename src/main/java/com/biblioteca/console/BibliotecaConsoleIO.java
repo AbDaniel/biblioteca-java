@@ -1,24 +1,13 @@
 package com.biblioteca.console;
 
+import com.biblioteca.constants.Constants;
 import com.biblioteca.enums.MenuItem;
-import com.biblioteca.model.Book;
 
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
 public class BibliotecaConsoleIO {
-
-    public static final int INVALID_INPUT = -1;
-    public static final int EXIT_STATUS = 0;
-
-    public static final String WELCOME_TEXT = "Hello! Welcome to Biblioteca";
-    public static final String INVALID_INPUT_TEXT = "Select a valid option!";
-    public static final String CHECKOUT_PROMPT_TEXT = "Enter a book name : ";
-    public static final String BOOK_NOT_PRESENT_TEXT = "That book is not available.";
-    public static final String SUCCESSFULL_CHECKOUT_TEXT = "Thank you! Enjoy the book.";
-    public static final String BOOK_NOT_VALID_TEXT = "That is not a valid book to return.";
-    public static final String SUCCESSFULL_RETURN_TEXT = "Thank you for returning the book.";
 
     private Scanner scanner;
 
@@ -50,7 +39,7 @@ public class BibliotecaConsoleIO {
                 throw new InputMismatchException();
             }
         } catch (InputMismatchException e) {
-            choice = INVALID_INPUT;
+            choice = Constants.INVALID_INPUT;
         }
         scanner.nextLine();
         return choice;

@@ -15,8 +15,8 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import static com.biblioteca.command.QuitCommand.EXIT_MESSAGE;
-import static com.biblioteca.console.BibliotecaConsoleIO.EXIT_STATUS;
-import static com.biblioteca.console.BibliotecaConsoleIO.WELCOME_TEXT;
+import static com.biblioteca.constants.Constants.EXIT_STATUS;
+import static com.biblioteca.constants.Constants.WELCOME_TEXT;
 import static com.biblioteca.enums.MenuItem.QUIT;
 import static org.mockito.Mockito.when;
 

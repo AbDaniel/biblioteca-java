@@ -1,6 +1,7 @@
 package com.biblioteca.command;
 
 import com.biblioteca.console.BibliotecaConsoleIO;
+import com.biblioteca.constants.Constants;
 import com.biblioteca.model.Owner;
 import com.biblioteca.repository.Borrowables;
 import org.junit.Before;
@@ -10,7 +11,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
-import static com.biblioteca.console.BibliotecaConsoleIO.*;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.when;
 
@@ -37,7 +37,7 @@ public class CheckoutCommandTest {
     public void shouldDisplayMessageAskingUserToInputBookName() {
         command.execute();
 
-        Mockito.verify(bibliotecaConsoleIO).displayMessage(CHECKOUT_PROMPT_TEXT);
+        Mockito.verify(bibliotecaConsoleIO).displayMessage(Constants.CHECKOUT_PROMPT_TEXT);
     }
 
     @Test
@@ -65,7 +65,7 @@ public class CheckoutCommandTest {
 
         command.execute();
 
-        Mockito.verify(bibliotecaConsoleIO).displayMessage(BOOK_NOT_PRESENT_TEXT);
+        Mockito.verify(bibliotecaConsoleIO).displayMessage(Constants.BOOK_NOT_PRESENT_TEXT);
     }
 
     @Test
@@ -76,7 +76,7 @@ public class CheckoutCommandTest {
 
         command.execute();
 
-        Mockito.verify(bibliotecaConsoleIO).displayMessage(SUCCESSFULL_CHECKOUT_TEXT);
+        Mockito.verify(bibliotecaConsoleIO).displayMessage(Constants.SUCCESSFUL_CHECKOUT_TEXT);
     }
 
 }
