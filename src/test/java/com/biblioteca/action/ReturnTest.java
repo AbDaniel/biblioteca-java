@@ -1,4 +1,4 @@
-package com.biblioteca.command;
+package com.biblioteca.action;
 
 import com.biblioteca.console.BibliotecaConsoleIO;
 import com.biblioteca.constants.Constants;
@@ -14,7 +14,7 @@ import org.mockito.MockitoAnnotations;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.when;
 
-public class CheckoutTest {
+public class ReturnTest {
 
     @Mock
     BibliotecaConsoleIO bibliotecaConsoleIO;
@@ -25,12 +25,12 @@ public class CheckoutTest {
     @Mock
     private Owner owner;
 
-    private Checkout command;
+    private Return command;
 
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        command = new Checkout(borrowables, bibliotecaConsoleIO, owner);
+        command = new Return(borrowables, bibliotecaConsoleIO, owner);
     }
 
     @Test
@@ -48,35 +48,35 @@ public class CheckoutTest {
     }
 
     @Test
-    public void shouldCallCheckoutWithGivenInput() {
+    public void shouldCallReturnBookWithGivenInput() {
         String bookName = "Lord of the Rings";
         when(bibliotecaConsoleIO.getBookNameFromUser()).thenReturn(bookName);
 
         command.execute();
 
-        Mockito.verify(borrowables).checkout(eq(bookName), Matchers.any(Owner.class));
+        Mockito.verify(borrowables).returnItem(eq(bookName), Matchers.any(Owner.class));
     }
 
     @Test
-    public void shouldNotifyIfBookIsNotValid() {
+    public void shouldNotifyIfUserInputsInvalidBookName() {
         String bookName = "123";
         when(bibliotecaConsoleIO.getBookNameFromUser()).thenReturn(bookName);
-        when(borrowables.checkout(bookName, owner)).thenReturn(false);
+        when(borrowables.returnItem(eq(bookName), Matchers.any(Owner.class))).thenReturn(false);
 
         command.execute();
 
-        Mockito.verify(bibliotecaConsoleIO).displayMessage(Constants.BOOK_NOT_PRESENT_TEXT);
+        Mockito.verify(bibliotecaConsoleIO).displayMessage(Constants.BOOK_NOT_VALID_TEXT);
     }
 
     @Test
-    public void shouldNotifyUserOnSuccessfulCheckout() {
+    public void shouldNotifyUserOnSuccessfulReturn() {
         String bookName = "Lord of the Rings";
         when(bibliotecaConsoleIO.getBookNameFromUser()).thenReturn(bookName);
-        when(borrowables.checkout(eq(bookName), Matchers.any(Owner.class))).thenReturn(true);
+        when(borrowables.returnItem(eq(bookName), Matchers.any(Owner.class))).thenReturn(true);
 
         command.execute();
 
-        Mockito.verify(bibliotecaConsoleIO).displayMessage(Constants.SUCCESSFUL_CHECKOUT_TEXT);
+        Mockito.verify(bibliotecaConsoleIO).displayMessage(Constants.SUCCESSFUL_RETURN_TEXT);
     }
 
 }

@@ -1,7 +1,8 @@
-package com.biblioteca.command;
+package com.biblioteca.action;
 
 import com.biblioteca.console.BibliotecaConsoleIO;
 import com.biblioteca.constants.Constants;
+import com.biblioteca.controller.Controller;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;

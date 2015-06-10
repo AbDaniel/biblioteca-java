@@ -1,4 +1,4 @@
-package com.biblioteca.command;
+package com.biblioteca.action;
 
 import com.biblioteca.console.BibliotecaConsoleIO;
 import com.biblioteca.repository.Borrowables;

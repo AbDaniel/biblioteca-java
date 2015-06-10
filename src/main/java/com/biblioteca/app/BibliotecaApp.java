@@ -1,7 +1,7 @@
 package com.biblioteca.app;
 
-import com.biblioteca.command.Actions;
-import com.biblioteca.command.Controller;
+import com.biblioteca.action.Actions;
+import com.biblioteca.controller.Controller;
 import com.biblioteca.console.BibliotecaConsoleIO;
 
 public class BibliotecaApp {

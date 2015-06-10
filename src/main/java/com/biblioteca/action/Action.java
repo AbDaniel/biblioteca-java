@@ -1,4 +1,4 @@
-package com.biblioteca.command;
+package com.biblioteca.action;
 
 public interface Action {
 

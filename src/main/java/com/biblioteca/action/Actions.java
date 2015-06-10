@@ -1,14 +1,12 @@
-package com.biblioteca.command;
+package com.biblioteca.action;
 
 import com.biblioteca.console.BibliotecaConsoleIO;
 import com.biblioteca.model.Owner;
 import com.biblioteca.repository.Borrowables;
 import com.biblioteca.enums.MenuItem;
 
-import java.util.HashMap;
 import java.util.Map;
 
-import static com.biblioteca.constants.Constants.EXIT_MESSAGE;
 import static com.biblioteca.enums.MenuItem.*;
 
 public class Actions {
