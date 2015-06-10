@@ -13,9 +13,9 @@ import static org.hamcrest.CoreMatchers.any;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
-public class CommandFactoryTest {
+public class ActionFactoryTest {
 
-    CommandFactory commandFactory;
+    Actions actions;
 
     @Mock
     Borrowables borrowables;
@@ -28,16 +28,16 @@ public class CommandFactoryTest {
 
     @Before
     public void setUp() throws Exception {
-        commandFactory = new CommandFactory(borrowables, bibliotecaConsoleIO, owner);
+        actions = new Actions(borrowables, bibliotecaConsoleIO, owner);
     }
 
     @Test
     public void shouldReturnNecessaryCommand() {
         MenuItem item = LIST_BOOKS;
 
-        ListBooksCommand actualCommand = (ListBooksCommand) commandFactory.getCommand(item);
+        ListBooks actualCommand = (ListBooks) actions.getCommand(item);
 
-        assertThat(actualCommand, is(any(ListBooksCommand.class)));
+        assertThat(actualCommand, is(any(ListBooks.class)));
     }
 
 }

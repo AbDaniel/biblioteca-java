@@ -7,14 +7,14 @@ import static com.biblioteca.constants.Constants.INVALID_INPUT;
 import static com.biblioteca.constants.Constants.INVALID_INPUT_TEXT;
 import static com.biblioteca.enums.MenuItem.valueOf;
 
-public class ExecuteUserOptionCommand implements Command {
+public class ExecuteUserOptionAction implements Action {
 
     BibliotecaConsoleIO bibliotecaConsoleIO;
-    private CommandFactory commandFactory;
+    private Actions actions;
 
-    public ExecuteUserOptionCommand(BibliotecaConsoleIO bibliotecaConsoleIO, CommandFactory commandFactory) {
+    public ExecuteUserOptionAction(BibliotecaConsoleIO bibliotecaConsoleIO, Actions actions) {
         this.bibliotecaConsoleIO = bibliotecaConsoleIO;
-        this.commandFactory = commandFactory;
+        this.actions = actions;
     }
 
     @Override
@@ -23,7 +23,7 @@ public class ExecuteUserOptionCommand implements Command {
         int userChoice = bibliotecaConsoleIO.getUserChoice();
         if (userChoice != INVALID_INPUT) {
             MenuItem selectedMenuItem = valueOf(userChoice);
-            commandFactory.getCommand(selectedMenuItem).execute();
+            actions.getCommand(selectedMenuItem).execute();
         } else {
             bibliotecaConsoleIO.displayMessage(INVALID_INPUT_TEXT);
         }

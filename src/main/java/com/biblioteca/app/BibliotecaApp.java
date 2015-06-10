@@ -1,25 +1,25 @@
 package com.biblioteca.app;
 
-import com.biblioteca.command.CommandFactory;
-import com.biblioteca.command.ExecuteUserOptionCommand;
+import com.biblioteca.command.Actions;
+import com.biblioteca.command.ExecuteUserOptionAction;
 import com.biblioteca.console.BibliotecaConsoleIO;
 
 public class BibliotecaApp {
 
     private String welcomeMessage;
     private BibliotecaConsoleIO bibliotecaConsoleIO;
-    private CommandFactory commandFactory;
+    private Actions actions;
 
     public BibliotecaApp(String welcomeMessage, BibliotecaConsoleIO bibliotecaConsoleIO,
-                         CommandFactory commandFactory) {
+                         Actions actions) {
         this.welcomeMessage = welcomeMessage;
         this.bibliotecaConsoleIO = bibliotecaConsoleIO;
-        this.commandFactory = commandFactory;
+        this.actions = actions;
     }
 
     public void start() {
         bibliotecaConsoleIO.displayMessage(welcomeMessage);
-        ExecuteUserOptionCommand command = new ExecuteUserOptionCommand(bibliotecaConsoleIO, commandFactory);
+        ExecuteUserOptionAction command = new ExecuteUserOptionAction(bibliotecaConsoleIO, actions);
         do {
             command.execute();
         } while (true);

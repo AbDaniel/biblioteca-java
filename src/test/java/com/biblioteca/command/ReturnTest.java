@@ -14,7 +14,7 @@ import org.mockito.MockitoAnnotations;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.when;
 
-public class ReturnCommandTest {
+public class ReturnTest {
 
     @Mock
     BibliotecaConsoleIO bibliotecaConsoleIO;
@@ -25,12 +25,12 @@ public class ReturnCommandTest {
     @Mock
     private Owner owner;
 
-    private ReturnCommand command;
+    private Return command;
 
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        command = new ReturnCommand(borrowables, bibliotecaConsoleIO, owner);
+        command = new Return(borrowables, bibliotecaConsoleIO, owner);
     }
 
     @Test

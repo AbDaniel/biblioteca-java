@@ -1,6 +1,6 @@
 package com.biblioteca.command;
 
-public interface Command {
+public interface Action {
 
     void execute();
 

@@ -1,12 +1,10 @@
 package com.biblioteca.command;
 
-public class QuitCommand implements Command {
-
-    public static String EXIT_MESSAGE = "Thank you! For Using Biblioteca";
+public class Quit implements Action {
 
     private String welcomeMessage;
 
-    public QuitCommand(String welcomeMessage) {
+    public Quit(String welcomeMessage) {
         this.welcomeMessage = welcomeMessage;
     }
 

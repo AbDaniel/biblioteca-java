@@ -13,25 +13,25 @@ import org.mockito.MockitoAnnotations;
 import static com.biblioteca.enums.MenuItem.LIST_BOOKS;
 import static org.mockito.Mockito.when;
 
-public class ExecuteUserOptionCommandTest {
+public class ExecuteUserOptionActionTest {
 
-    private ExecuteUserOptionCommand exceuteUserOptionsCommand;
+    private ExecuteUserOptionAction exceuteUserOptionsCommand;
 
     @Mock
     private BibliotecaConsoleIO bibliotecaConsoleIO;
 
     @Mock
-    private CommandFactory commandFactory;
+    private Actions actions;
 
     @Mock
-    Command mockCommand;
+    Action mockAction;
 
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        exceuteUserOptionsCommand = new ExecuteUserOptionCommand(bibliotecaConsoleIO, commandFactory);
+        exceuteUserOptionsCommand = new ExecuteUserOptionAction(bibliotecaConsoleIO, actions);
         when(bibliotecaConsoleIO.getUserChoice()).thenReturn(LIST_BOOKS.getCode());
-        when(commandFactory.getCommand(Matchers.any(MenuItem.class))).thenReturn(mockCommand);
+        when(actions.getCommand(Matchers.any(MenuItem.class))).thenReturn(mockAction);
     }
 
     @Test
@@ -52,7 +52,7 @@ public class ExecuteUserOptionCommandTest {
     public void shouldExecuteCommandAssociatedWithMenuItem() {
         exceuteUserOptionsCommand.execute();
 
-        Mockito.verify(mockCommand).execute();
+        Mockito.verify(mockAction).execute();
     }
 
     @Test

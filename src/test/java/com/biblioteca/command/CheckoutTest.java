@@ -14,7 +14,7 @@ import org.mockito.MockitoAnnotations;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.when;
 
-public class CheckoutCommandTest {
+public class CheckoutTest {
 
     @Mock
     BibliotecaConsoleIO bibliotecaConsoleIO;
@@ -25,12 +25,12 @@ public class CheckoutCommandTest {
     @Mock
     private Owner owner;
 
-    private CheckoutCommand command;
+    private Checkout command;
 
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        command = new CheckoutCommand(borrowables, bibliotecaConsoleIO, owner);
+        command = new Checkout(borrowables, bibliotecaConsoleIO, owner);
     }
 
     @Test

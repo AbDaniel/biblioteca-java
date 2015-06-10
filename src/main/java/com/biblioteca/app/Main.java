@@ -1,6 +1,6 @@
 package com.biblioteca.app;
 
-import com.biblioteca.command.CommandFactory;
+import com.biblioteca.command.Actions;
 import com.biblioteca.console.BibliotecaConsoleIO;
 import com.biblioteca.constants.Constants;
 import com.biblioteca.model.Ownable;
@@ -36,9 +36,9 @@ public class Main {
 
             }
         };
-        CommandFactory commandFactory = new CommandFactory(new Borrowables<>(availableBooks), bibliotecaConsoleIO, owner);
+        Actions actions = new Actions(new Borrowables<>(availableBooks), bibliotecaConsoleIO, owner);
 
-        BibliotecaApp bibliotecaApp = new BibliotecaApp(Constants.WELCOME_TEXT, bibliotecaConsoleIO, commandFactory);
+        BibliotecaApp bibliotecaApp = new BibliotecaApp(Constants.WELCOME_TEXT, bibliotecaConsoleIO, actions);
         bibliotecaApp.start();
     }
 
