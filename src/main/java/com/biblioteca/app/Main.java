@@ -3,6 +3,7 @@ package com.biblioteca.app;
 import com.biblioteca.action.Actions;
 import com.biblioteca.console.BibliotecaConsoleIO;
 import com.biblioteca.constants.Constants;
+import com.biblioteca.controller.Controller;
 import com.biblioteca.model.Ownable;
 import com.biblioteca.model.Owner;
 import com.biblioteca.repository.Borrowables;
@@ -37,8 +38,9 @@ public class Main {
             }
         };
         Actions actions = new Actions(new Borrowables<>(availableBooks), bibliotecaConsoleIO, owner, new HashMap<>());
+        Controller controller = new Controller(bibliotecaConsoleIO, actions);
 
-        BibliotecaApp bibliotecaApp = new BibliotecaApp(Constants.WELCOME_TEXT, bibliotecaConsoleIO, actions);
+        BibliotecaApp bibliotecaApp = new BibliotecaApp(Constants.WELCOME_TEXT, bibliotecaConsoleIO, controller);
         bibliotecaApp.start();
     }
 

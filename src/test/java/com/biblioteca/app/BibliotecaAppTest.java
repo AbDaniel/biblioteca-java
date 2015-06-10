@@ -2,6 +2,7 @@ package com.biblioteca.app;
 
 import com.biblioteca.action.Actions;
 import com.biblioteca.console.BibliotecaConsoleIO;
+import com.biblioteca.controller.Controller;
 import com.biblioteca.repository.Borrowables;
 import org.junit.Before;
 import org.junit.Rule;
@@ -13,6 +14,7 @@ import org.mockito.MockitoAnnotations;
 
 import static com.biblioteca.constants.Constants.WELCOME_TEXT;
 import static com.biblioteca.enums.MenuItem.QUIT;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 public class BibliotecaAppTest {
@@ -29,21 +31,30 @@ public class BibliotecaAppTest {
     @Mock
     Actions actions;
 
+    @Mock
+    Controller controller;
+
     BibliotecaApp bibliotecaApp;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        bibliotecaApp = new BibliotecaApp(WELCOME_TEXT, bibliotecaConsoleIO, actions);
-        when(bibliotecaConsoleIO.getUserChoice()).thenReturn(QUIT.getCode());
-        when(actions.execute(QUIT.getCode())).thenReturn(false);
+        bibliotecaApp = new BibliotecaApp(WELCOME_TEXT, bibliotecaConsoleIO, controller);
+        when(controller.execute()).thenReturn(false);
     }
 
     @Test
     public void shouldPrintWelcomeMessageAtStart() {
         bibliotecaApp.start();
 
-        Mockito.verify(bibliotecaConsoleIO).displayMessage(WELCOME_TEXT);
+        verify(bibliotecaConsoleIO).displayMessage(WELCOME_TEXT);
+    }
+
+    @Test
+    public void shouldStartController() {
+        bibliotecaApp.start();
+
+        verify(controller).execute();
     }
 
 }

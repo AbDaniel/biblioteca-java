@@ -1,6 +1,5 @@
 package com.biblioteca.app;
 
-import com.biblioteca.action.Actions;
 import com.biblioteca.controller.Controller;
 import com.biblioteca.console.BibliotecaConsoleIO;
 
@@ -8,21 +7,20 @@ public class BibliotecaApp {
 
     private String welcomeMessage;
     private BibliotecaConsoleIO bibliotecaConsoleIO;
-    private Actions actions;
+    private Controller controller;
 
     public BibliotecaApp(String welcomeMessage, BibliotecaConsoleIO bibliotecaConsoleIO,
-                         Actions actions) {
+                         Controller controller) {
         this.welcomeMessage = welcomeMessage;
         this.bibliotecaConsoleIO = bibliotecaConsoleIO;
-        this.actions = actions;
+        this.controller = controller;
     }
 
     public void start() {
         bibliotecaConsoleIO.displayMessage(welcomeMessage);
-        Controller command = new Controller(bibliotecaConsoleIO, actions);
-        boolean shouldContinue = true;
+        boolean shouldContinue;
         do {
-            shouldContinue = command.execute();
+            shouldContinue = controller.execute();
         } while (shouldContinue);
     }
 
