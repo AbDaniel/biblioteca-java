@@ -2,10 +2,8 @@ package com.biblioteca.command;
 
 import com.biblioteca.console.BibliotecaConsoleIO;
 import com.biblioteca.constants.Constants;
-import com.biblioteca.enums.MenuItem;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
@@ -13,9 +11,9 @@ import org.mockito.MockitoAnnotations;
 import static com.biblioteca.enums.MenuItem.LIST_BOOKS;
 import static org.mockito.Mockito.when;
 
-public class ExecuteUserOptionActionTest {
+public class ControllerTest {
 
-    private ExecuteUserOptionAction exceuteUserOptionsCommand;
+    private Controller exceuteUserOptionsCommand;
 
     @Mock
     private BibliotecaConsoleIO bibliotecaConsoleIO;
@@ -29,7 +27,7 @@ public class ExecuteUserOptionActionTest {
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        exceuteUserOptionsCommand = new ExecuteUserOptionAction(bibliotecaConsoleIO, actions);
+        exceuteUserOptionsCommand = new Controller(bibliotecaConsoleIO, actions);
         when(bibliotecaConsoleIO.getUserChoice()).thenReturn(LIST_BOOKS.getCode());
     }
 

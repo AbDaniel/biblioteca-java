@@ -1,7 +1,7 @@
 package com.biblioteca.app;
 
 import com.biblioteca.command.Actions;
-import com.biblioteca.command.ExecuteUserOptionAction;
+import com.biblioteca.command.Controller;
 import com.biblioteca.console.BibliotecaConsoleIO;
 
 public class BibliotecaApp {
@@ -19,7 +19,7 @@ public class BibliotecaApp {
 
     public void start() {
         bibliotecaConsoleIO.displayMessage(welcomeMessage);
-        ExecuteUserOptionAction command = new ExecuteUserOptionAction(bibliotecaConsoleIO, actions);
+        Controller command = new Controller(bibliotecaConsoleIO, actions);
         boolean shouldContinue = true;
         do {
             shouldContinue = command.execute();

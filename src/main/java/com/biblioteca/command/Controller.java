@@ -7,12 +7,12 @@ import static com.biblioteca.constants.Constants.INVALID_INPUT;
 import static com.biblioteca.constants.Constants.INVALID_INPUT_TEXT;
 import static com.biblioteca.enums.MenuItem.valueOf;
 
-public class ExecuteUserOptionAction {
+public class Controller {
 
     BibliotecaConsoleIO bibliotecaConsoleIO;
     private Actions actions;
 
-    public ExecuteUserOptionAction(BibliotecaConsoleIO bibliotecaConsoleIO, Actions actions) {
+    public Controller(BibliotecaConsoleIO bibliotecaConsoleIO, Actions actions) {
         this.bibliotecaConsoleIO = bibliotecaConsoleIO;
         this.actions = actions;
     }

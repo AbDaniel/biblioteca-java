@@ -23,7 +23,6 @@ public class Main {
         availableBooks.add(new Book("Harry Potter", "JK Rowling", 1992));
         availableBooks.add(new Book("Catch-22", "Joesph Heller", 1950));
         availableBooks.add(new Book("Winds of Winter", "George RR Martin", 2017));
-        List<Book> checkedOutBooks = new ArrayList<>();
 
         BibliotecaConsoleIO bibliotecaConsoleIO = new BibliotecaConsoleIO(new Scanner(in));
         Owner owner = new Owner() {
