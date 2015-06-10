@@ -20,9 +20,10 @@ public class BibliotecaApp {
     public void start() {
         bibliotecaConsoleIO.displayMessage(welcomeMessage);
         ExecuteUserOptionAction command = new ExecuteUserOptionAction(bibliotecaConsoleIO, actions);
+        boolean shouldContinue = true;
         do {
-            command.execute();
-        } while (true);
+            shouldContinue = command.execute();
+        } while (shouldContinue);
     }
 
 }

@@ -7,7 +7,7 @@ import static com.biblioteca.constants.Constants.INVALID_INPUT;
 import static com.biblioteca.constants.Constants.INVALID_INPUT_TEXT;
 import static com.biblioteca.enums.MenuItem.valueOf;
 
-public class ExecuteUserOptionAction implements Action {
+public class ExecuteUserOptionAction {
 
     BibliotecaConsoleIO bibliotecaConsoleIO;
     private Actions actions;
@@ -17,16 +17,16 @@ public class ExecuteUserOptionAction implements Action {
         this.actions = actions;
     }
 
-    @Override
-    public void execute() {
+    public boolean execute() {
+        boolean status = true;
         bibliotecaConsoleIO.displayMenu();
         int userChoice = bibliotecaConsoleIO.getUserChoice();
         if (userChoice != INVALID_INPUT) {
-            MenuItem selectedMenuItem = valueOf(userChoice);
-            actions.getCommand(selectedMenuItem).execute();
+            status = actions.execute(userChoice);
         } else {
             bibliotecaConsoleIO.displayMessage(INVALID_INPUT_TEXT);
         }
+        return status;
     }
 
 }

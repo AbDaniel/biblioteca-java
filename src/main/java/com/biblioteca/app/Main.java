@@ -9,6 +9,7 @@ import com.biblioteca.repository.Borrowables;
 import com.biblioteca.model.Book;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 
@@ -36,7 +37,7 @@ public class Main {
 
             }
         };
-        Actions actions = new Actions(new Borrowables<>(availableBooks), bibliotecaConsoleIO, owner);
+        Actions actions = new Actions(new Borrowables<>(availableBooks), bibliotecaConsoleIO, owner, new HashMap<>());
 
         BibliotecaApp bibliotecaApp = new BibliotecaApp(Constants.WELCOME_TEXT, bibliotecaConsoleIO, actions);
         bibliotecaApp.start();

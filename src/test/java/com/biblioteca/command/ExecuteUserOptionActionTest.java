@@ -31,7 +31,6 @@ public class ExecuteUserOptionActionTest {
         MockitoAnnotations.initMocks(this);
         exceuteUserOptionsCommand = new ExecuteUserOptionAction(bibliotecaConsoleIO, actions);
         when(bibliotecaConsoleIO.getUserChoice()).thenReturn(LIST_BOOKS.getCode());
-        when(actions.getCommand(Matchers.any(MenuItem.class))).thenReturn(mockAction);
     }
 
     @Test
@@ -52,7 +51,7 @@ public class ExecuteUserOptionActionTest {
     public void shouldExecuteCommandAssociatedWithMenuItem() {
         exceuteUserOptionsCommand.execute();
 
-        Mockito.verify(mockAction).execute();
+        Mockito.verify(actions).execute(LIST_BOOKS.getCode());
     }
 
     @Test
