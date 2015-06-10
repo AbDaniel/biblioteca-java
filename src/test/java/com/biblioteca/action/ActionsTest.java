@@ -40,7 +40,7 @@ public class ActionsTest {
 
     @Before
     public void setUp() throws Exception {
-        actions = new Actions(borrowables, bibliotecaConsoleIO, owner, actionMap);
+        actions = new Actions(actionMap);
     }
 
     @Test
@@ -48,14 +48,14 @@ public class ActionsTest {
         MenuItem item = LIST_BOOKS;
         when(actionMap.get(item)).thenReturn(action);
 
-        actions.execute(item.getCode());
+        actions.execute(item.getCode(), owner);
 
-        Mockito.verify(action).execute();
+        Mockito.verify(action).execute(owner);
     }
 
     @Test
     public void shouldReturnFalseOnQuit() {
-        boolean actual = actions.execute(QUIT.getCode());
+        boolean actual = actions.execute(QUIT.getCode(), owner);
 
         assertFalse(actual);
     }

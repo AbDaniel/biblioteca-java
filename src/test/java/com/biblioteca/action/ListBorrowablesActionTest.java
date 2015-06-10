@@ -1,6 +1,7 @@
 package com.biblioteca.action;
 
 import com.biblioteca.console.BibliotecaConsoleIO;
+import com.biblioteca.model.Owner;
 import com.biblioteca.repository.Borrowables;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,8 +15,12 @@ public class ListBorrowablesActionTest {
 
     @Mock
     Borrowables borrowables;
+
     @Mock
     BibliotecaConsoleIO bibliotecaConsoleIO;
+
+    @Mock
+    Owner owner;
 
     Action action;
 
@@ -27,7 +32,7 @@ public class ListBorrowablesActionTest {
 
     @Test
     public void shouldListAllBooks() {
-        action.execute();
+        action.execute(owner);
 
         verify(borrowables).allAvailableItems();
         verify(bibliotecaConsoleIO).displayListOfBooks(Matchers.anyListOf(Object.class));

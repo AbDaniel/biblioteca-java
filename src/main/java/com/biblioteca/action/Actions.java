@@ -1,32 +1,26 @@
 package com.biblioteca.action;
 
-import com.biblioteca.console.BibliotecaConsoleIO;
-import com.biblioteca.model.Owner;
-import com.biblioteca.repository.Borrowables;
 import com.biblioteca.enums.MenuItem;
+import com.biblioteca.model.Owner;
 
 import java.util.Map;
 
-import static com.biblioteca.enums.MenuItem.*;
+import static com.biblioteca.enums.MenuItem.QUIT;
+import static com.biblioteca.enums.MenuItem.valueOf;
 
 public class Actions {
 
-    private final Owner owner;
-    private Map<MenuItem, Action> commandMap;
+    private Map<MenuItem, Action> actionsMap;
 
-    public Actions(Borrowables borrowables, BibliotecaConsoleIO bibliotecaConsoleIO, Owner owner, Map<MenuItem, Action> commandMap) {
-        this.owner = owner;
-        this.commandMap = commandMap;
-        this.commandMap.put(LIST_BOOKS, new ListBooks(borrowables, bibliotecaConsoleIO));
-        this.commandMap.put(CHECKOUT_BOOK, new Checkout(borrowables, bibliotecaConsoleIO, this.owner));
-        this.commandMap.put(RETURN_BOOK, new Return(borrowables, bibliotecaConsoleIO, this.owner));
+    public Actions(Map<MenuItem, Action> actionsMap) {
+        this.actionsMap = actionsMap;
     }
 
-    public boolean execute(int userChoice) {
+    public boolean execute(int userChoice, Owner owner) {
         MenuItem selectedMenuItem = valueOf(userChoice);
         if (selectedMenuItem == QUIT)
             return false;
-        commandMap.get(selectedMenuItem).execute();
+        actionsMap.get(selectedMenuItem).execute(owner);
         return true;
     }
 
