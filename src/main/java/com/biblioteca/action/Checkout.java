@@ -9,16 +9,14 @@ public class Checkout implements Action {
 
     private Borrowables borrowables;
     private BibliotecaConsoleIO bibliotecaConsoleIO;
-    private Owner owner;
 
-    public Checkout(Borrowables borrowables, BibliotecaConsoleIO bibliotecaConsoleIO, Owner owner) {
+    public Checkout(Borrowables borrowables, BibliotecaConsoleIO bibliotecaConsoleIO) {
         this.borrowables = borrowables;
         this.bibliotecaConsoleIO = bibliotecaConsoleIO;
-        this.owner = owner;
     }
 
     @Override
-    public void execute() {
+    public void execute(Owner owner) {
         bibliotecaConsoleIO.displayMessage(Constants.CHECKOUT_PROMPT_TEXT);
         String bookName = bibliotecaConsoleIO.getBookNameFromUser();
         if (borrowables.checkout(bookName, owner)) {

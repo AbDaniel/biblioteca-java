@@ -30,19 +30,19 @@ public class ReturnTest {
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        command = new Return(borrowables, bibliotecaConsoleIO, owner);
+        command = new Return(borrowables, bibliotecaConsoleIO);
     }
 
     @Test
     public void shouldDisplayMessageAskingUserToInputBookName() {
-        command.execute();
+        command.execute(owner);
 
         Mockito.verify(bibliotecaConsoleIO).displayMessage(Constants.CHECKOUT_PROMPT_TEXT);
     }
 
     @Test
     public void shouldGetBookNameFromUser() {
-        command.execute();
+        command.execute(owner);
 
         Mockito.verify(bibliotecaConsoleIO).getBookNameFromUser();
     }
@@ -52,7 +52,7 @@ public class ReturnTest {
         String bookName = "Lord of the Rings";
         when(bibliotecaConsoleIO.getBookNameFromUser()).thenReturn(bookName);
 
-        command.execute();
+        command.execute(owner);
 
         Mockito.verify(borrowables).returnItem(eq(bookName), Matchers.any(Owner.class));
     }
@@ -63,7 +63,7 @@ public class ReturnTest {
         when(bibliotecaConsoleIO.getBookNameFromUser()).thenReturn(bookName);
         when(borrowables.returnItem(eq(bookName), Matchers.any(Owner.class))).thenReturn(false);
 
-        command.execute();
+        command.execute(owner);
 
         Mockito.verify(bibliotecaConsoleIO).displayMessage(Constants.BOOK_NOT_VALID_TEXT);
     }
@@ -74,7 +74,7 @@ public class ReturnTest {
         when(bibliotecaConsoleIO.getBookNameFromUser()).thenReturn(bookName);
         when(borrowables.returnItem(eq(bookName), Matchers.any(Owner.class))).thenReturn(true);
 
-        command.execute();
+        command.execute(owner);
 
         Mockito.verify(bibliotecaConsoleIO).displayMessage(Constants.SUCCESSFUL_RETURN_TEXT);
     }

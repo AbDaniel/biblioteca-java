@@ -1,19 +1,18 @@
 package com.biblioteca.app;
 
-import com.biblioteca.action.Actions;
+import com.biblioteca.action.*;
 import com.biblioteca.console.BibliotecaConsoleIO;
 import com.biblioteca.constants.Constants;
 import com.biblioteca.controller.Controller;
-import com.biblioteca.model.Ownable;
-import com.biblioteca.model.Owner;
+import com.biblioteca.enums.MenuItem;
 import com.biblioteca.repository.Borrowables;
 import com.biblioteca.model.Book;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
+import static com.biblioteca.enums.MenuItem.CHECKOUT_BOOK;
+import static com.biblioteca.enums.MenuItem.LIST_BOOKS;
+import static com.biblioteca.enums.MenuItem.RETURN_BOOK;
 import static java.lang.System.*;
 
 public class Main {
@@ -26,18 +25,15 @@ public class Main {
         availableBooks.add(new Book("Winds of Winter", "George RR Martin", 2017));
 
         BibliotecaConsoleIO bibliotecaConsoleIO = new BibliotecaConsoleIO(new Scanner(in));
-        Owner owner = new Owner() {
-            @Override
-            public void addOwnable(Ownable ownable) {
 
-            }
+        Borrowables<Book> borrowables = new Borrowables<>(availableBooks);
 
-            @Override
-            public void removeOwnable(Ownable ownable) {
+        Map<MenuItem, Action> actionMap = new HashMap<>();
+        actionMap.put(LIST_BOOKS, new ListBooks(borrowables, bibliotecaConsoleIO));
+        actionMap.put(CHECKOUT_BOOK, new Checkout(borrowables, bibliotecaConsoleIO));
+        actionMap.put(RETURN_BOOK, new Return(borrowables, bibliotecaConsoleIO));
 
-            }
-        };
-        Actions actions = new Actions(new Borrowables<>(availableBooks), bibliotecaConsoleIO, owner, new HashMap<>());
+        Actions actions = new Actions(new HashMap<>());
         Controller controller = new Controller(bibliotecaConsoleIO, actions);
 
         BibliotecaApp bibliotecaApp = new BibliotecaApp(Constants.WELCOME_TEXT, bibliotecaConsoleIO, controller);
