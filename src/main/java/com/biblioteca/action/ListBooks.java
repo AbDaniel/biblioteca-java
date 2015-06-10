@@ -15,7 +15,7 @@ public class ListBooks implements Action {
 
     @Override
     public void execute() {
-        bibliotecaConsoleIO.displayListOfBooks(borrowables.allAvailableBooks());
+        bibliotecaConsoleIO.displayListOfBooks(borrowables.allAvailableItems());
     }
 
 }

@@ -29,7 +29,7 @@ public class ListBorrowablesActionTest {
     public void shouldListAllBooks() {
         action.execute();
 
-        verify(borrowables).allAvailableBooks();
+        verify(borrowables).allAvailableItems();
         verify(bibliotecaConsoleIO).displayListOfBooks(Matchers.anyListOf(Object.class));
     }
 

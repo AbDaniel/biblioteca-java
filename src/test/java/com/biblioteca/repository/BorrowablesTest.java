@@ -48,7 +48,7 @@ public class BorrowablesTest {
     @Test
     public void shouldReturnListOfAvailableBooksOfRightSize() {
         setUpWithData();
-        int actualSize = borrowables.allAvailableBooks().size();
+        int actualSize = borrowables.allAvailableItems().size();
 
         assertEquals(4, actualSize);
     }
@@ -57,7 +57,7 @@ public class BorrowablesTest {
     public void shouldReturnZeroSizedListIfNoAvailableBooks() {
         this.borrowables = new Borrowables<>(new ArrayList<>());
 
-        int actualSize = borrowables.allAvailableBooks().size();
+        int actualSize = borrowables.allAvailableItems().size();
 
         assertEquals(0, actualSize);
     }
