@@ -1,7 +1,6 @@
 package com.biblioteca.app;
 
 import com.biblioteca.action.*;
-import com.biblioteca.console.BibliotecaConsoleIO;
 import com.biblioteca.console.BorrowablesListView;
 import com.biblioteca.console.MenuView;
 import com.biblioteca.console.View;
@@ -18,7 +17,6 @@ import static com.biblioteca.constants.Constants.*;
 import static com.biblioteca.enums.MenuItem.CHECKOUT_BOOK;
 import static com.biblioteca.enums.MenuItem.LIST_BOOKS;
 import static com.biblioteca.enums.MenuItem.RETURN_BOOK;
-import static java.lang.System.*;
 
 public class Main {
 
@@ -30,7 +28,6 @@ public class Main {
         availableBooks.add(new Book("W" +
                 "inds of Winter", "George RR Martin", 2017));
 
-        BibliotecaConsoleIO bibliotecaConsoleIO = new BibliotecaConsoleIO(new Scanner(in));
         Scanner scanner = new Scanner(System.in);
         MenuView menuView = new MenuView(scanner);
         BorrowablesListView listView = new BorrowablesListView(scanner);

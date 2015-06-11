@@ -1,6 +1,5 @@
 package com.biblioteca.action;
 
-import com.biblioteca.console.BibliotecaConsoleIO;
 import com.biblioteca.enums.MenuItem;
 import com.biblioteca.model.Owner;
 import com.biblioteca.repository.Borrowables;
@@ -8,16 +7,12 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.Map;
 
 import static com.biblioteca.enums.MenuItem.LIST_BOOKS;
-import static com.biblioteca.enums.MenuItem.QUIT;
-import static org.junit.Assert.assertFalse;
 import static org.mockito.Mockito.*;
-import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class DispatcherTest {
@@ -29,9 +24,6 @@ public class DispatcherTest {
 
     @Mock
     Owner owner;
-
-    @Mock
-    BibliotecaConsoleIO bibliotecaConsoleIO;
 
     @Mock
     Map<MenuItem, Action> actionMap;
