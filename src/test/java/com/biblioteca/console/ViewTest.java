@@ -35,4 +35,13 @@ public class ViewTest {
         assertEquals(WELCOME_TEXT + "\n", outContent.toString());
     }
 
+    @Test
+    public void shouldGetRawStringFromUser() {
+        systemInMock.provideText("Lord of the Rings\n");
+
+        String actualBookName = view.getString();
+
+        assertEquals("Lord of the Rings", actualBookName);
+    }
+
 }

@@ -13,4 +13,8 @@ public class View {
     public void displayMessage(String welcomeText) {
         System.out.println(welcomeText);
     }
+
+    public String getString() {
+        return scanner.nextLine();
+    }
 }
