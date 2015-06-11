@@ -5,6 +5,9 @@ import com.biblioteca.constants.Constants;
 import com.biblioteca.model.Owner;
 import com.biblioteca.repository.Borrowables;
 
+import static com.biblioteca.constants.Constants.*;
+import static com.biblioteca.constants.Constants.SUCCESSFUL_CHECKOUT_TEXT;
+
 public class Checkout implements Action {
 
     private Borrowables borrowables;
@@ -17,12 +20,12 @@ public class Checkout implements Action {
 
     @Override
     public void execute(Owner owner) {
-        view.displayMessage(Constants.CHECKOUT_PROMPT_TEXT);
+        view.displayMessage(CHECKOUT_PROMPT_TEXT);
         String bookName = view.getString();
         if (borrowables.checkout(bookName, owner)) {
-            view.displayMessage(Constants.SUCCESSFUL_CHECKOUT_TEXT);
+            view.displayMessage(SUCCESSFUL_CHECKOUT_TEXT);
         } else {
-            view.displayMessage(Constants.BOOK_NOT_PRESENT_TEXT);
+            view.displayMessage(BOOK_NOT_PRESENT_TEXT);
         }
     }
 

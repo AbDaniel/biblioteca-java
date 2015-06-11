@@ -1,6 +1,6 @@
 package com.biblioteca.action;
 
-import com.biblioteca.console.BibliotecaConsoleIO;
+import com.biblioteca.console.View;
 import com.biblioteca.constants.Constants;
 import com.biblioteca.model.Owner;
 import com.biblioteca.repository.Borrowables;
@@ -17,7 +17,7 @@ import static org.mockito.Mockito.when;
 public class ReturnTest {
 
     @Mock
-    BibliotecaConsoleIO bibliotecaConsoleIO;
+    View view;
 
     @Mock
     private Borrowables borrowables;
@@ -30,27 +30,27 @@ public class ReturnTest {
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        command = new Return(borrowables, bibliotecaConsoleIO);
+        command = new Return(borrowables, view);
     }
 
     @Test
     public void shouldDisplayMessageAskingUserToInputBookName() {
         command.execute(owner);
 
-        Mockito.verify(bibliotecaConsoleIO).displayMessage(Constants.CHECKOUT_PROMPT_TEXT);
+        Mockito.verify(view).displayMessage(Constants.CHECKOUT_PROMPT_TEXT);
     }
 
     @Test
     public void shouldGetBookNameFromUser() {
         command.execute(owner);
 
-        Mockito.verify(bibliotecaConsoleIO).getBookNameFromUser();
+        Mockito.verify(view).getString();
     }
 
     @Test
     public void shouldCallReturnBookWithGivenInput() {
         String bookName = "Lord of the Rings";
-        when(bibliotecaConsoleIO.getBookNameFromUser()).thenReturn(bookName);
+        when(view.getString()).thenReturn(bookName);
 
         command.execute(owner);
 
@@ -60,23 +60,23 @@ public class ReturnTest {
     @Test
     public void shouldNotifyIfUserInputsInvalidBookName() {
         String bookName = "123";
-        when(bibliotecaConsoleIO.getBookNameFromUser()).thenReturn(bookName);
+        when(view.getString()).thenReturn(bookName);
         when(borrowables.returnItem(eq(bookName), Matchers.any(Owner.class))).thenReturn(false);
 
         command.execute(owner);
 
-        Mockito.verify(bibliotecaConsoleIO).displayMessage(Constants.BOOK_NOT_VALID_TEXT);
+        Mockito.verify(view).displayMessage(Constants.BOOK_NOT_VALID_TEXT);
     }
 
     @Test
     public void shouldNotifyUserOnSuccessfulReturn() {
         String bookName = "Lord of the Rings";
-        when(bibliotecaConsoleIO.getBookNameFromUser()).thenReturn(bookName);
+        when(view.getString()).thenReturn(bookName);
         when(borrowables.returnItem(eq(bookName), Matchers.any(Owner.class))).thenReturn(true);
 
         command.execute(owner);
 
-        Mockito.verify(bibliotecaConsoleIO).displayMessage(Constants.SUCCESSFUL_RETURN_TEXT);
+        Mockito.verify(view).displayMessage(Constants.SUCCESSFUL_RETURN_TEXT);
     }
 
 }
