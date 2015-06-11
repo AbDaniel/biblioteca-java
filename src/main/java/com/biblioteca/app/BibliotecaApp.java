@@ -2,8 +2,11 @@ package com.biblioteca.app;
 
 import com.biblioteca.controller.Controller;
 import com.biblioteca.console.BibliotecaConsoleIO;
+import com.biblioteca.enums.MenuItem;
 import com.biblioteca.model.Ownable;
 import com.biblioteca.model.Owner;
+
+import static com.biblioteca.enums.MenuItem.*;
 
 public class BibliotecaApp {
 
@@ -11,6 +14,7 @@ public class BibliotecaApp {
     private BibliotecaConsoleIO bibliotecaConsoleIO;
     private Controller controller;
     private boolean shouldContinue;
+    private MenuItem chosenMenuItem;
 
     public BibliotecaApp(String welcomeMessage, BibliotecaConsoleIO bibliotecaConsoleIO,
                          Controller controller) {
@@ -34,8 +38,8 @@ public class BibliotecaApp {
         };
 
         do {
-            shouldContinue = controller.execute(owner);
-        } while (shouldContinue);
+            chosenMenuItem = controller.execute(owner);
+        } while (chosenMenuItem != QUIT);
     }
 
 }

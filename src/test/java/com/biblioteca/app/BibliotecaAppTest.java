@@ -3,6 +3,7 @@ package com.biblioteca.app;
 import com.biblioteca.action.Dispatcher;
 import com.biblioteca.console.BibliotecaConsoleIO;
 import com.biblioteca.controller.Controller;
+import com.biblioteca.enums.MenuItem;
 import com.biblioteca.model.Owner;
 import com.biblioteca.repository.Borrowables;
 import org.junit.Before;
@@ -13,6 +14,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import static com.biblioteca.constants.Constants.WELCOME_TEXT;
+import static com.biblioteca.enums.MenuItem.*;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.times;
@@ -42,7 +44,7 @@ public class BibliotecaAppTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         bibliotecaApp = new BibliotecaApp(WELCOME_TEXT, bibliotecaConsoleIO, controller);
-        when(controller.execute(any(Owner.class))).thenReturn(false);
+        when(controller.execute(any(Owner.class))).thenReturn(QUIT);
     }
 
     @Test
@@ -68,7 +70,7 @@ public class BibliotecaAppTest {
 
     @Test
     public void shouldContinueWhenUserDoesNotExit() throws InterruptedException {
-        when(controller.execute(any(Owner.class))).thenReturn(true);
+        when(controller.execute(any(Owner.class))).thenReturn(LIST_BOOKS);
         Thread t = new Thread(bibliotecaApp::start);
         t.start();
         t.join(500);

@@ -1,6 +1,7 @@
 package com.biblioteca.controller;
 
 import com.biblioteca.action.Dispatcher;
+import com.biblioteca.app.BibliotecaApp;
 import com.biblioteca.console.BibliotecaConsoleIO;
 import com.biblioteca.enums.MenuItem;
 import com.biblioteca.model.Owner;
@@ -20,19 +21,17 @@ public class Controller {
         this.dispatcher = dispatcher;
     }
 
-    public boolean execute(Owner owner) {
+    public MenuItem execute(Owner owner) {
         bibliotecaConsoleIO.displayMenu();
         int userChoice = bibliotecaConsoleIO.getUserChoice();
 
         MenuItem selectedMenuItem = valueOf(userChoice);
-        if (selectedMenuItem == QUIT)
-            return false;
-        dispatcher.dispatch(selectedMenuItem, owner);
-        return true;
-    }
+        if (selectedMenuItem == QUIT) {
+            return selectedMenuItem;
+        }
 
-    public interface ExitListener {
-        void update(int userChoice);
+        dispatcher.dispatch(selectedMenuItem, owner);
+        return selectedMenuItem;
     }
 
 }
