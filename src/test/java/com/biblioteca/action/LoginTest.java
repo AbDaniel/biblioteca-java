@@ -32,4 +32,14 @@ public class LoginTest {
         assertNull(user);
     }
 
+    @Test
+    public void shouldReturnUserOnValidLogin() {
+        String librayNumber = "111-1111";
+        String password = "onering";
+        User actualUser = login.login(librayNumber, password);
+
+        User expectedUser = new User("111-1111", "", "", null);
+        assertEquals(actualUser, expectedUser);
+    }
+
 }

@@ -2,17 +2,17 @@ package com.biblioteca.action;
 
 import com.biblioteca.model.User;
 
-import java.util.Map;
+import java.util.List;
 
 public class Login {
 
-    private Map<String, String> users;
+    private List<User> users;
 
-    public Login(Map<String, String> users) {
+    public Login(List<User> users) {
         this.users = users;
     }
 
-    public User login() {
-        return null;
+    public User login(String librayNumber, String password) {
+        return users.stream().filter(p -> p.isValidCredential(librayNumber, password)).findFirst().orElse(null);
     }
 }
