@@ -17,4 +17,5 @@ public class View {
     public String getString() {
         return scanner.nextLine();
     }
+
 }
