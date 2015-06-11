@@ -2,7 +2,6 @@ package com.biblioteca.constants;
 
 public interface Constants {
     int INVALID_INPUT = -1;
-    int EXIT_STATUS = 0;
     String WELCOME_TEXT = "Hello! Welcome to Biblioteca";
     String INVALID_INPUT_TEXT = "Select a valid option!";
     String CHECKOUT_PROMPT_TEXT = "Enter a book name : ";
@@ -11,4 +10,5 @@ public interface Constants {
     String BOOK_NOT_VALID_TEXT = "That is not a valid book to return.";
     String SUCCESSFUL_RETURN_TEXT = "Thank you for returning the book.";
     String EXIT_MESSAGE = "Thank you! For Using Biblioteca";
+    String ENTER_USER_NAME = "Enter User Name :";
 }
