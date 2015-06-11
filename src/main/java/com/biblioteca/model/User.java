@@ -1,15 +1,19 @@
 package com.biblioteca.model;
 
-public class User {
+import java.util.List;
 
-    String libraryNo;
-    String name;
-    char[] password;
+public class User implements Owner {
 
-    public User(String libraryNo, String name, char[] password) {
+    private String libraryNo;
+    private String name;
+    private char[] password;
+    private List<Ownable> ownables;
+
+    public User(String libraryNo, String name, char[] password, List<Ownable> ownables) {
         this.libraryNo = libraryNo;
         this.name = name;
         this.password = password;
+        this.ownables = ownables;
     }
 
     @Override
@@ -27,4 +31,15 @@ public class User {
     public int hashCode() {
         return libraryNo != null ? libraryNo.hashCode() : 0;
     }
+
+    @Override
+    public void addOwnable(Ownable ownable) {
+        ownables.add(ownable);
+    }
+
+    @Override
+    public void removeOwnable(Ownable ownable) {
+        ownables.remove(ownable);
+    }
+
 }
