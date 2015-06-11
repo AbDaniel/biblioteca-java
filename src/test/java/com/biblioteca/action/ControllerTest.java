@@ -1,13 +1,11 @@
 package com.biblioteca.action;
 
-import com.biblioteca.console.BibliotecaConsoleIO;
-import com.biblioteca.constants.Constants;
+import com.biblioteca.console.MenuView;
 import com.biblioteca.controller.Controller;
 import com.biblioteca.model.Owner;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import static com.biblioteca.enums.MenuItem.LIST_BOOKS;
@@ -24,7 +22,7 @@ public class ControllerTest {
     private Controller controller;
 
     @Mock
-    private BibliotecaConsoleIO bibliotecaConsoleIO;
+    private MenuView menuView;
 
     @Mock
     private Dispatcher dispatcher;
@@ -38,22 +36,22 @@ public class ControllerTest {
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        controller = new Controller(bibliotecaConsoleIO, dispatcher);
-        when(bibliotecaConsoleIO.getUserChoice()).thenReturn(LIST_BOOKS.getCode());
+        controller = new Controller(menuView, dispatcher);
+        when(menuView.getUserChoice()).thenReturn(LIST_BOOKS.getCode());
     }
 
     @Test
     public void shouldListAllMenuOptions() {
         controller.execute(owner);
 
-        verify(bibliotecaConsoleIO).displayMenu();
+        verify(menuView).displayMenu();
     }
 
     @Test
     public void shouldGetMenuOptionFromUser() {
         controller.execute(owner);
 
-        verify(bibliotecaConsoleIO).getUserChoice();
+        verify(menuView).getUserChoice();
     }
 
     @Test
@@ -65,7 +63,7 @@ public class ControllerTest {
 
     @Test
     public void shouldNotCallDispatchIfMenuItemIsQuit() {
-        when(bibliotecaConsoleIO.getUserChoice()).thenReturn(QUIT.getCode());
+        when(menuView.getUserChoice()).thenReturn(QUIT.getCode());
         controller.execute(owner);
 
         verify(dispatcher, times(0)).dispatch(eq(QUIT), any(Owner.class));
@@ -73,7 +71,7 @@ public class ControllerTest {
 
     @Test
     public void shouldNotCallDispatchIfMenuItemIsLogout() {
-        when(bibliotecaConsoleIO.getUserChoice()).thenReturn(LOGOUT.getCode());
+        when(menuView.getUserChoice()).thenReturn(LOGOUT.getCode());
         controller.execute(owner);
 
         verify(dispatcher, times(0)).dispatch(eq(LOGOUT), any(Owner.class));
