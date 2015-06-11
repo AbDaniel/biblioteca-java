@@ -49,6 +49,11 @@ public class Book implements Borrowable, Ownable {
     }
 
     @Override
+    public boolean isEqualTo(String itemName) {
+        return false;
+    }
+
+    @Override
     public boolean checkout(Owner owner) {
         if (checkedOut) {
             return false;

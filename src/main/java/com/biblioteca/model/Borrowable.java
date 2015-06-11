@@ -2,7 +2,7 @@ package com.biblioteca.model;
 
 public interface Borrowable {
 
-    String getName();
+    boolean isEqualTo(String itemName);
 
     boolean checkout(Owner owner);
 

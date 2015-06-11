@@ -20,12 +20,12 @@ public class Borrowables<T extends Borrowable> {
     }
 
     public boolean checkout(final String itemName, Owner owner) {
-        Borrowable borrowable = borrowables.stream().filter(p -> p.getName().equals(itemName)).findFirst().orElse(null);
+        Borrowable borrowable = borrowables.stream().filter(p -> p.isEqualTo(itemName)).findFirst().orElse(null);
         return borrowable != null && borrowable.checkout(owner);
     }
 
     public boolean returnItem(String itemName, Owner owner) {
-        Borrowable borrowable = borrowables.stream().filter(p -> p.getName().equals(itemName)).findFirst().orElse(null);
+        Borrowable borrowable = borrowables.stream().filter(p -> p.isEqualTo(itemName)).findFirst().orElse(null);
         return borrowable != null && borrowable.returnItem(owner);
     }
 
