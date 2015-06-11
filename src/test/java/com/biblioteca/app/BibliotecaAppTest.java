@@ -1,7 +1,7 @@
 package com.biblioteca.app;
 
 import com.biblioteca.action.Dispatcher;
-import com.biblioteca.console.BibliotecaConsoleIO;
+import com.biblioteca.console.View;
 import com.biblioteca.controller.Controller;
 import com.biblioteca.controller.LoginController;
 import com.biblioteca.model.Owner;
@@ -12,7 +12,6 @@ import org.junit.Test;
 import org.junit.contrib.java.lang.system.ExpectedSystemExit;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import static com.biblioteca.constants.Constants.WELCOME_TEXT;
@@ -33,7 +32,7 @@ public class BibliotecaAppTest {
     Borrowables borrowables;
 
     @Mock
-    BibliotecaConsoleIO bibliotecaConsoleIO;
+    View view;
 
     @Mock
     Dispatcher dispatcher;
@@ -48,7 +47,7 @@ public class BibliotecaAppTest {
 
     @Before
     public void setUp() {
-        bibliotecaApp = new BibliotecaApp(WELCOME_TEXT, bibliotecaConsoleIO, controller, loginController);
+        bibliotecaApp = new BibliotecaApp(WELCOME_TEXT, view, controller, loginController);
         when(controller.execute(any(Owner.class))).thenReturn(QUIT);
     }
 
@@ -56,7 +55,7 @@ public class BibliotecaAppTest {
     public void shouldPrintWelcomeMessageAtStart() {
         bibliotecaApp.start();
 
-        verify(bibliotecaConsoleIO).displayMessage(WELCOME_TEXT);
+        verify(view).displayMessage(WELCOME_TEXT);
     }
 
     @Test
