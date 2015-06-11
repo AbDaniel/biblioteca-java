@@ -2,9 +2,9 @@ package com.biblioteca.app;
 
 import com.biblioteca.action.*;
 import com.biblioteca.console.BibliotecaConsoleIO;
+import com.biblioteca.console.BorrowablesListView;
 import com.biblioteca.console.MenuView;
 import com.biblioteca.console.View;
-import com.biblioteca.constants.Constants;
 import com.biblioteca.controller.Controller;
 import com.biblioteca.controller.LoginController;
 import com.biblioteca.enums.MenuItem;
@@ -31,12 +31,15 @@ public class Main {
                 "inds of Winter", "George RR Martin", 2017));
 
         BibliotecaConsoleIO bibliotecaConsoleIO = new BibliotecaConsoleIO(new Scanner(in));
-        MenuView menuView = new MenuView(new Scanner(System.in));
+        Scanner scanner = new Scanner(System.in);
+        MenuView menuView = new MenuView(scanner);
+        BorrowablesListView listView = new BorrowablesListView(scanner);
+        View view = new View(scanner);
 
         Borrowables<Book> borrowables = new Borrowables<>(availableBooks);
 
         Map<MenuItem, Action> actions = new HashMap<>();
-        actions.put(LIST_BOOKS, new ListBooks(borrowables, bibliotecaConsoleIO));
+        actions.put(LIST_BOOKS, new ListBorrowables<>(borrowables, listView));
         actions.put(CHECKOUT_BOOK, new Checkout(borrowables, bibliotecaConsoleIO));
         actions.put(RETURN_BOOK, new Return(borrowables, bibliotecaConsoleIO));
 
@@ -47,7 +50,6 @@ public class Main {
         User user = new User("111-1111", "sauron", "onering", new ArrayList<>());
         users.add(user);
         Login login = new Login(users);
-        View view = new View(new Scanner(System.in));
         LoginController loginController = new LoginController(login, view);
 
 

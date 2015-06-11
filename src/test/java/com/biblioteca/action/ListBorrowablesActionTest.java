@@ -1,6 +1,7 @@
 package com.biblioteca.action;
 
-import com.biblioteca.console.BibliotecaConsoleIO;
+import com.biblioteca.console.BorrowablesListView;
+import com.biblioteca.model.Borrowable;
 import com.biblioteca.model.Owner;
 import com.biblioteca.repository.Borrowables;
 import org.junit.Before;
@@ -17,7 +18,7 @@ public class ListBorrowablesActionTest {
     Borrowables borrowables;
 
     @Mock
-    BibliotecaConsoleIO bibliotecaConsoleIO;
+    BorrowablesListView listView;
 
     @Mock
     Owner owner;
@@ -27,7 +28,7 @@ public class ListBorrowablesActionTest {
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        action = new ListBooks(borrowables, bibliotecaConsoleIO);
+        action = new ListBorrowables<>(borrowables, listView);
     }
 
     @Test
@@ -35,7 +36,7 @@ public class ListBorrowablesActionTest {
         action.execute(owner);
 
         verify(borrowables).allAvailableItems();
-        verify(bibliotecaConsoleIO).displayListOfBooks(Matchers.anyListOf(Object.class));
+        verify(listView).displayListOfBorrowables(Matchers.anyListOf(Borrowable.class));
     }
 
 }

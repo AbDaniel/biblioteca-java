@@ -15,7 +15,7 @@ public class Borrowables<T extends Borrowable> {
         this.borrowables = borrowables;
     }
 
-    public List<Object> allAvailableItems() {
+    public List<T> allAvailableItems() {
         return borrowables.stream().filter(p -> !p.isCheckedOut()).collect(Collectors.toCollection(ArrayList::new));
     }
 
