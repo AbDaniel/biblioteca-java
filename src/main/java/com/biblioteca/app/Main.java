@@ -33,8 +33,8 @@ public class Main {
         actionMap.put(CHECKOUT_BOOK, new Checkout(borrowables, bibliotecaConsoleIO));
         actionMap.put(RETURN_BOOK, new Return(borrowables, bibliotecaConsoleIO));
 
-        Actions actions = new Actions(new HashMap<>());
-        Controller controller = new Controller(bibliotecaConsoleIO, actions);
+        Dispatcher dispatcher = new Dispatcher(new HashMap<>());
+        Controller controller = new Controller(bibliotecaConsoleIO, dispatcher);
 
         BibliotecaApp bibliotecaApp = new BibliotecaApp(Constants.WELCOME_TEXT, bibliotecaConsoleIO, controller);
         bibliotecaApp.start();

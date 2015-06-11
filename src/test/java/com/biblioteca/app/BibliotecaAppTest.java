@@ -1,6 +1,6 @@
 package com.biblioteca.app;
 
-import com.biblioteca.action.Actions;
+import com.biblioteca.action.Dispatcher;
 import com.biblioteca.console.BibliotecaConsoleIO;
 import com.biblioteca.controller.Controller;
 import com.biblioteca.model.Owner;
@@ -13,7 +13,9 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import static com.biblioteca.constants.Constants.WELCOME_TEXT;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -29,7 +31,7 @@ public class BibliotecaAppTest {
     BibliotecaConsoleIO bibliotecaConsoleIO;
 
     @Mock
-    Actions actions;
+    Dispatcher dispatcher;
 
     @Mock
     Controller controller;
@@ -55,6 +57,25 @@ public class BibliotecaAppTest {
         bibliotecaApp.start();
 
         verify(controller).execute(any(Owner.class));
+    }
+
+    @Test
+    public void shouldExitApp() {
+        bibliotecaApp.start();
+
+        verify(controller, times(1)).execute(any(Owner.class));
+    }
+
+    @Test
+    public void shouldContinueWhenUserDoesNotExit() throws InterruptedException {
+        when(controller.execute(any(Owner.class))).thenReturn(true);
+        Thread t = new Thread(bibliotecaApp::start);
+        t.start();
+        t.join(500);
+
+        assertTrue(t.isAlive());
+
+        t.stop();
     }
 
 }

@@ -1,6 +1,6 @@
 package com.biblioteca.controller;
 
-import com.biblioteca.action.Actions;
+import com.biblioteca.action.Dispatcher;
 import com.biblioteca.console.BibliotecaConsoleIO;
 import com.biblioteca.model.Owner;
 
@@ -11,11 +11,11 @@ import static com.biblioteca.enums.MenuItem.valueOf;
 public class Controller {
 
     BibliotecaConsoleIO bibliotecaConsoleIO;
-    private Actions actions;
+    private Dispatcher dispatcher;
 
-    public Controller(BibliotecaConsoleIO bibliotecaConsoleIO, Actions actions) {
+    public Controller(BibliotecaConsoleIO bibliotecaConsoleIO, Dispatcher dispatcher) {
         this.bibliotecaConsoleIO = bibliotecaConsoleIO;
-        this.actions = actions;
+        this.dispatcher = dispatcher;
     }
 
     public boolean execute(Owner owner) {
@@ -23,7 +23,7 @@ public class Controller {
         bibliotecaConsoleIO.displayMenu();
         int userChoice = bibliotecaConsoleIO.getUserChoice();
         if (userChoice != INVALID_INPUT) {
-            status = actions.execute(userChoice, owner);
+            status = dispatcher.dispatch(userChoice, owner);
         } else {
             bibliotecaConsoleIO.displayMessage(INVALID_INPUT_TEXT);
         }

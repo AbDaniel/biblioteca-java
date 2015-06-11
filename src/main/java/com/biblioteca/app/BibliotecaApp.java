@@ -21,7 +21,6 @@ public class BibliotecaApp {
     public void start() {
         bibliotecaConsoleIO.displayMessage(welcomeMessage);
         boolean shouldContinue;
-
         Owner owner = new Owner() {
             @Override
             public void addOwnable(Ownable ownable) {

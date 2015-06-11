@@ -23,7 +23,7 @@ public class ControllerTest {
     private BibliotecaConsoleIO bibliotecaConsoleIO;
 
     @Mock
-    private Actions actions;
+    private Dispatcher dispatcher;
 
     @Mock
     Action mockAction;
@@ -34,7 +34,7 @@ public class ControllerTest {
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        controller = new Controller(bibliotecaConsoleIO, actions);
+        controller = new Controller(bibliotecaConsoleIO, dispatcher);
         when(bibliotecaConsoleIO.getUserChoice()).thenReturn(LIST_BOOKS.getCode());
     }
 
@@ -56,7 +56,7 @@ public class ControllerTest {
     public void shouldExecuteCommandAssociatedWithMenuItem() {
         controller.execute(owner);
 
-        verify(actions).execute(eq(LIST_BOOKS.getCode()), any(Owner.class));
+        verify(dispatcher).dispatch(eq(LIST_BOOKS.getCode()), any(Owner.class));
     }
 
     @Test

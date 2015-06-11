@@ -8,19 +8,19 @@ import java.util.Map;
 import static com.biblioteca.enums.MenuItem.QUIT;
 import static com.biblioteca.enums.MenuItem.valueOf;
 
-public class Actions {
+public class Dispatcher {
 
-    private Map<MenuItem, Action> actionsMap;
+    private Map<MenuItem, Action> actions;
 
-    public Actions(Map<MenuItem, Action> actionsMap) {
-        this.actionsMap = actionsMap;
+    public Dispatcher(Map<MenuItem, Action> actions) {
+        this.actions = actions;
     }
 
-    public boolean execute(int userChoice, Owner owner) {
+    public boolean dispatch(int userChoice, Owner owner) {
         MenuItem selectedMenuItem = valueOf(userChoice);
         if (selectedMenuItem == QUIT)
             return false;
-        actionsMap.get(selectedMenuItem).execute(owner);
+        actions.get(selectedMenuItem).execute(owner);
         return true;
     }
 

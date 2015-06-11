@@ -19,9 +19,9 @@ import static org.junit.Assert.assertFalse;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
-public class ActionsTest {
+public class DispatcherTest {
 
-    Actions actions;
+    Dispatcher dispatcher;
 
     @Mock
     Borrowables borrowables;
@@ -40,7 +40,7 @@ public class ActionsTest {
 
     @Before
     public void setUp() throws Exception {
-        actions = new Actions(actionMap);
+        dispatcher = new Dispatcher(actionMap);
     }
 
     @Test
@@ -48,14 +48,14 @@ public class ActionsTest {
         MenuItem item = LIST_BOOKS;
         when(actionMap.get(item)).thenReturn(action);
 
-        actions.execute(item.getCode(), owner);
+        dispatcher.dispatch(item.getCode(), owner);
 
         Mockito.verify(action).execute(owner);
     }
 
     @Test
     public void shouldReturnFalseOnQuit() {
-        boolean actual = actions.execute(QUIT.getCode(), owner);
+        boolean actual = dispatcher.dispatch(QUIT.getCode(), owner);
 
         assertFalse(actual);
     }
