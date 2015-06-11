@@ -66,6 +66,17 @@ public class MenuViewTest {
         assertEquals(INVALID_INPUT_TEXT + "\n", outContent.toString());
     }
 
+    @Test
+    public void shouldDisplayMenu() {
+        menuView.displayMenu();
+
+        assertEquals("1. List all books\n" +
+                "2. Checkout a book\n" +
+                "3. Return a book\n" +
+                "4. Logout\n" +
+                "5. Quit Biblioteca\n", outContent.toString());
+    }
+
     @After
     public void tearDown() throws Exception {
         System.setOut(null);

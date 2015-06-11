@@ -30,4 +30,10 @@ public class MenuView extends View {
         return choice;
     }
 
+    public void displayMenu() {
+        for (MenuItem menuItem : MenuItem.values()) {
+            System.out.println(menuItem.getText());
+        }
+    }
+
 }
