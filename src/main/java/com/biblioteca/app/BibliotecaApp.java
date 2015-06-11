@@ -15,7 +15,6 @@ public class BibliotecaApp {
     private BibliotecaConsoleIO bibliotecaConsoleIO;
     private Controller controller;
     private LoginController loginController;
-    private MenuItem chosenMenuItem;
 
     public BibliotecaApp(String welcomeMessage, BibliotecaConsoleIO bibliotecaConsoleIO,
                          Controller controller, LoginController loginController) {
@@ -28,11 +27,12 @@ public class BibliotecaApp {
     public void start() {
         bibliotecaConsoleIO.displayMessage(welcomeMessage);
         Owner owner;
+        MenuItem chosenMenuItem;
         do {
             owner = loginController.execute();
             do {
                 chosenMenuItem = controller.execute(owner);
-            } while (chosenMenuItem != QUIT);
+            } while (chosenMenuItem != QUIT && chosenMenuItem != LOGOUT);
         } while (chosenMenuItem == LOGOUT);
     }
 
