@@ -6,10 +6,10 @@ public class User implements Owner {
 
     private String libraryNo;
     private String name;
-    private char[] password;
+    private String password;
     private List<Ownable> ownables;
 
-    public User(String libraryNo, String name, char[] password, List<Ownable> ownables) {
+    public User(String libraryNo, String name, String password, List<Ownable> ownables) {
         this.libraryNo = libraryNo;
         this.name = name;
         this.password = password;
@@ -41,7 +41,7 @@ public class User implements Owner {
         ownables.remove(ownable);
     }
 
-    public boolean isValidCredential(String userName, String password) {
-        return false;
+    public boolean isValidCredential(String libraryNo, String password) {
+        return this.libraryNo.equals(libraryNo) && this.password.equals(password);
     }
 }

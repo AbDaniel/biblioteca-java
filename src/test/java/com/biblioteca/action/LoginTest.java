@@ -17,14 +17,17 @@ public class LoginTest {
 
     @Before
     public void setUp() throws Exception {
-        Map<String, String> users = new HashMap<>();
-        users.put("111-1111", "Sauron");
+        List<User> users = new ArrayList<>();
+        User user = new User("111-1111", "sauron", "onering", null);
+        users.add(user);
         login = new Login(users);
     }
 
     @Test
     public void shouldReturnNullOnInvalidLogin() {
-        User user = login.login();
+        String librayNumber = "112";
+        String password = "";
+        User user = login.login(librayNumber, password);
 
         assertNull(user);
     }

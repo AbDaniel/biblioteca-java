@@ -18,7 +18,7 @@ public class UserTest {
     public void setUp() {
         String password = "onering";
         ownables = new ArrayList<>();
-        user = new User("111-1111", "Sauron", password.toCharArray(), ownables);
+        user = new User("111-1111", "Sauron", password, ownables);
     }
 
     @Test
@@ -44,7 +44,7 @@ public class UserTest {
         user.removeOwnable(book);
         int actualSize = ownables.size();
 
-        assertEquals(1, actualSize);
+        assertEquals(0, actualSize);
     }
 
     @Test
@@ -53,6 +53,14 @@ public class UserTest {
         String password = "";
 
         assertFalse(user.isValidCredential(userName, password));
+    }
+
+    @Test
+    public void shouldReturnTrueIfCredentialsAreValid() {
+        String userName = "111-1111";
+        String password = "onering";
+
+        assertTrue(user.isValidCredential(userName, password));
     }
 
 }
