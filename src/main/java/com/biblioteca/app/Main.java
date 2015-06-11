@@ -28,12 +28,12 @@ public class Main {
 
         Borrowables<Book> borrowables = new Borrowables<>(availableBooks);
 
-        Map<MenuItem, Action> actionMap = new HashMap<>();
-        actionMap.put(LIST_BOOKS, new ListBooks(borrowables, bibliotecaConsoleIO));
-        actionMap.put(CHECKOUT_BOOK, new Checkout(borrowables, bibliotecaConsoleIO));
-        actionMap.put(RETURN_BOOK, new Return(borrowables, bibliotecaConsoleIO));
+        Map<MenuItem, Action> actions = new HashMap<>();
+        actions.put(LIST_BOOKS, new ListBooks(borrowables, bibliotecaConsoleIO));
+        actions.put(CHECKOUT_BOOK, new Checkout(borrowables, bibliotecaConsoleIO));
+        actions.put(RETURN_BOOK, new Return(borrowables, bibliotecaConsoleIO));
 
-        Dispatcher dispatcher = new Dispatcher(new HashMap<>());
+        Dispatcher dispatcher = new Dispatcher(actions);
         Controller controller = new Controller(bibliotecaConsoleIO, dispatcher);
 
         BibliotecaApp bibliotecaApp = new BibliotecaApp(Constants.WELCOME_TEXT, bibliotecaConsoleIO, controller);
