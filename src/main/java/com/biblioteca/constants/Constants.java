@@ -10,5 +10,6 @@ public interface Constants {
     String BOOK_NOT_VALID_TEXT = "That is not a valid book to return.";
     String SUCCESSFUL_RETURN_TEXT = "Thank you for returning the book.";
     String EXIT_MESSAGE = "Thank you! For Using Biblioteca";
-    String ENTER_USER_NAME = "Enter User Name :";
+    String ENTER_LIBRARY_NO = "Enter Library no :";
+    String ENTER_PASSWORD = "Enter password :";
 }

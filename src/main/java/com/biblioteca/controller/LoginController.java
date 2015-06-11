@@ -2,9 +2,11 @@ package com.biblioteca.controller;
 
 import com.biblioteca.action.Login;
 import com.biblioteca.console.View;
+import com.biblioteca.constants.Constants;
 import com.biblioteca.model.User;
 
-import static com.biblioteca.constants.Constants.ENTER_USER_NAME;
+import static com.biblioteca.constants.Constants.*;
+import static com.biblioteca.constants.Constants.ENTER_LIBRARY_NO;
 
 public class LoginController {
 
@@ -17,7 +19,10 @@ public class LoginController {
     }
 
     public User execute() {
-        view.displayMessage(ENTER_USER_NAME);
-        return null;
+        view.displayMessage(ENTER_LIBRARY_NO);
+        String libraryNo = view.getString();
+        view.displayMessage(ENTER_PASSWORD);
+        String password = view.getString();
+        return login.login(libraryNo, password);
     }
 }
