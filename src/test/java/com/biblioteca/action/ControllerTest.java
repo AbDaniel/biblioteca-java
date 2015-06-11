@@ -11,6 +11,7 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import static com.biblioteca.enums.MenuItem.LIST_BOOKS;
+import static com.biblioteca.enums.MenuItem.LOGOUT;
 import static com.biblioteca.enums.MenuItem.QUIT;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
@@ -68,6 +69,14 @@ public class ControllerTest {
         controller.execute(owner);
 
         verify(dispatcher, times(0)).dispatch(eq(QUIT), any(Owner.class));
+    }
+
+    @Test
+    public void shouldNotCallDispatchIfMenuItemIsLogout() {
+        when(bibliotecaConsoleIO.getUserChoice()).thenReturn(LOGOUT.getCode());
+        controller.execute(owner);
+
+        verify(dispatcher, times(0)).dispatch(eq(LOGOUT), any(Owner.class));
     }
 
 }
