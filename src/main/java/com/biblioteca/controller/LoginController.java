@@ -1,8 +1,7 @@
 package com.biblioteca.controller;
 
 import com.biblioteca.action.Login;
-import com.biblioteca.console.BibliotecaConsoleIO;
-import com.biblioteca.constants.Constants;
+import com.biblioteca.console.View;
 import com.biblioteca.model.User;
 
 import static com.biblioteca.constants.Constants.ENTER_USER_NAME;
@@ -10,15 +9,15 @@ import static com.biblioteca.constants.Constants.ENTER_USER_NAME;
 public class LoginController {
 
     private Login login;
-    private BibliotecaConsoleIO bibliotecaConsoleIO;
+    private View view;
 
-    public LoginController(Login login, BibliotecaConsoleIO bibliotecaConsoleIO) {
+    public LoginController(Login login, View view) {
         this.login = login;
-        this.bibliotecaConsoleIO = bibliotecaConsoleIO;
+        this.view = view;
     }
 
     public User execute() {
-        bibliotecaConsoleIO.displayMessage(ENTER_USER_NAME);
+        view.displayMessage(ENTER_USER_NAME);
         return null;
     }
 }
