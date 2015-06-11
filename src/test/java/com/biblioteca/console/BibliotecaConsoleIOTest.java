@@ -1,12 +1,15 @@
 package com.biblioteca.console;
 
 import com.biblioteca.model.Book;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.contrib.java.lang.system.SystemOutRule;
 import org.junit.contrib.java.lang.system.TextFromStandardInputStream;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -18,8 +21,8 @@ import static org.junit.Assert.assertEquals;
 
 public class BibliotecaConsoleIOTest {
 
-    @Rule
-    public final SystemOutRule systemOutRule = new SystemOutRule().enableLog();
+
+    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 
     @Rule
     public final TextFromStandardInputStream systemInMock
@@ -29,6 +32,7 @@ public class BibliotecaConsoleIOTest {
 
     @Before
     public void setUp() {
+        System.setOut(new PrintStream(outContent));
         bibliotecaConsoleIO = new BibliotecaConsoleIO(new Scanner(System.in));
     }
 
@@ -36,7 +40,7 @@ public class BibliotecaConsoleIOTest {
     public void shouldDisplayWelcomeMessage() {
         bibliotecaConsoleIO.displayMessage(WELCOME_TEXT);
 
-        assertEquals(WELCOME_TEXT + "\n", systemOutRule.getLog());
+        assertEquals(WELCOME_TEXT + "\n", outContent.toString());
     }
 
     @Test
@@ -53,7 +57,7 @@ public class BibliotecaConsoleIOTest {
                 "name='Catch-22', author='Joesph Heller', year=1950\n" +
                 "name='Winds of Winter', author='George RR Martin', year=2017\n";
 
-        assertEquals(expected, systemOutRule.getLog());
+        assertEquals(expected, outContent.toString());
     }
 
     @Test
@@ -63,7 +67,7 @@ public class BibliotecaConsoleIOTest {
         assertEquals("1. List all books\n" +
                 "2. Checkout a book\n" +
                 "3. Return a book\n" +
-                "4. Quit Biblioteca\n", systemOutRule.getLog());
+                "4. Quit Biblioteca\n", outContent.toString());
     }
 
     @Test
@@ -102,4 +106,8 @@ public class BibliotecaConsoleIOTest {
         assertEquals("Lord of the Rings", actualBookName);
     }
 
+    @After
+    public void tearDown() throws Exception {
+        System.setOut(null);
+    }
 }
