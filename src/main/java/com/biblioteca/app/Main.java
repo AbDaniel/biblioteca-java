@@ -40,7 +40,7 @@ public class Main {
 
         Map<MenuItem, Action> actions = new HashMap<>();
         actions.put(LIST_BOOKS, new ListBorrowables<>(borrowables, listView));
-        actions.put(CHECKOUT_BOOK, new Checkout(borrowables, bibliotecaConsoleIO));
+        actions.put(CHECKOUT_BOOK, new Checkout(borrowables, view));
         actions.put(RETURN_BOOK, new Return(borrowables, bibliotecaConsoleIO));
 
         Dispatcher dispatcher = new Dispatcher(actions);
