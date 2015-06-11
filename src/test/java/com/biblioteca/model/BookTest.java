@@ -66,4 +66,9 @@ public class BookTest {
         assertFalse(book.isEqualTo("aasd"));
     }
 
+    @Test
+    public void shouldReturnTrueIfBookNameIsValid() {
+        assertTrue(book.isEqualTo("Lord of the Rings"));
+    }
+
 }

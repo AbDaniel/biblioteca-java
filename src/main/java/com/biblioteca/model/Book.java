@@ -50,7 +50,7 @@ public class Book implements Borrowable, Ownable {
 
     @Override
     public boolean isEqualTo(String itemName) {
-        return false;
+        return name.equals(itemName);
     }
 
     @Override
