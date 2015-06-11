@@ -7,11 +7,14 @@ import com.biblioteca.model.Owner;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import static com.biblioteca.enums.MenuItem.LIST_BOOKS;
+import static com.biblioteca.enums.MenuItem.QUIT;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -57,6 +60,14 @@ public class ControllerTest {
         controller.execute(owner);
 
         verify(dispatcher).dispatch(eq(LIST_BOOKS), any(Owner.class));
+    }
+
+    @Test
+    public void shouldNotCallDispatchIfMenuItemIsQuit() {
+        when(bibliotecaConsoleIO.getUserChoice()).thenReturn(QUIT.getCode());
+        controller.execute(owner);
+
+        verify(dispatcher, times(0)).dispatch(eq(QUIT), any(Owner.class));
     }
 
 }

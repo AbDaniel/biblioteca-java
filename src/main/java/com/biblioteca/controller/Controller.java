@@ -8,6 +8,7 @@ import com.biblioteca.model.Owner;
 
 import static com.biblioteca.constants.Constants.INVALID_INPUT;
 import static com.biblioteca.constants.Constants.INVALID_INPUT_TEXT;
+import static com.biblioteca.enums.MenuItem.LOGOUT;
 import static com.biblioteca.enums.MenuItem.QUIT;
 import static com.biblioteca.enums.MenuItem.valueOf;
 
@@ -26,7 +27,7 @@ public class Controller {
         int userChoice = bibliotecaConsoleIO.getUserChoice();
 
         MenuItem selectedMenuItem = valueOf(userChoice);
-        if (selectedMenuItem == QUIT) {
+        if (selectedMenuItem == QUIT || selectedMenuItem == LOGOUT) {
             return selectedMenuItem;
         }
 

@@ -27,10 +27,13 @@ public class BibliotecaApp {
 
     public void start() {
         bibliotecaConsoleIO.displayMessage(welcomeMessage);
-        Owner owner = loginController.execute();
+        Owner owner;
         do {
-            chosenMenuItem = controller.execute(owner);
-        } while (chosenMenuItem != QUIT);
+            owner = loginController.execute();
+            do {
+                chosenMenuItem = controller.execute(owner);
+            } while (chosenMenuItem != QUIT);
+        } while (chosenMenuItem == LOGOUT);
     }
 
 }
