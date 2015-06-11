@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import static com.biblioteca.constants.Constants.INVALID_INPUT;
+import static com.biblioteca.constants.Constants.INVALID_INPUT_TEXT;
 import static com.biblioteca.constants.Constants.WELCOME_TEXT;
 
 import static org.junit.Assert.assertEquals;
@@ -106,8 +107,18 @@ public class BibliotecaConsoleIOTest {
         assertEquals("Lord of the Rings", actualBookName);
     }
 
+    @Test
+    public void shouldDisplayInvalidInputMessageOnInvalidInput() {
+        systemInMock.provideText("6\n");
+
+        bibliotecaConsoleIO.getUserChoice();
+
+        assertEquals(INVALID_INPUT_TEXT + "\n", outContent.toString());
+    }
+
     @After
     public void tearDown() throws Exception {
         System.setOut(null);
     }
+
 }

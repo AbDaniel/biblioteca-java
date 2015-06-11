@@ -2,10 +2,12 @@ package com.biblioteca.controller;
 
 import com.biblioteca.action.Dispatcher;
 import com.biblioteca.console.BibliotecaConsoleIO;
+import com.biblioteca.enums.MenuItem;
 import com.biblioteca.model.Owner;
 
 import static com.biblioteca.constants.Constants.INVALID_INPUT;
 import static com.biblioteca.constants.Constants.INVALID_INPUT_TEXT;
+import static com.biblioteca.enums.MenuItem.QUIT;
 import static com.biblioteca.enums.MenuItem.valueOf;
 
 public class Controller {
@@ -19,15 +21,18 @@ public class Controller {
     }
 
     public boolean execute(Owner owner) {
-        boolean status = true;
         bibliotecaConsoleIO.displayMenu();
         int userChoice = bibliotecaConsoleIO.getUserChoice();
-        if (userChoice != INVALID_INPUT) {
-            status = dispatcher.dispatch(userChoice, owner);
-        } else {
-            bibliotecaConsoleIO.displayMessage(INVALID_INPUT_TEXT);
-        }
-        return status;
+
+        MenuItem selectedMenuItem = valueOf(userChoice);
+        if (selectedMenuItem == QUIT)
+            return false;
+        dispatcher.dispatch(selectedMenuItem, owner);
+        return true;
+    }
+
+    public interface ExitListener {
+        void update(int userChoice);
     }
 
 }

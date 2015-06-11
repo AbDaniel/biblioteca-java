@@ -56,16 +56,7 @@ public class ControllerTest {
     public void shouldExecuteCommandAssociatedWithMenuItem() {
         controller.execute(owner);
 
-        verify(dispatcher).dispatch(eq(LIST_BOOKS.getCode()), any(Owner.class));
-    }
-
-    @Test
-    public void shouldSayInvalidInputOnInvalidInput() {
-        when(bibliotecaConsoleIO.getUserChoice()).thenReturn(Constants.INVALID_INPUT);
-
-        controller.execute(owner);
-
-        verify(bibliotecaConsoleIO).displayMessage(Constants.INVALID_INPUT_TEXT);
+        verify(dispatcher).dispatch(eq(LIST_BOOKS), any(Owner.class));
     }
 
 }

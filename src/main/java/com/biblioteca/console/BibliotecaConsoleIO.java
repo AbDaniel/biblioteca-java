@@ -7,6 +7,8 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
+import static com.biblioteca.constants.Constants.*;
+
 public class BibliotecaConsoleIO {
 
     private Scanner scanner;
@@ -39,9 +41,11 @@ public class BibliotecaConsoleIO {
                 throw new InputMismatchException();
             }
         } catch (InputMismatchException e) {
-            choice = Constants.INVALID_INPUT;
+            choice = INVALID_INPUT;
         }
         scanner.nextLine();
+        if(choice == INVALID_INPUT)
+            System.out.println(INVALID_INPUT_TEXT);
         return choice;
     }
 

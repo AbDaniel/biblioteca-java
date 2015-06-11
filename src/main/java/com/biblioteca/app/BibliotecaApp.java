@@ -10,6 +10,7 @@ public class BibliotecaApp {
     private String welcomeMessage;
     private BibliotecaConsoleIO bibliotecaConsoleIO;
     private Controller controller;
+    private boolean shouldContinue;
 
     public BibliotecaApp(String welcomeMessage, BibliotecaConsoleIO bibliotecaConsoleIO,
                          Controller controller) {
@@ -20,7 +21,6 @@ public class BibliotecaApp {
 
     public void start() {
         bibliotecaConsoleIO.displayMessage(welcomeMessage);
-        boolean shouldContinue;
         Owner owner = new Owner() {
             @Override
             public void addOwnable(Ownable ownable) {

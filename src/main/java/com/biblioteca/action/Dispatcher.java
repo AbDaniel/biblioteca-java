@@ -5,9 +5,6 @@ import com.biblioteca.model.Owner;
 
 import java.util.Map;
 
-import static com.biblioteca.enums.MenuItem.QUIT;
-import static com.biblioteca.enums.MenuItem.valueOf;
-
 public class Dispatcher {
 
     private Map<MenuItem, Action> actions;
@@ -16,12 +13,9 @@ public class Dispatcher {
         this.actions = actions;
     }
 
-    public boolean dispatch(int userChoice, Owner owner) {
-        MenuItem selectedMenuItem = valueOf(userChoice);
-        if (selectedMenuItem == QUIT)
-            return false;
-        actions.get(selectedMenuItem).execute(owner);
-        return true;
+    public void dispatch(MenuItem selectedMenuItem, Owner owner) {
+        if (selectedMenuItem != null)
+            actions.get(selectedMenuItem).execute(owner);
     }
 
 }

@@ -16,6 +16,7 @@ import java.util.Map;
 import static com.biblioteca.enums.MenuItem.LIST_BOOKS;
 import static com.biblioteca.enums.MenuItem.QUIT;
 import static org.junit.Assert.assertFalse;
+import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -48,16 +49,16 @@ public class DispatcherTest {
         MenuItem item = LIST_BOOKS;
         when(actionMap.get(item)).thenReturn(action);
 
-        dispatcher.dispatch(item.getCode(), owner);
+        dispatcher.dispatch(item, owner);
 
-        Mockito.verify(action).execute(owner);
+        verify(action).execute(owner);
     }
 
     @Test
-    public void shouldReturnFalseOnQuit() {
-        boolean actual = dispatcher.dispatch(QUIT.getCode(), owner);
+    public void shouldNotExecuteActionWhenChoiceIsNull() {
+        dispatcher.dispatch(null, owner);
 
-        assertFalse(actual);
+        verify(action, times(0)).execute(owner);
     }
 
 }
