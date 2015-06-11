@@ -1,7 +1,7 @@
 package com.biblioteca.controller;
 
 import com.biblioteca.action.Dispatcher;
-import com.biblioteca.console.MenuView;
+import com.biblioteca.view.MenuView;
 import com.biblioteca.enums.MenuItem;
 import com.biblioteca.model.Owner;
 

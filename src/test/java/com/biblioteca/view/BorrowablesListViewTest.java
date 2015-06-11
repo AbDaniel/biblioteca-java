@@ -1,4 +1,4 @@
-package com.biblioteca.console;
+package com.biblioteca.view;
 
 import com.biblioteca.model.Book;
 import org.junit.Before;

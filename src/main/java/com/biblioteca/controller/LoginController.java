@@ -1,8 +1,7 @@
 package com.biblioteca.controller;
 
 import com.biblioteca.action.Login;
-import com.biblioteca.console.View;
-import com.biblioteca.constants.Constants;
+import com.biblioteca.view.View;
 import com.biblioteca.model.User;
 
 import static com.biblioteca.constants.Constants.*;

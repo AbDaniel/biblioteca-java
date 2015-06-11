@@ -1,6 +1,6 @@
 package com.biblioteca.app;
 
-import com.biblioteca.console.View;
+import com.biblioteca.view.View;
 import com.biblioteca.controller.Controller;
 import com.biblioteca.controller.LoginController;
 import com.biblioteca.enums.MenuItem;

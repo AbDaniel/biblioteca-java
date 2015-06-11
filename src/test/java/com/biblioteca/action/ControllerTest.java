@@ -1,6 +1,6 @@
 package com.biblioteca.action;
 
-import com.biblioteca.console.MenuView;
+import com.biblioteca.view.MenuView;
 import com.biblioteca.controller.Controller;
 import com.biblioteca.model.Owner;
 import org.junit.Before;

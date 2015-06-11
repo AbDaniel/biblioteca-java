@@ -1,7 +1,7 @@
 package com.biblioteca.controller;
 
 import com.biblioteca.action.Login;
-import com.biblioteca.console.View;
+import com.biblioteca.view.View;
 import com.biblioteca.model.User;
 import org.junit.Before;
 import org.junit.Rule;

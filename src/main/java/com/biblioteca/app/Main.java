@@ -1,9 +1,9 @@
 package com.biblioteca.app;
 
 import com.biblioteca.action.*;
-import com.biblioteca.console.BorrowablesListView;
-import com.biblioteca.console.MenuView;
-import com.biblioteca.console.View;
+import com.biblioteca.view.BorrowablesListView;
+import com.biblioteca.view.MenuView;
+import com.biblioteca.view.View;
 import com.biblioteca.controller.Controller;
 import com.biblioteca.controller.LoginController;
 import com.biblioteca.enums.MenuItem;

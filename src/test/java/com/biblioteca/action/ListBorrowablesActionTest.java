@@ -1,6 +1,6 @@
 package com.biblioteca.action;
 
-import com.biblioteca.console.BorrowablesListView;
+import com.biblioteca.view.BorrowablesListView;
 import com.biblioteca.model.Borrowable;
 import com.biblioteca.model.Owner;
 import com.biblioteca.repository.Borrowables;
