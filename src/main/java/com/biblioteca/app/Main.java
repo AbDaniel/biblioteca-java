@@ -25,7 +25,8 @@ public class Main {
         availableBooks.add(new Book("Lord of the Rings", "JR Toliken", 1930));
         availableBooks.add(new Book("Harry Potter", "JK Rowling", 1992));
         availableBooks.add(new Book("Catch-22", "Joesph Heller", 1950));
-        availableBooks.add(new Book("Winds of Winter", "George RR Martin", 2017));
+        availableBooks.add(new Book("W" +
+                "inds of Winter", "George RR Martin", 2017));
 
         BibliotecaConsoleIO bibliotecaConsoleIO = new BibliotecaConsoleIO(new Scanner(in));
 
@@ -40,7 +41,7 @@ public class Main {
         Controller controller = new Controller(bibliotecaConsoleIO, dispatcher);
 
         List<User> users = new ArrayList<>();
-        User user = new User("111-1111", "sauron", "onering", null);
+        User user = new User("111-1111", "sauron", "onering", new ArrayList<>());
         users.add(user);
         Login login = new Login(users);
         View view = new View(new Scanner(System.in));
