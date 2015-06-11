@@ -25,8 +25,10 @@ import static org.mockito.Mockito.*;
 @RunWith(MockitoJUnitRunner.class)
 public class LoginControllerTest {
 
-    Login login;
     LoginController loginController;
+
+    @Mock
+    Login login;
 
     @Mock
     View view;
@@ -36,41 +38,39 @@ public class LoginControllerTest {
             = TextFromStandardInputStream.emptyStandardInputStream();
 
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-
+    private User user;
 
     @Before
     public void setUp() throws Exception {
         System.setOut(new PrintStream(outContent));
-        List<User> users = new ArrayList<>();
-        User user = new User("111-1111", "sauron", "onering", null);
-        users.add(user);
-        login = new Login(users);
         loginController = new LoginController(login, view);
+        user = new User("111-1111", "sauron", "onering", null);
     }
 
-//    @Test
-//    public void shouldDisplayMessageRequestingUserForInput() {
-//        systemInMock.provideText("111-1111\nonering\n");
-//
-//        loginController.execute();
-//
-//        verify(view).displayMessage(ENTER_LIBRARY_NO);
-//    }
-//
-//    @Test
-//    public void shouldRetriveInputFromUser() {
-//        systemInMock.provideText("111-1111\nonering\n");
-//
-//        loginController.execute();
-//
-//        verify(view).getString();
-//    }
+    @Test
+    public void shouldDisplayMessageRequestingUserForInput() {
+        Mockito.when(login.login(Mockito.anyString(), Mockito.anyString())).thenReturn(user);
+        loginController.execute();
+
+        verify(view).displayMessage(ENTER_LIBRARY_NO);
+    }
+
+    @Test
+    public void shouldRetriveInputFromUser() {
+        Mockito.when(login.login(Mockito.anyString(), Mockito.anyString())).thenReturn(user);
+        loginController.execute();
+
+        verify(view, times(2)).getString();
+    }
 
     @Test
     public void shouldTryToLoginWithCredentials() {
+        List<User> users = new ArrayList<>();
+        user = new User("111-1111", "sauron", "onering", null);
+        users.add(user);
+        login = new Login(users);
         View view = new View(new Scanner(System.in));
         loginController = new LoginController(login, view);
-
         systemInMock.provideText("111-1111\nonering\n");
 
         User actualUser = loginController.execute();

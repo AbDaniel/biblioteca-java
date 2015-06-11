@@ -2,9 +2,12 @@ package com.biblioteca.app;
 
 import com.biblioteca.action.*;
 import com.biblioteca.console.BibliotecaConsoleIO;
+import com.biblioteca.console.View;
 import com.biblioteca.constants.Constants;
 import com.biblioteca.controller.Controller;
+import com.biblioteca.controller.LoginController;
 import com.biblioteca.enums.MenuItem;
+import com.biblioteca.model.User;
 import com.biblioteca.repository.Borrowables;
 import com.biblioteca.model.Book;
 
@@ -36,7 +39,15 @@ public class Main {
         Dispatcher dispatcher = new Dispatcher(actions);
         Controller controller = new Controller(bibliotecaConsoleIO, dispatcher);
 
-        BibliotecaApp bibliotecaApp = new BibliotecaApp(Constants.WELCOME_TEXT, bibliotecaConsoleIO, controller);
+        List<User> users = new ArrayList<>();
+        User user = new User("111-1111", "sauron", "onering", null);
+        users.add(user);
+        Login login = new Login(users);
+        View view = new View(new Scanner(System.in));
+        LoginController loginController = new LoginController(login, view);
+
+
+        BibliotecaApp bibliotecaApp = new BibliotecaApp(Constants.WELCOME_TEXT, bibliotecaConsoleIO, controller, loginController);
         bibliotecaApp.start();
     }
 

@@ -2,8 +2,10 @@ package com.biblioteca.controller;
 
 import com.biblioteca.action.Login;
 import com.biblioteca.console.View;
+import com.biblioteca.constants.Constants;
 import com.biblioteca.model.User;
 
+import static com.biblioteca.constants.Constants.*;
 import static com.biblioteca.constants.Constants.ENTER_LIBRARY_NO;
 import static com.biblioteca.constants.Constants.ENTER_PASSWORD;
 
@@ -25,6 +27,9 @@ public class LoginController {
             view.displayMessage(ENTER_PASSWORD);
             String password = view.getString();
             user = login.login(libraryNo, password);
+            if (user == null) {
+                view.displayMessage(INVALID_CREDENTIALS);
+            }
         } while (user == null);
         return user;
     }

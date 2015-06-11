@@ -3,15 +3,17 @@ package com.biblioteca.app;
 import com.biblioteca.action.Dispatcher;
 import com.biblioteca.console.BibliotecaConsoleIO;
 import com.biblioteca.controller.Controller;
-import com.biblioteca.enums.MenuItem;
+import com.biblioteca.controller.LoginController;
 import com.biblioteca.model.Owner;
 import com.biblioteca.repository.Borrowables;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.contrib.java.lang.system.ExpectedSystemExit;
+import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import static com.biblioteca.constants.Constants.WELCOME_TEXT;
 import static com.biblioteca.enums.MenuItem.*;
@@ -21,6 +23,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+@RunWith(MockitoJUnitRunner.class)
 public class BibliotecaAppTest {
 
     @Rule
@@ -38,12 +41,14 @@ public class BibliotecaAppTest {
     @Mock
     Controller controller;
 
+    @Mock
+    LoginController loginController;
+
     BibliotecaApp bibliotecaApp;
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
-        bibliotecaApp = new BibliotecaApp(WELCOME_TEXT, bibliotecaConsoleIO, controller);
+        bibliotecaApp = new BibliotecaApp(WELCOME_TEXT, bibliotecaConsoleIO, controller, loginController);
         when(controller.execute(any(Owner.class))).thenReturn(QUIT);
     }
 
@@ -78,6 +83,13 @@ public class BibliotecaAppTest {
         assertTrue(t.isAlive());
 
         t.stop();
+    }
+
+    @Test
+    public void shouldExecuteLoginController() {
+        bibliotecaApp.start();
+
+        verify(loginController).execute();
     }
 
 }

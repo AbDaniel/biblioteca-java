@@ -12,4 +12,5 @@ public interface Constants {
     String EXIT_MESSAGE = "Thank you! For Using Biblioteca";
     String ENTER_LIBRARY_NO = "Enter Library no :";
     String ENTER_PASSWORD = "Enter password :";
+    String INVALID_CREDENTIALS = "Invalid Credentials";
 }

@@ -68,7 +68,8 @@ public class BibliotecaConsoleIOTest {
         assertEquals("1. List all books\n" +
                 "2. Checkout a book\n" +
                 "3. Return a book\n" +
-                "4. Quit Biblioteca\n", outContent.toString());
+                "4. Logout\n" +
+                "5. Quit Biblioteca\n", outContent.toString());
     }
 
     @Test
