@@ -24,7 +24,6 @@ public class User implements Owner {
         User user = (User) o;
 
         return !(libraryNo != null ? !libraryNo.equals(user.libraryNo) : user.libraryNo != null);
-
     }
 
     @Override
@@ -42,4 +41,7 @@ public class User implements Owner {
         ownables.remove(ownable);
     }
 
+    public boolean isValidCredential(String userName, String password) {
+        return false;
+    }
 }

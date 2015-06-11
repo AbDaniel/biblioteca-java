@@ -44,7 +44,15 @@ public class UserTest {
         user.removeOwnable(book);
         int actualSize = ownables.size();
 
-        assertEquals(0, actualSize);
+        assertEquals(1, actualSize);
+    }
+
+    @Test
+    public void shouldReturnFalseIfCredentialsAreInvalid() {
+        String userName = "";
+        String password = "";
+
+        assertFalse(user.isValidCredential(userName, password));
     }
 
 }
