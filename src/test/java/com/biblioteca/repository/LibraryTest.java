@@ -14,9 +14,9 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.MockitoAnnotations.initMocks;
 
-public class BorrowablesTest {
+public class LibraryTest {
 
-    Borrowables borrowables;
+    Library library;
 
     @Mock
     List<Book> bookList;
@@ -27,7 +27,7 @@ public class BorrowablesTest {
     @Before
     public void setUp() {
         initMocks(this);
-        borrowables = new Borrowables<>(bookList);
+        library = new Library<>(bookList);
     }
 
     void setUpWithData() {
@@ -42,22 +42,22 @@ public class BorrowablesTest {
         book = new Book("Alchemist", "Paulo Coelho", 1988);
         book.checkout(owner);
         bookList.add(book);
-        this.borrowables = new Borrowables<>(bookList);
+        this.library = new Library<>(bookList);
     }
 
     @Test
     public void shouldReturnListOfAvailableBooksOfRightSize() {
         setUpWithData();
-        int actualSize = borrowables.allAvailableItems().size();
+        int actualSize = library.allAvailableItems().size();
 
         assertEquals(4, actualSize);
     }
 
     @Test
     public void shouldReturnZeroSizedListIfNoAvailableBooks() {
-        this.borrowables = new Borrowables<>(new ArrayList<>());
+        this.library = new Library<>(new ArrayList<>());
 
-        int actualSize = borrowables.allAvailableItems().size();
+        int actualSize = library.allAvailableItems().size();
 
         assertEquals(0, actualSize);
     }
@@ -67,7 +67,7 @@ public class BorrowablesTest {
         setUpWithData();
         String bookName = "1234";
 
-        assertFalse(borrowables.checkout(bookName, owner));
+        assertFalse(library.checkout(bookName, owner));
     }
 
     @Test
@@ -75,7 +75,7 @@ public class BorrowablesTest {
         setUpWithData();
         String name = "Lord of the Rings";
 
-        assertTrue(borrowables.checkout(name, owner));
+        assertTrue(library.checkout(name, owner));
     }
 
     @Test
@@ -83,7 +83,7 @@ public class BorrowablesTest {
         setUpWithData();
         String bookName = "Lord of the Rings";
 
-        assertFalse(borrowables.returnItem(bookName, owner));
+        assertFalse(library.returnItem(bookName, owner));
     }
 
     @Test
@@ -91,7 +91,7 @@ public class BorrowablesTest {
         setUpWithData();
         String bookName = "1234";
 
-        assertFalse(borrowables.returnItem(bookName, owner));
+        assertFalse(library.returnItem(bookName, owner));
     }
 
     @Test
@@ -99,7 +99,7 @@ public class BorrowablesTest {
         setUpWithData();
         String name = "1984";
 
-        assertTrue(borrowables.returnItem(name, owner));
+        assertTrue(library.returnItem(name, owner));
     }
 
 }

@@ -2,7 +2,7 @@ package com.biblioteca.action;
 
 import com.biblioteca.enums.MenuItem;
 import com.biblioteca.model.Owner;
-import com.biblioteca.repository.Borrowables;
+import com.biblioteca.repository.Library;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,7 +20,7 @@ public class DispatcherTest {
     Dispatcher dispatcher;
 
     @Mock
-    Borrowables borrowables;
+    Library library;
 
     @Mock
     Owner owner;

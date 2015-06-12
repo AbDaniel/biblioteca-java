@@ -7,11 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Borrowables<T extends Borrowable> {
+public class Library<T extends Borrowable> {
 
     private List<T> borrowables;
 
-    public Borrowables(List<T> borrowables) {
+    public Library(List<T> borrowables) {
         this.borrowables = borrowables;
     }
 

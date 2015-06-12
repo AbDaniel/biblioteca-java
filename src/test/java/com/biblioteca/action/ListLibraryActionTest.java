@@ -3,7 +3,7 @@ package com.biblioteca.action;
 import com.biblioteca.view.BorrowablesListView;
 import com.biblioteca.model.Borrowable;
 import com.biblioteca.model.Owner;
-import com.biblioteca.repository.Borrowables;
+import com.biblioteca.repository.Library;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Matchers;
@@ -12,10 +12,10 @@ import org.mockito.MockitoAnnotations;
 
 import static org.mockito.Mockito.verify;
 
-public class ListBorrowablesActionTest {
+public class ListLibraryActionTest {
 
     @Mock
-    Borrowables borrowables;
+    Library library;
 
     @Mock
     BorrowablesListView listView;
@@ -28,14 +28,14 @@ public class ListBorrowablesActionTest {
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        action = new ListBorrowables<>(borrowables, listView);
+        action = new ListBorrowables<>(library, listView);
     }
 
     @Test
     public void shouldListAllBooks() {
         action.execute(owner);
 
-        verify(borrowables).allAvailableItems();
+        verify(library).allAvailableItems();
         verify(listView).displayListOfBorrowables(Matchers.anyListOf(Borrowable.class));
     }
 

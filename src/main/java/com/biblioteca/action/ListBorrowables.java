@@ -3,21 +3,21 @@ package com.biblioteca.action;
 import com.biblioteca.view.BorrowablesListView;
 import com.biblioteca.model.Borrowable;
 import com.biblioteca.model.Owner;
-import com.biblioteca.repository.Borrowables;
+import com.biblioteca.repository.Library;
 
 public class ListBorrowables<T extends Borrowable> implements Action {
 
-    private final Borrowables<T> borrowables;
+    private final Library<T> library;
     private final BorrowablesListView listView;
 
-    public ListBorrowables(Borrowables<T> borrowables, BorrowablesListView borrowablesListView) {
-        this.borrowables = borrowables;
+    public ListBorrowables(Library<T> library, BorrowablesListView borrowablesListView) {
+        this.library = library;
         this.listView = borrowablesListView;
     }
 
     @Override
     public void execute(Owner owner) {
-        listView.displayListOfBorrowables(borrowables.allAvailableItems());
+        listView.displayListOfBorrowables(library.allAvailableItems());
     }
 
 }

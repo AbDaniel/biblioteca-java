@@ -14,7 +14,7 @@ import java.util.Scanner;
 
 import static org.junit.Assert.*;
 
-public class BorrowablesListViewTest {
+public class LibraryListViewTest {
 
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 

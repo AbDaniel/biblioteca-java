@@ -5,7 +5,7 @@ import com.biblioteca.view.View;
 import com.biblioteca.controller.Controller;
 import com.biblioteca.controller.LoginController;
 import com.biblioteca.model.Owner;
-import com.biblioteca.repository.Borrowables;
+import com.biblioteca.repository.Library;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -29,7 +29,7 @@ public class BibliotecaAppTest {
     public final ExpectedSystemExit exit = ExpectedSystemExit.none();
 
     @Mock
-    Borrowables borrowables;
+    Library library;
 
     @Mock
     View view;

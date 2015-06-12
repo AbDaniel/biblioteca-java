@@ -8,7 +8,7 @@ import com.biblioteca.controller.Controller;
 import com.biblioteca.controller.LoginController;
 import com.biblioteca.enums.MenuItem;
 import com.biblioteca.model.User;
-import com.biblioteca.repository.Borrowables;
+import com.biblioteca.repository.Library;
 import com.biblioteca.model.Book;
 
 import java.util.*;
@@ -33,12 +33,12 @@ public class Main {
         BorrowablesListView listView = new BorrowablesListView(scanner);
         View view = new View(scanner);
 
-        Borrowables<Book> borrowables = new Borrowables<>(availableBooks);
+        Library<Book> library = new Library<>(availableBooks);
 
         Map<MenuItem, Action> actions = new HashMap<>();
-        actions.put(LIST_BOOKS, new ListBorrowables<>(borrowables, listView));
-        actions.put(CHECKOUT_BOOK, new Checkout(borrowables, view));
-        actions.put(RETURN_BOOK, new Return(borrowables, view));
+        actions.put(LIST_BOOKS, new ListBorrowables<>(library, listView));
+        actions.put(CHECKOUT_BOOK, new Checkout(library, view));
+        actions.put(RETURN_BOOK, new Return(library, view));
 
         Dispatcher dispatcher = new Dispatcher(actions);
         Controller controller = new Controller(menuView, dispatcher);
