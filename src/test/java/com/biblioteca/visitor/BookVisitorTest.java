@@ -4,17 +4,26 @@ import com.biblioteca.model.Book;
 import com.biblioteca.model.Movie;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.biblioteca.model.Book.REGULAR_BOOK_FORMAT;
 import static junit.framework.TestCase.assertEquals;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
 
+@RunWith(MockitoJUnitRunner.class)
 public class BookVisitorTest {
 
     BookVisitor visitor;
+
+    @Mock
+    List<Book> books;
 
     @Before
     public void setUp() throws Exception {
@@ -45,5 +54,15 @@ public class BookVisitorTest {
         int actualSize = visitor.size();
 
         assertEquals(4, actualSize);
+    }
+
+    @Test
+    public void shouldAddTheVisitedObjectToBooks() {
+        visitor = new BookVisitor(books, REGULAR_BOOK_FORMAT);
+        Book book = new Book("Winds of Winter", "George RR Martin", 2017);
+
+        visitor.visit(book);
+
+        verify(books).add(book);
     }
 }

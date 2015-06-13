@@ -14,7 +14,7 @@ public class BookVisitor implements Visitor {
 
     public BookVisitor(List<Book> books, Function<Book, String> format) {
         this.format = format;
-        this.books = new ArrayList<>();
+        this.books = books;
     }
 
     @Override
