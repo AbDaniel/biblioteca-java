@@ -18,6 +18,8 @@ public class ListLibrary implements Action {
 
     @Override
     public void execute() {
+        library.getBorrowables(visitor);
+        listView.displayMessage(visitor.visitables());
         listView.displayListOfBorrowables(library.allAvailableItems());
     }
 
