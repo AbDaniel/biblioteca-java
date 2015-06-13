@@ -50,7 +50,7 @@ public class MenuViewTest {
 
     @Test
     public void shouldReturnInvalidInputIfUserInputsAInvalidNumber() {
-        systemInMock.provideText("9\n");
+        systemInMock.provideText("10\n");
 
         int actualUserChoice = menuView.getUserChoice();
 
@@ -59,7 +59,7 @@ public class MenuViewTest {
 
     @Test
     public void shouldDisplayInvalidInputMessageOnInvalidInput() {
-        systemInMock.provideText("9\n");
+        systemInMock.provideText("10\n");
 
         menuView.getUserChoice();
 
@@ -73,9 +73,11 @@ public class MenuViewTest {
         assertEquals("1. List all books\n" +
                 "2. Checkout a book\n" +
                 "3. Return a book\n" +
-                "4. Logout\n" +
-                "5. List all Movies\n" +
-                "6. Quit Biblioteca\n", outContent.toString());
+                "4. List all Movies\n" +
+                "5. Checkout a Movie\n" +
+                "6. Return a Movie\n" +
+                "7. Logout\n" +
+                "8. Quit Biblioteca\n", outContent.toString());
     }
 
     @After

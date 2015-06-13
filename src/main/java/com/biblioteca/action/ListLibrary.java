@@ -30,7 +30,17 @@ public class ListLibrary implements Action {
         ListLibrary that = (ListLibrary) o;
 
         if (library != null ? !library.equals(that.library) : that.library != null) return false;
-        return !(listView != null ? !listView.equals(that.listView) : that.listView != null);
+        if (listView != null ? !listView.getClass().equals(that.listView.getClass()) : that.listView != null) return
+                false;
+        return !(visitor != null ? !visitor.getClass().equals(that.visitor.getClass()) : that.visitor != null);
+
     }
 
+    @Override
+    public int hashCode() {
+        int result = library != null ? library.hashCode() : 0;
+        result = 31 * result + (listView != null ? listView.hashCode() : 0);
+        result = 31 * result + (visitor != null ? visitor.hashCode() : 0);
+        return result;
+    }
 }

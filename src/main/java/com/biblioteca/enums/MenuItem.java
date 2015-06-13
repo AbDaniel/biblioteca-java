@@ -13,9 +13,11 @@ public enum MenuItem {
     LIST_BOOKS(1, "List all books", new ListView(scanner)),
     CHECKOUT_BOOK(2, "Checkout a book", new View(scanner)),
     RETURN_BOOK(3, "Return a book", new View(scanner)),
-    LOGOUT(4, "Logout", new View(scanner)),
-    LIST_MOVIES(5, "List all Movies", new ListView(scanner)),
-    QUIT(6, "Quit Biblioteca", new View(scanner));
+    LIST_MOVIES(4, "List all Movies", new ListView(scanner)),
+    CHECKOUT_MOVIE(5, "Checkout a Movie", new View(scanner)),
+    RETURN_MOVIE(6, "Return a Movie", new View(scanner)),
+    LOGOUT(7, "Logout", new View(scanner)),
+    QUIT(8, "Quit Biblioteca", new View(scanner));
 
     private final int code;
     private final String text;
