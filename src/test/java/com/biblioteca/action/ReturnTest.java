@@ -82,7 +82,7 @@ public class ReturnTest {
 
     @Test
     public void shouldVerifyEqualsContract() {
-        EqualsVerifier.forClass(Checkout.class).usingGetClass();
+        EqualsVerifier.forClass(Return.class).usingGetClass();
     }
 
 }

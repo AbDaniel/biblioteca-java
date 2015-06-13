@@ -79,8 +79,8 @@ public class ParserTest {
     }
 
     @Test
-    public void shouldReturnReturnActionActionWhenUserSelectsReturnMovies() {
-        MenuItem item = RETURN_MOVIE;
+    public void shouldReturnReturnActionActionWhenUserSelectsReturnBook() {
+        MenuItem item = RETURN_BOOK;
 
         Action actualAction = parser.getAction(item, user);
         Return expected = new Return(library, item.view(), user);
