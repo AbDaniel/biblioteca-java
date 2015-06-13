@@ -1,6 +1,7 @@
 package com.biblioteca.app;
 
 import com.biblioteca.action.*;
+import com.biblioteca.model.Borrowable;
 import com.biblioteca.view.ListView;
 import com.biblioteca.view.MenuView;
 import com.biblioteca.view.View;
@@ -21,7 +22,7 @@ import static com.biblioteca.enums.MenuItem.RETURN_BOOK;
 public class Main {
 
     public static void main(String[] args) {
-        List<Book> availableBooks = new ArrayList<>();
+        List<Borrowable> availableBooks = new ArrayList<>();
         availableBooks.add(new Book("Lord of the Rings", "JR Toliken", 1930));
         availableBooks.add(new Book("Harry Potter", "JK Rowling", 1992));
         availableBooks.add(new Book("Catch-22", "Joesph Heller", 1950));
@@ -33,12 +34,7 @@ public class Main {
         ListView listView = new ListView(scanner);
         View view = new View(scanner);
 
-        Library<Book> library = new Library<>(availableBooks);
-
-        Map<MenuItem, Action> actions = new HashMap<>();
-        actions.put(LIST_BOOKS, new ListLibrary<>(library, listView));
-        actions.put(CHECKOUT_BOOK, new Checkout(library, view));
-        actions.put(RETURN_BOOK, new Return(library, view));
+        Library library = new Library(availableBooks);
 
         Parser parser = new Parser(library);
         Controller controller = new Controller(menuView, parser);

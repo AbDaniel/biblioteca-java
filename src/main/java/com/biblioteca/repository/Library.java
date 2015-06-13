@@ -7,15 +7,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Library<T extends Borrowable> {
+public class Library {
 
-    private List<T> borrowables;
+    private List<Borrowable> borrowables;
 
-    public Library(List<T> borrowables) {
+    public Library(List<Borrowable> borrowables) {
         this.borrowables = borrowables;
     }
 
-    public List<T> allAvailableItems() {
+    public List<? extends Borrowable> allAvailableItems() {
         return borrowables.stream().filter(p -> !p.isCheckedOut()).collect(Collectors.toCollection(ArrayList::new));
     }
 

@@ -1,6 +1,7 @@
 package com.biblioteca.repository;
 
 import com.biblioteca.model.Book;
+import com.biblioteca.model.Borrowable;
 import com.biblioteca.model.Owner;
 import org.junit.Before;
 import org.junit.Test;
@@ -19,7 +20,7 @@ public class LibraryTest {
     Library library;
 
     @Mock
-    List<Book> bookList;
+    List<Borrowable> bookList;
 
     @Mock
     Owner owner;
@@ -27,11 +28,11 @@ public class LibraryTest {
     @Before
     public void setUp() {
         initMocks(this);
-        library = new Library<>(bookList);
+        library = new Library(bookList);
     }
 
     void setUpWithData() {
-        List<Book> bookList = new ArrayList<>();
+        List<Borrowable> bookList = new ArrayList<>();
         bookList.add(new Book("Lord of the Rings", "JR Toliken", 1930));
         bookList.add(new Book("Harry Potter", "JK Rowling", 1992));
         bookList.add(new Book("Catch-22", "Joesph Heller", 1950));
@@ -42,7 +43,7 @@ public class LibraryTest {
         book = new Book("Alchemist", "Paulo Coelho", 1988);
         book.checkout(owner);
         bookList.add(book);
-        this.library = new Library<>(bookList);
+        this.library = new Library(bookList);
     }
 
     @Test
@@ -55,7 +56,7 @@ public class LibraryTest {
 
     @Test
     public void shouldReturnZeroSizedListIfNoAvailableBooks() {
-        this.library = new Library<>(new ArrayList<>());
+        this.library = new Library(new ArrayList<>());
 
         int actualSize = library.allAvailableItems().size();
 
