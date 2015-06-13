@@ -10,8 +10,10 @@ import java.util.function.Function;
 public class BookVisitor implements Visitor {
 
     private List<Book> books;
+    private Function<Book, String> format;
 
-    public BookVisitor() {
+    public BookVisitor(Function<Book, String> format) {
+        this.format = format;
         this.books = new ArrayList<>();
     }
 
@@ -20,7 +22,7 @@ public class BookVisitor implements Visitor {
         books.add(book);
     }
 
-    public String books(Function<Book, String> format) {
+    public String visitables() {
         StringBuilder builder = new StringBuilder();
         books.forEach(book -> builder.append(book.toString(format)).append("\n"));
         return builder.toString();
