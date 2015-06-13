@@ -25,7 +25,7 @@ public class ListLibraryTest {
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        action = new ListLibrary(library, listView);
+        action = new ListLibrary(library, listView, null);
     }
 
     @Test

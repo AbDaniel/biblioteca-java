@@ -12,8 +12,8 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import static com.biblioteca.enums.MenuItem.LIST_BOOKS;
 import static com.biblioteca.enums.MenuItem.QUIT;
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertNull;
+import static junit.framework.TestCase.assertEquals;
+import static junit.framework.TestCase.assertNull;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ParserTest {
@@ -36,7 +36,7 @@ public class ParserTest {
         MenuItem item = LIST_BOOKS;
 
         Action actualAction = parser.getAction(item, owner);
-        ListLibrary expected = new ListLibrary(library, (ListView) item.view());
+        ListLibrary expected = new ListLibrary(library, (ListView) item.view(), null);
 
         assertEquals(expected, actualAction);
     }
