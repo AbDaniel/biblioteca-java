@@ -22,6 +22,7 @@ public class BookVisitor implements Visitor {
         books.add(book);
     }
 
+    @Override
     public String visitables() {
         StringBuilder builder = new StringBuilder();
         books.forEach(book -> builder.append(book.toString(format)).append("\n"));

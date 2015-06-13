@@ -2,6 +2,7 @@ package com.biblioteca.repository;
 
 import com.biblioteca.model.Borrowable;
 import com.biblioteca.model.User;
+import com.biblioteca.visitor.Visitor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,4 +30,7 @@ public class Library {
         return borrowable != null && borrowable.returnItem(user);
     }
 
+    public void getBorrowables(Visitor visitor) {
+        borrowables.forEach(borrowable -> borrowable.accept(visitor));
+    }
 }

@@ -5,6 +5,8 @@ import com.biblioteca.model.Movie;
 
 public interface Visitor {
 
+    String visitables();
+
     default void visit(Book book) {
 
     }
@@ -14,3 +16,4 @@ public interface Visitor {
     }
 
 }
+
