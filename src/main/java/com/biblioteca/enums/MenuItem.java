@@ -1,13 +1,12 @@
 package com.biblioteca.enums;
 
-import com.biblioteca.constants.Constants;
 import com.biblioteca.view.ListView;
 import com.biblioteca.view.View;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.biblioteca.constants.Constants.*;
+import static com.biblioteca.constants.Constants.scanner;
 
 public enum MenuItem {
 

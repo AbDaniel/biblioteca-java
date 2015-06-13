@@ -1,6 +1,8 @@
 package com.biblioteca.model;
 
-public interface Borrowable {
+import com.biblioteca.visitor.Visitable;
+
+public interface Borrowable extends Visitable {
 
     boolean isEqualTo(String itemName);
 

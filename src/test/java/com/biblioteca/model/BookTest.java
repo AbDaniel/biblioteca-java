@@ -1,5 +1,6 @@
 package com.biblioteca.model;
 
+import com.biblioteca.visitor.Visitor;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.Before;
 import org.junit.Test;
@@ -20,6 +21,9 @@ public class BookTest {
 
     @Mock
     User user;
+
+    @Mock
+    Visitor visitor;
 
     @Before
     public void setUp() {
@@ -80,4 +84,10 @@ public class BookTest {
         verify(user).addBorrowable(book);
     }
 
+    @Test
+    public void shouldAcceptVisitor() {
+        book.accept(visitor);
+
+        verify(visitor).visit(book);
+    }
 }

@@ -1,5 +1,7 @@
 package com.biblioteca.model;
 
+import com.biblioteca.visitor.Visitor;
+
 public class Book implements Borrowable {
 
     private final String name;
@@ -73,4 +75,10 @@ public class Book implements Borrowable {
     public boolean isCheckedOut() {
         return checkedOut;
     }
+
+    @Override
+    public void accept(Visitor visitor) {
+        visitor.visit(new Book(this));
+    }
+
 }
