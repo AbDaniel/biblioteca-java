@@ -1,6 +1,6 @@
 package com.biblioteca.app;
 
-import com.biblioteca.action.Dispatcher;
+import com.biblioteca.action.Parser;
 import com.biblioteca.view.View;
 import com.biblioteca.controller.Controller;
 import com.biblioteca.controller.LoginController;
@@ -35,7 +35,7 @@ public class BibliotecaAppTest {
     View view;
 
     @Mock
-    Dispatcher dispatcher;
+    Parser parser;
 
     @Mock
     Controller controller;

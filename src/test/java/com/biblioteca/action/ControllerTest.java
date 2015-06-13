@@ -1,5 +1,6 @@
 package com.biblioteca.action;
 
+import com.biblioteca.repository.Library;
 import com.biblioteca.view.MenuView;
 import com.biblioteca.controller.Controller;
 import com.biblioteca.model.Owner;
@@ -19,25 +20,32 @@ import static org.mockito.Mockito.when;
 
 public class ControllerTest {
 
-    private Controller controller;
-
     @Mock
     private MenuView menuView;
 
     @Mock
-    private Dispatcher dispatcher;
+    private Action mockAction;
 
     @Mock
-    Action mockAction;
+    private Owner owner;
 
     @Mock
-    Owner owner;
+    private Library library;
+
+    @Mock
+    private Action action;
+
+    @Mock
+    private Parser parser;
+
+    private Controller controller;
 
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        controller = new Controller(menuView, dispatcher);
+        controller = new Controller(menuView, parser);
         when(menuView.getUserChoice()).thenReturn(LIST_BOOKS.getCode());
+        when(parser.getAction(LIST_BOOKS, owner)).thenReturn(action);
     }
 
     @Test
@@ -55,10 +63,10 @@ public class ControllerTest {
     }
 
     @Test
-    public void shouldExecuteCommandAssociatedWithMenuItem() {
+    public void shouldGetCommandAssociatedWithMenuItem() {
         controller.execute(owner);
 
-        verify(dispatcher).dispatch(eq(LIST_BOOKS), any(Owner.class));
+        verify(parser).getAction(eq(LIST_BOOKS), any(Owner.class));
     }
 
     @Test
@@ -66,7 +74,7 @@ public class ControllerTest {
         when(menuView.getUserChoice()).thenReturn(QUIT.getCode());
         controller.execute(owner);
 
-        verify(dispatcher, times(0)).dispatch(eq(QUIT), any(Owner.class));
+        verify(parser, times(0)).getAction(eq(QUIT), any(Owner.class));
     }
 
     @Test
@@ -74,7 +82,15 @@ public class ControllerTest {
         when(menuView.getUserChoice()).thenReturn(LOGOUT.getCode());
         controller.execute(owner);
 
-        verify(dispatcher, times(0)).dispatch(eq(LOGOUT), any(Owner.class));
+        verify(parser, times(0)).getAction(eq(LOGOUT), any(Owner.class));
+    }
+
+    @Test
+    public void shouldExecuteActionSelectedByUser() {
+        when(parser.getAction(LIST_BOOKS, owner)).thenReturn(action);
+        controller.execute(owner);
+
+        verify(action).execute(owner);
     }
 
 }

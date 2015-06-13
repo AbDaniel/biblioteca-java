@@ -1,26 +1,38 @@
 package com.biblioteca.enums;
 
+import com.biblioteca.constants.Constants;
+import com.biblioteca.view.ListView;
+import com.biblioteca.view.View;
+
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.biblioteca.constants.Constants.*;
+
 public enum MenuItem {
 
-    LIST_BOOKS(1, "List all books"),
-    CHECKOUT_BOOK(2, "Checkout a book"),
-    RETURN_BOOK(3, "Return a book"),
-    LOGOUT(4, "Logout"),
-    QUIT(5, "Quit Biblioteca");
+    LIST_BOOKS(1, "List all books", new ListView(scanner)),
+    CHECKOUT_BOOK(2, "Checkout a book", new View(scanner)),
+    RETURN_BOOK(3, "Return a book", new View(scanner)),
+    LOGOUT(4, "Logout", new View(scanner)),
+    QUIT(5, "Quit Biblioteca", new View(scanner));
 
     private final int code;
     private final String text;
+    private View view;
 
-    MenuItem(final int code, String text) {
+    MenuItem(final int code, String text, View view) {
         this.code = code;
         this.text = text;
+        this.view = view;
     }
 
     public int getCode() {
         return code;
+    }
+
+    public View getView() {
+        return view;
     }
 
     public static boolean isInvalidMenuItem(int code) {

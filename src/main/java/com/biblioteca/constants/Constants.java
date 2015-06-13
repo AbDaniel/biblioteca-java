@@ -1,5 +1,7 @@
 package com.biblioteca.constants;
 
+import java.util.Scanner;
+
 public interface Constants {
     int INVALID_INPUT = -1;
     String WELCOME_TEXT = "Hello! Welcome to Biblioteca";
@@ -13,4 +15,5 @@ public interface Constants {
     String ENTER_LIBRARY_NO = "Enter Library no :";
     String ENTER_PASSWORD = "Enter password :";
     String INVALID_CREDENTIALS = "Invalid Credentials";
+    Scanner scanner = new Scanner(System.in);
 }

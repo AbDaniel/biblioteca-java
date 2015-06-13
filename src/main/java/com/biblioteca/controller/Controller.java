@@ -1,6 +1,6 @@
 package com.biblioteca.controller;
 
-import com.biblioteca.action.Dispatcher;
+import com.biblioteca.action.Parser;
 import com.biblioteca.view.MenuView;
 import com.biblioteca.enums.MenuItem;
 import com.biblioteca.model.Owner;
@@ -12,11 +12,11 @@ import static com.biblioteca.enums.MenuItem.valueOf;
 public class Controller {
 
     private MenuView menuView;
-    private Dispatcher dispatcher;
+    private Parser parser;
 
-    public Controller(MenuView menuView, Dispatcher dispatcher) {
+    public Controller(MenuView menuView, Parser parser) {
         this.menuView = menuView;
-        this.dispatcher = dispatcher;
+        this.parser = parser;
     }
 
     public MenuItem execute(Owner owner) {
@@ -28,7 +28,7 @@ public class Controller {
             return selectedMenuItem;
         }
 
-        dispatcher.dispatch(selectedMenuItem, owner);
+        parser.getAction(selectedMenuItem, owner).execute(owner);
         return selectedMenuItem;
     }
 

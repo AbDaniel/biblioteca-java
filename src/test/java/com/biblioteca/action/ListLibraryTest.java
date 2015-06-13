@@ -4,6 +4,7 @@ import com.biblioteca.view.ListView;
 import com.biblioteca.model.Borrowable;
 import com.biblioteca.model.Owner;
 import com.biblioteca.repository.Library;
+import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Matchers;
@@ -37,6 +38,11 @@ public class ListLibraryTest {
 
         verify(library).allAvailableItems();
         verify(listView).displayListOfBorrowables(Matchers.anyListOf(Borrowable.class));
+    }
+
+    @Test
+    public void shouldVerifyEqualsContract() {
+        EqualsVerifier.forClass(ListLibrary.class).usingGetClass();
     }
 
 }

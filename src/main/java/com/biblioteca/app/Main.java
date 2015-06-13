@@ -1,7 +1,7 @@
 package com.biblioteca.app;
 
 import com.biblioteca.action.*;
-import com.biblioteca.view.BorrowablesListView;
+import com.biblioteca.view.ListView;
 import com.biblioteca.view.MenuView;
 import com.biblioteca.view.View;
 import com.biblioteca.controller.Controller;
@@ -30,18 +30,18 @@ public class Main {
 
         Scanner scanner = new Scanner(System.in);
         MenuView menuView = new MenuView(scanner);
-        BorrowablesListView listView = new BorrowablesListView(scanner);
+        ListView listView = new ListView(scanner);
         View view = new View(scanner);
 
         Library<Book> library = new Library<>(availableBooks);
 
         Map<MenuItem, Action> actions = new HashMap<>();
-        actions.put(LIST_BOOKS, new ListBorrowables<>(library, listView));
+        actions.put(LIST_BOOKS, new ListLibrary<>(library, listView));
         actions.put(CHECKOUT_BOOK, new Checkout(library, view));
         actions.put(RETURN_BOOK, new Return(library, view));
 
-        Dispatcher dispatcher = new Dispatcher(actions);
-        Controller controller = new Controller(menuView, dispatcher);
+        Parser parser = new Parser(library);
+        Controller controller = new Controller(menuView, parser);
 
         List<User> users = new ArrayList<>();
         User user = new User("111-1111", "sauron", "onering", new ArrayList<>());
@@ -52,6 +52,10 @@ public class Main {
 
         BibliotecaApp bibliotecaApp = new BibliotecaApp(WELCOME_TEXT, view, controller, loginController);
         bibliotecaApp.start();
+
+        Action action = (owner) -> {
+
+        };
     }
 
 }

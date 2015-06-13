@@ -22,12 +22,12 @@ public class LibraryListViewTest {
     public final TextFromStandardInputStream systemInMock
             = TextFromStandardInputStream.emptyStandardInputStream();
 
-    BorrowablesListView borrowablesListView;
+    ListView listView;
 
     @Before
     public void setUp() {
         System.setOut(new PrintStream(outContent));
-        borrowablesListView = new BorrowablesListView(new Scanner(System.in));
+        listView = new ListView(new Scanner(System.in));
     }
 
     @Test
@@ -38,7 +38,7 @@ public class LibraryListViewTest {
         books.add(new Book("Catch-22", "Joesph Heller", 1950));
         books.add(new Book("Winds of Winter", "George RR Martin", 2017));
 
-        borrowablesListView.displayListOfBorrowables(books);
+        listView.displayListOfBorrowables(books);
         String expected = "name='Lord of the Rings', author='JR Toliken', year=1930\n" +
                 "name='Harry Potter', author='JK Rowling', year=1992\n" +
                 "name='Catch-22', author='Joesph Heller', year=1950\n" +
