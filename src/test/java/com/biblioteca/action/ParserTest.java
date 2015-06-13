@@ -1,8 +1,6 @@
 package com.biblioteca.action;
 
 import com.biblioteca.enums.MenuItem;
-import com.biblioteca.model.Book;
-import com.biblioteca.model.Movie;
 import com.biblioteca.model.User;
 import com.biblioteca.repository.Library;
 import com.biblioteca.view.ListView;
@@ -16,9 +14,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.ArrayList;
 
-import static com.biblioteca.enums.MenuItem.LIST_BOOKS;
-import static com.biblioteca.enums.MenuItem.LIST_MOVIES;
-import static com.biblioteca.enums.MenuItem.QUIT;
+import static com.biblioteca.enums.MenuItem.*;
 import static com.biblioteca.model.Book.REGULAR_BOOK_FORMAT;
 import static com.biblioteca.model.Movie.REGULAR_MOVIE_FORMAT;
 import static junit.framework.TestCase.assertEquals;
@@ -33,7 +29,7 @@ public class ParserTest {
     Library library;
 
     @Mock
-    User owner;
+    User user;
 
     @Before
     public void setUp() throws Exception {
@@ -44,7 +40,7 @@ public class ParserTest {
     public void shouldReturnListBookActionWhenUserSelectsListBook() {
         MenuItem item = LIST_BOOKS;
 
-        Action actualAction = parser.getAction(item, owner);
+        Action actualAction = parser.getAction(item, user);
         ListLibrary expected = new ListLibrary(library, (ListView) item.view(),
                 new BookVisitor(new ArrayList<>(), REGULAR_BOOK_FORMAT));
 
@@ -55,7 +51,7 @@ public class ParserTest {
     public void shouldReturnListMoviesActionWhenUserSelectsListBook() {
         MenuItem item = LIST_MOVIES;
 
-        Action actualAction = parser.getAction(item, owner);
+        Action actualAction = parser.getAction(item, user);
         ListLibrary expected = new ListLibrary(library, (ListView) item.view(),
                 new MovieVisitor(new ArrayList<>(), REGULAR_MOVIE_FORMAT));
 
@@ -63,10 +59,21 @@ public class ParserTest {
     }
 
     @Test
+    public void shouldReturnCheckoutActionActionWhenUserSelectsCheckoutBook() {
+        MenuItem item = CHECKOUT_BOOK;
+
+        Action actualAction = parser.getAction(item, user);
+        Checkout expected = new Checkout(library, item.view(), user);
+
+        assertEquals(expected, actualAction);
+    }
+
+
+    @Test
     public void shouldReturnNullIfSelectedMenuItemIsNotCheckoutReturnOrList() {
         MenuItem item = QUIT;
 
-        Action actualAction = parser.getAction(item, owner);
+        Action actualAction = parser.getAction(item, user);
 
         assertNull(actualAction);
     }
