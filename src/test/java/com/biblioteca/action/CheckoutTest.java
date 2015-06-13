@@ -4,6 +4,7 @@ import com.biblioteca.model.User;
 import com.biblioteca.view.View;
 import com.biblioteca.constants.Constants;
 import com.biblioteca.repository.Library;
+import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Matchers;
@@ -77,6 +78,11 @@ public class CheckoutTest {
         command.execute();
 
         verify(view).displayMessage(Constants.SUCCESSFUL_CHECKOUT_TEXT);
+    }
+
+    @Test
+    public void shouldVerifyEqualsContract() {
+        EqualsVerifier.forClass(Checkout.class).usingGetClass();
     }
 
 }

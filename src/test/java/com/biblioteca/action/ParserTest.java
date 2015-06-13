@@ -51,7 +51,6 @@ public class ParserTest {
         assertEquals(expected, actualAction);
     }
 
-
     @Test
     public void shouldReturnListMoviesActionWhenUserSelectsListBook() {
         MenuItem item = LIST_MOVIES;
