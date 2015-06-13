@@ -85,12 +85,12 @@ public class Book implements Borrowable<Book>, Visitable {
         return format.apply(this);
     }
 
-    public static Function<Book, String> REGULAR_FORMAT = book -> "name='" + book.name + '\'' +
-            ", author='" + book.author + '\'' +
-            ", year=" + book.year;
-
     @Override
     public void accept(Visitor visitor) {
         visitor.visit(new Book(this));
     }
+
+    public static Function<Book, String> REGULAR_BOOK_FORMAT = book -> "name='" + book.name + '\'' +
+            ", author='" + book.author + '\'' +
+            ", year=" + book.year;
 }

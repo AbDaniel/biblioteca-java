@@ -1,17 +1,14 @@
 package com.biblioteca.model;
 
-import com.biblioteca.visitor.Visitor;
+import com.biblioteca.visitor.BorrowableVisitor;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import java.util.function.Function;
-
-import static com.biblioteca.model.Book.REGULAR_FORMAT;
+import static com.biblioteca.model.Book.REGULAR_BOOK_FORMAT;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -26,7 +23,7 @@ public class BookTest {
     User user;
 
     @Mock
-    Visitor visitor;
+    BorrowableVisitor<Book> visitor;
 
     @Before
     public void setUp() {
@@ -96,7 +93,7 @@ public class BookTest {
 
     @Test
     public void shouldReturnStringByFormat() {
-        String formattedString = book.toString(REGULAR_FORMAT);
+        String formattedString = book.toString(REGULAR_BOOK_FORMAT);
 
         String expectedString = "name='Lord of the Rings', author='JR Toliken', year=1930";
 

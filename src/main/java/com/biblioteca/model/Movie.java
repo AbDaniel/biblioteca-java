@@ -1,6 +1,11 @@
 package com.biblioteca.model;
 
-public class Movie {
+import com.biblioteca.visitor.Visitable;
+import com.biblioteca.visitor.Visitor;
+
+import java.util.function.Function;
+
+public class Movie implements Borrowable<Movie>, Visitable {
 
     private final String name;
     private final String director;
@@ -44,5 +49,40 @@ public class Movie {
                 ", year=" + year +
                 ", rating=" + rating;
     }
+
+    @Override
+    public boolean isEqualTo(String itemName) {
+        return false;
+    }
+
+    @Override
+    public boolean checkout(User user) {
+        return false;
+    }
+
+    @Override
+    public boolean returnItem(User user) {
+        return false;
+    }
+
+    @Override
+    public boolean isCheckedOut() {
+        return false;
+    }
+
+    @Override
+    public String toString(Function<? super Movie, String> format) {
+        return format.apply(this);
+    }
+
+    @Override
+    public void accept(Visitor visitor) {
+        visitor.visit(new Movie(this));
+    }
+
+    public static Function<Movie, String> REGULAR_MOVIE_FORMAT = movie -> "name='" + movie.name + '\'' +
+            ", director='" + movie.director + '\'' +
+            ", year=" + movie.year +
+            ", rating=" + movie.rating;
 
 }

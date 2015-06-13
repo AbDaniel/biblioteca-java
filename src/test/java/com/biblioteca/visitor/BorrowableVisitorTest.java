@@ -29,7 +29,7 @@ public class BorrowableVisitorTest {
 
     @Test
     public void shouldReturnBookAsString() {
-        String acutalString = visitor.borrowables(Book.REGULAR_FORMAT);
+        String acutalString = visitor.borrowables(Book.REGULAR_BOOK_FORMAT);
 
         String expectedString = "name='Lord of the Rings', author='JR Toliken', year=1930\n" +
                 "name='Harry Potter', author='JK Rowling', year=1992\n" +
