@@ -19,7 +19,9 @@ public class BookVisitor implements Visitor {
     }
 
     public String books(Function<Book, String> format) {
-        return null;
+        StringBuilder builder = new StringBuilder();
+        books.forEach(book -> builder.append(book.toString(Book.REGULAR_FORMAT)).append("\n"));
+        return builder.toString();
     }
 
 }
