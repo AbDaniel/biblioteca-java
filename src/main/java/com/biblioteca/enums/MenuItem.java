@@ -14,7 +14,8 @@ public enum MenuItem {
     CHECKOUT_BOOK(2, "Checkout a book", new View(scanner)),
     RETURN_BOOK(3, "Return a book", new View(scanner)),
     LOGOUT(4, "Logout", new View(scanner)),
-    QUIT(5, "Quit Biblioteca", new View(scanner));
+    LIST_MOVIES(5, "List all Movies", new ListView(scanner)),
+    QUIT(6, "Quit Biblioteca", new View(scanner));
 
     private final int code;
     private final String text;

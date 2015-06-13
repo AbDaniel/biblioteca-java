@@ -6,6 +6,7 @@ import com.biblioteca.controller.Controller;
 import com.biblioteca.controller.LoginController;
 import com.biblioteca.model.Book;
 import com.biblioteca.model.Borrowable;
+import com.biblioteca.model.Movie;
 import com.biblioteca.model.User;
 import com.biblioteca.repository.Library;
 import com.biblioteca.view.MenuView;
@@ -44,12 +45,16 @@ public class Main {
     }
 
     private static List<Borrowable> loadBorrowables() {
-        List<Borrowable> availableBooks = new ArrayList<>();
-        availableBooks.add(new Book("Lord of the Rings", "JR Toliken", 1930));
-        availableBooks.add(new Book("Harry Potter", "JK Rowling", 1992));
-        availableBooks.add(new Book("Catch-22", "Joesph Heller", 1950));
-        availableBooks.add(new Book("Winds of Winter", "George RR Martin", 2017));
-        return availableBooks;
+        List<Borrowable> availables = new ArrayList<>();
+        availables.add(new Book("Lord of the Rings", "JR Toliken", 1930));
+        availables.add(new Book("Harry Potter", "JK Rowling", 1992));
+        availables.add(new Book("Catch-22", "Joesph Heller", 1950));
+        availables.add(new Book("Winds of Winter", "George RR Martin", 2017));
+        availables.add(new Movie("The Matrix", "The Wachowskis", 1999, 10));
+        availables.add(new Movie("Departed", "Martin Scorsese", 2005, 8));
+        availables.add(new Movie("The Dark Knight", "Nolan", 2008, 10));
+        availables.add(new Movie("Seven Samurai", "Akira Kurosawa", 1950, 10));
+        return availables;
     }
 
 }
