@@ -91,6 +91,6 @@ public class Book implements Borrowable<Book>, Visitable {
 
     @Override
     public void accept(Visitor visitor) {
-        visitor.visit(this);
+        visitor.visit(new Book(this));
     }
 }
