@@ -1,6 +1,6 @@
 package com.biblioteca.model;
 
-import com.biblioteca.visitor.BorrowableVisitor;
+import com.biblioteca.visitor.Visitor;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.Before;
 import org.junit.Test;
@@ -8,8 +8,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import static com.biblioteca.model.Book.REGULAR_BOOK_FORMAT;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -18,7 +17,7 @@ public class MovieTest {
     Movie movie;
 
     @Mock
-    BorrowableVisitor<Movie> visitor;
+    Visitor visitor;
 
     @Before
     public void setUp() throws Exception {

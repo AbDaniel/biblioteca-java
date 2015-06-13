@@ -1,6 +1,6 @@
 package com.biblioteca.model;
 
-import com.biblioteca.visitor.BorrowableVisitor;
+import com.biblioteca.visitor.BookVisitor;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.Before;
 import org.junit.Test;
@@ -9,9 +9,7 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import static com.biblioteca.model.Book.REGULAR_BOOK_FORMAT;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -23,7 +21,7 @@ public class BookTest {
     User user;
 
     @Mock
-    BorrowableVisitor<Book> visitor;
+    BookVisitor visitor;
 
     @Before
     public void setUp() {

@@ -1,9 +1,11 @@
 package com.biblioteca.visitor;
 
-import com.biblioteca.model.Borrowable;
+import com.biblioteca.model.Book;
+import com.biblioteca.model.Movie;
 
-public interface Visitor<T extends Borrowable> {
+public interface Visitor {
 
-    void visit(T t);
+    void visit(Book book);
+    void visit(Movie movie);
 
 }
