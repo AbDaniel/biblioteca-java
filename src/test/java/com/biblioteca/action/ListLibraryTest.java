@@ -1,6 +1,6 @@
 package com.biblioteca.action;
 
-import com.biblioteca.view.BorrowablesListView;
+import com.biblioteca.view.ListView;
 import com.biblioteca.model.Borrowable;
 import com.biblioteca.model.Owner;
 import com.biblioteca.repository.Library;
@@ -12,13 +12,13 @@ import org.mockito.MockitoAnnotations;
 
 import static org.mockito.Mockito.verify;
 
-public class ListLibraryActionTest {
+public class ListLibraryTest {
 
     @Mock
     Library library;
 
     @Mock
-    BorrowablesListView listView;
+    ListView listView;
 
     @Mock
     Owner owner;
@@ -28,7 +28,7 @@ public class ListLibraryActionTest {
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        action = new ListBorrowables<>(library, listView);
+        action = new ListLibrary<>(library, listView);
     }
 
     @Test

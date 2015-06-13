@@ -5,9 +5,9 @@ import com.biblioteca.model.Borrowable;
 import java.util.List;
 import java.util.Scanner;
 
-public class BorrowablesListView extends View {
+public class ListView extends View {
 
-    public BorrowablesListView(Scanner scanner) {
+    public ListView(Scanner scanner) {
         super(scanner);
     }
 
