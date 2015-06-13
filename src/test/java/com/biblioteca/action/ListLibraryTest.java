@@ -53,15 +53,6 @@ public class ListLibraryTest {
     }
 
     @Test
-    public void shouldListAllBooks() {
-        action.execute();
-
-        verify(library).allAvailableItems();
-        verify(listView).displayListOfBorrowables(Matchers.anyListOf(Borrowable.class));
-    }
-
-
-    @Test
     public void shouldGetBorrowablesFromLibraryUsingVisitor() {
         action.execute();
 
@@ -87,7 +78,6 @@ public class ListLibraryTest {
 
         verify(listView).displayMessage(expected);
     }
-
 
     @Test
     public void shouldVerifyEqualsContract() {

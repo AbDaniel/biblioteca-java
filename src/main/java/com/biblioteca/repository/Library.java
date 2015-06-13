@@ -16,10 +16,6 @@ public class Library {
         this.borrowables = borrowables;
     }
 
-    public List<? extends Borrowable> allAvailableItems() {
-        return borrowables.stream().filter(p -> !p.isCheckedOut()).collect(Collectors.toCollection(ArrayList::new));
-    }
-
     public boolean checkout(final String itemName, User user) {
         Borrowable borrowable = borrowables.stream().filter(p -> p.isEqualTo(itemName)).findFirst().orElse(null);
         return borrowable != null && borrowable.checkout(user);
