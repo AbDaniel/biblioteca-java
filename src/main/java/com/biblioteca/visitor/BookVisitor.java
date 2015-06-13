@@ -20,11 +20,6 @@ public class BookVisitor implements Visitor {
         books.add(book);
     }
 
-    @Override
-    public void visit(Movie movie) {
-
-    }
-
     public String books(Function<Book, String> format) {
         StringBuilder builder = new StringBuilder();
         books.forEach(book -> builder.append(book.toString(format)).append("\n"));

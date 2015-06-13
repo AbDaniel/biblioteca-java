@@ -13,7 +13,6 @@ import static junit.framework.TestCase.assertEquals;
 
 public class BookVisitorTest {
 
-
     BookVisitor visitor;
 
     @Before
@@ -30,14 +29,14 @@ public class BookVisitorTest {
 
     @Test
     public void shouldReturnBookAsString() {
-        String acutalString = visitor.books(Book.REGULAR_BOOK_FORMAT);
+        String actualString = visitor.books(Book.REGULAR_BOOK_FORMAT);
 
         String expectedString = "name='Lord of the Rings', author='JR Toliken', year=1930\n" +
                 "name='Harry Potter', author='JK Rowling', year=1992\n" +
                 "name='Catch-22', author='Joesph Heller', year=1950\n" +
                 "name='Winds of Winter', author='George RR Martin', year=2017\n";
 
-        assertEquals(expectedString, acutalString);
+        assertEquals(expectedString, actualString);
     }
 
     @Test

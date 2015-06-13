@@ -5,7 +5,12 @@ import com.biblioteca.model.Movie;
 
 public interface Visitor {
 
-    void visit(Book book);
-    void visit(Movie movie);
+    default void visit(Book book) {
+
+    }
+
+    default void visit(Movie movie) {
+
+    }
 
 }
