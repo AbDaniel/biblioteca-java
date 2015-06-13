@@ -10,8 +10,7 @@ import com.biblioteca.visitor.MovieVisitor;
 
 import java.util.ArrayList;
 
-import static com.biblioteca.enums.MenuItem.LIST_BOOKS;
-import static com.biblioteca.enums.MenuItem.LIST_MOVIES;
+import static com.biblioteca.enums.MenuItem.*;
 import static com.biblioteca.model.Book.REGULAR_BOOK_FORMAT;
 import static com.biblioteca.model.Movie.REGULAR_MOVIE_FORMAT;
 
@@ -33,9 +32,10 @@ public class Parser {
                         new MovieVisitor(new ArrayList<>(), REGULAR_MOVIE_FORMAT));
             case CHECKOUT_BOOK:
             case CHECKOUT_MOVIE:
-                return new Checkout(library, LIST_BOOKS.view(), user);
+                return new Checkout(library, CHECKOUT_BOOK.view(), user);
             case RETURN_BOOK:
-                return new Return(library, LIST_BOOKS.view(), user);
+            case RETURN_MOVIE:
+                return new Return(library, RETURN_BOOK.view(), user);
             default:
                 return null;
         }

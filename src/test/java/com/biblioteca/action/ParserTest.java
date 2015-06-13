@@ -90,6 +90,17 @@ public class ParserTest {
 
 
     @Test
+    public void shouldReturnReturnActionActionWhenUserSelectsReturnMovies() {
+        MenuItem item = RETURN_MOVIE;
+
+        Action actualAction = parser.getAction(item, user);
+        Return expected = new Return(library, item.view(), user);
+
+        assertEquals(expected, actualAction);
+    }
+
+
+    @Test
     public void shouldReturnNullIfSelectedMenuItemIsNotCheckoutReturnOrList() {
         MenuItem item = QUIT;
 
