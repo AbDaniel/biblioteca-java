@@ -4,17 +4,25 @@ import com.biblioteca.model.Book;
 import com.biblioteca.model.Movie;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.biblioteca.model.Book.REGULAR_BOOK_FORMAT;
 import static com.biblioteca.model.Movie.REGULAR_MOVIE_FORMAT;
 import static junit.framework.TestCase.assertEquals;
+import static org.mockito.Mockito.verify;
 
-
+@RunWith(MockitoJUnitRunner.class)
 public class MovieVisitorTest {
 
     MovieVisitor visitor;
+
+    @Mock
+    private List<Movie> movies;
 
     @Before
     public void setUp() throws Exception {
@@ -43,4 +51,16 @@ public class MovieVisitorTest {
 
         assertEquals(1, actualSize);
     }
+
+
+    @Test
+    public void shouldAddTheVisitedObjectToBooks() {
+        visitor = new MovieVisitor(movies, REGULAR_MOVIE_FORMAT);
+        Movie movie = new Movie("The Matrix", "The Wachowskis", 1999, 10);
+
+        visitor.visit(movie);
+
+        verify(movies).add(movie);
+    }
+
 }
