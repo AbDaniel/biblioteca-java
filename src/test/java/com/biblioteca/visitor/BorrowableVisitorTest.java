@@ -12,7 +12,7 @@ import static junit.framework.TestCase.assertEquals;
 
 public class BorrowableVisitorTest {
 
-    BorrowableVisitor visitor;
+    BorrowableVisitor<Book> visitor;
 
     @Before
     public void setUp() throws Exception {
@@ -21,7 +21,10 @@ public class BorrowableVisitorTest {
         books.add(new Book("Harry Potter", "JK Rowling", 1992));
         books.add(new Book("Catch-22", "Joesph Heller", 1950));
         books.add(new Book("Winds of Winter", "George RR Martin", 2017));
-        visitor = new BorrowableVisitor(books);
+        visitor = new BorrowableVisitor<>();
+        for (Book book : books) {
+            book.accept(visitor);
+        }
     }
 
     @Test
@@ -34,6 +37,13 @@ public class BorrowableVisitorTest {
                 "name='Winds of Winter', author='George RR Martin', year=2017\n";
 
         assertEquals(expectedString, acutalString);
+    }
+
+    @Test
+    public void shouldReturnSizeOfVisitablesVisited() {
+        int actualSize = visitor.size();
+
+        assertEquals(4, actualSize);
     }
 
 }
