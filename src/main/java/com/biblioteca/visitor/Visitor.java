@@ -1,9 +1,9 @@
 package com.biblioteca.visitor;
 
-import com.biblioteca.model.Book;
+import com.biblioteca.model.Borrowable;
 
-public interface Visitor {
+public interface Visitor<T extends Borrowable> {
 
-    void visit(Book book);
+    void visit(T t);
 
 }

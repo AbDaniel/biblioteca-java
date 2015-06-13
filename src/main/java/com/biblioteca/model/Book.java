@@ -1,10 +1,11 @@
 package com.biblioteca.model;
 
+import com.biblioteca.visitor.Visitable;
 import com.biblioteca.visitor.Visitor;
 
 import java.util.function.Function;
 
-public class Book implements Borrowable {
+public class Book implements Borrowable<Book>, Visitable {
 
     private final String name;
     private String author;
@@ -47,9 +48,6 @@ public class Book implements Borrowable {
                 ", year=" + year;
     }
 
-    public String toString(Function<Book, String> format) {
-        return format.apply(this);
-    }
 
     @Override
     public boolean isEqualTo(String itemName) {
@@ -83,12 +81,16 @@ public class Book implements Borrowable {
     }
 
     @Override
-    public void accept(Visitor visitor) {
-        visitor.visit(new Book(this));
+    public String toString(Function<? super Book, String> format) {
+        return format.apply(this);
     }
 
     public static Function<Book, String> REGULAR_FORMAT = book -> "name='" + book.name + '\'' +
             ", author='" + book.author + '\'' +
             ", year=" + book.year;
 
+    @Override
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
+    }
 }

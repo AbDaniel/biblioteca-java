@@ -1,5 +1,8 @@
 package com.biblioteca.visitor;
 
-public interface Visitable {
-    void accept(Visitor visitor);
+import com.biblioteca.model.Book;
+import com.biblioteca.model.Borrowable;
+
+public interface Visitable<T extends Borrowable> {
+    void accept(Visitor<T> visitor);
 }
