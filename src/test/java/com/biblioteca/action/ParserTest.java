@@ -68,6 +68,26 @@ public class ParserTest {
         assertEquals(expected, actualAction);
     }
 
+    @Test
+    public void shouldReturnCheckoutActionActionWhenUserSelectsCheckoutMovies() {
+        MenuItem item = CHECKOUT_MOVIE;
+
+        Action actualAction = parser.getAction(item, user);
+        Checkout expected = new Checkout(library, item.view(), user);
+
+        assertEquals(expected, actualAction);
+    }
+
+    @Test
+    public void shouldReturnReturnActionActionWhenUserSelectsReturnMovies() {
+        MenuItem item = RETURN_MOVIE;
+
+        Action actualAction = parser.getAction(item, user);
+        Return expected = new Return(library, item.view(), user);
+
+        assertEquals(expected, actualAction);
+    }
+
 
     @Test
     public void shouldReturnNullIfSelectedMenuItemIsNotCheckoutReturnOrList() {

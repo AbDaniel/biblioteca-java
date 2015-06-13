@@ -32,6 +32,7 @@ public class Parser {
                 return new ListLibrary(library, (ListView) LIST_MOVIES.view(),
                         new MovieVisitor(new ArrayList<>(), REGULAR_MOVIE_FORMAT));
             case CHECKOUT_BOOK:
+            case CHECKOUT_MOVIE:
                 return new Checkout(library, LIST_BOOKS.view(), user);
             case RETURN_BOOK:
                 return new Return(library, LIST_BOOKS.view(), user);

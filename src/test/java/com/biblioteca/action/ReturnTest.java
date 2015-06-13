@@ -4,14 +4,15 @@ import com.biblioteca.constants.Constants;
 import com.biblioteca.model.User;
 import com.biblioteca.repository.Library;
 import com.biblioteca.view.View;
+import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Matchers;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 public class ReturnTest {
@@ -37,14 +38,14 @@ public class ReturnTest {
     public void shouldDisplayMessageAskingUserToInputBookName() {
         command.execute();
 
-        Mockito.verify(view).displayMessage(Constants.CHECKOUT_PROMPT_TEXT);
+        verify(view).displayMessage(Constants.CHECKOUT_PROMPT_TEXT);
     }
 
     @Test
     public void shouldGetBookNameFromUser() {
         command.execute();
 
-        Mockito.verify(view).getString();
+        verify(view).getString();
     }
 
     @Test
@@ -54,7 +55,7 @@ public class ReturnTest {
 
         command.execute();
 
-        Mockito.verify(library).returnItem(eq(bookName), Matchers.any(User.class));
+        verify(library).returnItem(eq(bookName), Matchers.any(User.class));
     }
 
     @Test
@@ -65,7 +66,7 @@ public class ReturnTest {
 
         command.execute();
 
-        Mockito.verify(view).displayMessage(Constants.BOOK_NOT_VALID_TEXT);
+        verify(view).displayMessage(Constants.BOOK_NOT_VALID_TEXT);
     }
 
     @Test
@@ -76,7 +77,12 @@ public class ReturnTest {
 
         command.execute();
 
-        Mockito.verify(view).displayMessage(Constants.SUCCESSFUL_RETURN_TEXT);
+        verify(view).displayMessage(Constants.SUCCESSFUL_RETURN_TEXT);
+    }
+
+    @Test
+    public void shouldVerifyEqualsContract() {
+        EqualsVerifier.forClass(Checkout.class).usingGetClass();
     }
 
 }
