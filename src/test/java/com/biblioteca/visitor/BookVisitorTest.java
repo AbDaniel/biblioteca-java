@@ -24,7 +24,7 @@ public class BookVisitorTest {
         visitables.add(new Book("Catch-22", "Joesph Heller", 1950));
         visitables.add(new Book("Winds of Winter", "George RR Martin", 2017));
         visitables.add(new Movie("The Matrix", "The Wachowskis", 1999, 10));
-        visitor = new BookVisitor(REGULAR_BOOK_FORMAT);
+        visitor = new BookVisitor(new ArrayList<>(), REGULAR_BOOK_FORMAT);
         visitables.forEach(visitable -> visitable.accept(visitor));
     }
 

@@ -11,7 +11,6 @@ import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
@@ -48,7 +47,7 @@ public class ListLibraryTest {
         bookList.add(new Book("Catch-22", "Joesph Heller", 1950));
         bookList.add(new Book("Winds of Winter", "George RR Martin", 2017));
         bookList.add(new Movie("The Matrix", "The Wachowskis", 1999, 10));
-        visitor = new BookVisitor(REGULAR_BOOK_FORMAT);
+        visitor = new BookVisitor(new ArrayList<>(), REGULAR_BOOK_FORMAT);
         action = new ListLibrary(new Library(bookList), listView, visitor);
     }
 

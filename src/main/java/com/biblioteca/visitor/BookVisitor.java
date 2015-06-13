@@ -12,7 +12,7 @@ public class BookVisitor implements Visitor {
     private List<Book> books;
     private Function<Book, String> format;
 
-    public BookVisitor(Function<Book, String> format) {
+    public BookVisitor(List<Book> books, Function<Book, String> format) {
         this.format = format;
         this.books = new ArrayList<>();
     }
