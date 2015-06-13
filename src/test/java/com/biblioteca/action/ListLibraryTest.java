@@ -13,7 +13,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Matchers;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.ArrayList;
@@ -66,7 +65,7 @@ public class ListLibraryTest {
     public void shouldGetBorrowablesFromLibraryUsingVisitor() {
         action.execute();
 
-        verify(library).getBorrowables(visitor);
+        verify(library).getAvailableBorrowables(visitor);
     }
 
     @Test

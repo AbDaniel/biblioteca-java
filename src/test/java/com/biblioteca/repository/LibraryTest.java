@@ -95,9 +95,9 @@ public class LibraryTest {
 
     @Test
     public void shouldRetrieveBorrowablesByVisitor() {
-        library.getBorrowables(visitor);
+        library.getAvailableBorrowables(visitor);
 
-        verify(visitor, times(6)).visit(any(Book.class));
+        verify(visitor, times(4)).visit(any(Book.class));
     }
 
 }

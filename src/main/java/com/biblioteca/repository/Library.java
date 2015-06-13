@@ -30,7 +30,7 @@ public class Library {
         return borrowable != null && borrowable.returnItem(user);
     }
 
-    public void getBorrowables(Visitor visitor) {
-        borrowables.forEach(borrowable -> borrowable.accept(visitor));
+    public void getAvailableBorrowables(Visitor visitor) {
+        borrowables.stream().filter(p -> !p.isCheckedOut()).forEach(borrowable -> borrowable.accept(visitor));
     }
 }
