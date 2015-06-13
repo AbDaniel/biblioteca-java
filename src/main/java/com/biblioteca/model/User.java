@@ -2,14 +2,14 @@ package com.biblioteca.model;
 
 import java.util.List;
 
-public class User implements Owner {
+public class User {
 
     private String libraryNo;
     private String name;
     private String password;
-    private List<Ownable> ownables;
+    private List<Borrowable> ownables;
 
-    public User(String libraryNo, String name, String password, List<Ownable> ownables) {
+    public User(String libraryNo, String name, String password, List<Borrowable> ownables) {
         this.libraryNo = libraryNo;
         this.name = name;
         this.password = password;
@@ -31,13 +31,11 @@ public class User implements Owner {
         return libraryNo != null ? libraryNo.hashCode() : 0;
     }
 
-    @Override
-    public void addOwnable(Ownable ownable) {
+    public void addBorrowable(Borrowable ownable) {
         ownables.add(ownable);
     }
 
-    @Override
-    public void removeOwnable(Ownable ownable) {
+    public void removeOwnable(Borrowable ownable) {
         ownables.remove(ownable);
     }
 

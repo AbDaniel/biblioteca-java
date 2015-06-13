@@ -7,7 +7,6 @@ import com.biblioteca.view.MenuView;
 import com.biblioteca.view.View;
 import com.biblioteca.controller.Controller;
 import com.biblioteca.controller.LoginController;
-import com.biblioteca.enums.MenuItem;
 import com.biblioteca.model.User;
 import com.biblioteca.repository.Library;
 import com.biblioteca.model.Book;
@@ -15,9 +14,6 @@ import com.biblioteca.model.Book;
 import java.util.*;
 
 import static com.biblioteca.constants.Constants.*;
-import static com.biblioteca.enums.MenuItem.CHECKOUT_BOOK;
-import static com.biblioteca.enums.MenuItem.LIST_BOOKS;
-import static com.biblioteca.enums.MenuItem.RETURN_BOOK;
 
 public class Main {
 
@@ -49,9 +45,6 @@ public class Main {
         BibliotecaApp bibliotecaApp = new BibliotecaApp(WELCOME_TEXT, view, controller, loginController);
         bibliotecaApp.start();
 
-        Action action = (owner) -> {
-
-        };
     }
 
 }

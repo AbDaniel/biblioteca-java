@@ -34,7 +34,7 @@ public class ListLibraryTest {
 
     @Test
     public void shouldListAllBooks() {
-        action.execute(owner);
+        action.execute();
 
         verify(library).allAvailableItems();
         verify(listView).displayListOfBorrowables(Matchers.anyListOf(Borrowable.class));

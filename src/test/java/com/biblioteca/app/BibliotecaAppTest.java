@@ -1,6 +1,7 @@
 package com.biblioteca.app;
 
 import com.biblioteca.action.Parser;
+import com.biblioteca.model.User;
 import com.biblioteca.view.View;
 import com.biblioteca.controller.Controller;
 import com.biblioteca.controller.LoginController;
@@ -48,7 +49,7 @@ public class BibliotecaAppTest {
     @Before
     public void setUp() {
         bibliotecaApp = new BibliotecaApp(WELCOME_TEXT, view, controller, loginController);
-        when(controller.execute(any(Owner.class))).thenReturn(QUIT);
+        when(controller.execute(any(User.class))).thenReturn(QUIT);
     }
 
     @Test
@@ -62,19 +63,19 @@ public class BibliotecaAppTest {
     public void shouldStartController() {
         bibliotecaApp.start();
 
-        verify(controller).execute(any(Owner.class));
+        verify(controller).execute(any(User.class));
     }
 
     @Test
     public void shouldExitApp() {
         bibliotecaApp.start();
 
-        verify(controller, times(1)).execute(any(Owner.class));
+        verify(controller, times(1)).execute(any(User.class));
     }
 
     @Test
     public void shouldContinueWhenUserDoesNotExit() throws InterruptedException {
-        when(controller.execute(any(Owner.class))).thenReturn(LIST_BOOKS);
+        when(controller.execute(any(User.class))).thenReturn(LIST_BOOKS);
         Thread t = new Thread(bibliotecaApp::start);
         t.start();
         t.join(500);

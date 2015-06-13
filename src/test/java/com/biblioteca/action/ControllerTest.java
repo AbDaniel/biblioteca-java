@@ -1,5 +1,6 @@
 package com.biblioteca.action;
 
+import com.biblioteca.model.User;
 import com.biblioteca.repository.Library;
 import com.biblioteca.view.MenuView;
 import com.biblioteca.controller.Controller;
@@ -27,7 +28,7 @@ public class ControllerTest {
     private Action mockAction;
 
     @Mock
-    private Owner owner;
+    private User user;
 
     @Mock
     private Library library;
@@ -45,52 +46,52 @@ public class ControllerTest {
         MockitoAnnotations.initMocks(this);
         controller = new Controller(menuView, parser);
         when(menuView.getUserChoice()).thenReturn(LIST_BOOKS.getCode());
-        when(parser.getAction(LIST_BOOKS, owner)).thenReturn(action);
+        when(parser.getAction(LIST_BOOKS, user)).thenReturn(action);
     }
 
     @Test
     public void shouldListAllMenuOptions() {
-        controller.execute(owner);
+        controller.execute(user);
 
         verify(menuView).displayMenu();
     }
 
     @Test
     public void shouldGetMenuOptionFromUser() {
-        controller.execute(owner);
+        controller.execute(user);
 
         verify(menuView).getUserChoice();
     }
 
     @Test
     public void shouldGetCommandAssociatedWithMenuItem() {
-        controller.execute(owner);
+        controller.execute(user);
 
-        verify(parser).getAction(eq(LIST_BOOKS), any(Owner.class));
+        verify(parser).getAction(eq(LIST_BOOKS), any(User.class));
     }
 
     @Test
     public void shouldNotCallDispatchIfMenuItemIsQuit() {
         when(menuView.getUserChoice()).thenReturn(QUIT.getCode());
-        controller.execute(owner);
+        controller.execute(user);
 
-        verify(parser, times(0)).getAction(eq(QUIT), any(Owner.class));
+        verify(parser, times(0)).getAction(eq(QUIT), any(User.class));
     }
 
     @Test
     public void shouldNotCallDispatchIfMenuItemIsLogout() {
         when(menuView.getUserChoice()).thenReturn(LOGOUT.getCode());
-        controller.execute(owner);
+        controller.execute(user);
 
-        verify(parser, times(0)).getAction(eq(LOGOUT), any(Owner.class));
+        verify(parser, times(0)).getAction(eq(LOGOUT), any(User.class));
     }
 
     @Test
     public void shouldExecuteActionSelectedByUser() {
-        when(parser.getAction(LIST_BOOKS, owner)).thenReturn(action);
-        controller.execute(owner);
+        when(parser.getAction(LIST_BOOKS, user)).thenReturn(action);
+        controller.execute(user);
 
-        verify(action).execute(owner);
+        verify(action).execute();
     }
 
 }

@@ -1,7 +1,7 @@
 package com.biblioteca.repository;
 
 import com.biblioteca.model.Borrowable;
-import com.biblioteca.model.Owner;
+import com.biblioteca.model.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,14 +19,14 @@ public class Library {
         return borrowables.stream().filter(p -> !p.isCheckedOut()).collect(Collectors.toCollection(ArrayList::new));
     }
 
-    public boolean checkout(final String itemName, Owner owner) {
+    public boolean checkout(final String itemName, User user) {
         Borrowable borrowable = borrowables.stream().filter(p -> p.isEqualTo(itemName)).findFirst().orElse(null);
-        return borrowable != null && borrowable.checkout(owner);
+        return borrowable != null && borrowable.checkout(user);
     }
 
-    public boolean returnItem(String itemName, Owner owner) {
+    public boolean returnItem(String itemName, User user) {
         Borrowable borrowable = borrowables.stream().filter(p -> p.isEqualTo(itemName)).findFirst().orElse(null);
-        return borrowable != null && borrowable.returnItem(owner);
+        return borrowable != null && borrowable.returnItem(user);
     }
 
 }

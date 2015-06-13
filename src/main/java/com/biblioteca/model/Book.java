@@ -54,18 +54,18 @@ public class Book implements Borrowable, Ownable {
     }
 
     @Override
-    public boolean checkout(Owner owner) {
+    public boolean checkout(User user) {
         if (checkedOut) {
             return false;
         } else {
             checkedOut = true;
-            owner.addOwnable(this);
+            user.addBorrowable(this);
             return true;
         }
     }
 
     @Override
-    public boolean returnItem(Owner owner) {
+    public boolean returnItem(User user) {
         if (checkedOut) {
             checkedOut = false;
             return true;

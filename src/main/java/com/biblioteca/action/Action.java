@@ -5,6 +5,6 @@ import com.biblioteca.model.Owner;
 @FunctionalInterface
 public interface Action {
 
-    void execute(Owner owner);
+    void execute();
 
 }

@@ -12,7 +12,7 @@ import static org.junit.Assert.*;
 public class UserTest {
 
     User user;
-    List<Ownable> ownables;
+    List<Borrowable> ownables;
 
     @Before
     public void setUp() {
@@ -30,7 +30,7 @@ public class UserTest {
     public void shouldAddOwnable() {
         Book book = new Book("I'm Damned", "Myself", 2025);
 
-        user.addOwnable(book);
+        user.addBorrowable(book);
         int actualSize = ownables.size();
 
         assertEquals(1, actualSize);

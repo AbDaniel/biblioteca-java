@@ -1,9 +1,9 @@
 package com.biblioteca.controller;
 
 import com.biblioteca.action.Parser;
+import com.biblioteca.model.User;
 import com.biblioteca.view.MenuView;
 import com.biblioteca.enums.MenuItem;
-import com.biblioteca.model.Owner;
 
 import static com.biblioteca.enums.MenuItem.LOGOUT;
 import static com.biblioteca.enums.MenuItem.QUIT;
@@ -19,7 +19,7 @@ public class Controller {
         this.parser = parser;
     }
 
-    public MenuItem execute(Owner owner) {
+    public MenuItem execute(User user) {
         menuView.displayMenu();
         int userChoice = menuView.getUserChoice();
 
@@ -28,7 +28,7 @@ public class Controller {
             return selectedMenuItem;
         }
 
-        parser.getAction(selectedMenuItem, owner).execute(owner);
+        parser.getAction(selectedMenuItem, user).execute();
         return selectedMenuItem;
     }
 

@@ -1,8 +1,6 @@
 package com.biblioteca.action;
 
 import com.biblioteca.view.ListView;
-import com.biblioteca.model.Borrowable;
-import com.biblioteca.model.Owner;
 import com.biblioteca.repository.Library;
 
 public class ListLibrary implements Action {
@@ -16,7 +14,7 @@ public class ListLibrary implements Action {
     }
 
     @Override
-    public void execute(Owner owner) {
+    public void execute() {
         listView.displayListOfBorrowables(library.allAvailableItems());
     }
 

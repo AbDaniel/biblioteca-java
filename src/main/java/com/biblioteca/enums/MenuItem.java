@@ -31,7 +31,7 @@ public enum MenuItem {
         return code;
     }
 
-    public View getView() {
+    public View view() {
         return view;
     }
 

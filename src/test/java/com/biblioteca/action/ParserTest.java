@@ -1,7 +1,7 @@
 package com.biblioteca.action;
 
 import com.biblioteca.enums.MenuItem;
-import com.biblioteca.model.Owner;
+import com.biblioteca.model.User;
 import com.biblioteca.repository.Library;
 import com.biblioteca.view.ListView;
 import org.junit.Before;
@@ -23,7 +23,7 @@ public class ParserTest {
     Library library;
 
     @Mock
-    Owner owner;
+    User owner;
 
     @Before
     public void setUp() throws Exception {
@@ -35,7 +35,7 @@ public class ParserTest {
         MenuItem item = LIST_BOOKS;
 
         Action actualAction = parser.getAction(item, owner);
-        ListLibrary expected = new ListLibrary(library, (ListView) item.getView());
+        ListLibrary expected = new ListLibrary(library, (ListView) item.view());
 
         assertEquals(expected, actualAction);
     }

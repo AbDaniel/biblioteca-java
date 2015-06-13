@@ -5,11 +5,13 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
 public class BookTest {
@@ -17,7 +19,7 @@ public class BookTest {
     Book book;
 
     @Mock
-    Owner owner;
+    User user;
 
     @Before
     public void setUp() {
@@ -39,26 +41,26 @@ public class BookTest {
 
     @Test
     public void shouldReturnTrueIfCurrentCheckoutStateIsFalseDuringCheckout() {
-        assertTrue(book.checkout(owner));
+        assertTrue(book.checkout(user));
     }
 
     @Test
     public void shouldReturnFalseIfCurrentCheckoutStateIsTrueDuringCheckout() {
-        book.checkout(owner);
+        book.checkout(user);
 
-        assertFalse(book.checkout(owner));
+        assertFalse(book.checkout(user));
     }
 
     @Test
     public void shouldReturnTrueIfCurrentCheckoutStateIsTrueDuringReturn() {
-        book.checkout(owner);
+        book.checkout(user);
 
-        assertTrue(book.returnItem(owner));
+        assertTrue(book.returnItem(user));
     }
 
     @Test
     public void shouldReturnFalseIfCurrentCheckoutStateIsFalseDuringReturn() {
-        assertFalse(book.returnItem(owner));
+        assertFalse(book.returnItem(user));
     }
 
     @Test
@@ -69,6 +71,13 @@ public class BookTest {
     @Test
     public void shouldReturnTrueIfBookNameIsValid() {
         assertTrue(book.isEqualTo("Lord of the Rings"));
+    }
+
+    @Test
+    public void shouldAddBookToUser() {
+        book.checkout(user);
+
+        verify(user).addBorrowable(book);
     }
 
 }

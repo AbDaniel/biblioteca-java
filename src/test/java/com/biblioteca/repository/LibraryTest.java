@@ -2,7 +2,7 @@ package com.biblioteca.repository;
 
 import com.biblioteca.model.Book;
 import com.biblioteca.model.Borrowable;
-import com.biblioteca.model.Owner;
+import com.biblioteca.model.User;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -23,7 +23,7 @@ public class LibraryTest {
     List<Borrowable> bookList;
 
     @Mock
-    Owner owner;
+    User user;
 
     @Before
     public void setUp() {
@@ -38,10 +38,10 @@ public class LibraryTest {
         bookList.add(new Book("Catch-22", "Joesph Heller", 1950));
         bookList.add(new Book("Winds of Winter", "George RR Martin", 2017));
         Book book = new Book("1984", "George Orwell", 1950);
-        book.checkout(owner);
+        book.checkout(user);
         bookList.add(book);
         book = new Book("Alchemist", "Paulo Coelho", 1988);
-        book.checkout(owner);
+        book.checkout(user);
         bookList.add(book);
         this.library = new Library(bookList);
     }
@@ -68,7 +68,7 @@ public class LibraryTest {
         setUpWithData();
         String bookName = "1234";
 
-        assertFalse(library.checkout(bookName, owner));
+        assertFalse(library.checkout(bookName, user));
     }
 
     @Test
@@ -76,7 +76,7 @@ public class LibraryTest {
         setUpWithData();
         String name = "Lord of the Rings";
 
-        assertTrue(library.checkout(name, owner));
+        assertTrue(library.checkout(name, user));
     }
 
     @Test
@@ -84,7 +84,7 @@ public class LibraryTest {
         setUpWithData();
         String bookName = "Lord of the Rings";
 
-        assertFalse(library.returnItem(bookName, owner));
+        assertFalse(library.returnItem(bookName, user));
     }
 
     @Test
@@ -92,7 +92,7 @@ public class LibraryTest {
         setUpWithData();
         String bookName = "1234";
 
-        assertFalse(library.returnItem(bookName, owner));
+        assertFalse(library.returnItem(bookName, user));
     }
 
     @Test
@@ -100,7 +100,7 @@ public class LibraryTest {
         setUpWithData();
         String name = "1984";
 
-        assertTrue(library.returnItem(name, owner));
+        assertTrue(library.returnItem(name, user));
     }
 
 }

@@ -1,5 +1,6 @@
 package com.biblioteca.app;
 
+import com.biblioteca.model.User;
 import com.biblioteca.view.View;
 import com.biblioteca.controller.Controller;
 import com.biblioteca.controller.LoginController;
@@ -25,12 +26,12 @@ public class BibliotecaApp {
 
     public void start() {
         view.displayMessage(welcomeMessage);
-        Owner owner;
+        User user;
         MenuItem chosenMenuItem;
         do {
-            owner = loginController.execute();
+            user = loginController.execute();
             do {
-                chosenMenuItem = controller.execute(owner);
+                chosenMenuItem = controller.execute(user);
             } while (chosenMenuItem != QUIT && chosenMenuItem != LOGOUT);
         } while (chosenMenuItem == LOGOUT);
     }

@@ -1,7 +1,7 @@
 package com.biblioteca.action;
 
 import com.biblioteca.enums.MenuItem;
-import com.biblioteca.model.Owner;
+import com.biblioteca.model.User;
 import com.biblioteca.repository.Library;
 import com.biblioteca.view.ListView;
 
@@ -15,14 +15,14 @@ public class Parser {
         this.library = library;
     }
 
-    public Action getAction(MenuItem selectedMenuItem, Owner owner) {
+    public Action getAction(MenuItem selectedMenuItem, User user) {
         switch (selectedMenuItem) {
             case LIST_BOOKS:
-                return new ListLibrary(library, (ListView) LIST_BOOKS.getView());
+                return new ListLibrary(library, (ListView) LIST_BOOKS.view());
             case CHECKOUT_BOOK:
-                return new Checkout(library, LIST_BOOKS.getView());
+                return new Checkout(library, LIST_BOOKS.view(), user);
             case RETURN_BOOK:
-                return new Return(library, LIST_BOOKS.getView());
+                return new Return(library, LIST_BOOKS.view(), user);
             default:
                 return null;
         }
