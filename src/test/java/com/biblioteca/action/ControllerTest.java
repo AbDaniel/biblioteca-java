@@ -1,23 +1,18 @@
 package com.biblioteca.action;
 
+import com.biblioteca.controller.Controller;
 import com.biblioteca.model.User;
 import com.biblioteca.repository.Library;
 import com.biblioteca.view.MenuView;
-import com.biblioteca.controller.Controller;
-import com.biblioteca.model.Owner;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import static com.biblioteca.enums.MenuItem.LIST_BOOKS;
-import static com.biblioteca.enums.MenuItem.LOGOUT;
-import static com.biblioteca.enums.MenuItem.QUIT;
+import static com.biblioteca.enums.MenuItem.*;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class ControllerTest {
 

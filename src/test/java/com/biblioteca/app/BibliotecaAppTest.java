@@ -5,7 +5,6 @@ import com.biblioteca.model.User;
 import com.biblioteca.view.View;
 import com.biblioteca.controller.Controller;
 import com.biblioteca.controller.LoginController;
-import com.biblioteca.model.Owner;
 import com.biblioteca.repository.Library;
 import org.junit.Before;
 import org.junit.Rule;

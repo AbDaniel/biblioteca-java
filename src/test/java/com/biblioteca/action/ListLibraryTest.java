@@ -1,9 +1,8 @@
 package com.biblioteca.action;
 
-import com.biblioteca.view.ListView;
 import com.biblioteca.model.Borrowable;
-import com.biblioteca.model.Owner;
 import com.biblioteca.repository.Library;
+import com.biblioteca.view.ListView;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.Before;
 import org.junit.Test;
@@ -20,9 +19,6 @@ public class ListLibraryTest {
 
     @Mock
     ListView listView;
-
-    @Mock
-    Owner owner;
 
     Action action;
 

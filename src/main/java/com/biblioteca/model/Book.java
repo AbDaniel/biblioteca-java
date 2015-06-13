@@ -1,6 +1,6 @@
 package com.biblioteca.model;
 
-public class Book implements Borrowable, Ownable {
+public class Book implements Borrowable {
 
     private final String name;
     private String author;
@@ -41,11 +41,6 @@ public class Book implements Borrowable, Ownable {
         return "name='" + name + '\'' +
                 ", author='" + author + '\'' +
                 ", year=" + year;
-    }
-
-    @Override
-    public String getName() {
-        return name;
     }
 
     @Override

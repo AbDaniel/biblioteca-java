@@ -1,13 +1,13 @@
 package com.biblioteca.app;
 
-import com.biblioteca.model.User;
-import com.biblioteca.view.View;
 import com.biblioteca.controller.Controller;
 import com.biblioteca.controller.LoginController;
 import com.biblioteca.enums.MenuItem;
-import com.biblioteca.model.Owner;
+import com.biblioteca.model.User;
+import com.biblioteca.view.View;
 
-import static com.biblioteca.enums.MenuItem.*;
+import static com.biblioteca.enums.MenuItem.LOGOUT;
+import static com.biblioteca.enums.MenuItem.QUIT;
 
 public class BibliotecaApp {
 
