@@ -34,6 +34,8 @@ public class MenuView extends View {
         int choice;
         choice = getChoice();
         MenuItem item = getMenuItem(choice);
+        if (item == null)
+            return null;
         String name = subMenuView.getItemName(item);
         return new SimpleEntry<>(item, name);
     }

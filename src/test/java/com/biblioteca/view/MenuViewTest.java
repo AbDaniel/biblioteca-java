@@ -1,5 +1,6 @@
 package com.biblioteca.view;
 
+import com.biblioteca.enums.MenuItem;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
@@ -11,10 +12,13 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.AbstractMap;
+import java.util.Map;
 import java.util.Scanner;
 
 import static com.biblioteca.constants.Constants.INVALID_INPUT;
 import static com.biblioteca.constants.Constants.INVALID_INPUT_TEXT;
+import static com.biblioteca.enums.MenuItem.*;
 import static org.junit.Assert.*;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -40,19 +44,20 @@ public class MenuViewTest {
     @Test
     public void shouldGetListBooksChoiceFromUser() {
         systemInMock.provideText("1\n");
+        Map.Entry<MenuItem, String> expected = new AbstractMap.SimpleEntry<MenuItem, String>(LIST_BOOKS, null);
 
-        int actualUserChoice = menuView.getUserChoice();
-
-        assertEquals(1, actualUserChoice);
+        Map.Entry<MenuItem, String> actualEntry = menuView.getUserChoiceAsEntry();
+        assertEquals(expected, actualEntry);
     }
 
     @Test
-    public void shouldReturnInvalidInputIfUserInputsNotANumber() {
+    public void shouldReturnNullIfUserInputsNotANumber() {
         systemInMock.provideText("Gondor\n");
 
-        int actualUserChoice = menuView.getUserChoice();
+        Map.Entry<MenuItem, String> expected = null;
 
-        assertEquals(INVALID_INPUT, actualUserChoice);
+        Map.Entry<MenuItem, String> actualEntry = menuView.getUserChoiceAsEntry();
+        assertEquals(null, actualEntry);
     }
 
     @Test
