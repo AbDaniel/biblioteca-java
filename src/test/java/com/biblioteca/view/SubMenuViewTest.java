@@ -35,5 +35,13 @@ public class SubMenuViewTest {
         assertNull(actualString);
     }
 
+    @Test
+    public void shouldReturnStringGivenByUserIfItemHasSubMenu() {
+        systemInMock.provideText("Lord of the Rings\n");
+
+        String actualString = view.getItemName(MenuItem.CHECKOUT_BOOK);
+
+        assertEquals("Lord of the Rings",actualString);
+    }
 
 }
