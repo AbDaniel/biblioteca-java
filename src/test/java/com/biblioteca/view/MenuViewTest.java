@@ -5,6 +5,9 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.contrib.java.lang.system.TextFromStandardInputStream;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -14,6 +17,7 @@ import static com.biblioteca.constants.Constants.INVALID_INPUT;
 import static com.biblioteca.constants.Constants.INVALID_INPUT_TEXT;
 import static org.junit.Assert.*;
 
+@RunWith(MockitoJUnitRunner.class)
 public class MenuViewTest {
 
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
@@ -24,10 +28,13 @@ public class MenuViewTest {
 
     private MenuView menuView;
 
+    @Mock
+    SubMenuView subMenuView;
+
     @Before
     public void setUp() {
         System.setOut(new PrintStream(outContent));
-        menuView = new MenuView(new Scanner(System.in));
+        menuView = new MenuView(new Scanner(System.in), subMenuView);
     }
 
     @Test

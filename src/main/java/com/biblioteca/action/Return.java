@@ -19,7 +19,7 @@ public class Return implements Action {
 
     @Override
     public void execute() {
-        view.displayMessage(Constants.CHECKOUT_PROMPT_TEXT);
+        view.displayMessage(Constants.ENTER_BOOK_NAME);
         String bookName = view.getString();
         if (library.returnItem(bookName, user)) {
             view.displayMessage(Constants.SUCCESSFUL_RETURN_TEXT);

@@ -10,6 +10,7 @@ import com.biblioteca.model.Movie;
 import com.biblioteca.model.User;
 import com.biblioteca.repository.Library;
 import com.biblioteca.view.MenuView;
+import com.biblioteca.view.SubMenuView;
 import com.biblioteca.view.View;
 
 import java.util.ArrayList;
@@ -22,8 +23,9 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        MenuView menuView = new MenuView(scanner);
         View view = new View(scanner);
+        SubMenuView subMenuView = new SubMenuView(scanner);
+        MenuView menuView = new MenuView(scanner, subMenuView);
 
         Library library = new Library(loadBorrowables());
         Parser parser = new Parser(library);

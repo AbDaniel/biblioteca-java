@@ -38,7 +38,7 @@ public class CheckoutTest {
     public void shouldDisplayMessageAskingUserToInputBookName() {
         command.execute();
 
-        verify(view).displayMessage(Constants.CHECKOUT_PROMPT_TEXT);
+        verify(view).displayMessage(Constants.ENTER_BOOK_NAME);
     }
 
     @Test

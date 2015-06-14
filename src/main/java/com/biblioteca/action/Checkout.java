@@ -21,7 +21,7 @@ public class Checkout implements Action {
 
     @Override
     public void execute() {
-        view.displayMessage(CHECKOUT_PROMPT_TEXT);
+        view.displayMessage(ENTER_BOOK_NAME);
         String bookName = view.getString();
         if (library.checkout(bookName, user)) {
             view.displayMessage(SUCCESSFUL_CHECKOUT_TEXT);
