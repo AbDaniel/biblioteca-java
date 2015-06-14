@@ -31,9 +31,9 @@ public class Parser {
             case CHECKOUT_MOVIE:
                 return new Checkout(movieLibrary, user, userChoice.getValue());
             case RETURN_BOOK:
-                return new Return(bookLibrary, RETURN_BOOK.view(), user);
+                return new Return(bookLibrary, user, userChoice.getValue());
             case RETURN_MOVIE:
-                return new Return(movieLibrary, RETURN_BOOK.view(), user);
+                return new Return(movieLibrary, user, userChoice.getValue());
             default:
                 return null;
         }

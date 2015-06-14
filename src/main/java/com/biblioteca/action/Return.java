@@ -1,31 +1,23 @@
 package com.biblioteca.action;
 
 import com.biblioteca.model.User;
-import com.biblioteca.view.View;
-import com.biblioteca.constants.Constants;
 import com.biblioteca.repository.Library;
 
 public class Return implements Action {
 
     private final Library library;
-    private final View view;
     private final User user;
+    private String itemName;
 
-    public Return(Library library, View view, User user) {
+    public Return(Library library, User user, String itemName) {
         this.library = library;
-        this.view = view;
         this.user = user;
+        this.itemName = itemName;
     }
 
     @Override
     public void execute() {
-        view.displayMessage(Constants.ENTER_BOOK_NAME);
-        String bookName = view.getString();
-        if (library.returnItem(bookName, user)) {
-            view.displayMessage(Constants.SUCCESSFUL_RETURN_TEXT);
-        } else {
-            view.displayMessage(Constants.BOOK_NOT_VALID_TEXT);
-        }
+        library.returnItem(itemName, user);
     }
 
     @Override

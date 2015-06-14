@@ -5,7 +5,6 @@ import com.biblioteca.model.User;
 import com.biblioteca.repository.Library;
 import com.biblioteca.view.View;
 import nl.jqno.equalsverifier.EqualsVerifier;
-import nl.jqno.equalsverifier.Warning;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Matchers;
@@ -29,57 +28,20 @@ public class ReturnTest {
     private User user;
 
     private Return command;
+    private String bookName;
 
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        command = new Return(library, view, user);
-    }
-
-    @Test
-    public void shouldDisplayMessageAskingUserToInputBookName() {
-        command.execute();
-
-        verify(view).displayMessage(Constants.ENTER_BOOK_NAME);
-    }
-
-    @Test
-    public void shouldGetBookNameFromUser() {
-        command.execute();
-
-        verify(view).getString();
+        bookName = "Lord of the Rings";
+        command = new Return(library, user, bookName);
     }
 
     @Test
     public void shouldCallReturnBookWithGivenInput() {
-        String bookName = "Lord of the Rings";
-        when(view.getString()).thenReturn(bookName);
-
         command.execute();
 
         verify(library).returnItem(eq(bookName), Matchers.any(User.class));
-    }
-
-    @Test
-    public void shouldNotifyIfUserInputsInvalidBookName() {
-        String bookName = "123";
-        when(view.getString()).thenReturn(bookName);
-        when(library.returnItem(eq(bookName), Matchers.any(User.class))).thenReturn(false);
-
-        command.execute();
-
-        verify(view).displayMessage(Constants.BOOK_NOT_VALID_TEXT);
-    }
-
-    @Test
-    public void shouldNotifyUserOnSuccessfulReturn() {
-        String bookName = "Lord of the Rings";
-        when(view.getString()).thenReturn(bookName);
-        when(library.returnItem(eq(bookName), Matchers.any(User.class))).thenReturn(true);
-
-        command.execute();
-
-        verify(view).displayMessage(Constants.SUCCESSFUL_RETURN_TEXT);
     }
 
     @Test

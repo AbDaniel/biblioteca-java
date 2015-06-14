@@ -29,6 +29,7 @@ public class ParserTest {
 
     @Mock
     User user;
+
     private String bookName;
 
     private SimpleEntry<MenuItem, String> userChoice;
@@ -88,7 +89,7 @@ public class ParserTest {
     public void shouldReturnReturnActionActionWhenUserSelectsReturnBook() {
         MenuItem item = RETURN_BOOK;
         userChoice = new SimpleEntry<>(item, null);
-        Return expected = new Return(bookLibrary, item.view(), user);
+        Return expected = new Return(bookLibrary, user, bookName);
 
         Action actualAction = parser.getAction(userChoice, user);
 
@@ -100,7 +101,7 @@ public class ParserTest {
     public void shouldReturnReturnActionActionWhenUserSelectsReturnMovies() {
         MenuItem item = RETURN_MOVIE;
         userChoice = new SimpleEntry<>(item, null);
-        Return expected = new Return(movieLibray, item.view(), user);
+        Return expected = new Return(movieLibray, user, bookName);
 
         Action actualAction = parser.getAction(userChoice, user);
 
