@@ -27,8 +27,9 @@ public class Main {
         SubMenuView subMenuView = new SubMenuView(scanner);
         MenuView menuView = new MenuView(scanner, subMenuView);
 
-        Library library = new Library(loadBorrowables(view));
-        Parser parser = new Parser(library);
+        Library bookLibrary = new Library(loadBorrowables(view));
+        Library movieLibrary = new Library(loadMovie(view));
+        Parser parser = new Parser(bookLibrary, movieLibrary);
         Controller controller = new Controller(menuView, parser);
 
         Login login = new Login(loadUsers());
@@ -52,6 +53,12 @@ public class Main {
         availables.add(new Book("Harry Potter", "JK Rowling", 1992));
         availables.add(new Book("Catch-22", "Joesph Heller", 1950));
         availables.add(new Book("Winds of Winter", "George RR Martin", 2017));
+        availables.forEach(borrowable -> borrowable.addListener(view));
+        return availables;
+    }
+
+    private static List<Borrowable> loadMovie(View view) {
+        List<Borrowable> availables = new ArrayList<>();
         availables.add(new Movie("The Matrix", "The Wachowskis", 1999, 10));
         availables.add(new Movie("Departed", "Martin Scorsese", 2005, 8));
         availables.add(new Movie("The Dark Knight", "Nolan", 2008, 10));

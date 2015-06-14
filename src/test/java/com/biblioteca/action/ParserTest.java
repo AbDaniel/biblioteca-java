@@ -22,7 +22,10 @@ public class ParserTest {
     Parser parser;
 
     @Mock
-    Library library;
+    Library bookLibrary;
+
+    @Mock
+    Library movieLibray;
 
     @Mock
     User user;
@@ -32,13 +35,13 @@ public class ParserTest {
 
     @Before
     public void setUp() throws Exception {
-        parser = new Parser(library);
+        parser = new Parser(bookLibrary, movieLibray);
     }
 
     @Test
     public void shouldReturnListBookActionWhenUserSelectsListBook() {
         userChoice = new SimpleEntry<>(LIST_BOOKS, null);
-        ListLibrary expected = new ListLibrary(library, (ListView) userChoice.getKey().view()
+        ListLibrary expected = new ListLibrary(bookLibrary, (ListView) userChoice.getKey().view()
         );
 
         Action actualAction = parser.getAction(userChoice, user);
@@ -51,7 +54,7 @@ public class ParserTest {
     public void shouldReturnListMoviesActionWhenUserSelectsListBook() {
         MenuItem item = LIST_MOVIES;
         userChoice = new SimpleEntry<>(item, null);
-        ListLibrary expected = new ListLibrary(library, (ListView) item.view()
+        ListLibrary expected = new ListLibrary(movieLibray, (ListView) item.view()
         );
 
         Action actualAction = parser.getAction(userChoice, user);
@@ -63,7 +66,7 @@ public class ParserTest {
     public void shouldReturnCheckoutActionActionWhenUserSelectsCheckoutBook() {
         MenuItem item = CHECKOUT_BOOK;
         userChoice = new SimpleEntry<>(item, null);
-        Checkout expected = new Checkout(library, user, bookName);
+        Checkout expected = new Checkout(bookLibrary, user, bookName);
 
         Action actualAction = parser.getAction(userChoice, user);
 
@@ -76,7 +79,7 @@ public class ParserTest {
         userChoice = new SimpleEntry<>(item, null);
 
         Action actualAction = parser.getAction(userChoice, user);
-        Checkout expected = new Checkout(library, user, bookName);
+        Checkout expected = new Checkout(movieLibray, user, bookName);
 
         assertEquals(expected, actualAction);
     }
@@ -85,7 +88,7 @@ public class ParserTest {
     public void shouldReturnReturnActionActionWhenUserSelectsReturnBook() {
         MenuItem item = RETURN_BOOK;
         userChoice = new SimpleEntry<>(item, null);
-        Return expected = new Return(library, item.view(), user);
+        Return expected = new Return(bookLibrary, item.view(), user);
 
         Action actualAction = parser.getAction(userChoice, user);
 
@@ -97,7 +100,7 @@ public class ParserTest {
     public void shouldReturnReturnActionActionWhenUserSelectsReturnMovies() {
         MenuItem item = RETURN_MOVIE;
         userChoice = new SimpleEntry<>(item, null);
-        Return expected = new Return(library, item.view(), user);
+        Return expected = new Return(movieLibray, item.view(), user);
 
         Action actualAction = parser.getAction(userChoice, user);
 
