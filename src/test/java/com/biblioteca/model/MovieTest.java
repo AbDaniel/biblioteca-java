@@ -1,5 +1,6 @@
 package com.biblioteca.model;
 
+import com.biblioteca.listener.Listener;
 import com.biblioteca.visitor.Visitor;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.Before;
@@ -24,9 +25,13 @@ public class MovieTest {
     @Mock
     User user;
 
+    @Mock
+    Listener listener;
+
     @Before
     public void setUp() throws Exception {
         movie = new Movie("The Matrix", "The Wachowskis", 1999, 10);
+        movie.addListener(listener);
     }
 
     @Test
