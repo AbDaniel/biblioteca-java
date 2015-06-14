@@ -1,7 +1,9 @@
 package com.biblioteca.action;
 
+import com.biblioteca.constants.Constants;
 import com.biblioteca.controller.Controller;
 import com.biblioteca.enums.MenuItem;
+import com.biblioteca.listener.ExitLogoutListener;
 import com.biblioteca.model.User;
 import com.biblioteca.repository.Library;
 import com.biblioteca.view.MenuView;
@@ -10,9 +12,9 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import java.util.AbstractMap;
 import java.util.AbstractMap.SimpleEntry;
 
+import static com.biblioteca.constants.Constants.*;
 import static com.biblioteca.enums.MenuItem.*;
 import static junit.framework.TestCase.assertNull;
 import static org.mockito.Matchers.any;
@@ -43,6 +45,9 @@ public class ControllerTest {
 
     private SimpleEntry<MenuItem, String> userChoice;
 
+    @Mock
+    private ExitLogoutListener listener;
+
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
@@ -50,6 +55,7 @@ public class ControllerTest {
         userChoice = new SimpleEntry<>(LIST_BOOKS, null);
         when(menuView.getUserChoiceAsEntry()).thenReturn(userChoice);
         when(parser.getAction(userChoice, user)).thenReturn(action);
+        controller.addListener(listener);
     }
 
     @Test
@@ -84,11 +90,29 @@ public class ControllerTest {
 
     @Test
     public void shouldNotCallDispatchIfMenuItemIsLogout() {
-        SimpleEntry<MenuItem, String> choice = new SimpleEntry<>(QUIT, null);
+        SimpleEntry<MenuItem, String> choice = new SimpleEntry<>(LOGOUT, null);
         when(menuView.getUserChoiceAsEntry()).thenReturn(choice);
         controller.execute(user);
 
         verify(parser, times(0)).getAction(eq(choice), any(User.class));
+    }
+
+    @Test
+    public void shouldUpdateListenerIfMenuItemIsQuit() {
+        SimpleEntry<MenuItem, String> choice = new SimpleEntry<>(QUIT, null);
+        when(menuView.getUserChoiceAsEntry()).thenReturn(choice);
+        controller.execute(user);
+
+        verify(listener).update(EXIT_CODE);
+    }
+
+    @Test
+    public void shouldUpdateIfMenuItemIsLogout() {
+        SimpleEntry<MenuItem, String> choice = new SimpleEntry<>(LOGOUT, null);
+        when(menuView.getUserChoiceAsEntry()).thenReturn(choice);
+        controller.execute(user);
+
+        verify(listener).update(LOGOUT_CODE);
     }
 
     @Test
@@ -97,13 +121,6 @@ public class ControllerTest {
         controller.execute(user);
 
         verify(action).execute();
-    }
-
-    @Test
-    public void shouldReturnNullIfUserChoiceIsInvalid() {
-        when(menuView.getUserChoiceAsEntry()).thenReturn(null);
-
-        assertNull(controller.execute(user));
     }
 
 }

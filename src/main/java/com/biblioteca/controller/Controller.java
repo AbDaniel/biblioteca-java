@@ -1,46 +1,50 @@
 package com.biblioteca.controller;
 
 import com.biblioteca.action.Parser;
+import com.biblioteca.constants.Constants;
 import com.biblioteca.enums.MenuItem;
+import com.biblioteca.listener.ExitLogoutListener;
 import com.biblioteca.model.User;
 import com.biblioteca.view.MenuView;
 
 import java.util.Map;
 
-import static com.biblioteca.enums.MenuItem.LOGOUT;
-import static com.biblioteca.enums.MenuItem.QUIT;
-
 public class Controller {
 
     private MenuView menuView;
     private Parser parser;
+    private ExitLogoutListener listener;
 
     public Controller(MenuView menuView, Parser parser) {
         this.menuView = menuView;
         this.parser = parser;
     }
 
-    public MenuItem execute(User user) {
+    public void execute(User user) {
         menuView.displayMenu();
         Map.Entry<MenuItem, String> userChoice = menuView.getUserChoiceAsEntry();
 
         if (isInvalidChoice(userChoice))
-            return null;
+            return;
         MenuItem selectedMenuItem = userChoice.getKey();
-        if (isExitOrLogout(selectedMenuItem)) {
-            return selectedMenuItem;
+        switch (selectedMenuItem) {
+            case QUIT:
+                listener.update(Constants.EXIT_CODE);
+                return;
+            case LOGOUT:
+                listener.update(Constants.LOGOUT_CODE);
+                return;
         }
 
         parser.getAction(userChoice, user).execute();
-        return selectedMenuItem;
     }
 
     private boolean isInvalidChoice(Map.Entry<MenuItem, String> userChoice) {
         return userChoice == null;
     }
 
-    private boolean isExitOrLogout(MenuItem selectedMenuItem) {
-        return selectedMenuItem == QUIT || selectedMenuItem == LOGOUT;
+    public void addListener(ExitLogoutListener listener) {
+        this.listener = listener;
     }
 
 }

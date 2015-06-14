@@ -21,4 +21,7 @@ public interface Constants {
     String SUCCESS_MOVIE_CHECKOUT = "Thank You! Enjoy the movie";
     String SUCCESS_MOVIE_RETURN = "Thank you for returning the movie";
     String MOVIE_IS_NOT_VALID = "That is a valid movie to return";
+    int EXIT_CODE = -1;
+    int LOGOUT_CODE = -2;
+    int RUNNING = 0;
 }

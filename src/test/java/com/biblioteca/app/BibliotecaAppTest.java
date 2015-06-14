@@ -1,6 +1,7 @@
 package com.biblioteca.app;
 
 import com.biblioteca.action.Parser;
+import com.biblioteca.constants.Constants;
 import com.biblioteca.model.User;
 import com.biblioteca.view.View;
 import com.biblioteca.controller.Controller;
@@ -14,6 +15,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import static com.biblioteca.constants.Constants.*;
 import static com.biblioteca.constants.Constants.WELCOME_TEXT;
 import static com.biblioteca.enums.MenuItem.*;
 import static org.junit.Assert.assertTrue;
@@ -48,7 +50,7 @@ public class BibliotecaAppTest {
     @Before
     public void setUp() {
         bibliotecaApp = new BibliotecaApp(WELCOME_TEXT, view, controller, loginController);
-        when(controller.execute(any(User.class))).thenReturn(QUIT);
+        bibliotecaApp.update(EXIT_CODE);
     }
 
     @Test
@@ -74,7 +76,7 @@ public class BibliotecaAppTest {
 
     @Test
     public void shouldContinueWhenUserDoesNotExit() throws InterruptedException {
-        when(controller.execute(any(User.class))).thenReturn(LIST_BOOKS);
+        bibliotecaApp.update(RUNNING);
         Thread t = new Thread(bibliotecaApp::start);
         t.start();
         t.join(500);

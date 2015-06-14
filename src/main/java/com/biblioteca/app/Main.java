@@ -36,6 +36,7 @@ public class Main {
         LoginController loginController = new LoginController(login, view);
 
         BibliotecaApp bibliotecaApp = new BibliotecaApp(WELCOME_TEXT, view, controller, loginController);
+        controller.addListener(bibliotecaApp);
         bibliotecaApp.start();
 
     }
