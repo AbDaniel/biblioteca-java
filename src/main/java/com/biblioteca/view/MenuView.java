@@ -1,16 +1,15 @@
 package com.biblioteca.view;
 
-import com.biblioteca.constants.Constants;
 import com.biblioteca.enums.MenuItem;
 
-import java.util.*;
 import java.util.AbstractMap.SimpleEntry;
+import java.util.InputMismatchException;
+import java.util.Scanner;
 
-import static com.biblioteca.constants.Constants.ENTER_BOOK_NAME;
 import static com.biblioteca.constants.Constants.INVALID_INPUT;
 import static com.biblioteca.constants.Constants.INVALID_INPUT_TEXT;
 import static com.biblioteca.enums.MenuItem.*;
-import static java.util.Map.*;
+import static java.util.Map.Entry;
 
 public class MenuView extends View {
 
@@ -24,9 +23,6 @@ public class MenuView extends View {
     public int getUserChoice() {
         int choice;
         choice = getChoice();
-        scanner.nextLine();
-        if (choice == INVALID_INPUT)
-            System.out.println(INVALID_INPUT_TEXT);
         return choice;
     }
 
@@ -56,7 +52,14 @@ public class MenuView extends View {
         } catch (InputMismatchException e) {
             choice = INVALID_INPUT;
         }
+        printInvalidMessage(choice);
         return choice;
+    }
+
+    private void printInvalidMessage(int choice) {
+        scanner.nextLine();
+        if (choice == INVALID_INPUT)
+            System.out.println(INVALID_INPUT_TEXT);
     }
 
     public void displayMenu() {

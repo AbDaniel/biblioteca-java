@@ -54,26 +54,23 @@ public class MenuViewTest {
     public void shouldReturnNullIfUserInputsNotANumber() {
         systemInMock.provideText("Gondor\n");
 
-        Map.Entry<MenuItem, String> expected = null;
-
         Map.Entry<MenuItem, String> actualEntry = menuView.getUserChoiceAsEntry();
-        assertEquals(null, actualEntry);
+        assertNull(actualEntry);
     }
 
     @Test
     public void shouldReturnInvalidInputIfUserInputsAInvalidNumber() {
         systemInMock.provideText("10\n");
 
-        int actualUserChoice = menuView.getUserChoice();
-
-        assertEquals(INVALID_INPUT, actualUserChoice);
+        Map.Entry<MenuItem, String> actualEntry = menuView.getUserChoiceAsEntry();
+        assertNull(actualEntry);
     }
 
     @Test
     public void shouldDisplayInvalidInputMessageOnInvalidInput() {
         systemInMock.provideText("10\n");
 
-        menuView.getUserChoice();
+        menuView.getUserChoiceAsEntry();
 
         assertEquals(INVALID_INPUT_TEXT + "\n", outContent.toString());
     }
