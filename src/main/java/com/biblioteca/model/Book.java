@@ -16,7 +16,7 @@ public class Book implements Borrowable<Book> {
     private boolean checkedOut;
     private Listener listener;
 
-    public Book(String name, String author, int year, Listener listener) {
+    public Book(String name, String author, int year) {
         this.name = name;
         this.author = author;
         this.year = year;

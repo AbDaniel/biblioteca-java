@@ -1,6 +1,6 @@
 package com.biblioteca.model;
 
-import com.biblioteca.view.View;
+import com.biblioteca.listener.Listener;
 import com.biblioteca.visitor.BookVisitor;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.Before;
@@ -8,8 +8,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-
-import java.util.Scanner;
 
 import static com.biblioteca.model.Book.REGULAR_BOOK_FORMAT;
 import static org.junit.Assert.*;
@@ -26,9 +24,13 @@ public class BookTest {
     @Mock
     private BookVisitor visitor;
 
+    @Mock
+    Listener listener;
+
     @Before
     public void setUp() {
-        book = new Book("Lord of the Rings", "JR Toliken", 1930, new View(new Scanner(System.in)));
+        book = new Book("Lord of the Rings", "JR Toliken", 1930);
+        book.addListener(listener);
     }
 
     @Test

@@ -1,12 +1,11 @@
 package com.biblioteca.model;
 
 import com.biblioteca.listener.Listener;
-import com.biblioteca.visitor.Visitable;
 import com.biblioteca.visitor.Visitor;
 
 import java.util.function.Function;
 
-public class Movie implements Borrowable<Movie>, Visitable {
+public class Movie implements Borrowable<Movie> {
 
     private final String name;
     private final String director;

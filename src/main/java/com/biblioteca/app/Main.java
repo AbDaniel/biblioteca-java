@@ -27,7 +27,7 @@ public class Main {
         SubMenuView subMenuView = new SubMenuView(scanner);
         MenuView menuView = new MenuView(scanner, subMenuView);
 
-        Library library = new Library(loadBorrowables());
+        Library library = new Library(loadBorrowables(view));
         Parser parser = new Parser(library);
         Controller controller = new Controller(menuView, parser);
 
@@ -46,16 +46,17 @@ public class Main {
         return users;
     }
 
-    private static List<Borrowable> loadBorrowables() {
+    private static List<Borrowable> loadBorrowables(View view) {
         List<Borrowable> availables = new ArrayList<>();
-        availables.add(new Book("Lord of the Rings", "JR Toliken", 1930, new View(new Scanner(System.in))));
-        availables.add(new Book("Harry Potter", "JK Rowling", 1992, new View(new Scanner(System.in))));
-        availables.add(new Book("Catch-22", "Joesph Heller", 1950, new View(new Scanner(System.in))));
-        availables.add(new Book("Winds of Winter", "George RR Martin", 2017, new View(new Scanner(System.in))));
+        availables.add(new Book("Lord of the Rings", "JR Toliken", 1930));
+        availables.add(new Book("Harry Potter", "JK Rowling", 1992));
+        availables.add(new Book("Catch-22", "Joesph Heller", 1950));
+        availables.add(new Book("Winds of Winter", "George RR Martin", 2017));
         availables.add(new Movie("The Matrix", "The Wachowskis", 1999, 10));
         availables.add(new Movie("Departed", "Martin Scorsese", 2005, 8));
         availables.add(new Movie("The Dark Knight", "Nolan", 2008, 10));
         availables.add(new Movie("Seven Samurai", "Akira Kurosawa", 1950, 10));
+        availables.forEach(borrowable -> borrowable.addListener(view));
         return availables;
     }
 
