@@ -13,7 +13,8 @@ import org.mockito.runners.MockitoJUnitRunner;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.AbstractMap;
-import java.util.Map;
+import java.util.AbstractMap.SimpleEntry;
+import java.util.Map.Entry;
 import java.util.Scanner;
 
 import static com.biblioteca.constants.Constants.INVALID_INPUT_TEXT;
@@ -44,9 +45,9 @@ public class MenuViewTest {
     @Test
     public void shouldGetListBooksChoiceFromUser() {
         systemInMock.provideText("1\n");
-        Map.Entry<MenuItem, String> expected = new AbstractMap.SimpleEntry<MenuItem, String>(LIST_BOOKS, null);
+        Entry<MenuItem, String> expected = new SimpleEntry<>(LIST_BOOKS, null);
 
-        Map.Entry<MenuItem, String> actualEntry = menuView.getUserChoiceAsEntry();
+        Entry<MenuItem, String> actualEntry = menuView.getUserChoiceAsEntry();
         assertEquals(expected, actualEntry);
     }
 
@@ -54,7 +55,7 @@ public class MenuViewTest {
     public void shouldReturnNullIfUserInputsNotANumber() {
         systemInMock.provideText("Gondor\n");
 
-        Map.Entry<MenuItem, String> actualEntry = menuView.getUserChoiceAsEntry();
+        Entry<MenuItem, String> actualEntry = menuView.getUserChoiceAsEntry();
         assertNull(actualEntry);
     }
 
@@ -62,7 +63,7 @@ public class MenuViewTest {
     public void shouldReturnInvalidInputIfUserInputsAInvalidNumber() {
         systemInMock.provideText("10\n");
 
-        Map.Entry<MenuItem, String> actualEntry = menuView.getUserChoiceAsEntry();
+        Entry<MenuItem, String> actualEntry = menuView.getUserChoiceAsEntry();
         assertNull(actualEntry);
     }
 

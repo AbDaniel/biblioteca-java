@@ -1,6 +1,7 @@
 package com.biblioteca.controller;
 
 import com.biblioteca.action.Login;
+import com.biblioteca.listener.ExitLogoutListener;
 import com.biblioteca.view.View;
 import com.biblioteca.model.User;
 import org.junit.Before;
@@ -33,6 +34,9 @@ public class LoginControllerTest {
     @Mock
     View view;
 
+    @Mock
+    ExitLogoutListener listener;
+
     @Rule
     public final TextFromStandardInputStream systemInMock
             = TextFromStandardInputStream.emptyStandardInputStream();
@@ -44,6 +48,7 @@ public class LoginControllerTest {
     public void setUp() throws Exception {
         System.setOut(new PrintStream(outContent));
         loginController = new LoginController(login, view);
+        loginController.addListener(listener);
         user = new User("111-1111", "sauron", "onering", null);
     }
 
@@ -71,6 +76,7 @@ public class LoginControllerTest {
         login = new Login(users);
         View view = new View(new Scanner(System.in));
         loginController = new LoginController(login, view);
+        loginController.addListener(listener);
         systemInMock.provideText("111-1111\nonering\n");
 
         User actualUser = loginController.execute();
@@ -79,4 +85,19 @@ public class LoginControllerTest {
         assertEquals(expectedUser, actualUser);
     }
 
+    @Test
+    public void shouldUpdateListenerWhenLoginIsSuccessful() {
+        List<User> users = new ArrayList<>();
+        user = new User("111-1111", "sauron", "onering", null);
+        users.add(user);
+        login = new Login(users);
+        View view = new View(new Scanner(System.in));
+        loginController = new LoginController(login, view);
+        loginController.addListener(listener);
+        systemInMock.provideText("111-1111\nonering\n");
+
+        loginController.execute();
+
+        verify(listener).update(RUNNING);
+    }
 }

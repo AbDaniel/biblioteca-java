@@ -30,13 +30,16 @@ public class Main {
         Library bookLibrary = new Library(loadBorrowables(view));
         Library movieLibrary = new Library(loadMovie(view));
         Parser parser = new Parser(bookLibrary, movieLibrary);
-        Controller controller = new Controller(menuView, parser);
 
         Login login = new Login(loadUsers());
+
+        Controller controller = new Controller(menuView, parser);
         LoginController loginController = new LoginController(login, view);
 
         BibliotecaApp bibliotecaApp = new BibliotecaApp(WELCOME_TEXT, view, controller, loginController);
         controller.addListener(bibliotecaApp);
+        loginController.addListener(bibliotecaApp);
+
         bibliotecaApp.start();
 
     }
