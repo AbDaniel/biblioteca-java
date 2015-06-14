@@ -10,6 +10,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -62,6 +63,33 @@ public class MovieTest {
         movie.checkout(user);
 
         assertFalse(movie.checkout(user));
+    }
+
+    @Test
+    public void shouldReturnTrueIfCurrentCheckoutStateIsFalseDuringCheckout() {
+        assertTrue(movie.checkout(user));
+    }
+
+    @Test
+    public void shouldReturnTrueIfCurrentCheckoutStateIsTrueDuringReturn() {
+        movie.checkout(user);
+
+        assertTrue(movie.returnItem(user));
+    }
+
+    @Test
+    public void shouldReturnFalseIfCurrentCheckoutStateIsFalseDuringReturn() {
+        assertFalse(movie.returnItem(user));
+    }
+
+    @Test
+    public void shouldReturnFalseIfMovieNameIsNotValid() {
+        assertFalse(movie.isEqualTo("aasd"));
+    }
+
+    @Test
+    public void shouldReturnTrueIfMovieNameIsValid() {
+        assertTrue(movie.isEqualTo("Lord of the Rings"));
     }
 
 }

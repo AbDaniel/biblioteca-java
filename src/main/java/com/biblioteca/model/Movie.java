@@ -57,17 +57,29 @@ public class Movie implements Borrowable<Movie>, Visitable {
 
     @Override
     public boolean checkout(User user) {
-        return false;
+        if (checkedOut) {
+            return false;
+        } else {
+            checkedOut = true;
+            user.addBorrowable(this);
+            return true;
+        }
     }
 
     @Override
     public boolean returnItem(User user) {
-        return false;
+        if (checkedOut) {
+            checkedOut = false;
+            user.removeOwnable(this);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
     public boolean isCheckedOut() {
-        return false;
+        return checkedOut;
     }
 
     @Override
