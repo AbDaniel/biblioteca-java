@@ -69,6 +69,7 @@ public class Book implements Borrowable<Book>, Visitable {
     public boolean returnItem(User user) {
         if (checkedOut) {
             checkedOut = false;
+            user.removeOwnable(this);
             return true;
         } else {
             return false;

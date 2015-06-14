@@ -76,10 +76,19 @@ public class BookTest {
     }
 
     @Test
-    public void shouldAddBookToUser() {
+    public void shouldAddBookToUserOnCheckout() {
         book.checkout(user);
 
         verify(user).addBorrowable(book);
+    }
+
+    @Test
+    public void shouldRemoveBookFromUserOnReturn() {
+        book.checkout(user);
+
+        book.returnItem(user);
+
+        verify(user).removeOwnable(book);
     }
 
     @Test

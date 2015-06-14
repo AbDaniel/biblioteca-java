@@ -35,7 +35,7 @@ public class MovieTest {
     }
 
     @Test
-    public void shouldReturnFormatedStringToRespresentBookState() {
+    public void shouldReturnFormatedStringToRespresentMovieState() {
         String actualString = movie.toString();
         String expectedString = "name='The Matrix', director='The Wachowskis', year=1999, rating=10";
 
@@ -90,6 +90,22 @@ public class MovieTest {
     @Test
     public void shouldReturnTrueIfMovieNameIsValid() {
         assertTrue(movie.isEqualTo("The Matrix"));
+    }
+
+    @Test
+    public void shouldAddMovieToUserOnCheckout() {
+        movie.checkout(user);
+
+        verify(user).addBorrowable(movie);
+    }
+
+    @Test
+    public void shouldRemoveMovieFromUserOnReturn() {
+        movie.checkout(user);
+
+        movie.returnItem(user);
+
+        verify(user).removeOwnable(movie);
     }
 
 }
