@@ -10,9 +10,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import static com.biblioteca.constants.Constants.BOOK_NOT_PRESENT_TEXT;
-import static com.biblioteca.constants.Constants.BOOK_NOT_VALID_TEXT;
-import static com.biblioteca.constants.Constants.SUCCESSFUL_CHECKOUT_TEXT;
+import static com.biblioteca.constants.Constants.*;
 import static com.biblioteca.model.Book.REGULAR_BOOK_FORMAT;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.verify;
@@ -128,6 +126,15 @@ public class BookTest {
         book.returnItem(user);
 
         verify(listener).update(BOOK_NOT_VALID_TEXT);
+    }
+
+
+    @Test
+    public void shouldNotifyListenerOnSuccessOfReturn() {
+        book.checkout(user);
+        book.returnItem(user);
+
+        verify(listener).update(SUCCESSFUL_RETURN_TEXT);
     }
 
     @Test
