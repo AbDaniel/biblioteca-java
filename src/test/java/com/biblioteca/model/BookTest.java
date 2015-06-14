@@ -1,5 +1,6 @@
 package com.biblioteca.model;
 
+import com.biblioteca.constants.Constants;
 import com.biblioteca.listener.Listener;
 import com.biblioteca.visitor.BookVisitor;
 import nl.jqno.equalsverifier.EqualsVerifier;
@@ -9,6 +10,8 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import static com.biblioteca.constants.Constants.BOOK_NOT_PRESENT_TEXT;
+import static com.biblioteca.constants.Constants.SUCCESSFUL_CHECKOUT_TEXT;
 import static com.biblioteca.model.Book.REGULAR_BOOK_FORMAT;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.verify;
@@ -101,6 +104,21 @@ public class BookTest {
         book.accept(visitor);
 
         verify(visitor).visit(book);
+    }
+
+    @Test
+    public void shouldNotifyListenerOnFailureOfCheckOut() {
+        book.checkout(user);
+        book.checkout(user);
+
+        verify(listener).update(BOOK_NOT_PRESENT_TEXT);
+    }
+
+    @Test
+    public void shouldNotifyListenerOnSuccessOfCheckOut() {
+        book.checkout(user);
+
+        verify(listener).update(SUCCESSFUL_CHECKOUT_TEXT);
     }
 
     @Test
