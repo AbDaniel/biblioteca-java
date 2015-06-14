@@ -89,7 +89,7 @@ public class MovieTest {
 
     @Test
     public void shouldReturnTrueIfMovieNameIsValid() {
-        assertTrue(movie.isEqualTo("Lord of the Rings"));
+        assertTrue(movie.isEqualTo("The Matrix"));
     }
 
 }

@@ -52,7 +52,7 @@ public class Movie implements Borrowable<Movie>, Visitable {
 
     @Override
     public boolean isEqualTo(String itemName) {
-        return false;
+        return name.equals(itemName);
     }
 
     @Override
