@@ -9,21 +9,19 @@ import com.biblioteca.view.View;
 import com.biblioteca.visitor.BookVisitor;
 import com.biblioteca.visitor.Visitor;
 import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.MockitoAnnotations;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 import static com.biblioteca.model.Book.REGULAR_BOOK_FORMAT;
-import static junit.framework.TestCase.assertEquals;
 import static org.mockito.Mockito.verify;
 
-@RunWith(MockitoJUnitRunner.class)
 public class ListLibraryTest {
 
     @Mock
@@ -39,6 +37,7 @@ public class ListLibraryTest {
 
     @Before
     public void setUp() throws Exception {
+        MockitoAnnotations.initMocks(this);
         action = new ListLibrary(library, listView, visitor);
     }
 
@@ -51,6 +50,11 @@ public class ListLibraryTest {
         bookList.add(new Movie("The Matrix", "The Wachowskis", 1999, 10));
         visitor = new BookVisitor(new ArrayList<>(), REGULAR_BOOK_FORMAT);
         action = new ListLibrary(new Library(bookList), listView, visitor);
+    }
+
+    @Test
+    public void shouldVerifyEqualsContract() {
+        EqualsVerifier.forClass(ListLibrary.class).suppress(Warning.NULL_FIELDS).usingGetClass().verify();
     }
 
     @Test
@@ -78,11 +82,6 @@ public class ListLibraryTest {
                 "name='Winds of Winter', author='George RR Martin', year=2017\n";
 
         verify(listView).displayMessage(expected);
-    }
-
-    @Test
-    public void shouldVerifyEqualsContract() {
-        EqualsVerifier.forClass(ListLibrary.class).usingGetClass();
     }
 
 }

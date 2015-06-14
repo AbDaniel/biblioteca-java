@@ -16,10 +16,10 @@ import java.util.AbstractMap;
 import java.util.Map;
 import java.util.Scanner;
 
-import static com.biblioteca.constants.Constants.INVALID_INPUT;
 import static com.biblioteca.constants.Constants.INVALID_INPUT_TEXT;
-import static com.biblioteca.enums.MenuItem.*;
-import static org.junit.Assert.*;
+import static com.biblioteca.enums.MenuItem.LIST_BOOKS;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 @RunWith(MockitoJUnitRunner.class)
 public class MenuViewTest {

@@ -25,7 +25,7 @@ public class UserTest {
 
     @Test
     public void shouldVerifyEqualsContract() {
-        EqualsVerifier.forClass(User.class).usingGetClass();
+        EqualsVerifier.forClass(User.class).usingGetClass().verify();
     }
 
     @Test

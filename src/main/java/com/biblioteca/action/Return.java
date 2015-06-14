@@ -7,9 +7,9 @@ import com.biblioteca.repository.Library;
 
 public class Return implements Action {
 
-    private Library library;
-    private View view;
-    private User user;
+    private final Library library;
+    private final View view;
+    private final User user;
 
     public Return(Library library, View view, User user) {
         this.library = library;

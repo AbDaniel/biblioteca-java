@@ -5,12 +5,14 @@ import com.biblioteca.model.User;
 import com.biblioteca.repository.Library;
 import com.biblioteca.view.View;
 import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import static nl.jqno.equalsverifier.Warning.NULL_FIELDS;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -82,7 +84,7 @@ public class ReturnTest {
 
     @Test
     public void shouldVerifyEqualsContract() {
-        EqualsVerifier.forClass(Return.class).usingGetClass();
+        EqualsVerifier.forClass(Return.class).usingGetClass().suppress(NULL_FIELDS).verify();
     }
 
 }

@@ -4,8 +4,8 @@ import java.util.List;
 
 public class User {
 
-    private String libraryNo;
-    private String name;
+    private final String libraryNo;
+    private final String name;
     private String password;
     private List<Borrowable> ownables;
 

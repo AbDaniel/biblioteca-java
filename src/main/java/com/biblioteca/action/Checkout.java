@@ -9,9 +9,9 @@ import static com.biblioteca.constants.Constants.SUCCESSFUL_CHECKOUT_TEXT;
 
 public class Checkout implements Action {
 
-    private Library library;
-    private View view;
-    private User user;
+    private final Library library;
+    private final View view;
+    private final User user;
 
     public Checkout(Library library, View view, User user) {
         this.library = library;

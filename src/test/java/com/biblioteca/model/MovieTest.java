@@ -31,7 +31,7 @@ public class MovieTest {
 
     @Test
     public void shouldVerifyEqualsContract() {
-        EqualsVerifier.forClass(Movie.class).usingGetClass();
+        EqualsVerifier.forClass(Movie.class).usingGetClass().verify();
     }
 
     @Test

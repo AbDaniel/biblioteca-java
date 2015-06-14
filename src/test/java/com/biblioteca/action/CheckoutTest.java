@@ -5,6 +5,7 @@ import com.biblioteca.view.View;
 import com.biblioteca.constants.Constants;
 import com.biblioteca.repository.Library;
 import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Matchers;
@@ -82,7 +83,7 @@ public class CheckoutTest {
 
     @Test
     public void shouldVerifyEqualsContract() {
-        EqualsVerifier.forClass(Checkout.class).usingGetClass();
+        EqualsVerifier.forClass(Checkout.class).usingGetClass().suppress(Warning.NULL_FIELDS).verify();
     }
 
 }
