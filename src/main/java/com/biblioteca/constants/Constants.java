@@ -17,4 +17,8 @@ public interface Constants {
     String INVALID_CREDENTIALS = "Invalid Credentials";
     Scanner scanner = new Scanner(System.in);
     String ENTER_MOVIE_NAME = "Enter Movie name :";
+    String MOVIE_IS_NOT_PRESENT = "That Movie is not present";
+    String SUCCESS_MOVIE_CHECKOUT = "Thank You! Enjoy the movie";
+    String SUCCESS_MOVIE_RETURN = "Thank you for returning the movie";
+    String MOVIE_IS_NOT_VALID = "That is a valid movie to return";
 }

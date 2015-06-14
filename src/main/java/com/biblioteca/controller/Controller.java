@@ -1,15 +1,14 @@
 package com.biblioteca.controller;
 
 import com.biblioteca.action.Parser;
+import com.biblioteca.enums.MenuItem;
 import com.biblioteca.model.User;
 import com.biblioteca.view.MenuView;
-import com.biblioteca.enums.MenuItem;
 
 import java.util.Map;
 
 import static com.biblioteca.enums.MenuItem.LOGOUT;
 import static com.biblioteca.enums.MenuItem.QUIT;
-import static com.biblioteca.enums.MenuItem.valueOf;
 
 public class Controller {
 

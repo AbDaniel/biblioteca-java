@@ -61,12 +61,12 @@ public class Movie implements Borrowable<Movie> {
     @Override
     public boolean checkout(User user) {
         if (checkedOut) {
-            listener.update(BOOK_NOT_PRESENT_TEXT);
+            listener.update(MOVIE_IS_NOT_PRESENT);
             return false;
         } else {
             checkedOut = true;
             user.addBorrowable(this);
-            listener.update(SUCCESSFUL_CHECKOUT_TEXT);
+            listener.update(SUCCESS_MOVIE_CHECKOUT);
             return true;
         }
     }
@@ -76,10 +76,10 @@ public class Movie implements Borrowable<Movie> {
         if (checkedOut) {
             checkedOut = false;
             user.removeOwnable(this);
-            listener.update(SUCCESSFUL_RETURN_TEXT);
+            listener.update(SUCCESS_MOVIE_RETURN);
             return true;
         } else {
-            listener.update(BOOK_NOT_VALID_TEXT);
+            listener.update(MOVIE_IS_NOT_VALID);
             return false;
         }
     }

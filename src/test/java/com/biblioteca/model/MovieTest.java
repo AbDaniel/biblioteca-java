@@ -120,14 +120,14 @@ public class MovieTest {
         movie.checkout(user);
         movie.checkout(user);
 
-        verify(listener).update(BOOK_NOT_PRESENT_TEXT);
+        verify(listener).update(MOVIE_IS_NOT_PRESENT);
     }
 
     @Test
     public void shouldNotifyListenerOnSuccessOfCheckOut() {
         movie.checkout(user);
 
-        verify(listener).update(SUCCESSFUL_CHECKOUT_TEXT);
+        verify(listener).update(SUCCESS_MOVIE_CHECKOUT);
     }
 
 
@@ -135,7 +135,7 @@ public class MovieTest {
     public void shouldNotifyListenerOnFailureOfReturn() {
         movie.returnItem(user);
 
-        verify(listener).update(BOOK_NOT_VALID_TEXT);
+        verify(listener).update(MOVIE_IS_NOT_VALID);
     }
 
 
@@ -144,7 +144,7 @@ public class MovieTest {
         movie.checkout(user);
         movie.returnItem(user);
 
-        verify(listener).update(SUCCESSFUL_RETURN_TEXT);
+        verify(listener).update(SUCCESS_MOVIE_RETURN);
     }
 
 }
