@@ -5,8 +5,7 @@ import com.biblioteca.visitor.Visitor;
 
 import java.util.function.Function;
 
-import static com.biblioteca.constants.Constants.BOOK_NOT_PRESENT_TEXT;
-import static com.biblioteca.constants.Constants.BOOK_NOT_VALID_TEXT;
+import static com.biblioteca.constants.Constants.*;
 
 public class Movie implements Borrowable<Movie> {
 
@@ -67,6 +66,7 @@ public class Movie implements Borrowable<Movie> {
         } else {
             checkedOut = true;
             user.addBorrowable(this);
+            listener.update(SUCCESSFUL_CHECKOUT_TEXT);
             return true;
         }
     }
@@ -76,6 +76,7 @@ public class Movie implements Borrowable<Movie> {
         if (checkedOut) {
             checkedOut = false;
             user.removeOwnable(this);
+            listener.update(SUCCESSFUL_RETURN_TEXT);
             return true;
         } else {
             listener.update(BOOK_NOT_VALID_TEXT);

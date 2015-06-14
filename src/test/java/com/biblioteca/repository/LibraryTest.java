@@ -42,9 +42,11 @@ public class LibraryTest {
         bookList.add(new Book("Catch-22", "Joesph Heller", 1950));
         bookList.add(new Book("Winds of Winter", "George RR Martin", 2017));
         Book book = new Book("1984", "George Orwell", 1950);
+        book.addListener(listener);
         book.checkout(user);
         bookList.add(book);
         book = new Book("Alchemist", "Paulo Coelho", 1988);
+        book.addListener(listener);
         book.checkout(user);
         bookList.add(book);
         bookList.forEach(borrowable -> borrowable.addListener(listener));

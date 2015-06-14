@@ -9,6 +9,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import static com.biblioteca.constants.Constants.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -111,6 +112,39 @@ public class MovieTest {
         movie.returnItem(user);
 
         verify(user).removeOwnable(movie);
+    }
+
+
+    @Test
+    public void shouldNotifyListenerOnFailureOfCheckOut() {
+        movie.checkout(user);
+        movie.checkout(user);
+
+        verify(listener).update(BOOK_NOT_PRESENT_TEXT);
+    }
+
+    @Test
+    public void shouldNotifyListenerOnSuccessOfCheckOut() {
+        movie.checkout(user);
+
+        verify(listener).update(SUCCESSFUL_CHECKOUT_TEXT);
+    }
+
+
+    @Test
+    public void shouldNotifyListenerOnFailureOfReturn() {
+        movie.returnItem(user);
+
+        verify(listener).update(BOOK_NOT_VALID_TEXT);
+    }
+
+
+    @Test
+    public void shouldNotifyListenerOnSuccessOfReturn() {
+        movie.checkout(user);
+        movie.returnItem(user);
+
+        verify(listener).update(SUCCESSFUL_RETURN_TEXT);
     }
 
 }
