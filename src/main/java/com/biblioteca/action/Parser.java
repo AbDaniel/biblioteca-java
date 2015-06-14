@@ -4,15 +4,10 @@ import com.biblioteca.enums.MenuItem;
 import com.biblioteca.model.User;
 import com.biblioteca.repository.Library;
 import com.biblioteca.view.ListView;
-import com.biblioteca.visitor.BookVisitor;
-import com.biblioteca.visitor.MovieVisitor;
 
-import java.util.ArrayList;
 import java.util.Map;
 
 import static com.biblioteca.enums.MenuItem.*;
-import static com.biblioteca.model.Book.REGULAR_BOOK_FORMAT;
-import static com.biblioteca.model.Movie.REGULAR_MOVIE_FORMAT;
 
 public class Parser {
 
@@ -26,11 +21,9 @@ public class Parser {
         MenuItem selectedMenuItem = userChoice.getKey();
         switch (selectedMenuItem) {
             case LIST_BOOKS:
-                return new ListLibrary(library, (ListView) LIST_BOOKS.view(),
-                        new BookVisitor(new ArrayList<>(), REGULAR_BOOK_FORMAT));
+                return new ListLibrary(library, (ListView) LIST_BOOKS.view());
             case LIST_MOVIES:
-                return new ListLibrary(library, (ListView) LIST_MOVIES.view(),
-                        new MovieVisitor(new ArrayList<>(), REGULAR_MOVIE_FORMAT));
+                return new ListLibrary(library, (ListView) LIST_MOVIES.view());
             case CHECKOUT_BOOK:
             case CHECKOUT_MOVIE:
                 return new Checkout(library, user, userChoice.getValue());

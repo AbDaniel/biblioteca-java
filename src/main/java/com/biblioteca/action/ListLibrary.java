@@ -1,19 +1,16 @@
 package com.biblioteca.action;
 
-import com.biblioteca.view.ListView;
 import com.biblioteca.repository.Library;
-import com.biblioteca.visitor.Visitor;
+import com.biblioteca.view.ListView;
 
 public class ListLibrary implements Action {
 
     private final Library library;
     private final ListView listView;
-    private final Visitor visitor;
 
-    public ListLibrary(Library library, ListView listView, Visitor visitor) {
+    public ListLibrary(Library library, ListView listView) {
         this.library = library;
         this.listView = listView;
-        this.visitor = visitor;
     }
 
     @Override
@@ -28,11 +25,7 @@ public class ListLibrary implements Action {
 
         ListLibrary that = (ListLibrary) o;
 
-        if (library != null ? !library.equals(that.library) : that.library != null) return false;
-        if (listView != null ? !listView.getClass().equals(that.listView.getClass()) : that.listView != null)
-            return false;
-        return !(visitor != null ? !visitor.getClass().equals(that.visitor.getClass()) : that.visitor != null);
-
+        return !(library != null ? !library.equals(that.library) : that.library != null);
     }
 
     @Override

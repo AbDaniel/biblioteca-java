@@ -2,7 +2,6 @@ package com.biblioteca.action;
 
 import com.biblioteca.model.Book;
 import com.biblioteca.model.Borrowable;
-import com.biblioteca.model.Movie;
 import com.biblioteca.repository.Library;
 import com.biblioteca.view.ListView;
 import com.biblioteca.visitor.BookVisitor;
@@ -36,7 +35,7 @@ public class ListLibraryTest {
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        action = new ListLibrary(library, listView, visitor);
+        action = new ListLibrary(library, listView);
     }
 
     public void setUpWithData() {
@@ -46,7 +45,7 @@ public class ListLibraryTest {
         bookList.add(new Book("Catch-22", "Joesph Heller", 1950));
         bookList.add(new Book("Winds of Winter", "George RR Martin", 2017));
         visitor = new BookVisitor(new ArrayList<>(), REGULAR_BOOK_FORMAT);
-        action = new ListLibrary(new Library(bookList), listView, visitor);
+        action = new ListLibrary(new Library(bookList), listView);
     }
 
     @Test
