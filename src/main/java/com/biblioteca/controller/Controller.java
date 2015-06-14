@@ -25,6 +25,8 @@ public class Controller {
         menuView.displayMenu();
         Map.Entry<MenuItem, String> userChoice = menuView.getUserChoiceAsEntry();
 
+        if (userChoice == null)
+            return null;
         MenuItem selectedMenuItem = userChoice.getKey();
         if (selectedMenuItem == QUIT || selectedMenuItem == LOGOUT || selectedMenuItem == null) {
             return selectedMenuItem;

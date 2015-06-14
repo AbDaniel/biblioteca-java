@@ -13,6 +13,7 @@ import org.mockito.MockitoAnnotations;
 import java.util.AbstractMap.SimpleEntry;
 
 import static com.biblioteca.enums.MenuItem.*;
+import static junit.framework.TestCase.assertNull;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.*;
@@ -90,6 +91,13 @@ public class ControllerTest {
         controller.execute(user);
 
         verify(action).execute();
+    }
+
+    @Test
+    public void shouldReturnNullIfUserChoiceIsInvalid() {
+        when(menuView.getUserChoiceAsEntry()).thenReturn(null);
+
+        assertNull(controller.execute(user));
     }
 
 }
