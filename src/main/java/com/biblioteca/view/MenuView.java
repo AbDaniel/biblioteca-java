@@ -3,6 +3,8 @@ package com.biblioteca.view;
 import com.biblioteca.enums.MenuItem;
 
 import java.util.InputMismatchException;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.Scanner;
 
 import static com.biblioteca.constants.Constants.INVALID_INPUT;

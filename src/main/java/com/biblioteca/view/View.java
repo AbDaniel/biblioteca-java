@@ -1,8 +1,10 @@
 package com.biblioteca.view;
 
+import com.biblioteca.listener.Listener;
+
 import java.util.Scanner;
 
-public class View {
+public class View implements Listener {
 
     Scanner scanner;
 
@@ -18,4 +20,8 @@ public class View {
         return scanner.nextLine();
     }
 
+    @Override
+    public void update(String message) {
+        displayMessage(message);
+    }
 }

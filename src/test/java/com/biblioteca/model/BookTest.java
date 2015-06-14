@@ -15,13 +15,13 @@ import static org.mockito.Mockito.verify;
 @RunWith(MockitoJUnitRunner.class)
 public class BookTest {
 
-    Book book;
+    private Book book;
 
     @Mock
-    User user;
+    private User user;
 
     @Mock
-    BookVisitor visitor;
+    private BookVisitor visitor;
 
     @Before
     public void setUp() {
@@ -106,4 +106,5 @@ public class BookTest {
 
         assertEquals(expectedString, formattedString);
     }
+
 }

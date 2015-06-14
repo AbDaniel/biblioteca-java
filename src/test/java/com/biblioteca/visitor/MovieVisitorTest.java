@@ -11,7 +11,6 @@ import org.mockito.runners.MockitoJUnitRunner;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.biblioteca.model.Book.REGULAR_BOOK_FORMAT;
 import static com.biblioteca.model.Movie.REGULAR_MOVIE_FORMAT;
 import static junit.framework.TestCase.assertEquals;
 import static org.mockito.Mockito.verify;

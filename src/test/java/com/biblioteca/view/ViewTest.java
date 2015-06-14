@@ -44,4 +44,11 @@ public class ViewTest {
         assertEquals("Lord of the Rings", actualBookName);
     }
 
+    @Test
+    public void shouldPrintMessageReceivedByUpdate() {
+        view.update("Hello! World");
+
+        assertEquals("Hello! World\n", outContent.toString());
+    }
+
 }

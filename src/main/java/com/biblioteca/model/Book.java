@@ -1,11 +1,10 @@
 package com.biblioteca.model;
 
-import com.biblioteca.visitor.Visitable;
 import com.biblioteca.visitor.Visitor;
 
 import java.util.function.Function;
 
-public class Book implements Borrowable<Book>, Visitable {
+public class Book implements Borrowable<Book> {
 
     private final String name;
     private String author;
@@ -24,34 +23,6 @@ public class Book implements Borrowable<Book>, Visitable {
         this.author = book.author;
         this.year = book.year;
         this.checkedOut = book.isCheckedOut();
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Book book = (Book) o;
-
-        return !(name != null ? !name.equals(book.name) : book.name != null);
-    }
-
-    @Override
-    public int hashCode() {
-        return name != null ? name.hashCode() : 0;
-    }
-
-    @Override
-    public String toString() {
-        return "name='" + name + '\'' +
-                ", author='" + author + '\'' +
-                ", year=" + year;
-    }
-
-
-    @Override
-    public boolean isEqualTo(String itemName) {
-        return name.equals(itemName);
     }
 
     @Override
@@ -81,14 +52,42 @@ public class Book implements Borrowable<Book>, Visitable {
         return checkedOut;
     }
 
+
+    @Override
+    public void accept(Visitor visitor) {
+        visitor.visit(new Book(this));
+    }
+
     @Override
     public String toString(Function<? super Book, String> format) {
         return format.apply(this);
     }
 
     @Override
-    public void accept(Visitor visitor) {
-        visitor.visit(new Book(this));
+    public boolean isEqualTo(String itemName) {
+        return name.equals(itemName);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Book book = (Book) o;
+
+        return !(name != null ? !name.equals(book.name) : book.name != null);
+    }
+
+    @Override
+    public int hashCode() {
+        return name != null ? name.hashCode() : 0;
+    }
+
+    @Override
+    public String toString() {
+        return "name='" + name + '\'' +
+                ", author='" + author + '\'' +
+                ", year=" + year;
     }
 
     public static Function<Book, String> REGULAR_BOOK_FORMAT = book -> "name='" + book.name + '\'' +
