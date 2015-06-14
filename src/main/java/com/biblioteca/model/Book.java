@@ -1,8 +1,12 @@
 package com.biblioteca.model;
 
+import com.biblioteca.listener.Listener;
 import com.biblioteca.visitor.Visitor;
 
 import java.util.function.Function;
+
+import static com.biblioteca.constants.Constants.BOOK_NOT_PRESENT_TEXT;
+import static com.biblioteca.constants.Constants.BOOK_NOT_VALID_TEXT;
 
 public class Book implements Borrowable<Book> {
 
@@ -10,11 +14,13 @@ public class Book implements Borrowable<Book> {
     private String author;
     private int year;
     private boolean checkedOut;
+    private Listener listener;
 
-    public Book(String name, String author, int year) {
+    public Book(String name, String author, int year, Listener listener) {
         this.name = name;
         this.author = author;
         this.year = year;
+        this.listener = listener;
         this.checkedOut = false;
     }
 
@@ -28,6 +34,7 @@ public class Book implements Borrowable<Book> {
     @Override
     public boolean checkout(User user) {
         if (checkedOut) {
+            listener.update(BOOK_NOT_PRESENT_TEXT);
             return false;
         } else {
             checkedOut = true;
@@ -43,6 +50,7 @@ public class Book implements Borrowable<Book> {
             user.removeOwnable(this);
             return true;
         } else {
+            listener.update(BOOK_NOT_VALID_TEXT);
             return false;
         }
     }
@@ -93,4 +101,10 @@ public class Book implements Borrowable<Book> {
     public static Function<Book, String> REGULAR_BOOK_FORMAT = book -> "name='" + book.name + '\'' +
             ", author='" + book.author + '\'' +
             ", year=" + book.year;
+
+    @Override
+    public void addListener(Listener listener) {
+        this.listener = listener;
+    }
+
 }

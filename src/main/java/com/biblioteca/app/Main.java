@@ -46,10 +46,10 @@ public class Main {
 
     private static List<Borrowable> loadBorrowables() {
         List<Borrowable> availables = new ArrayList<>();
-        availables.add(new Book("Lord of the Rings", "JR Toliken", 1930));
-        availables.add(new Book("Harry Potter", "JK Rowling", 1992));
-        availables.add(new Book("Catch-22", "Joesph Heller", 1950));
-        availables.add(new Book("Winds of Winter", "George RR Martin", 2017));
+        availables.add(new Book("Lord of the Rings", "JR Toliken", 1930, new View(new Scanner(System.in))));
+        availables.add(new Book("Harry Potter", "JK Rowling", 1992, new View(new Scanner(System.in))));
+        availables.add(new Book("Catch-22", "Joesph Heller", 1950, new View(new Scanner(System.in))));
+        availables.add(new Book("Winds of Winter", "George RR Martin", 2017, new View(new Scanner(System.in))));
         availables.add(new Movie("The Matrix", "The Wachowskis", 1999, 10));
         availables.add(new Movie("Departed", "Martin Scorsese", 2005, 8));
         availables.add(new Movie("The Dark Knight", "Nolan", 2008, 10));

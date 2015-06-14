@@ -5,6 +5,7 @@ import com.biblioteca.model.Borrowable;
 import com.biblioteca.model.Movie;
 import com.biblioteca.repository.Library;
 import com.biblioteca.view.ListView;
+import com.biblioteca.view.View;
 import com.biblioteca.visitor.BookVisitor;
 import com.biblioteca.visitor.Visitor;
 import nl.jqno.equalsverifier.EqualsVerifier;
@@ -16,6 +17,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import static com.biblioteca.model.Book.REGULAR_BOOK_FORMAT;
 import static junit.framework.TestCase.assertEquals;
@@ -42,10 +44,10 @@ public class ListLibraryTest {
 
     public void setUpWithData() {
         List<Borrowable> bookList = new ArrayList<>();
-        bookList.add(new Book("Lord of the Rings", "JR Toliken", 1930));
-        bookList.add(new Book("Harry Potter", "JK Rowling", 1992));
-        bookList.add(new Book("Catch-22", "Joesph Heller", 1950));
-        bookList.add(new Book("Winds of Winter", "George RR Martin", 2017));
+        bookList.add(new Book("Lord of the Rings", "JR Toliken", 1930, new View(new Scanner(System.in))));
+        bookList.add(new Book("Harry Potter", "JK Rowling", 1992, new View(new Scanner(System.in))));
+        bookList.add(new Book("Catch-22", "Joesph Heller", 1950, new View(new Scanner(System.in))));
+        bookList.add(new Book("Winds of Winter", "George RR Martin", 2017, new View(new Scanner(System.in))));
         bookList.add(new Movie("The Matrix", "The Wachowskis", 1999, 10));
         visitor = new BookVisitor(new ArrayList<>(), REGULAR_BOOK_FORMAT);
         action = new ListLibrary(new Library(bookList), listView, visitor);

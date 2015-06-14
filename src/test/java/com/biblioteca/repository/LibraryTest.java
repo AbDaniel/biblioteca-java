@@ -4,6 +4,7 @@ import com.biblioteca.model.Book;
 import com.biblioteca.model.Borrowable;
 import com.biblioteca.model.Movie;
 import com.biblioteca.model.User;
+import com.biblioteca.view.View;
 import com.biblioteca.visitor.Visitor;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,6 +14,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -38,10 +40,10 @@ public class LibraryTest {
     public void setUp() {
         List<Borrowable> bookList = loadBorrowables();
 
-        Book book = new Book("1984", "George Orwell", 1950);
+        Book book = new Book("1984", "George Orwell", 1950, new View(new Scanner(System.in)));
         book.checkout(user);
         bookList.add(book);
-        book = new Book("Alchemist", "Paulo Coelho", 1988);
+        book = new Book("Alchemist", "Paulo Coelho", 1988, new View(new Scanner(System.in)));
         book.checkout(user);
         bookList.add(book);
 
@@ -50,10 +52,10 @@ public class LibraryTest {
 
     private List<Borrowable> loadBorrowables() {
         List<Borrowable> bookList = new ArrayList<>();
-        bookList.add(new Book("Lord of the Rings", "JR Toliken", 1930));
-        bookList.add(new Book("Harry Potter", "JK Rowling", 1992));
-        bookList.add(new Book("Catch-22", "Joesph Heller", 1950));
-        bookList.add(new Book("Winds of Winter", "George RR Martin", 2017));
+        bookList.add(new Book("Lord of the Rings", "JR Toliken", 1930, new View(new Scanner(System.in))));
+        bookList.add(new Book("Harry Potter", "JK Rowling", 1992, new View(new Scanner(System.in))));
+        bookList.add(new Book("Catch-22", "Joesph Heller", 1950, new View(new Scanner(System.in))));
+        bookList.add(new Book("Winds of Winter", "George RR Martin", 2017, new View(new Scanner(System.in))));
         bookList.add(new Movie("The Matrix", "The Wachowskis", 1999, 10));
         return bookList;
     }

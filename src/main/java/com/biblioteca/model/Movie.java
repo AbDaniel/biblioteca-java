@@ -1,5 +1,6 @@
 package com.biblioteca.model;
 
+import com.biblioteca.listener.Listener;
 import com.biblioteca.visitor.Visitable;
 import com.biblioteca.visitor.Visitor;
 
@@ -12,6 +13,7 @@ public class Movie implements Borrowable<Movie>, Visitable {
     private final int year;
     private final int rating;
     private boolean checkedOut;
+    private Listener listener;
 
     public Movie(String name, String director, int year, int rating) {
         this.name = name;
@@ -97,4 +99,8 @@ public class Movie implements Borrowable<Movie>, Visitable {
             ", year=" + movie.year +
             ", rating=" + movie.rating;
 
+    @Override
+    public void addListener(Listener listener) {
+        this.listener = listener;
+    }
 }

@@ -1,10 +1,11 @@
 package com.biblioteca.model;
 
+import com.biblioteca.listener.Listenable;
 import com.biblioteca.visitor.Visitable;
 
 import java.util.function.Function;
 
-public interface Borrowable<T> extends Visitable {
+public interface Borrowable<T> extends Visitable, Listenable {
 
     boolean isEqualTo(String itemName);
 
