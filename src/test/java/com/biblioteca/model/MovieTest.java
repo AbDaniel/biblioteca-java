@@ -9,6 +9,7 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -18,6 +19,9 @@ public class MovieTest {
 
     @Mock
     Visitor visitor;
+
+    @Mock
+    User user;
 
     @Before
     public void setUp() throws Exception {
@@ -51,6 +55,13 @@ public class MovieTest {
         String expectedString = "name='The Matrix', director='The Wachowskis', year=1999, rating=10";
 
         assertEquals(expectedString, formattedString);
+    }
+
+    @Test
+    public void shouldReturnFalseIfCurrentCheckoutStateIsTrueDuringCheckout() {
+        movie.checkout(user);
+
+        assertFalse(movie.checkout(user));
     }
 
 }
