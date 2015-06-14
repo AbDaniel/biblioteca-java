@@ -51,7 +51,7 @@ public class Book implements Borrowable<Book> {
             user.removeOwnable(this);
             return true;
         } else {
-//            listener.update(BOOK_NOT_VALID_TEXT);
+            listener.update(BOOK_NOT_VALID_TEXT);
             return false;
         }
     }
