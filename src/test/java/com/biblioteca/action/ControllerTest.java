@@ -1,6 +1,7 @@
 package com.biblioteca.action;
 
 import com.biblioteca.controller.Controller;
+import com.biblioteca.enums.MenuItem;
 import com.biblioteca.model.User;
 import com.biblioteca.repository.Library;
 import com.biblioteca.view.MenuView;
@@ -8,6 +9,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+
+import java.util.AbstractMap.SimpleEntry;
 
 import static com.biblioteca.enums.MenuItem.*;
 import static org.mockito.Matchers.any;
@@ -40,7 +43,7 @@ public class ControllerTest {
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
         controller = new Controller(menuView, parser);
-        when(menuView.getUserChoice()).thenReturn(LIST_BOOKS.getCode());
+        when(menuView.getUserChoiceAsEntry()).thenReturn(new SimpleEntry<>(LIST_BOOKS, null));
         when(parser.getAction(LIST_BOOKS, user)).thenReturn(action);
     }
 
@@ -55,7 +58,7 @@ public class ControllerTest {
     public void shouldGetMenuOptionFromUser() {
         controller.execute(user);
 
-        verify(menuView).getUserChoice();
+        verify(menuView).getUserChoiceAsEntry();
     }
 
     @Test
@@ -67,7 +70,7 @@ public class ControllerTest {
 
     @Test
     public void shouldNotCallDispatchIfMenuItemIsQuit() {
-        when(menuView.getUserChoice()).thenReturn(QUIT.getCode());
+        when(menuView.getUserChoiceAsEntry()).thenReturn(new SimpleEntry<>(QUIT, null));
         controller.execute(user);
 
         verify(parser, times(0)).getAction(eq(QUIT), any(User.class));
@@ -75,7 +78,7 @@ public class ControllerTest {
 
     @Test
     public void shouldNotCallDispatchIfMenuItemIsLogout() {
-        when(menuView.getUserChoice()).thenReturn(LOGOUT.getCode());
+        when(menuView.getUserChoiceAsEntry()).thenReturn(new SimpleEntry<>(QUIT, null));
         controller.execute(user);
 
         verify(parser, times(0)).getAction(eq(LOGOUT), any(User.class));

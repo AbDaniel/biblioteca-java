@@ -5,6 +5,8 @@ import com.biblioteca.model.User;
 import com.biblioteca.view.MenuView;
 import com.biblioteca.enums.MenuItem;
 
+import java.util.Map;
+
 import static com.biblioteca.enums.MenuItem.LOGOUT;
 import static com.biblioteca.enums.MenuItem.QUIT;
 import static com.biblioteca.enums.MenuItem.valueOf;
@@ -21,10 +23,10 @@ public class Controller {
 
     public MenuItem execute(User user) {
         menuView.displayMenu();
-        int userChoice = menuView.getUserChoice();
+        Map.Entry<MenuItem, String> userChoice = menuView.getUserChoiceAsEntry();
 
-        MenuItem selectedMenuItem = valueOf(userChoice);
-        if (selectedMenuItem == QUIT || selectedMenuItem == LOGOUT) {
+        MenuItem selectedMenuItem = userChoice.getKey();
+        if (selectedMenuItem == QUIT || selectedMenuItem == LOGOUT || selectedMenuItem == null) {
             return selectedMenuItem;
         }
 
