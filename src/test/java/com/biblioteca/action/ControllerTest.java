@@ -10,6 +10,7 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import java.util.AbstractMap;
 import java.util.AbstractMap.SimpleEntry;
 
 import static com.biblioteca.enums.MenuItem.*;
@@ -40,12 +41,15 @@ public class ControllerTest {
 
     private Controller controller;
 
+    private SimpleEntry<MenuItem, String> userChoice;
+
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
         controller = new Controller(menuView, parser);
-        when(menuView.getUserChoiceAsEntry()).thenReturn(new SimpleEntry<>(LIST_BOOKS, null));
-        when(parser.getAction(LIST_BOOKS, user)).thenReturn(action);
+        userChoice = new SimpleEntry<>(LIST_BOOKS, null);
+        when(menuView.getUserChoiceAsEntry()).thenReturn(userChoice);
+        when(parser.getAction(userChoice, user)).thenReturn(action);
     }
 
     @Test
@@ -66,28 +70,30 @@ public class ControllerTest {
     public void shouldGetCommandAssociatedWithMenuItem() {
         controller.execute(user);
 
-        verify(parser).getAction(eq(LIST_BOOKS), any(User.class));
+        verify(parser).getAction(eq(userChoice), any(User.class));
     }
 
     @Test
     public void shouldNotCallDispatchIfMenuItemIsQuit() {
-        when(menuView.getUserChoiceAsEntry()).thenReturn(new SimpleEntry<>(QUIT, null));
+        SimpleEntry<MenuItem, String> choice = new SimpleEntry<>(QUIT, null);
+        when(menuView.getUserChoiceAsEntry()).thenReturn(choice);
         controller.execute(user);
 
-        verify(parser, times(0)).getAction(eq(QUIT), any(User.class));
+        verify(parser, times(0)).getAction(eq(choice), any(User.class));
     }
 
     @Test
     public void shouldNotCallDispatchIfMenuItemIsLogout() {
-        when(menuView.getUserChoiceAsEntry()).thenReturn(new SimpleEntry<>(QUIT, null));
+        SimpleEntry<MenuItem, String> choice = new SimpleEntry<>(QUIT, null);
+        when(menuView.getUserChoiceAsEntry()).thenReturn(choice);
         controller.execute(user);
 
-        verify(parser, times(0)).getAction(eq(LOGOUT), any(User.class));
+        verify(parser, times(0)).getAction(eq(choice), any(User.class));
     }
 
     @Test
     public void shouldExecuteActionSelectedByUser() {
-        when(parser.getAction(LIST_BOOKS, user)).thenReturn(action);
+        when(parser.getAction(userChoice, user)).thenReturn(action);
         controller.execute(user);
 
         verify(action).execute();

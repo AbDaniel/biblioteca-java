@@ -3,45 +3,44 @@ package com.biblioteca.repository;
 import com.biblioteca.listener.Listener;
 import com.biblioteca.model.Book;
 import com.biblioteca.model.Borrowable;
-import com.biblioteca.model.Movie;
 import com.biblioteca.model.User;
-import com.biblioteca.visitor.Visitor;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
+import static org.mockito.MockitoAnnotations.initMocks;
 
-@RunWith(MockitoJUnitRunner.class)
 public class LibraryTest {
 
-    private Library library;
+    Library library;
 
     @Mock
-    private List<Borrowable> bookList;
+    List<Borrowable> bookList;
 
     @Mock
-    private User user;
+    User user;
 
     @Mock
-    private Visitor visitor;
-
-    @Mock
-    private Listener listener;
+    Listener listener;
 
     @Before
     public void setUp() {
-        List<Borrowable> bookList = loadBorrowables();
+        initMocks(this);
+        library = new Library(bookList);
+    }
 
+    void setUpWithData() {
+        List<Borrowable> bookList = new ArrayList<>();
+        bookList.add(new Book("Lord of the Rings", "JR Toliken", 1930));
+        bookList.add(new Book("Harry Potter", "JK Rowling", 1992));
+        bookList.add(new Book("Catch-22", "Joesph Heller", 1950));
+        bookList.add(new Book("Winds of Winter", "George RR Martin", 2017));
         Book book = new Book("1984", "George Orwell", 1950);
         book.checkout(user);
         bookList.add(book);
@@ -52,18 +51,26 @@ public class LibraryTest {
         this.library = new Library(bookList);
     }
 
-    private List<Borrowable> loadBorrowables() {
-        List<Borrowable> bookList = new ArrayList<>();
-        bookList.add(new Book("Lord of the Rings", "JR Toliken", 1930));
-        bookList.add(new Book("Harry Potter", "JK Rowling", 1992));
-        bookList.add(new Book("Catch-22", "Joesph Heller", 1950));
-        bookList.add(new Book("Winds of Winter", "George RR Martin", 2017));
-        bookList.add(new Movie("The Matrix", "The Wachowskis", 1999, 10));
-        return bookList;
+    @Test
+    public void shouldReturnListOfAvailableBooksOfRightSize() {
+        setUpWithData();
+        int actualSize = library.allAvailableItems().size();
+
+        assertEquals(4, actualSize);
+    }
+
+    @Test
+    public void shouldReturnZeroSizedListIfNoAvailableBooks() {
+        this.library = new Library(new ArrayList<>());
+
+        int actualSize = library.allAvailableItems().size();
+
+        assertEquals(0, actualSize);
     }
 
     @Test
     public void shouldReturnFalseIfBookIsNotAvailableDuringCheckout() {
+        setUpWithData();
         String bookName = "1234";
 
         assertFalse(library.checkout(bookName, user));
@@ -71,6 +78,7 @@ public class LibraryTest {
 
     @Test
     public void shouldReturnTrueOnSuccessfulCheckOut() {
+        setUpWithData();
         String name = "Lord of the Rings";
 
         assertTrue(library.checkout(name, user));
@@ -78,6 +86,7 @@ public class LibraryTest {
 
     @Test
     public void shouldReturnFalseIfBookIsValidButCheckStateIsFalseDuringReturn() {
+        setUpWithData();
         String bookName = "Lord of the Rings";
 
         assertFalse(library.returnItem(bookName, user));
@@ -85,6 +94,7 @@ public class LibraryTest {
 
     @Test
     public void shouldReturnFalseIfBookIsInValidDuringReturn() {
+        setUpWithData();
         String bookName = "1234";
 
         assertFalse(library.returnItem(bookName, user));
@@ -92,16 +102,10 @@ public class LibraryTest {
 
     @Test
     public void shouldReturnTrueOnSuccessfulReturn() {
+        setUpWithData();
         String name = "1984";
 
         assertTrue(library.returnItem(name, user));
-    }
-
-    @Test
-    public void shouldRetrieveBorrowablesByVisitor() {
-        library.getAvailableBorrowables(visitor);
-
-        verify(visitor, times(4)).visit(any(Book.class));
     }
 
 }

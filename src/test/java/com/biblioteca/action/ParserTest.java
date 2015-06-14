@@ -12,6 +12,8 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import java.util.AbstractMap;
+import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
 
 import static com.biblioteca.enums.MenuItem.*;
@@ -30,6 +32,9 @@ public class ParserTest {
 
     @Mock
     User user;
+    private String bookName;
+
+    private SimpleEntry<MenuItem, String> userChoice;
 
     @Before
     public void setUp() throws Exception {
@@ -38,22 +43,24 @@ public class ParserTest {
 
     @Test
     public void shouldReturnListBookActionWhenUserSelectsListBook() {
-        MenuItem item = LIST_BOOKS;
-
-        Action actualAction = parser.getAction(item, user);
-        ListLibrary expected = new ListLibrary(library, (ListView) item.view(),
+        userChoice = new SimpleEntry<>(LIST_BOOKS, null);
+        ListLibrary expected = new ListLibrary(library, (ListView) userChoice.getKey().view(),
                 new BookVisitor(new ArrayList<>(), REGULAR_BOOK_FORMAT));
 
+        Action actualAction = parser.getAction(userChoice, user);
+
+        bookName = "Lord of the Rings";
         assertEquals(expected, actualAction);
     }
 
     @Test
     public void shouldReturnListMoviesActionWhenUserSelectsListBook() {
         MenuItem item = LIST_MOVIES;
-
-        Action actualAction = parser.getAction(item, user);
+        userChoice = new SimpleEntry<>(item, null);
         ListLibrary expected = new ListLibrary(library, (ListView) item.view(),
                 new MovieVisitor(new ArrayList<>(), REGULAR_MOVIE_FORMAT));
+
+        Action actualAction = parser.getAction(userChoice, user);
 
         assertEquals(expected, actualAction);
     }
@@ -61,9 +68,10 @@ public class ParserTest {
     @Test
     public void shouldReturnCheckoutActionActionWhenUserSelectsCheckoutBook() {
         MenuItem item = CHECKOUT_BOOK;
+        userChoice = new SimpleEntry<>(item, null);
+        Checkout expected = new Checkout(library, user, bookName);
 
-        Action actualAction = parser.getAction(item, user);
-        Checkout expected = new Checkout(library, item.view(), user);
+        Action actualAction = parser.getAction(userChoice, user);
 
         assertEquals(expected, actualAction);
     }
@@ -71,9 +79,10 @@ public class ParserTest {
     @Test
     public void shouldReturnCheckoutActionActionWhenUserSelectsCheckoutMovies() {
         MenuItem item = CHECKOUT_MOVIE;
+        userChoice = new SimpleEntry<>(item, null);
 
-        Action actualAction = parser.getAction(item, user);
-        Checkout expected = new Checkout(library, item.view(), user);
+        Action actualAction = parser.getAction(userChoice, user);
+        Checkout expected = new Checkout(library, user, bookName);
 
         assertEquals(expected, actualAction);
     }
@@ -81,9 +90,10 @@ public class ParserTest {
     @Test
     public void shouldReturnReturnActionActionWhenUserSelectsReturnBook() {
         MenuItem item = RETURN_BOOK;
-
-        Action actualAction = parser.getAction(item, user);
+        userChoice = new SimpleEntry<>(item, null);
         Return expected = new Return(library, item.view(), user);
+
+        Action actualAction = parser.getAction(userChoice, user);
 
         assertEquals(expected, actualAction);
     }
@@ -92,9 +102,10 @@ public class ParserTest {
     @Test
     public void shouldReturnReturnActionActionWhenUserSelectsReturnMovies() {
         MenuItem item = RETURN_MOVIE;
-
-        Action actualAction = parser.getAction(item, user);
+        userChoice = new SimpleEntry<>(item, null);
         Return expected = new Return(library, item.view(), user);
+
+        Action actualAction = parser.getAction(userChoice, user);
 
         assertEquals(expected, actualAction);
     }
@@ -103,8 +114,9 @@ public class ParserTest {
     @Test
     public void shouldReturnNullIfSelectedMenuItemIsNotCheckoutReturnOrList() {
         MenuItem item = QUIT;
+        userChoice = new SimpleEntry<>(item, null);
 
-        Action actualAction = parser.getAction(item, user);
+        Action actualAction = parser.getAction(userChoice, user);
 
         assertNull(actualAction);
     }

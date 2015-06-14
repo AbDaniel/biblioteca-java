@@ -45,7 +45,6 @@ public class ListLibraryTest {
         bookList.add(new Book("Harry Potter", "JK Rowling", 1992));
         bookList.add(new Book("Catch-22", "Joesph Heller", 1950));
         bookList.add(new Book("Winds of Winter", "George RR Martin", 2017));
-        bookList.add(new Movie("The Matrix", "The Wachowskis", 1999, 10));
         visitor = new BookVisitor(new ArrayList<>(), REGULAR_BOOK_FORMAT);
         action = new ListLibrary(new Library(bookList), listView, visitor);
     }
@@ -59,14 +58,7 @@ public class ListLibraryTest {
     public void shouldGetBorrowablesFromLibraryUsingVisitor() {
         action.execute();
 
-        verify(library).getAvailableBorrowables(visitor);
-    }
-
-    @Test
-    public void shouldRetrieveBorrowablesFromVisitor() {
-        action.execute();
-
-        verify(visitor).visitables();
+        verify(library).allAvailableItems();
     }
 
     @Test
@@ -74,12 +66,13 @@ public class ListLibraryTest {
         setUpWithData();
         action.execute();
 
-        String expected = "name='Lord of the Rings', author='JR Toliken', year=1930\n" +
-                "name='Harry Potter', author='JK Rowling', year=1992\n" +
-                "name='Catch-22', author='Joesph Heller', year=1950\n" +
-                "name='Winds of Winter', author='George RR Martin', year=2017\n";
+        List<Borrowable> expected = new ArrayList<>();
+        expected.add(new Book("Lord of the Rings", "JR Toliken", 1930));
+        expected.add(new Book("Harry Potter", "JK Rowling", 1992));
+        expected.add(new Book("Catch-22", "Joesph Heller", 1950));
+        expected.add(new Book("Winds of Winter", "George RR Martin", 2017));
 
-        verify(listView).displayMessage(expected);
+        verify(listView).displayListOfBorrowables(expected);
     }
 
 }

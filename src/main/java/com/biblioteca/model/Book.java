@@ -20,7 +20,6 @@ public class Book implements Borrowable<Book> {
         this.name = name;
         this.author = author;
         this.year = year;
-        this.listener = listener;
         this.checkedOut = false;
     }
 

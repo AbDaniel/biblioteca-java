@@ -19,9 +19,6 @@ import static org.mockito.Mockito.when;
 public class CheckoutTest {
 
     @Mock
-    View view;
-
-    @Mock
     private Library library;
 
     @Mock
@@ -32,53 +29,16 @@ public class CheckoutTest {
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        command = new Checkout(library, view, user);
-    }
-
-    @Test
-    public void shouldDisplayMessageAskingUserToInputBookName() {
-        command.execute();
-
-        verify(view).displayMessage(Constants.ENTER_BOOK_NAME);
-    }
-
-    @Test
-    public void shouldGetBookNameFromUser() {
-        command.execute();
-
-        verify(view).getString();
+        command = new Checkout(library, user, "Lord of the Rings");
     }
 
     @Test
     public void shouldCallCheckoutWithGivenInput() {
         String bookName = "Lord of the Rings";
-        when(view.getString()).thenReturn(bookName);
 
         command.execute();
 
         verify(library).checkout(eq(bookName), Matchers.any(User.class));
-    }
-
-    @Test
-    public void shouldNotifyIfBookIsNotValid() {
-        String bookName = "123";
-        when(view.getString()).thenReturn(bookName);
-        when(library.checkout(bookName, user)).thenReturn(false);
-
-        command.execute();
-
-        verify(view).displayMessage(Constants.BOOK_NOT_PRESENT_TEXT);
-    }
-
-    @Test
-    public void shouldNotifyUserOnSuccessfulCheckout() {
-        String bookName = "Lord of the Rings";
-        when(view.getString()).thenReturn(bookName);
-        when(library.checkout(eq(bookName), Matchers.any(User.class))).thenReturn(true);
-
-        command.execute();
-
-        verify(view).displayMessage(Constants.SUCCESSFUL_CHECKOUT_TEXT);
     }
 
     @Test

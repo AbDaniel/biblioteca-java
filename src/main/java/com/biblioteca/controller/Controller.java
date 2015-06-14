@@ -25,15 +25,23 @@ public class Controller {
         menuView.displayMenu();
         Map.Entry<MenuItem, String> userChoice = menuView.getUserChoiceAsEntry();
 
-        if (userChoice == null)
+        if (isInvalidChoice(userChoice))
             return null;
         MenuItem selectedMenuItem = userChoice.getKey();
-        if (selectedMenuItem == QUIT || selectedMenuItem == LOGOUT || selectedMenuItem == null) {
+        if (isExitOrLogout(selectedMenuItem)) {
             return selectedMenuItem;
         }
 
-        parser.getAction(selectedMenuItem, user).execute();
+        parser.getAction(userChoice, user).execute();
         return selectedMenuItem;
+    }
+
+    private boolean isInvalidChoice(Map.Entry<MenuItem, String> userChoice) {
+        return userChoice == null;
+    }
+
+    private boolean isExitOrLogout(MenuItem selectedMenuItem) {
+        return selectedMenuItem == QUIT || selectedMenuItem == LOGOUT;
     }
 
 }

@@ -1,33 +1,23 @@
 package com.biblioteca.action;
 
 import com.biblioteca.model.User;
-import com.biblioteca.view.View;
 import com.biblioteca.repository.Library;
-
-import static com.biblioteca.constants.Constants.*;
-import static com.biblioteca.constants.Constants.SUCCESSFUL_CHECKOUT_TEXT;
 
 public class Checkout implements Action {
 
     private final Library library;
-    private final View view;
     private final User user;
+    private String itemName;
 
-    public Checkout(Library library, View view, User user) {
+    public Checkout(Library library, User user, String itemName) {
         this.library = library;
-        this.view = view;
         this.user = user;
+        this.itemName = itemName;
     }
 
     @Override
     public void execute() {
-        view.displayMessage(ENTER_BOOK_NAME);
-        String bookName = view.getString();
-        if (library.checkout(bookName, user)) {
-            view.displayMessage(SUCCESSFUL_CHECKOUT_TEXT);
-        } else {
-            view.displayMessage(BOOK_NOT_PRESENT_TEXT);
-        }
+        library.checkout(itemName, user);
     }
 
     @Override
