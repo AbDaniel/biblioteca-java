@@ -1,6 +1,5 @@
 package com.biblioteca.repository;
 
-import com.biblioteca.constants.Constants;
 import com.biblioteca.listener.Listener;
 import com.biblioteca.model.Borrowable;
 import com.biblioteca.model.User;
@@ -8,6 +7,8 @@ import com.biblioteca.model.User;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static com.biblioteca.constants.Constants.ITEM_NOT_PRESENT;
 
 public class Library {
 
@@ -25,7 +26,7 @@ public class Library {
     public boolean checkout(final String itemName, User user) {
         Borrowable borrowable = borrowables.stream().filter(p -> p.isEqualTo(itemName)).findFirst().orElse(null);
         if (borrowable == null)
-            listener.update(Constants.ITEM_NOT_PRESENT);
+            listener.update(ITEM_NOT_PRESENT);
         return borrowable != null && borrowable.checkout(user);
     }
 

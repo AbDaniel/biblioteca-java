@@ -29,6 +29,9 @@ public class Main {
 
         Library bookLibrary = new Library(loadBorrowables(view));
         Library movieLibrary = new Library(loadMovie(view));
+        bookLibrary.addListener(view);
+        movieLibrary.addListener(view);
+
         Parser parser = new Parser(bookLibrary, movieLibrary);
 
         Login login = new Login(loadUsers());
