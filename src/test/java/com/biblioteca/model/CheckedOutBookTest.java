@@ -1,5 +1,6 @@
 package com.biblioteca.model;
 
+import com.biblioteca.search.Searcher;
 import com.biblioteca.visitor.Visitor;
 import org.junit.Before;
 import org.junit.Test;
@@ -9,6 +10,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CheckedOutBookTest {
@@ -20,6 +22,9 @@ public class CheckedOutBookTest {
 
     @Mock
     private Visitor visitor;
+
+    @Mock
+    private Searcher searcher;
 
     @Before
     public void setUp() throws Exception {
@@ -45,6 +50,15 @@ public class CheckedOutBookTest {
         book.accept(visitor);
 
         verify(visitor).visit(book);
+    }
+
+    @Test
+    public void shouldAcceptSearcherWithRightSearchString() {
+        when(searcher.getSearchString()).thenReturn("Lord of the Rings");
+
+        book.match(searcher);
+
+        verify(searcher).visit(book);
     }
 
 }
