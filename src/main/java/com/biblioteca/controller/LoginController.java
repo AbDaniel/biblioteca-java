@@ -1,8 +1,8 @@
 package com.biblioteca.controller;
 
 import com.biblioteca.action.Login;
-import com.biblioteca.constants.Constants;
 import com.biblioteca.listener.ExitLogoutListener;
+import com.biblioteca.listener.LoginListener;
 import com.biblioteca.view.View;
 import com.biblioteca.model.User;
 
@@ -14,7 +14,8 @@ public class LoginController {
 
     private Login login;
     private View view;
-    private ExitLogoutListener listener;
+    private ExitLogoutListener exitLogoutListener;
+    private LoginListener loginListener;
 
     public LoginController(Login login, View view) {
         this.login = login;
@@ -33,12 +34,17 @@ public class LoginController {
                 view.displayMessage(INVALID_CREDENTIALS);
             }
         } while (user == null);
-        listener.update(RUNNING);
+        exitLogoutListener.update(RUNNING);
+        loginListener.update(user);
         return user;
     }
 
-    public void addListener(ExitLogoutListener listener) {
-        this.listener = listener;
+    public void addExitLogoutListener(ExitLogoutListener listener) {
+        this.exitLogoutListener = listener;
+    }
+
+    public void addLoginListener(LoginListener loginListener) {
+        this.loginListener = loginListener;
     }
 
 }

@@ -41,7 +41,7 @@ public class Main {
 
         BibliotecaApp bibliotecaApp = new BibliotecaApp(WELCOME_TEXT, view, controller, loginController);
         controller.addListener(bibliotecaApp);
-        loginController.addListener(bibliotecaApp);
+        loginController.addExitLogoutListener(bibliotecaApp);
 
         bibliotecaApp.start();
 
