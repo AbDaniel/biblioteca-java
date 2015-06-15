@@ -2,6 +2,9 @@ package com.biblioteca.action;
 
 import com.biblioteca.model.User;
 import com.biblioteca.repository.Library;
+import com.biblioteca.search.BookSearcher;
+
+import java.util.ArrayList;
 
 public class Checkout implements Action {
 
@@ -17,7 +20,7 @@ public class Checkout implements Action {
 
     @Override
     public void execute() {
-        library.checkout(itemName, user);
+        library.checkout(itemName, user, new BookSearcher(new ArrayList<>(), itemName));
     }
 
     @Override

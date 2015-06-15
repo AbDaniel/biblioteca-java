@@ -3,6 +3,7 @@ package com.biblioteca.repository;
 import com.biblioteca.listener.Listener;
 import com.biblioteca.model.Borrowable;
 import com.biblioteca.model.User;
+import com.biblioteca.search.Searcher;
 import com.biblioteca.visitor.Visitor;
 
 import java.util.List;
@@ -25,8 +26,9 @@ public class Library {
         return null;
     }
 
-    public boolean checkout(final String itemName, User user) {
-        Borrowable borrowable = borrowables.stream().filter(p -> p.isEqualTo(itemName)).findFirst().orElse(null);
+    public boolean checkout(final String itemName, User user, Searcher searcher) {
+        borrowables.forEach(borrowable -> borrowable.match(searcher));
+        Borrowable borrowable = searcher.searchResults().stream().findFirst().orElse(null);
         if (borrowable == null)
             listener.update(ITEM_NOT_PRESENT);
         return borrowable != null && borrowable.checkout(user);
