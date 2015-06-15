@@ -1,5 +1,7 @@
 package com.biblioteca.model;
 
+import com.biblioteca.search.AvailableBookSearcher;
+import com.biblioteca.search.BookSearcher;
 import com.biblioteca.search.Searchable;
 import com.biblioteca.search.Searcher;
 import com.biblioteca.visitor.Visitor;
@@ -23,6 +25,9 @@ public class AvailableBookTest {
 
     @Mock
     Visitor visitor;
+
+    @Mock
+    AvailableBookSearcher searcher;
 
     @Before
     public void setUp() throws Exception {
@@ -48,6 +53,15 @@ public class AvailableBookTest {
         book.accept(visitor);
 
         verify(visitor).visit(book);
+    }
+
+    @Test
+    public void shouldAcceptSearcherWithRightSearchString() {
+        when(searcher.getSearchString()).thenReturn("Lord of the Rings");
+
+        book.match(searcher);
+
+        verify(searcher).visit(book);
     }
 
 }

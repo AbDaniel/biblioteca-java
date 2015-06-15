@@ -52,4 +52,13 @@ public class CheckedOutBookTest {
         verify(visitor).visit(book);
     }
 
+    @Test
+    public void shouldAcceptSearcherWithRightSearchString() {
+        when(searcher.getSearchString()).thenReturn("Lord of the Rings");
+
+        book.match(searcher);
+
+        verify(searcher).visit(book);
+    }
+
 }

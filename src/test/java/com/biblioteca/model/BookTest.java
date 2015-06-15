@@ -144,13 +144,4 @@ public class BookTest {
         assertEquals(expectedString, formattedString);
     }
 
-    @Test
-    public void shouldAcceptSearcherWithRightSearchString() {
-        when(searcher.getSearchString()).thenReturn("Lord of the Rings");
-
-        book.match(searcher);
-
-        verify(searcher).visit(book);
-    }
-
 }

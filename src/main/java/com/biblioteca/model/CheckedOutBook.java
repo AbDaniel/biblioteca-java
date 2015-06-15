@@ -22,4 +22,11 @@ public class CheckedOutBook extends Book {
     public Book returnBorrowable(User user) {
         return new AvailableBook(this);
     }
+
+    @Override
+    public void match(Searcher searcher) {
+        if (searcher.getSearchString().equals(name))
+            searcher.visit(this);
+    }
+
 }

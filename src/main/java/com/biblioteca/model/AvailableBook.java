@@ -23,4 +23,10 @@ public class AvailableBook extends Book {
         return new CheckedOutBook(this);
     }
 
+    @Override
+    public void match(Searcher searcher) {
+        if (searcher.getSearchString().equals(name))
+            searcher.visit(this);
+    }
+
 }

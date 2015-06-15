@@ -31,6 +31,10 @@ public class Library {
         Borrowable borrowable = searcher.searchResults().stream().findFirst().orElse(null);
         if (borrowable == null)
             listener.update(ITEM_NOT_PRESENT);
+        else {
+            borrowables.remove(borrowable);
+            borrowables.add(borrowable.checkoutBorrowable(user));
+        }
         return borrowable != null && borrowable.checkout(user);
     }
 

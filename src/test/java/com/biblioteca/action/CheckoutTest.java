@@ -41,7 +41,7 @@ public class CheckoutTest {
 
         command.execute();
 
-        verify(library).checkout(eq(bookName), Matchers.any(User.class), searcher);
+        verify(library).checkout(eq(bookName), Matchers.any(User.class), eq(searcher));
     }
 
     @Test

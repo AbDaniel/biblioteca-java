@@ -5,6 +5,7 @@ import com.biblioteca.model.AvailableBook;
 import com.biblioteca.model.Book;
 import com.biblioteca.model.Borrowable;
 import com.biblioteca.model.User;
+import com.biblioteca.search.AvailableBookSearcher;
 import com.biblioteca.search.BookSearcher;
 import com.biblioteca.visitor.Visitor;
 import org.junit.Before;
@@ -67,7 +68,7 @@ public class LibraryTest {
         setUpWithData();
         String bookName = "1234";
 
-        assertFalse(library.checkout(bookName, user, new BookSearcher(new ArrayList<>(), bookName)));
+        assertFalse(library.checkout(bookName, user, new AvailableBookSearcher(new ArrayList<>(), bookName)));
     }
 
     @Test
@@ -75,7 +76,7 @@ public class LibraryTest {
         setUpWithData();
         String name = "Lord of the Rings";
 
-        assertTrue(library.checkout(name, user, new BookSearcher(new ArrayList<>(), name)));
+        assertTrue(library.checkout(name, user, new AvailableBookSearcher(new ArrayList<>(), name)));
     }
 
     @Test
@@ -107,7 +108,7 @@ public class LibraryTest {
         setUpWithData();
         String bookName = "1234";
         library.addListener(listener);
-        library.checkout(bookName, user, new BookSearcher(new ArrayList<>(), bookName));
+        library.checkout(bookName, user, new AvailableBookSearcher(new ArrayList<>(), bookName));
 
         verify(listener).update(ITEM_NOT_PRESENT);
     }
