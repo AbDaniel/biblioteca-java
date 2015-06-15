@@ -24,9 +24,6 @@ public class AvailableBookTest {
     @Mock
     Visitor visitor;
 
-    @Mock
-    Searcher searcher;
-
     @Before
     public void setUp() throws Exception {
         book = new AvailableBook("Lord of the Rings", "JR Toliken", 1930);
@@ -51,15 +48,6 @@ public class AvailableBookTest {
         book.accept(visitor);
 
         verify(visitor).visit(book);
-    }
-
-    @Test
-    public void shouldAcceptSearcherWithRightSearchString() {
-        when(searcher.getSearchString()).thenReturn("Lord of the Rings");
-
-        book.match(searcher);
-
-        verify(searcher).visit(book);
     }
 
 }

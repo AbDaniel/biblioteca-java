@@ -36,7 +36,7 @@ public class MovieTest {
 
     @Before
     public void setUp() throws Exception {
-        movie = new Movie("The Matrix", "The Wachowskis", 1999, 10);
+        movie = new AvailableMovie("The Matrix", "The Wachowskis", 1999, 10);
         movie.addListener(listener);
     }
 

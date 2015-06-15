@@ -1,6 +1,5 @@
 package com.biblioteca.model;
 
-import com.biblioteca.search.Searcher;
 import com.biblioteca.visitor.Visitor;
 import org.junit.Before;
 import org.junit.Test;
@@ -10,46 +9,42 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
-public class CheckedOutBookTest {
+public class CheckedoutMovieTest {
 
-    private CheckedOutBook book;
-
-    @Mock
-    private User user;
+    CheckedoutMovie movie;
 
     @Mock
-    private Visitor visitor;
+    User user;
 
     @Mock
-    private Searcher searcher;
+    Visitor visitor;
 
     @Before
     public void setUp() throws Exception {
-        book = new CheckedOutBook("Lord of the Rings", "JR Toliken", 1930);
+        movie = new CheckedoutMovie("The Matrix", "The Wachowskis", 1999, 10);
     }
 
     @Test
     public void shouldReturnAnAvailableBookOnCheckout() {
-        Book actualBook = book.returnBorrowable(user);
+        Movie actualBook = movie.returnBorrowable(user);
 
-        assertTrue(actualBook instanceof AvailableBook);
+        assertTrue(actualBook instanceof AvailableMovie);
     }
 
     @Test
     public void shouldReturnNullOnReturn() {
-        Book actualBook = book.checkoutBorrowable(user);
+        Movie actualBook = movie.checkoutBorrowable(user);
 
         assertNull(actualBook);
     }
 
     @Test
     public void shouldAcceptVisitor() {
-        book.accept(visitor);
+        movie.accept(visitor);
 
-        verify(visitor).visit(book);
+        verify(visitor).visit(movie);
     }
 
 }

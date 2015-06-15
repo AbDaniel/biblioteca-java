@@ -1,9 +1,6 @@
 package com.biblioteca.visitor;
 
-import com.biblioteca.model.AvailableBook;
-import com.biblioteca.model.Book;
-import com.biblioteca.model.CheckedOutBook;
-import com.biblioteca.model.Movie;
+import com.biblioteca.model.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -33,7 +30,7 @@ public class CheckedoutBookVisitorTest {
         visitables.add(new AvailableBook("Harry Potter", "JK Rowling", 1992));
         visitables.add(new AvailableBook("Catch-22", "Joesph Heller", 1950));
         visitables.add(new AvailableBook("Winds of Winter", "George RR Martin", 2017));
-        visitables.add(new Movie("The Matrix", "The Wachowskis", 1999, 10));
+        visitables.add(new AvailableMovie("The Matrix", "The Wachowskis", 1999, 10));
         visitables.add(new CheckedOutBook("Dance with Dragons", "George RR Martin", 2017));
         visitor = new CheckedoutBookVisitor(new ArrayList<>(), REGULAR_BOOK_FORMAT);
         visitables.forEach(visitable -> visitable.accept(visitor));

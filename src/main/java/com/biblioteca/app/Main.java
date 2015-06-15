@@ -61,10 +61,10 @@ public class Main {
 
     private static List<Borrowable> loadMovie(View view) {
         List<Borrowable> availables = new ArrayList<>();
-        availables.add(new Movie("The Matrix", "The Wachowskis", 1999, 10));
-        availables.add(new Movie("Departed", "Martin Scorsese", 2005, 8));
-        availables.add(new Movie("The Dark Knight", "Nolan", 2008, 10));
-        availables.add(new Movie("Seven Samurai", "Akira Kurosawa", 1950, 10));
+        availables.add(new AvailableMovie("The Matrix", "The Wachowskis", 1999, 10));
+        availables.add(new AvailableMovie("Departed", "Martin Scorsese", 2005, 8));
+        availables.add(new AvailableMovie("The Dark Knight", "Nolan", 2008, 10));
+        availables.add(new AvailableMovie("Seven Samurai", "Akira Kurosawa", 1950, 10));
         availables.forEach(borrowable -> borrowable.addListener(view));
         return availables;
     }

@@ -8,7 +8,7 @@ import java.util.function.Function;
 
 import static com.biblioteca.constants.Constants.*;
 
-public class Movie implements Borrowable<Movie> {
+public abstract class Movie implements Borrowable<Movie> {
 
     private final String name;
     private final String director;
@@ -95,11 +95,6 @@ public class Movie implements Borrowable<Movie> {
         return format.apply(this);
     }
 
-    @Override
-    public void accept(Visitor visitor) {
-        visitor.visit(new Movie(this));
-    }
-
     public static Function<Movie, String> REGULAR_MOVIE_FORMAT = movie -> "name='" + movie.name + '\'' +
             ", director='" + movie.director + '\'' +
             ", year=" + movie.year +
@@ -114,5 +109,15 @@ public class Movie implements Borrowable<Movie> {
     public void match(Searcher searcher) {
         if (searcher.getSearchString().equals(name))
             searcher.visit(this);
+    }
+
+    @Override
+    public Movie checkoutBorrowable(User user) {
+        return null;
+    }
+
+    @Override
+    public Movie returnBorrowable(User user) {
+        return null;
     }
 }
