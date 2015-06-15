@@ -1,5 +1,6 @@
 package com.biblioteca.repository;
 
+import com.biblioteca.constants.Constants;
 import com.biblioteca.listener.Listener;
 import com.biblioteca.model.Book;
 import com.biblioteca.model.Borrowable;
@@ -7,13 +8,18 @@ import com.biblioteca.model.User;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.biblioteca.constants.Constants.BOOK_NOT_PRESENT_TEXT;
+import static com.biblioteca.constants.Constants.INVALID_INPUT_TEXT;
+import static com.biblioteca.constants.Constants.ITEM_NOT_PRESENT;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.*;
 import static org.mockito.MockitoAnnotations.initMocks;
 
 public class LibraryTest {
@@ -33,6 +39,7 @@ public class LibraryTest {
     public void setUp() {
         initMocks(this);
         library = new Library(bookList);
+        library.addListener(listener);
     }
 
     void setUpWithData() {
@@ -51,6 +58,7 @@ public class LibraryTest {
         bookList.add(book);
         bookList.forEach(borrowable -> borrowable.addListener(listener));
         this.library = new Library(bookList);
+        library.addListener(listener);
     }
 
     @Test
@@ -108,6 +116,16 @@ public class LibraryTest {
         String name = "1984";
 
         assertTrue(library.returnItem(name, user));
+    }
+
+    @Test
+    public void shouldUpdateListenerWhenItemIsNotFound() {
+        setUpWithData();
+        String bookName = "1234";
+        library.addListener(listener);
+        library.checkout(bookName, user);
+
+        verify(listener).update(ITEM_NOT_PRESENT);
     }
 
 }

@@ -24,4 +24,5 @@ public interface Constants {
     int EXIT_CODE = -1;
     int LOGOUT_CODE = -2;
     int RUNNING = 0;
+    String ITEM_NOT_PRESENT = "That item is not a present";
 }
