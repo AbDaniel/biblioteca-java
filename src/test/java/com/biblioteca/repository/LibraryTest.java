@@ -5,7 +5,6 @@ import com.biblioteca.model.AvailableBook;
 import com.biblioteca.model.Book;
 import com.biblioteca.model.Borrowable;
 import com.biblioteca.model.User;
-import com.biblioteca.visitor.BookVisitor;
 import com.biblioteca.visitor.Visitor;
 import org.junit.Before;
 import org.junit.Test;
@@ -39,7 +38,7 @@ public class LibraryTest {
     @Before
     public void setUp() {
         initMocks(this);
-        library = new Library(bookList, visitor);
+        library = new Library(bookList);
         library.addListener(listener);
     }
 
@@ -58,7 +57,7 @@ public class LibraryTest {
         book.checkout(user);
         bookList.add(book);
         bookList.forEach(borrowable -> borrowable.addListener(listener));
-        this.library = new Library(bookList, visitor);
+        this.library = new Library(bookList);
         library.addListener(listener);
     }
 
@@ -116,7 +115,7 @@ public class LibraryTest {
     public void shouldResetVistorBeforeMakingItVisit() {
         setUpWithData();
 
-        library.allAvailableItems();
+        library.allAvailableItems(visitor);
 
         verify(visitor).reset();
     }

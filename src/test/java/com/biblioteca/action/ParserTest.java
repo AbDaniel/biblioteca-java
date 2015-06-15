@@ -1,9 +1,11 @@
 package com.biblioteca.action;
 
 import com.biblioteca.enums.MenuItem;
+import com.biblioteca.model.Book;
 import com.biblioteca.model.User;
 import com.biblioteca.repository.Library;
 import com.biblioteca.view.ListView;
+import com.biblioteca.visitor.AvailableBookVisitor;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,6 +13,7 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.AbstractMap.SimpleEntry;
+import java.util.ArrayList;
 
 import static com.biblioteca.enums.MenuItem.*;
 import static junit.framework.TestCase.assertEquals;
@@ -42,8 +45,8 @@ public class ParserTest {
     @Test
     public void shouldReturnListBookActionWhenUserSelectsListBook() {
         userChoice = new SimpleEntry<>(LIST_BOOKS, null);
-        ListLibrary expected = new ListLibrary(bookLibrary, (ListView) userChoice.getKey().view()
-        );
+        ListLibrary expected = new ListLibrary(bookLibrary, (ListView) userChoice.getKey().view(),
+                new AvailableBookVisitor(new ArrayList<>(), Book.REGULAR_BOOK_FORMAT));
 
         Action actualAction = parser.getAction(userChoice, user);
 
@@ -55,8 +58,8 @@ public class ParserTest {
     public void shouldReturnListMoviesActionWhenUserSelectsListBook() {
         MenuItem item = LIST_MOVIES;
         userChoice = new SimpleEntry<>(item, null);
-        ListLibrary expected = new ListLibrary(movieLibray, (ListView) item.view()
-        );
+        ListLibrary expected = new ListLibrary(movieLibray, (ListView) item.view(),
+                new AvailableBookVisitor(new ArrayList<>(), Book.REGULAR_BOOK_FORMAT));
 
         Action actualAction = parser.getAction(userChoice, user);
 

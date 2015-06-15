@@ -12,15 +12,13 @@ import static com.biblioteca.constants.Constants.ITEM_NOT_PRESENT;
 public class Library {
 
     private List<Borrowable> borrowables;
-    private Visitor visitor;
     private Listener listener;
 
-    public Library(List<Borrowable> borrowables, Visitor visitor) {
+    public Library(List<Borrowable> borrowables) {
         this.borrowables = borrowables;
-        this.visitor = visitor;
     }
 
-    public List<? extends Borrowable> allAvailableItems() {
+    public List<? extends Borrowable> allAvailableItems(Visitor visitor) {
         visitor.reset();
         borrowables.forEach(borrowable -> borrowable.accept(visitor));
         listener.update(visitor.visitables());

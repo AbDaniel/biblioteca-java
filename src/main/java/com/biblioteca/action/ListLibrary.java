@@ -2,20 +2,23 @@ package com.biblioteca.action;
 
 import com.biblioteca.repository.Library;
 import com.biblioteca.view.ListView;
+import com.biblioteca.visitor.Visitor;
 
 public class ListLibrary implements Action {
 
     private final Library library;
     private final ListView listView;
+    private Visitor visitor;
 
-    public ListLibrary(Library library, ListView listView) {
+    public ListLibrary(Library library, ListView listView, Visitor visitor) {
         this.library = library;
         this.listView = listView;
+        this.visitor = visitor;
     }
 
     @Override
     public void execute() {
-        library.allAvailableItems();
+        library.allAvailableItems(visitor);
     }
 
     @Override

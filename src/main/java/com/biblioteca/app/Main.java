@@ -9,7 +9,6 @@ import com.biblioteca.repository.Library;
 import com.biblioteca.view.MenuView;
 import com.biblioteca.view.SubMenuView;
 import com.biblioteca.view.View;
-import com.biblioteca.visitor.BookVisitor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,8 +24,8 @@ public class Main {
         SubMenuView subMenuView = new SubMenuView(scanner);
         MenuView menuView = new MenuView(scanner, subMenuView);
 
-        Library bookLibrary = new Library(loadBorrowables(view), new BookVisitor(new ArrayList<>(), Book.REGULAR_BOOK_FORMAT));
-        Library movieLibrary = new Library(loadMovie(view), new BookVisitor(new ArrayList<>(), Book.REGULAR_BOOK_FORMAT));
+        Library bookLibrary = new Library(loadBorrowables(view));
+        Library movieLibrary = new Library(loadMovie(view));
         bookLibrary.addListener(view);
         movieLibrary.addListener(view);
 

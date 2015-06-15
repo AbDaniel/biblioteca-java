@@ -5,6 +5,7 @@ import com.biblioteca.model.Book;
 import com.biblioteca.model.Borrowable;
 import com.biblioteca.repository.Library;
 import com.biblioteca.view.ListView;
+import com.biblioteca.visitor.AvailableBookVisitor;
 import com.biblioteca.visitor.BookVisitor;
 import com.biblioteca.visitor.Visitor;
 import nl.jqno.equalsverifier.EqualsVerifier;
@@ -36,17 +37,7 @@ public class ListLibraryTest {
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        action = new ListLibrary(library, listView);
-    }
-
-    public void setUpWithData() {
-        List<Borrowable> bookList = new ArrayList<>();
-        bookList.add(new AvailableBook("Lord of the Rings", "JR Toliken", 1930));
-        bookList.add(new AvailableBook("Harry Potter", "JK Rowling", 1992));
-        bookList.add(new AvailableBook("Catch-22", "Joesph Heller", 1950));
-        bookList.add(new AvailableBook("Winds of Winter", "George RR Martin", 2017));
-        visitor = new BookVisitor(new ArrayList<>(), REGULAR_BOOK_FORMAT);
-        action = new ListLibrary(new Library(bookList, new BookVisitor(new ArrayList<>(), Book.REGULAR_BOOK_FORMAT)), listView);
+        action = new ListLibrary(library, listView, visitor);
     }
 
     @Test
@@ -58,7 +49,7 @@ public class ListLibraryTest {
     public void shouldGetBorrowablesFromLibraryUsingVisitor() {
         action.execute();
 
-        verify(library).allAvailableItems();
+        verify(library).allAvailableItems(visitor);
     }
 
 }
