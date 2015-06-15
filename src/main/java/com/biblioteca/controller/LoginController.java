@@ -1,17 +1,20 @@
 package com.biblioteca.controller;
 
 import com.biblioteca.action.Login;
-import com.biblioteca.listener.Listener;
-import com.biblioteca.model.User;
+import com.biblioteca.constants.Constants;
+import com.biblioteca.listener.ExitLogoutListener;
 import com.biblioteca.view.View;
+import com.biblioteca.model.User;
 
 import static com.biblioteca.constants.Constants.*;
+import static com.biblioteca.constants.Constants.ENTER_LIBRARY_NO;
+import static com.biblioteca.constants.Constants.ENTER_PASSWORD;
 
 public class LoginController {
 
     private Login login;
     private View view;
-    private Listener listener;
+    private ExitLogoutListener listener;
 
     public LoginController(Login login, View view) {
         this.login = login;
@@ -34,7 +37,7 @@ public class LoginController {
         return user;
     }
 
-    public void addListener(Listener listener) {
+    public void addListener(ExitLogoutListener listener) {
         this.listener = listener;
     }
 

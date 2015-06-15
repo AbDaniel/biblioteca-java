@@ -1,9 +1,9 @@
 package com.biblioteca.controller;
 
 import com.biblioteca.action.Login;
-import com.biblioteca.listener.Listener;
-import com.biblioteca.model.User;
+import com.biblioteca.listener.ExitLogoutListener;
 import com.biblioteca.view.View;
+import com.biblioteca.model.User;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -19,11 +19,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import static com.biblioteca.constants.Constants.ENTER_LIBRARY_NO;
-import static com.biblioteca.constants.Constants.RUNNING;
+import static com.biblioteca.constants.Constants.*;
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class LoginControllerTest {
@@ -37,7 +35,7 @@ public class LoginControllerTest {
     View view;
 
     @Mock
-    Listener listener;
+    ExitLogoutListener listener;
 
     @Rule
     public final TextFromStandardInputStream systemInMock
