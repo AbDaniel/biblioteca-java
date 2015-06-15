@@ -1,9 +1,6 @@
 package com.biblioteca.visitor;
 
-import com.biblioteca.model.AvailableBook;
-import com.biblioteca.model.Book;
-import com.biblioteca.model.CheckedOutBook;
-import com.biblioteca.model.Movie;
+import com.biblioteca.model.*;
 
 public interface Visitor {
 
@@ -18,6 +15,11 @@ public interface Visitor {
     default void visit(CheckedOutBook book) {
 
     }
+
+    default void visit(AvailableMovie movie) {
+
+    }
+
 
     default void visit(Movie movie) {
 
