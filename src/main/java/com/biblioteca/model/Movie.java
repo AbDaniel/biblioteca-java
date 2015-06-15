@@ -10,12 +10,12 @@ import static com.biblioteca.constants.Constants.*;
 
 public abstract class Movie implements Borrowable<Movie> {
 
-    private final String name;
-    private final String director;
-    private final int year;
-    private final int rating;
-    private boolean checkedOut;
-    private Listener listener;
+    protected final String name;
+    protected final String director;
+    protected final int year;
+    protected final int rating;
+    protected boolean checkedOut;
+    protected Listener listener;
 
     public Movie(String name, String director, int year, int rating) {
         this.name = name;
@@ -103,12 +103,6 @@ public abstract class Movie implements Borrowable<Movie> {
     @Override
     public void addListener(Listener listener) {
         this.listener = listener;
-    }
-
-    @Override
-    public void match(Searcher searcher) {
-        if (searcher.getSearchString().equals(name))
-            searcher.visit(this);
     }
 
     @Override

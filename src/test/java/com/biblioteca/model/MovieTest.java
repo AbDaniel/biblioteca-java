@@ -31,9 +31,6 @@ public class MovieTest {
     @Mock
     Listener listener;
 
-    @Mock
-    Searcher searcher;
-
     @Before
     public void setUp() throws Exception {
         movie = new AvailableMovie("The Matrix", "The Wachowskis", 1999, 10);
@@ -51,13 +48,6 @@ public class MovieTest {
         String expectedString = "name='The Matrix', director='The Wachowskis', year=1999, rating=10";
 
         assertEquals(expectedString, actualString);
-    }
-
-    @Test
-    public void shouldAcceptVisitor() {
-        movie.accept(visitor);
-
-        verify(visitor).visit(movie);
     }
 
     @Test
@@ -150,15 +140,6 @@ public class MovieTest {
         movie.returnItem(user);
 
         verify(listener).update(SUCCESS_MOVIE_RETURN);
-    }
-
-    @Test
-    public void shouldAcceptSearcherWithRightSearchString() {
-        when(searcher.getSearchString()).thenReturn("The Matrix");
-
-        movie.match(searcher);
-
-        verify(searcher).visit(movie);
     }
 
 }

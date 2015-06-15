@@ -2,6 +2,7 @@ package com.biblioteca.action;
 
 import com.biblioteca.enums.MenuItem;
 import com.biblioteca.model.Book;
+import com.biblioteca.model.Movie;
 import com.biblioteca.model.User;
 import com.biblioteca.repository.Library;
 import com.biblioteca.search.AvailableBookSearcher;
@@ -9,6 +10,7 @@ import com.biblioteca.search.AvailableMovieSearcher;
 import com.biblioteca.search.Searcher;
 import com.biblioteca.view.ListView;
 import com.biblioteca.visitor.AvailableBookVisitor;
+import com.biblioteca.visitor.AvailableMovieVisitor;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,6 +21,7 @@ import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
 
 import static com.biblioteca.enums.MenuItem.*;
+import static com.biblioteca.model.Movie.REGULAR_MOVIE_FORMAT;
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNull;
 
@@ -65,7 +68,7 @@ public class ParserTest {
         MenuItem item = LIST_MOVIES;
         userChoice = new SimpleEntry<>(item, null);
         ListLibrary expected = new ListLibrary(movieLibray, (ListView) item.view(),
-                new AvailableBookVisitor(new ArrayList<>(), Book.REGULAR_BOOK_FORMAT));
+                new AvailableMovieVisitor(new ArrayList<>(), REGULAR_MOVIE_FORMAT));
 
         Action actualAction = parser.getAction(userChoice, user);
 

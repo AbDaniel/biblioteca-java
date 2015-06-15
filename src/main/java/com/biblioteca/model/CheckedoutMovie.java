@@ -1,5 +1,6 @@
 package com.biblioteca.model;
 
+import com.biblioteca.search.Searcher;
 import com.biblioteca.visitor.Visitor;
 
 public class CheckedoutMovie extends Movie {
@@ -20,6 +21,12 @@ public class CheckedoutMovie extends Movie {
     @Override
     public Movie returnBorrowable(User user) {
         return new AvailableMovie(this);
+    }
+
+    @Override
+    public void match(Searcher searcher) {
+        if (searcher.getSearchString().equals(name))
+            searcher.visit(this);
     }
 
 }

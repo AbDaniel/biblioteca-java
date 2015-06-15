@@ -28,7 +28,9 @@ public class ListLibrary implements Action {
 
         ListLibrary that = (ListLibrary) o;
 
-        return !(library != null ? !library.equals(that.library) : that.library != null);
+        if (library != null ? !library.equals(that.library) : that.library != null) return false;
+        return !(visitor != null ? !visitor.getClass().equals(that.visitor.getClass()) : that.visitor != null);
+
     }
 
     @Override
