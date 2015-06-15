@@ -2,6 +2,7 @@ package com.biblioteca.visitor;
 
 import com.biblioteca.model.AvailableBook;
 import com.biblioteca.model.Book;
+import com.biblioteca.model.CheckedOutBook;
 import com.biblioteca.model.Movie;
 
 public interface Visitor {
@@ -11,6 +12,10 @@ public interface Visitor {
     void reset();
 
     default void visit(AvailableBook book) {
+
+    }
+
+    default void visit(CheckedOutBook book) {
 
     }
 
