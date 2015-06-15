@@ -14,7 +14,6 @@ import static com.biblioteca.constants.Constants.*;
 import static com.biblioteca.model.Book.REGULAR_BOOK_FORMAT;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class BookTest {
@@ -115,7 +114,7 @@ public class BookTest {
     public void shouldNotifyListenerOnSuccessOfCheckOut() {
         book.checkout(user);
 
-        verify(listener).update(SUCCESSFUL_CHECKOUT_TEXT);
+        verify(listener).update(SUCCESSFUL_BOOK_CHECKOUT);
     }
 
 
@@ -132,7 +131,7 @@ public class BookTest {
         book.checkout(user);
         book.returnItem(user);
 
-        verify(listener).update(SUCCESSFUL_RETURN_TEXT);
+        verify(listener).update(SUCCESSFUL_BOOK_RETURN);
     }
 
     @Test

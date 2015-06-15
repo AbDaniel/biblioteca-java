@@ -1,7 +1,10 @@
 package com.biblioteca.model;
 
+import com.biblioteca.constants.Constants;
 import com.biblioteca.search.Searcher;
 import com.biblioteca.visitor.Visitor;
+
+import static com.biblioteca.constants.Constants.SUCCESSFUL_BOOK_CHECKOUT;
 
 public class AvailableBook extends Book {
 
@@ -20,6 +23,7 @@ public class AvailableBook extends Book {
 
     @Override
     public Book checkoutBorrowable(User user) {
+        listener.update(SUCCESSFUL_BOOK_CHECKOUT);
         return new CheckedOutBook(this);
     }
 

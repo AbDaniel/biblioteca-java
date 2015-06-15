@@ -1,8 +1,6 @@
 package com.biblioteca.model;
 
 import com.biblioteca.listener.Listener;
-import com.biblioteca.search.Searcher;
-import com.biblioteca.visitor.Visitor;
 
 import java.util.function.Function;
 
@@ -38,7 +36,7 @@ public abstract class Book implements Borrowable<Book> {
         } else {
             checkedOut = true;
             user.addBorrowable(this);
-            listener.update(SUCCESSFUL_CHECKOUT_TEXT);
+            listener.update(SUCCESSFUL_BOOK_CHECKOUT);
             return true;
         }
     }
@@ -48,7 +46,7 @@ public abstract class Book implements Borrowable<Book> {
         if (checkedOut) {
             checkedOut = false;
             user.removeOwnable(this);
-            listener.update(SUCCESSFUL_RETURN_TEXT);
+            listener.update(SUCCESSFUL_BOOK_RETURN);
             return true;
         } else {
             listener.update(BOOK_NOT_VALID_TEXT);

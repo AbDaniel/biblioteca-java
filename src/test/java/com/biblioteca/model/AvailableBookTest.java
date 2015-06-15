@@ -1,5 +1,7 @@
 package com.biblioteca.model;
 
+import com.biblioteca.constants.Constants;
+import com.biblioteca.listener.Listener;
 import com.biblioteca.search.AvailableBookSearcher;
 import com.biblioteca.search.BookSearcher;
 import com.biblioteca.search.Searchable;
@@ -11,6 +13,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import static com.biblioteca.constants.Constants.SUCCESSFUL_BOOK_CHECKOUT;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -29,9 +32,13 @@ public class AvailableBookTest {
     @Mock
     AvailableBookSearcher searcher;
 
+    @Mock
+    private Listener listener;
+
     @Before
     public void setUp() throws Exception {
         book = new AvailableBook("Lord of the Rings", "JR Toliken", 1930);
+        book.addListener(listener);
     }
 
     @Test
@@ -62,6 +69,13 @@ public class AvailableBookTest {
         book.match(searcher);
 
         verify(searcher).visit(book);
+    }
+
+    @Test
+    public void shouldUpdateListenerOnReturn() {
+        Book actualBook = book.checkoutBorrowable(user);
+
+        verify(listener).update(SUCCESSFUL_BOOK_CHECKOUT);
     }
 
 }

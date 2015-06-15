@@ -1,5 +1,7 @@
 package com.biblioteca.model;
 
+import com.biblioteca.constants.Constants;
+import com.biblioteca.listener.Listener;
 import com.biblioteca.search.Searcher;
 import com.biblioteca.visitor.Visitor;
 import org.junit.Before;
@@ -26,9 +28,13 @@ public class CheckedOutBookTest {
     @Mock
     private Searcher searcher;
 
+    @Mock
+    private Listener listener;
+
     @Before
     public void setUp() throws Exception {
         book = new CheckedOutBook("Lord of the Rings", "JR Toliken", 1930);
+        book.addListener(listener);
     }
 
     @Test
@@ -59,6 +65,13 @@ public class CheckedOutBookTest {
         book.match(searcher);
 
         verify(searcher).visit(book);
+    }
+
+    @Test
+    public void shouldUpdateListenerOnReturn() {
+        Book actualBook = book.returnBorrowable(user);
+
+        verify(listener).update(Constants.SUCCESSFUL_BOOK_RETURN);
     }
 
 }
