@@ -1,8 +1,6 @@
 package com.biblioteca.search;
 
-import com.biblioteca.model.Book;
-import com.biblioteca.model.Borrowable;
-import com.biblioteca.model.Movie;
+import com.biblioteca.model.*;
 
 import java.util.List;
 
@@ -11,6 +9,15 @@ public interface Searcher {
     String getSearchString();
 
     default void visit(Book book) {
+
+    }
+
+
+    default void visit(AvailableBook book) {
+
+    }
+
+    default void visit(CheckedOutBook book) {
 
     }
 
