@@ -35,7 +35,7 @@ public class Library {
             borrowables.remove(borrowable);
             borrowables.add(borrowable.checkoutBorrowable(user));
         }
-        return borrowable != null && borrowable.checkout(user);
+        return borrowable != null;
     }
 
     public boolean returnItem(String itemName, User user) {
