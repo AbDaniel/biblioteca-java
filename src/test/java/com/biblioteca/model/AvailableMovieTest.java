@@ -1,5 +1,6 @@
 package com.biblioteca.model;
 
+import com.biblioteca.listener.Listener;
 import com.biblioteca.search.Searcher;
 import com.biblioteca.visitor.Visitor;
 import org.junit.Before;
@@ -8,6 +9,8 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import static com.biblioteca.constants.Constants.SUCCESSFUL_BOOK_CHECKOUT;
+import static com.biblioteca.constants.Constants.SUCCESS_MOVIE_CHECKOUT;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -26,9 +29,13 @@ public class AvailableMovieTest {
     @Mock
     Searcher searcher;
 
+    @Mock
+    private Listener listener;
+
     @Before
     public void setUp() throws Exception {
         movie = new AvailableMovie("The Matrix", "The Wachowskis", 1999, 10);
+        movie.addListener(listener);
     }
 
     @Test
@@ -59,6 +66,13 @@ public class AvailableMovieTest {
         movie.match(searcher);
 
         verify(searcher).visit(movie);
+    }
+
+    @Test
+    public void shouldUpdateListenerOnReturn() {
+        movie.checkoutBorrowable(user);
+
+        verify(listener).update(SUCCESS_MOVIE_CHECKOUT);
     }
 
 }

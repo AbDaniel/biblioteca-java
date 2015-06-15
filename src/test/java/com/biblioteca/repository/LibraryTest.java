@@ -6,6 +6,7 @@ import com.biblioteca.model.Book;
 import com.biblioteca.model.Borrowable;
 import com.biblioteca.model.User;
 import com.biblioteca.search.AvailableBookSearcher;
+import com.biblioteca.visitor.AvailableBookVisitor;
 import com.biblioteca.visitor.Visitor;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,8 +16,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.biblioteca.constants.Constants.ITEM_NOT_PRESENT;
+import static com.biblioteca.model.Book.REGULAR_BOOK_FORMAT;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.MockitoAnnotations.initMocks;
 
@@ -49,15 +52,11 @@ public class LibraryTest {
         bookList.add(new AvailableBook("Harry Potter", "JK Rowling", 1992));
         bookList.add(new AvailableBook("Catch-22", "Joesph Heller", 1950));
         bookList.add(new AvailableBook("Winds of Winter", "George RR Martin", 2017));
+        bookList.forEach(borrowable -> borrowable.addListener(listener));
         Book book = new AvailableBook("1984", "George Orwell", 1950);
         book.addListener(listener);
         book.checkout(user);
         bookList.add(book);
-        book = new AvailableBook("Alchemist", "Paulo Coelho", 1988);
-        book.addListener(listener);
-        book.checkout(user);
-        bookList.add(book);
-        bookList.forEach(borrowable -> borrowable.addListener(listener));
         this.library = new Library(bookList);
         library.addListener(listener);
     }
@@ -119,6 +118,23 @@ public class LibraryTest {
         library.allAvailableItems(visitor);
 
         verify(visitor).reset();
+    }
+
+    @Test
+    public void shouldUpdateListenerWithAvailableBorrowablesOnList() {
+        setUpWithData();
+        listener = mock(Listener.class);
+        library.addListener(listener);
+        visitor = new AvailableBookVisitor(new ArrayList<>(), REGULAR_BOOK_FORMAT);
+
+        library.allAvailableItems(visitor);
+        String expected = "name='Lord of the Rings', author='JR Toliken', year=1930\n" +
+                "name='Harry Potter', author='JK Rowling', year=1992\n" +
+                "name='Catch-22', author='Joesph Heller', year=1950\n" +
+                "name='Winds of Winter', author='George RR Martin', year=2017\n" +
+                "name='1984', author='George Orwell', year=1950\n";
+
+        verify(listener).update(expected);
     }
 
 }
