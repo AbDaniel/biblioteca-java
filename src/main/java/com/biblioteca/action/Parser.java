@@ -5,6 +5,7 @@ import com.biblioteca.model.Book;
 import com.biblioteca.model.User;
 import com.biblioteca.repository.Library;
 import com.biblioteca.search.AvailableBookSearcher;
+import com.biblioteca.search.AvailableMovieSearcher;
 import com.biblioteca.view.ListView;
 import com.biblioteca.visitor.AvailableBookVisitor;
 
@@ -34,7 +35,7 @@ public class Parser {
                 return new Checkout(bookLibrary, user, new AvailableBookSearcher(new
                         ArrayList<>(), userChoice.getValue()));
             case CHECKOUT_MOVIE:
-                return new Checkout(movieLibrary, user, new AvailableBookSearcher(new
+                return new Checkout(movieLibrary, user, new AvailableMovieSearcher(new
                         ArrayList<>(), userChoice.getValue()));
             case RETURN_BOOK:
                 return new Return(bookLibrary, user, userChoice.getValue());

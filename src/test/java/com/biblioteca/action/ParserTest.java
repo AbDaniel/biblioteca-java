@@ -5,6 +5,7 @@ import com.biblioteca.model.Book;
 import com.biblioteca.model.User;
 import com.biblioteca.repository.Library;
 import com.biblioteca.search.AvailableBookSearcher;
+import com.biblioteca.search.AvailableMovieSearcher;
 import com.biblioteca.search.Searcher;
 import com.biblioteca.view.ListView;
 import com.biblioteca.visitor.AvailableBookVisitor;
@@ -89,7 +90,7 @@ public class ParserTest {
         userChoice = new SimpleEntry<>(item, null);
 
         userChoice = new SimpleEntry<>(item, "Lord of the Rings");
-        Searcher searcher = new AvailableBookSearcher(new ArrayList<>(), "Lord of the Rings");
+        Searcher searcher = new AvailableMovieSearcher(new ArrayList<>(), "Lord of the Rings");
         Action actualAction = parser.getAction(userChoice, user);
         Checkout expected = new Checkout(movieLibray, user, searcher);
 
