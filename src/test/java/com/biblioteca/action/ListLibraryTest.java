@@ -45,7 +45,7 @@ public class ListLibraryTest {
         bookList.add(new Book("Catch-22", "Joesph Heller", 1950));
         bookList.add(new Book("Winds of Winter", "George RR Martin", 2017));
         visitor = new BookVisitor(new ArrayList<>(), REGULAR_BOOK_FORMAT);
-        action = new ListLibrary(new Library(bookList), listView);
+        action = new ListLibrary(new Library(bookList, new BookVisitor(new ArrayList<>(), Book.REGULAR_BOOK_FORMAT)), listView);
     }
 
     @Test
@@ -58,20 +58,6 @@ public class ListLibraryTest {
         action.execute();
 
         verify(library).allAvailableItems();
-    }
-
-    @Test
-    public void shouldRequestViewToDisplayBorrowablesRetrievedFromVisitor() {
-        setUpWithData();
-        action.execute();
-
-        List<Borrowable> expected = new ArrayList<>();
-        expected.add(new Book("Lord of the Rings", "JR Toliken", 1930));
-        expected.add(new Book("Harry Potter", "JK Rowling", 1992));
-        expected.add(new Book("Catch-22", "Joesph Heller", 1950));
-        expected.add(new Book("Winds of Winter", "George RR Martin", 2017));
-
-        verify(listView).displayListOfBorrowables(expected);
     }
 
 }

@@ -2,6 +2,7 @@ package com.biblioteca.visitor;
 
 import com.biblioteca.model.Movie;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 
@@ -25,6 +26,11 @@ public class MovieVisitor implements Visitor {
         StringBuilder builder = new StringBuilder();
         movies.forEach(movie -> builder.append(movie.toString(format)).append("\n"));
         return builder.toString();
+    }
+
+    @Override
+    public void reset() {
+        movies = new ArrayList<>();
     }
 
     public int size() {

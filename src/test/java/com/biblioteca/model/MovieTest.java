@@ -1,6 +1,7 @@
 package com.biblioteca.model;
 
 import com.biblioteca.listener.Listener;
+import com.biblioteca.search.Searcher;
 import com.biblioteca.visitor.Visitor;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.Before;
@@ -14,6 +15,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class MovieTest {
@@ -28,6 +30,9 @@ public class MovieTest {
 
     @Mock
     Listener listener;
+
+    @Mock
+    Searcher searcher;
 
     @Before
     public void setUp() throws Exception {
@@ -145,6 +150,15 @@ public class MovieTest {
         movie.returnItem(user);
 
         verify(listener).update(SUCCESS_MOVIE_RETURN);
+    }
+
+    @Test
+    public void shouldAcceptSearcherWithRightSearchString() {
+        when(searcher.getSearchString()).thenReturn("The Matrix");
+
+        movie.match(searcher);
+
+        verify(searcher).visit(movie);
     }
 
 }

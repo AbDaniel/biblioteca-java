@@ -1,25 +1,22 @@
 package com.biblioteca.repository;
 
-import com.biblioteca.constants.Constants;
 import com.biblioteca.listener.Listener;
 import com.biblioteca.model.Book;
 import com.biblioteca.model.Borrowable;
 import com.biblioteca.model.User;
+import com.biblioteca.visitor.BookVisitor;
+import com.biblioteca.visitor.Visitor;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.biblioteca.constants.Constants.BOOK_NOT_PRESENT_TEXT;
-import static com.biblioteca.constants.Constants.INVALID_INPUT_TEXT;
 import static com.biblioteca.constants.Constants.ITEM_NOT_PRESENT;
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.verify;
 import static org.mockito.MockitoAnnotations.initMocks;
 
 public class LibraryTest {
@@ -35,10 +32,13 @@ public class LibraryTest {
     @Mock
     Listener listener;
 
+    @Mock
+    Visitor visitor;
+
     @Before
     public void setUp() {
         initMocks(this);
-        library = new Library(bookList);
+        library = new Library(bookList, visitor);
         library.addListener(listener);
     }
 
@@ -57,25 +57,8 @@ public class LibraryTest {
         book.checkout(user);
         bookList.add(book);
         bookList.forEach(borrowable -> borrowable.addListener(listener));
-        this.library = new Library(bookList);
+        this.library = new Library(bookList, visitor);
         library.addListener(listener);
-    }
-
-    @Test
-    public void shouldReturnListOfAvailableBooksOfRightSize() {
-        setUpWithData();
-        int actualSize = library.allAvailableItems().size();
-
-        assertEquals(4, actualSize);
-    }
-
-    @Test
-    public void shouldReturnZeroSizedListIfNoAvailableBooks() {
-        this.library = new Library(new ArrayList<>());
-
-        int actualSize = library.allAvailableItems().size();
-
-        assertEquals(0, actualSize);
     }
 
     @Test
@@ -126,6 +109,15 @@ public class LibraryTest {
         library.checkout(bookName, user);
 
         verify(listener).update(ITEM_NOT_PRESENT);
+    }
+
+    @Test
+    public void shouldResetVistorBeforeMakingItVisit() {
+        setUpWithData();
+
+        library.allAvailableItems();
+
+        verify(visitor).reset();
     }
 
 }

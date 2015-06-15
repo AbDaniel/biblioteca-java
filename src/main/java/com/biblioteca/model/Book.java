@@ -1,6 +1,7 @@
 package com.biblioteca.model;
 
 import com.biblioteca.listener.Listener;
+import com.biblioteca.search.Searcher;
 import com.biblioteca.visitor.Visitor;
 
 import java.util.function.Function;
@@ -98,13 +99,18 @@ public class Book implements Borrowable<Book> {
                 ", year=" + year;
     }
 
-    public static Function<Book, String> REGULAR_BOOK_FORMAT = book -> "name='" + book.name + '\'' +
-            ", author='" + book.author + '\'' +
-            ", year=" + book.year;
-
     @Override
     public void addListener(Listener listener) {
         this.listener = listener;
     }
 
+    public static Function<Book, String> REGULAR_BOOK_FORMAT = book -> "name='" + book.name + '\'' +
+            ", author='" + book.author + '\'' +
+            ", year=" + book.year;
+
+    @Override
+    public void match(Searcher searcher) {
+        if (searcher.getSearchString() == name)
+            searcher.visit(this);
+    }
 }

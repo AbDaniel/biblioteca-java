@@ -1,13 +1,11 @@
-package com.biblioteca.visitor;
+package com.biblioteca.search;
 
 import com.biblioteca.model.Book;
 import com.biblioteca.model.Movie;
 
-public interface Visitor {
+public interface Searcher {
 
-    String visitables();
-
-    void reset();
+    String getSearchString();
 
     default void visit(Book book) {
 
@@ -18,4 +16,3 @@ public interface Visitor {
     }
 
 }
-

@@ -3,24 +3,28 @@ package com.biblioteca.repository;
 import com.biblioteca.listener.Listener;
 import com.biblioteca.model.Borrowable;
 import com.biblioteca.model.User;
+import com.biblioteca.visitor.Visitor;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static com.biblioteca.constants.Constants.ITEM_NOT_PRESENT;
 
 public class Library {
 
     private List<Borrowable> borrowables;
+    private Visitor visitor;
     private Listener listener;
 
-    public Library(List<Borrowable> borrowables) {
+    public Library(List<Borrowable> borrowables, Visitor visitor) {
         this.borrowables = borrowables;
+        this.visitor = visitor;
     }
 
     public List<? extends Borrowable> allAvailableItems() {
-        return borrowables.stream().filter(p -> !p.isCheckedOut()).collect(Collectors.toCollection(ArrayList::new));
+        visitor.reset();
+        borrowables.forEach(borrowable -> borrowable.accept(visitor));
+        listener.update(visitor.visitables());
+        return null;
     }
 
     public boolean checkout(final String itemName, User user) {

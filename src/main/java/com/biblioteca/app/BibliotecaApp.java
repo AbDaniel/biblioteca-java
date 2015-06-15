@@ -25,11 +25,14 @@ public class BibliotecaApp implements ExitLogoutListener, LoginListener {
         this.view = view;
         this.controller = controller;
         this.loginController = loginController;
+        this.controller.addListener(this);
+        this.loginController.addLoginListener(this);
+        this.loginController.addExitLogoutListener(this);
     }
 
     public void start() {
         view.displayMessage(welcomeMessage);
-        do  {
+        do {
             loginController.execute();
             do {
                 controller.execute(user);

@@ -1,6 +1,7 @@
 package com.biblioteca.model;
 
 import com.biblioteca.listener.Listener;
+import com.biblioteca.search.Searcher;
 import com.biblioteca.visitor.Visitor;
 
 import java.util.function.Function;
@@ -107,5 +108,10 @@ public class Movie implements Borrowable<Movie> {
     @Override
     public void addListener(Listener listener) {
         this.listener = listener;
+    }
+
+    @Override
+    public void match(Searcher searcher) {
+
     }
 }

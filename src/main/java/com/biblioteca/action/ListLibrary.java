@@ -15,7 +15,7 @@ public class ListLibrary implements Action {
 
     @Override
     public void execute() {
-        listView.displayListOfBorrowables(library.allAvailableItems());
+        library.allAvailableItems();
     }
 
     @Override

@@ -2,6 +2,7 @@ package com.biblioteca.model;
 
 import com.biblioteca.constants.Constants;
 import com.biblioteca.listener.Listener;
+import com.biblioteca.search.BookSearcher;
 import com.biblioteca.visitor.BookVisitor;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.Before;
@@ -10,10 +11,13 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import java.util.ArrayList;
+
 import static com.biblioteca.constants.Constants.*;
 import static com.biblioteca.model.Book.REGULAR_BOOK_FORMAT;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class BookTest {
@@ -28,6 +32,10 @@ public class BookTest {
 
     @Mock
     Listener listener;
+
+    @Mock
+    BookSearcher searcher;
+
 
     @Before
     public void setUp() {
@@ -144,6 +152,15 @@ public class BookTest {
         String expectedString = "name='Lord of the Rings', author='JR Toliken', year=1930";
 
         assertEquals(expectedString, formattedString);
+    }
+
+    @Test
+    public void shouldAcceptSearcherWithRightSearchString() {
+        when(searcher.getSearchString()).thenReturn("Lord of the Rings");
+
+        book.match(searcher);
+
+        verify(searcher).visit(book);
     }
 
 }
