@@ -29,9 +29,8 @@ public class BibliotecaApp implements ExitLogoutListener, LoginListener {
 
     public void start() {
         view.displayMessage(welcomeMessage);
-        User user;
-        do {
-            user = loginController.execute();
+        do  {
+            loginController.execute();
             do {
                 controller.execute(user);
             } while (EXIT_LOGOUT != EXIT_CODE && EXIT_LOGOUT != LOGOUT_CODE);
