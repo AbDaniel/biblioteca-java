@@ -112,5 +112,11 @@ public abstract class Book implements Borrowable<Book> {
         return null;
     }
 
+    @Override
+    public void match(Searcher searcher) {
+        if (searcher.getSearchString().equals(name))
+            searcher.visit(this);
+    }
+
 
 }

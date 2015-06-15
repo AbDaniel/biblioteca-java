@@ -14,12 +14,6 @@ public class CheckedOutBook extends Book {
     }
 
     @Override
-    public void match(Searcher searcher) {
-        if (searcher.getSearchString().equals(name))
-            searcher.visit(this);
-    }
-
-    @Override
     public void accept(Visitor visitor) {
         visitor.visit(this);
     }

@@ -42,10 +42,7 @@ public class BookVisitorTest {
     public void shouldReturnBookAsString() {
         String actualString = visitor.visitables();
 
-        String expectedString = "name='Lord of the Rings', author='JR Toliken', year=1930\n" +
-                "name='Harry Potter', author='JK Rowling', year=1992\n" +
-                "name='Catch-22', author='Joesph Heller', year=1950\n" +
-                "name='Winds of Winter', author='George RR Martin', year=2017\n";
+        String expectedString = "";
 
         assertEquals(expectedString, actualString);
     }
@@ -54,7 +51,7 @@ public class BookVisitorTest {
     public void shouldReturnSizeOfVisitablesVisited() {
         int actualSize = visitor.size();
 
-        assertEquals(4, actualSize);
+        assertEquals(0, actualSize);
     }
 
     @Test

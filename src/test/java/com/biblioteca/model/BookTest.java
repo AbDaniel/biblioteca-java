@@ -104,13 +104,6 @@ public class BookTest {
     }
 
     @Test
-    public void shouldAcceptVisitor() {
-        book.accept(visitor);
-
-        verify(visitor).visit(book);
-    }
-
-    @Test
     public void shouldNotifyListenerOnFailureOfCheckOut() {
         book.checkout(user);
         book.checkout(user);
