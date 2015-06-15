@@ -4,6 +4,7 @@ import com.biblioteca.enums.MenuItem;
 import com.biblioteca.model.Book;
 import com.biblioteca.model.User;
 import com.biblioteca.repository.Library;
+import com.biblioteca.search.AvailableBookSearcher;
 import com.biblioteca.search.Searcher;
 import com.biblioteca.view.ListView;
 import com.biblioteca.visitor.AvailableBookVisitor;
@@ -73,8 +74,9 @@ public class ParserTest {
     @Test
     public void shouldReturnCheckoutActionActionWhenUserSelectsCheckoutBook() {
         MenuItem item = CHECKOUT_BOOK;
-        userChoice = new SimpleEntry<>(item, null);
-        Checkout expected = new Checkout(bookLibrary, user, bookName, searcher);
+        userChoice = new SimpleEntry<>(item, "Lord of the Rings");
+        Searcher searcher = new AvailableBookSearcher(new ArrayList<>(), "Lord of the Rings");
+        Checkout expected = new Checkout(bookLibrary, user, searcher);
 
         Action actualAction = parser.getAction(userChoice, user);
 
@@ -86,8 +88,10 @@ public class ParserTest {
         MenuItem item = CHECKOUT_MOVIE;
         userChoice = new SimpleEntry<>(item, null);
 
+        userChoice = new SimpleEntry<>(item, "Lord of the Rings");
+        Searcher searcher = new AvailableBookSearcher(new ArrayList<>(), "Lord of the Rings");
         Action actualAction = parser.getAction(userChoice, user);
-        Checkout expected = new Checkout(movieLibray, user, bookName, searcher);
+        Checkout expected = new Checkout(movieLibray, user, searcher);
 
         assertEquals(expected, actualAction);
     }

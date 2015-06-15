@@ -31,10 +31,10 @@ public class Parser {
             case LIST_MOVIES:
                 return new ListLibrary(movieLibrary, (ListView) LIST_MOVIES.view(), new AvailableBookVisitor(new ArrayList<>(), Book.REGULAR_BOOK_FORMAT));
             case CHECKOUT_BOOK:
-                return new Checkout(bookLibrary, user, userChoice.getValue(), new AvailableBookSearcher(new
+                return new Checkout(bookLibrary, user, new AvailableBookSearcher(new
                         ArrayList<>(), userChoice.getValue()));
             case CHECKOUT_MOVIE:
-                return new Checkout(movieLibrary, user, userChoice.getValue(), new AvailableBookSearcher(new
+                return new Checkout(movieLibrary, user, new AvailableBookSearcher(new
                         ArrayList<>(), userChoice.getValue()));
             case RETURN_BOOK:
                 return new Return(bookLibrary, user, userChoice.getValue());

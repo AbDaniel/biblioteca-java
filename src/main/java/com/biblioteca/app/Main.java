@@ -38,7 +38,6 @@ public class Main {
 
         BibliotecaApp bibliotecaApp = new BibliotecaApp(WELCOME_TEXT, view, controller, loginController);
         bibliotecaApp.start();
-
     }
 
     private static List<User> loadUsers() {

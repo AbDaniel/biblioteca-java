@@ -10,7 +10,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Matchers;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import static org.mockito.Matchers.eq;
@@ -32,7 +31,7 @@ public class CheckoutTest {
 
     @Before
     public void setUp() throws Exception {
-        command = new Checkout(library, user, "Lord of the Rings", searcher);
+        command = new Checkout(library, user, searcher);
     }
 
     @Test
@@ -41,7 +40,7 @@ public class CheckoutTest {
 
         command.execute();
 
-        verify(library).checkout(eq(bookName), Matchers.any(User.class), eq(searcher));
+        verify(library).checkout(Matchers.any(User.class), eq(searcher));
     }
 
     @Test

@@ -2,6 +2,7 @@ package com.biblioteca.search;
 
 import com.biblioteca.model.AvailableBook;
 import com.biblioteca.model.Book;
+import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -44,5 +45,10 @@ public class AvailableBookSearcherTest {
         boolean isEmpty = searcher.searchResults().isEmpty();
 
         assertFalse(isEmpty);
+    }
+
+    @Test
+    public void shouldVerifyEqualsContract() {
+        EqualsVerifier.forClass(AvailableBookSearcher.class).usingGetClass().verify();
     }
 }

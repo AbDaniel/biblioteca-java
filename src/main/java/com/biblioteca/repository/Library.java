@@ -26,7 +26,7 @@ public class Library {
         return null;
     }
 
-    public boolean checkout(final String itemName, User user, Searcher searcher) {
+    public boolean checkout(User user, Searcher searcher) {
         borrowables.forEach(borrowable -> borrowable.match(searcher));
         Borrowable borrowable = searcher.searchResults().stream().findFirst().orElse(null);
         if (borrowable == null)
