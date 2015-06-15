@@ -59,22 +59,6 @@ public class LibraryTest {
     }
 
     @Test
-    public void shouldReturnFalseIfBookIsNotAvailableDuringCheckout() {
-        setUpWithData();
-        String bookName = "1234";
-
-        assertFalse(library.checkout(user, new AvailableBookSearcher(new ArrayList<>(), bookName)));
-    }
-
-    @Test
-    public void shouldReturnTrueOnSuccessfulCheckOut() {
-        setUpWithData();
-        String name = "Lord of the Rings";
-
-        assertTrue(library.checkout(user, new AvailableBookSearcher(new ArrayList<>(), name)));
-    }
-
-    @Test
     public void shouldReturnFalseIfBookIsValidButCheckStateIsFalseDuringReturn() {
         setUpWithData();
         String bookName = "Lord of the Rings";
