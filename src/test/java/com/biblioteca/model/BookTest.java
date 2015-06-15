@@ -1,6 +1,5 @@
 package com.biblioteca.model;
 
-import com.biblioteca.constants.Constants;
 import com.biblioteca.listener.Listener;
 import com.biblioteca.search.BookSearcher;
 import com.biblioteca.visitor.BookVisitor;
@@ -10,8 +9,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-
-import java.util.ArrayList;
 
 import static com.biblioteca.constants.Constants.*;
 import static com.biblioteca.model.Book.REGULAR_BOOK_FORMAT;

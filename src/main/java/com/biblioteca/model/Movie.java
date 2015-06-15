@@ -112,6 +112,7 @@ public class Movie implements Borrowable<Movie> {
 
     @Override
     public void match(Searcher searcher) {
-
+        if (searcher.getSearchString().equals(name))
+            searcher.visit(this);
     }
 }
