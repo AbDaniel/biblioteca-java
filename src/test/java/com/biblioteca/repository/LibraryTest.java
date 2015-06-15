@@ -1,10 +1,7 @@
 package com.biblioteca.repository;
 
 import com.biblioteca.listener.Listener;
-import com.biblioteca.model.AvailableBook;
-import com.biblioteca.model.Book;
-import com.biblioteca.model.Borrowable;
-import com.biblioteca.model.User;
+import com.biblioteca.model.*;
 import com.biblioteca.search.AvailableBookSearcher;
 import com.biblioteca.visitor.AvailableBookVisitor;
 import com.biblioteca.visitor.Visitor;
@@ -147,6 +144,20 @@ public class LibraryTest {
         library.checkout(user, new AvailableBookSearcher(books, bookName));
 
         verify(bookList).remove(book);
+    }
+
+    @Test
+    public void shouldAddCheckedoutBorrowableFromListOnSuccessFullCheckout() {
+        CheckedOutBook book = new CheckedOutBook("Lord of the Rings", "JR Toliken", 1930);
+        AvailableBook availableBook = new AvailableBook("Lord of the Rings", "JR Toliken", 1930);
+        String bookName = "Lord of the Rings";
+        ArrayList<AvailableBook> books = new ArrayList<>();
+        books.add(availableBook);
+        book.addListener(listener);
+        availableBook.addListener(listener);
+        library.checkout(user, new AvailableBookSearcher(books, bookName));
+
+        verify(bookList).add(book);
     }
 
 }
