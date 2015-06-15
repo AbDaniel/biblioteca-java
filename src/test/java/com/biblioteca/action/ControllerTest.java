@@ -1,9 +1,8 @@
 package com.biblioteca.action;
 
-import com.biblioteca.constants.Constants;
 import com.biblioteca.controller.Controller;
 import com.biblioteca.enums.MenuItem;
-import com.biblioteca.listener.ExitLogoutListener;
+import com.biblioteca.listener.Listener;
 import com.biblioteca.model.User;
 import com.biblioteca.repository.Library;
 import com.biblioteca.view.MenuView;
@@ -14,9 +13,9 @@ import org.mockito.MockitoAnnotations;
 
 import java.util.AbstractMap.SimpleEntry;
 
-import static com.biblioteca.constants.Constants.*;
+import static com.biblioteca.constants.Constants.EXIT_CODE;
+import static com.biblioteca.constants.Constants.LOGOUT_CODE;
 import static com.biblioteca.enums.MenuItem.*;
-import static junit.framework.TestCase.assertNull;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.*;
@@ -46,7 +45,7 @@ public class ControllerTest {
     private SimpleEntry<MenuItem, String> userChoice;
 
     @Mock
-    private ExitLogoutListener listener;
+    private Listener listener;
 
     @Before
     public void setUp() throws Exception {

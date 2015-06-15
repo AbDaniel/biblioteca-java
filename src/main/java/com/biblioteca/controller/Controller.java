@@ -3,7 +3,7 @@ package com.biblioteca.controller;
 import com.biblioteca.action.Parser;
 import com.biblioteca.constants.Constants;
 import com.biblioteca.enums.MenuItem;
-import com.biblioteca.listener.ExitLogoutListener;
+import com.biblioteca.listener.Listener;
 import com.biblioteca.model.User;
 import com.biblioteca.view.MenuView;
 
@@ -13,7 +13,7 @@ public class Controller {
 
     private MenuView menuView;
     private Parser parser;
-    private ExitLogoutListener listener;
+    private Listener listener;
 
     public Controller(MenuView menuView, Parser parser) {
         this.menuView = menuView;
@@ -43,7 +43,7 @@ public class Controller {
         return userChoice == null;
     }
 
-    public void addListener(ExitLogoutListener listener) {
+    public void addListener(Listener listener) {
         this.listener = listener;
     }
 

@@ -1,17 +1,15 @@
 package com.biblioteca.app;
 
-import com.biblioteca.constants.Constants;
 import com.biblioteca.controller.Controller;
 import com.biblioteca.controller.LoginController;
-import com.biblioteca.listener.ExitLogoutListener;
+import com.biblioteca.listener.Listener;
 import com.biblioteca.model.User;
 import com.biblioteca.view.View;
 
-import static com.biblioteca.constants.Constants.*;
-import static com.biblioteca.enums.MenuItem.LOGOUT;
-import static com.biblioteca.enums.MenuItem.QUIT;
+import static com.biblioteca.constants.Constants.EXIT_CODE;
+import static com.biblioteca.constants.Constants.LOGOUT_CODE;
 
-public class BibliotecaApp implements ExitLogoutListener {
+public class BibliotecaApp implements Listener {
 
     private String welcomeMessage;
     private View view;
