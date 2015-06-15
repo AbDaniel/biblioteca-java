@@ -1,22 +1,22 @@
 package com.biblioteca.action;
 
 import com.biblioteca.model.User;
-import com.biblioteca.search.BookSearcher;
 import com.biblioteca.repository.Library;
 import com.biblioteca.search.Searcher;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import nl.jqno.equalsverifier.Warning;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-
-import java.util.ArrayList;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.*;
 
+@RunWith(MockitoJUnitRunner.class)
 public class CheckoutTest {
 
     @Mock
@@ -25,12 +25,14 @@ public class CheckoutTest {
     @Mock
     private User user;
 
+    @Mock
+    private Searcher searcher;
+
     private Checkout command;
 
     @Before
     public void setUp() throws Exception {
-        MockitoAnnotations.initMocks(this);
-        command = new Checkout(library, user, "Lord of the Rings");
+        command = new Checkout(library, user, "Lord of the Rings", searcher);
     }
 
     @Test
@@ -39,7 +41,7 @@ public class CheckoutTest {
 
         command.execute();
 
-        verify(library).checkout(eq(bookName), Matchers.any(User.class), any(Searcher.class));
+        verify(library).checkout(eq(bookName), Matchers.any(User.class), searcher);
     }
 
     @Test

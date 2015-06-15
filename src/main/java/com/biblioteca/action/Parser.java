@@ -4,6 +4,7 @@ import com.biblioteca.enums.MenuItem;
 import com.biblioteca.model.Book;
 import com.biblioteca.model.User;
 import com.biblioteca.repository.Library;
+import com.biblioteca.search.AvailableBookSearcher;
 import com.biblioteca.view.ListView;
 import com.biblioteca.visitor.AvailableBookVisitor;
 
@@ -30,9 +31,11 @@ public class Parser {
             case LIST_MOVIES:
                 return new ListLibrary(movieLibrary, (ListView) LIST_MOVIES.view(), new AvailableBookVisitor(new ArrayList<>(), Book.REGULAR_BOOK_FORMAT));
             case CHECKOUT_BOOK:
-                return new Checkout(bookLibrary, user, userChoice.getValue());
+                return new Checkout(bookLibrary, user, userChoice.getValue(), new AvailableBookSearcher(new
+                        ArrayList<>(), userChoice.getValue()));
             case CHECKOUT_MOVIE:
-                return new Checkout(movieLibrary, user, userChoice.getValue());
+                return new Checkout(movieLibrary, user, userChoice.getValue(), new AvailableBookSearcher(new
+                        ArrayList<>(), userChoice.getValue()));
             case RETURN_BOOK:
                 return new Return(bookLibrary, user, userChoice.getValue());
             case RETURN_MOVIE:
