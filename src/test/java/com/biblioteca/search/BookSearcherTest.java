@@ -1,5 +1,6 @@
 package com.biblioteca.search;
 
+import com.biblioteca.model.AvailableBook;
 import com.biblioteca.model.Book;
 import org.junit.Before;
 import org.junit.Test;
@@ -29,7 +30,7 @@ public class BookSearcherTest {
 
     @Test
     public void shouldAddTheVisitedObjectToBooks() {
-        Book book = new Book("Winds of Winter", "George RR Martin", 2017);
+        Book book = new AvailableBook("Winds of Winter", "George RR Martin", 2017);
 
         searcher.visit(book);
 
@@ -38,7 +39,7 @@ public class BookSearcherTest {
 
     @Test
     public void shouldFindTheBookMatchingTheSearchString() {
-        Book book = new Book("Winds of Winter", "George RR Martin", 2017);
+        Book book = new AvailableBook("Winds of Winter", "George RR Martin", 2017);
         searcher.visit(book);
         boolean isEmpty = searcher.searchResults().isEmpty();
 

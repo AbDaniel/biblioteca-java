@@ -36,7 +36,7 @@ public class BookTest {
 
     @Before
     public void setUp() {
-        book = new Book("Lord of the Rings", "JR Toliken", 1930);
+        book = new AvailableBook("Lord of the Rings", "JR Toliken", 1930);
         book.addListener(listener);
     }
 

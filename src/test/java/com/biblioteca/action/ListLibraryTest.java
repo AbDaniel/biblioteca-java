@@ -1,5 +1,6 @@
 package com.biblioteca.action;
 
+import com.biblioteca.model.AvailableBook;
 import com.biblioteca.model.Book;
 import com.biblioteca.model.Borrowable;
 import com.biblioteca.repository.Library;
@@ -40,10 +41,10 @@ public class ListLibraryTest {
 
     public void setUpWithData() {
         List<Borrowable> bookList = new ArrayList<>();
-        bookList.add(new Book("Lord of the Rings", "JR Toliken", 1930));
-        bookList.add(new Book("Harry Potter", "JK Rowling", 1992));
-        bookList.add(new Book("Catch-22", "Joesph Heller", 1950));
-        bookList.add(new Book("Winds of Winter", "George RR Martin", 2017));
+        bookList.add(new AvailableBook("Lord of the Rings", "JR Toliken", 1930));
+        bookList.add(new AvailableBook("Harry Potter", "JK Rowling", 1992));
+        bookList.add(new AvailableBook("Catch-22", "Joesph Heller", 1950));
+        bookList.add(new AvailableBook("Winds of Winter", "George RR Martin", 2017));
         visitor = new BookVisitor(new ArrayList<>(), REGULAR_BOOK_FORMAT);
         action = new ListLibrary(new Library(bookList, new BookVisitor(new ArrayList<>(), Book.REGULAR_BOOK_FORMAT)), listView);
     }

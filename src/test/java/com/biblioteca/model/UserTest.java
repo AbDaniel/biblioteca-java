@@ -28,7 +28,7 @@ public class UserTest {
 
     @Test
     public void shouldAddOwnable() {
-        Book book = new Book("I'm Damned", "Myself", 2025);
+        Book book = new AvailableBook("I'm Damned", "Myself", 2025);
 
         user.addBorrowable(book);
         int actualSize = ownables.size();
@@ -38,7 +38,7 @@ public class UserTest {
 
     @Test
     public void shouldRemoveOwnable() {
-        Book book = new Book("I'm Damned", "Myself", 2025);
+        Book book = new AvailableBook("I'm Damned", "Myself", 2025);
         ownables.add(book);
 
         user.removeOwnable(book);

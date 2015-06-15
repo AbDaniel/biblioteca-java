@@ -1,5 +1,6 @@
 package com.biblioteca.view;
 
+import com.biblioteca.model.AvailableBook;
 import com.biblioteca.model.Book;
 import org.junit.Before;
 import org.junit.Rule;
@@ -33,10 +34,10 @@ public class LibraryListViewTest {
     @Test
     public void shouldDisplayList() {
         List<Book> books = new ArrayList<>();
-        books.add(new Book("Lord of the Rings", "JR Toliken", 1930));
-        books.add(new Book("Harry Potter", "JK Rowling", 1992));
-        books.add(new Book("Catch-22", "Joesph Heller", 1950));
-        books.add(new Book("Winds of Winter", "George RR Martin", 2017));
+        books.add(new AvailableBook("Lord of the Rings", "JR Toliken", 1930));
+        books.add(new AvailableBook("Harry Potter", "JK Rowling", 1992));
+        books.add(new AvailableBook("Catch-22", "Joesph Heller", 1950));
+        books.add(new AvailableBook("Winds of Winter", "George RR Martin", 2017));
 
         listView.displayListOfBorrowables(books);
         String expected = "name='Lord of the Rings', author='JR Toliken', year=1930\n" +

@@ -4,10 +4,7 @@ import com.biblioteca.action.Login;
 import com.biblioteca.action.Parser;
 import com.biblioteca.controller.Controller;
 import com.biblioteca.controller.LoginController;
-import com.biblioteca.model.Book;
-import com.biblioteca.model.Borrowable;
-import com.biblioteca.model.Movie;
-import com.biblioteca.model.User;
+import com.biblioteca.model.*;
 import com.biblioteca.repository.Library;
 import com.biblioteca.view.MenuView;
 import com.biblioteca.view.SubMenuView;
@@ -54,10 +51,10 @@ public class Main {
 
     private static List<Borrowable> loadBorrowables(View view) {
         List<Borrowable> availables = new ArrayList<>();
-        availables.add(new Book("Lord of the Rings", "JR Toliken", 1930));
-        availables.add(new Book("Harry Potter", "JK Rowling", 1992));
-        availables.add(new Book("Catch-22", "Joesph Heller", 1950));
-        availables.add(new Book("Winds of Winter", "George RR Martin", 2017));
+        availables.add(new AvailableBook("Lord of the Rings", "JR Toliken", 1930));
+        availables.add(new AvailableBook("Harry Potter", "JK Rowling", 1992));
+        availables.add(new AvailableBook("Catch-22", "Joesph Heller", 1950));
+        availables.add(new AvailableBook("Winds of Winter", "George RR Martin", 2017));
         availables.forEach(borrowable -> borrowable.addListener(view));
         return availables;
     }

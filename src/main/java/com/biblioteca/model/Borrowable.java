@@ -18,4 +18,12 @@ public interface Borrowable<T> extends Visitable, Listenable, Searchable {
 
     String toString(Function<? super T, String> format);
 
+    default Borrowable checkoutBorrowable(User user) {
+        return null;
+    }
+
+    default Borrowable returnBorrowable(User user) {
+        return null;
+    }
+
 }

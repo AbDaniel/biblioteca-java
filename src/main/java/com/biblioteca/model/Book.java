@@ -8,13 +8,13 @@ import java.util.function.Function;
 
 import static com.biblioteca.constants.Constants.*;
 
-public class Book implements Borrowable<Book> {
+public abstract class Book implements Borrowable<Book> {
 
-    private final String name;
-    private String author;
-    private int year;
-    private boolean checkedOut;
-    private Listener listener;
+    protected final String name;
+    protected String author;
+    protected int year;
+    protected boolean checkedOut;
+    protected Listener listener;
 
     public Book(String name, String author, int year) {
         this.name = name;
@@ -61,12 +61,6 @@ public class Book implements Borrowable<Book> {
         return checkedOut;
     }
 
-
-    @Override
-    public void accept(Visitor visitor) {
-        visitor.visit(new Book(this));
-    }
-
     @Override
     public String toString(Function<? super Book, String> format) {
         return format.apply(this);
@@ -109,8 +103,14 @@ public class Book implements Borrowable<Book> {
             ", year=" + book.year;
 
     @Override
-    public void match(Searcher searcher) {
-        if (searcher.getSearchString() == name)
-            searcher.visit(this);
+    public Book checkoutBorrowable(User user) {
+        return null;
     }
+
+    @Override
+    public Book returnBorrowable(User user) {
+        return null;
+    }
+
+
 }

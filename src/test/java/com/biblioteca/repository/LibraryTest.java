@@ -1,6 +1,7 @@
 package com.biblioteca.repository;
 
 import com.biblioteca.listener.Listener;
+import com.biblioteca.model.AvailableBook;
 import com.biblioteca.model.Book;
 import com.biblioteca.model.Borrowable;
 import com.biblioteca.model.User;
@@ -44,15 +45,15 @@ public class LibraryTest {
 
     void setUpWithData() {
         List<Borrowable> bookList = new ArrayList<>();
-        bookList.add(new Book("Lord of the Rings", "JR Toliken", 1930));
-        bookList.add(new Book("Harry Potter", "JK Rowling", 1992));
-        bookList.add(new Book("Catch-22", "Joesph Heller", 1950));
-        bookList.add(new Book("Winds of Winter", "George RR Martin", 2017));
-        Book book = new Book("1984", "George Orwell", 1950);
+        bookList.add(new AvailableBook("Lord of the Rings", "JR Toliken", 1930));
+        bookList.add(new AvailableBook("Harry Potter", "JK Rowling", 1992));
+        bookList.add(new AvailableBook("Catch-22", "Joesph Heller", 1950));
+        bookList.add(new AvailableBook("Winds of Winter", "George RR Martin", 2017));
+        Book book = new AvailableBook("1984", "George Orwell", 1950);
         book.addListener(listener);
         book.checkout(user);
         bookList.add(book);
-        book = new Book("Alchemist", "Paulo Coelho", 1988);
+        book = new AvailableBook("Alchemist", "Paulo Coelho", 1988);
         book.addListener(listener);
         book.checkout(user);
         bookList.add(book);
