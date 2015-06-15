@@ -137,4 +137,16 @@ public class LibraryTest {
         verify(listener).update(expected);
     }
 
+    @Test
+    public void shouldRemoveAvailableBorrowableFromListOnSuccessFullCheckout() {
+        AvailableBook book = new AvailableBook("Lord of the Rings", "JR Toliken", 1930);
+        String bookName = "Lord of the Rings";
+        ArrayList<AvailableBook> books = new ArrayList<>();
+        books.add(book);
+        book.addListener(listener);
+        library.checkout(user, new AvailableBookSearcher(books, bookName));
+
+        verify(bookList).remove(book);
+    }
+
 }
