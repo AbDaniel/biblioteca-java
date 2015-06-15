@@ -24,4 +24,11 @@ public class AvailableBookTest {
 
         assertTrue(actualBook instanceof CheckedOutBook);
     }
+
+    @Test
+    public void shouldReturnNullOnReturn() {
+        Book actualBook = book.returnBorrowable(user);
+
+        assertNull(actualBook);
+    }
 }
