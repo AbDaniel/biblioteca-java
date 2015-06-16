@@ -38,8 +38,15 @@ public class Library {
     }
 
     public boolean returnItem(String itemName, User user, Searcher searcher) {
-        Borrowable borrowable = borrowables.stream().filter(p -> p.isEqualTo(itemName)).findFirst().orElse(null);
-        return borrowable != null && borrowable.returnItem(user);
+        borrowables.forEach(borrowable -> borrowable.match(searcher));
+        Borrowable borrowable = searcher.searchResults().stream().findFirst().orElse(null);
+        if (borrowable == null)
+            listener.update(ITEM_NOT_PRESENT);
+        else {
+            borrowables.remove(borrowable);
+            borrowables.add(borrowable.returnBorrowable(user));
+        }
+        return false;
     }
 
     public void addListener(Listener listener) {

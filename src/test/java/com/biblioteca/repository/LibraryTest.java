@@ -4,6 +4,7 @@ import com.biblioteca.listener.Listener;
 import com.biblioteca.model.*;
 import com.biblioteca.search.AvailableBookSearcher;
 import com.biblioteca.search.CheckedOutBookSearcher;
+import com.biblioteca.search.Searcher;
 import com.biblioteca.visitor.AvailableBookVisitor;
 import com.biblioteca.visitor.Visitor;
 import org.junit.Before;
@@ -19,6 +20,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
 
 public class LibraryTest {
@@ -37,6 +39,9 @@ public class LibraryTest {
     @Mock
     Visitor visitor;
 
+    @Mock
+    Searcher searcher;
+
     @Before
     public void setUp() {
         initMocks(this);
@@ -50,6 +55,7 @@ public class LibraryTest {
         bookList.add(new AvailableBook("Harry Potter", "JK Rowling", 1992));
         bookList.add(new AvailableBook("Catch-22", "Joesph Heller", 1950));
         bookList.add(new AvailableBook("Winds of Winter", "George RR Martin", 2017));
+        bookList.add(new CheckedOutBook("Dance With Dragons", "George RR Martin", 2017));
         bookList.forEach(borrowable -> borrowable.addListener(listener));
         Book book = new AvailableBook("1984", "George Orwell", 1950);
         book.addListener(listener);
@@ -73,14 +79,6 @@ public class LibraryTest {
         String bookName = "1234";
 
         assertFalse(library.returnItem(bookName, user, new CheckedOutBookSearcher(new ArrayList<>(), bookName)));
-    }
-
-    @Test
-    public void shouldReturnTrueOnSuccessfulReturn() {
-        setUpWithData();
-        String name = "1984";
-
-        assertTrue(library.returnItem(name, user, new CheckedOutBookSearcher(new ArrayList<>(), name)));
     }
 
     @Test
@@ -144,5 +142,32 @@ public class LibraryTest {
 
         verify(bookList).add(book);
     }
+
+    @Test
+    public void shouldRemoveCheckoutBorrowableFromListOnSuccessFullReturn() {
+        CheckedOutBook checkedOutBook = new CheckedOutBook("Lord of the Rings", "JR Toliken", 1930);
+        String bookName = "Lord of the Rings";
+        ArrayList<CheckedOutBook> books = new ArrayList<>();
+        books.add(checkedOutBook);
+        checkedOutBook.addListener(listener);
+        library.returnItem(bookName, user, new CheckedOutBookSearcher(books, bookName));
+
+        verify(bookList).remove(checkedOutBook);
+    }
+
+    @Test
+    public void shouldAddAvailableBorrowableFromListOnSuccessFullReturn() {
+        CheckedOutBook checkedoutBook = new CheckedOutBook("Lord of the Rings", "JR Toliken", 1930);
+        AvailableBook availableBook = new AvailableBook("Lord of the Rings", "JR Toliken", 1930);
+        String bookName = "Lord of the Rings";
+        ArrayList<CheckedOutBook> books = new ArrayList<>();
+        books.add(checkedoutBook);
+        checkedoutBook.addListener(listener);
+        availableBook.addListener(listener);
+        library.returnItem(bookName, user, new CheckedOutBookSearcher(books, bookName));
+
+        verify(bookList).add(availableBook);
+    }
+
 
 }
