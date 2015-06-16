@@ -78,4 +78,11 @@ public class AvailableBookTest {
         verify(listener).update(SUCCESSFUL_BOOK_CHECKOUT);
     }
 
+    @Test
+    public void shouldAddBorrowableToUser() {
+        book.checkoutBorrowable(user);
+
+        verify(user).addBorrowable(book);
+    }
+
 }

@@ -23,6 +23,7 @@ public class AvailableBook extends Book {
 
     @Override
     public Book checkoutBorrowable(User user) {
+        user.addBorrowable(this);
         listener.update(SUCCESSFUL_BOOK_CHECKOUT);
         return new CheckedOutBook(this);
     }
