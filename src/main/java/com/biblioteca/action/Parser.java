@@ -1,7 +1,10 @@
 package com.biblioteca.action;
 
+import com.biblioteca.enums.LibrarianMenuItem;
 import com.biblioteca.enums.MenuItem;
+import com.biblioteca.model.Book;
 import com.biblioteca.model.User;
+import com.biblioteca.repository.Accounts;
 import com.biblioteca.repository.Library;
 import com.biblioteca.search.AvailableBookSearcher;
 import com.biblioteca.search.AvailableMovieSearcher;
@@ -10,8 +13,11 @@ import com.biblioteca.search.CheckedOutMovieSearcher;
 import com.biblioteca.view.ListView;
 import com.biblioteca.visitor.AvailableBookVisitor;
 import com.biblioteca.visitor.AvailableMovieVisitor;
+import com.biblioteca.visitor.BookDefaulterVisitor;
+import com.biblioteca.visitor.CheckedoutBookVisitor;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 import static com.biblioteca.enums.MenuItem.*;
@@ -22,10 +28,12 @@ public class Parser {
 
     Library bookLibrary;
     private Library movieLibrary;
+    private Accounts accounts;
 
-    public Parser(Library bookLibrary, Library movieLibrary) {
+    public Parser(Library bookLibrary, Library movieLibrary, Accounts accounts) {
         this.bookLibrary = bookLibrary;
         this.movieLibrary = movieLibrary;
+        this.accounts = accounts;
     }
 
     public Action getAction(Map.Entry<MenuItem, String> userChoice, User user) {
@@ -48,6 +56,16 @@ public class Parser {
             case RETURN_MOVIE:
                 return new Return(movieLibrary, user, new CheckedOutMovieSearcher(new
                         ArrayList<>(), userChoice.getValue()));
+            default:
+                return null;
+        }
+    }
+
+    public Action getLibrarianAction(LibrarianMenuItem menuItem) {
+        switch (menuItem) {
+            case LIST_BOOK_DEFAULTERS:
+                return new ListDefaulters(accounts, new BookDefaulterVisitor(new CheckedoutBookVisitor(new
+                        ArrayList<>(), Book.REGULAR_BOOK_FORMAT), new HashMap<>()));
             default:
                 return null;
         }

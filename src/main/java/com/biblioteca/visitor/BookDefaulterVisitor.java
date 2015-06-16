@@ -44,4 +44,17 @@ public class BookDefaulterVisitor implements DefaulterVisitor<CheckedOutBook> {
         return !userBooks.isEmpty();
     }
 
+    @Override
+    public final boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null) return false;
+
+        return getClass() == o.getClass();
+    }
+
+    @Override
+    public final int hashCode() {
+        return 0;
+    }
+
 }

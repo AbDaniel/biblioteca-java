@@ -7,6 +7,7 @@ import com.biblioteca.controller.LibrarianController;
 import com.biblioteca.controller.UserController;
 import com.biblioteca.controller.LoginController;
 import com.biblioteca.model.*;
+import com.biblioteca.repository.Accounts;
 import com.biblioteca.repository.Library;
 import com.biblioteca.view.LibrarianMenuView;
 import com.biblioteca.view.MenuView;
@@ -31,9 +32,11 @@ public class Main {
         bookLibrary.addListener(view);
         movieLibrary.addListener(view);
 
-        Parser parser = new Parser(bookLibrary, movieLibrary);
-
         List<User> users = loadUsers();
+
+        Accounts accounts = new Accounts(users);
+        Parser parser = new Parser(bookLibrary, movieLibrary, accounts);
+
         Login login = new Login(users);
 
         UserController userController = new UserController(menuView, parser);

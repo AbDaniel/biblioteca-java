@@ -1,6 +1,7 @@
 package com.biblioteca.visitor;
 
 import com.biblioteca.model.*;
+import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -59,5 +60,10 @@ public class AvailableMovieVisitorTest {
         visitor.visit(movie);
 
         verify(movies).add(movie);
+    }
+
+    @Test
+    public void shouldVerifyEqualsContract() {
+        EqualsVerifier.forClass(AvailableBookVisitor.class).usingGetClass().verify();
     }
 }

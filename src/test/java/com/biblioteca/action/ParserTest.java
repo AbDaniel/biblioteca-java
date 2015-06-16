@@ -1,13 +1,17 @@
 package com.biblioteca.action;
 
+import com.biblioteca.enums.LibrarianMenuItem;
 import com.biblioteca.enums.MenuItem;
 import com.biblioteca.model.Book;
 import com.biblioteca.model.User;
+import com.biblioteca.repository.Accounts;
 import com.biblioteca.repository.Library;
 import com.biblioteca.search.*;
 import com.biblioteca.view.ListView;
 import com.biblioteca.visitor.AvailableBookVisitor;
 import com.biblioteca.visitor.AvailableMovieVisitor;
+import com.biblioteca.visitor.BookDefaulterVisitor;
+import com.biblioteca.visitor.DefaulterVisitor;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,6 +21,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
 
+import static com.biblioteca.enums.LibrarianMenuItem.LIST_BOOK_DEFAULTERS;
 import static com.biblioteca.enums.MenuItem.*;
 import static com.biblioteca.model.Movie.REGULAR_MOVIE_FORMAT;
 import static junit.framework.TestCase.assertEquals;
@@ -39,13 +44,19 @@ public class ParserTest {
     @Mock
     Searcher searcher;
 
+    @Mock
+    Accounts accounts;
+
+    @Mock
+    BookDefaulterVisitor bookDefaulterVisitor;
+
     private String bookName;
 
     private SimpleEntry<MenuItem, String> userChoice;
 
     @Before
     public void setUp() throws Exception {
-        parser = new Parser(bookLibrary, movieLibray);
+        parser = new Parser(bookLibrary, movieLibray, accounts);
     }
 
     @Test
@@ -108,7 +119,6 @@ public class ParserTest {
         assertEquals(expected, actualAction);
     }
 
-
     @Test
     public void shouldReturnReturnActionActionWhenUserSelectsReturnMovies() {
         MenuItem item = RETURN_MOVIE;
@@ -121,7 +131,6 @@ public class ParserTest {
         assertEquals(expected, actualAction);
     }
 
-
     @Test
     public void shouldReturnNullIfSelectedMenuItemIsNotCheckoutReturnOrList() {
         MenuItem item = QUIT;
@@ -132,4 +141,14 @@ public class ParserTest {
         assertNull(actualAction);
     }
 
+
+    @Test
+    public void shouldReturnListBookDefaulterActionIfLibrarianSelectsListDefaulters() {
+        LibrarianMenuItem item = LIST_BOOK_DEFAULTERS;
+        Action expected = new ListDefaulters(accounts, bookDefaulterVisitor);
+
+        Action actualAction = parser.getLibrarianAction(item);
+
+        assertEquals(expected, actualAction);
+    }
 }

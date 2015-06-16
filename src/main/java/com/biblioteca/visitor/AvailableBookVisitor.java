@@ -38,4 +38,16 @@ public class AvailableBookVisitor implements Visitor<AvailableBook> {
         return books.size();
     }
 
+    @Override
+    public final boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null) return false;
+
+        return getClass() == o.getClass();
+    }
+
+    @Override
+    public final int hashCode() {
+        return 0;
+    }
 }
