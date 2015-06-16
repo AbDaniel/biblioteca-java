@@ -1,8 +1,7 @@
 package com.biblioteca.search;
 
-import com.biblioteca.model.AvailableBook;
-import com.biblioteca.model.Book;
 import com.biblioteca.model.CheckedOutBook;
+import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,7 +11,6 @@ import org.mockito.runners.MockitoJUnitRunner;
 import java.util.List;
 
 import static junit.framework.Assert.assertFalse;
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -45,6 +43,11 @@ public class CheckedOutBookSearcherTest {
         boolean isEmpty = searcher.searchResults().isEmpty();
 
         assertFalse(isEmpty);
+    }
+
+    @Test
+    public void shouldVerifyEqualsContract() {
+        EqualsVerifier.forClass(CheckedOutBookSearcher.class).usingGetClass().verify();
     }
 
 }
