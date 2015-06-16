@@ -29,6 +29,7 @@ public abstract class Movie implements Borrowable<Movie> {
         this.director = movie.director;
         this.year = movie.year;
         this.rating = movie.rating;
+        this.listener = movie.listener;
     }
 
     @Override
