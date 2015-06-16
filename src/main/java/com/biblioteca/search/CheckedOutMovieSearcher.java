@@ -1,6 +1,5 @@
 package com.biblioteca.search;
 
-import com.biblioteca.model.CheckedOutBook;
 import com.biblioteca.model.CheckedoutMovie;
 
 import java.util.List;

@@ -1,7 +1,10 @@
 package com.biblioteca.model;
 
+import com.biblioteca.constants.Constants;
 import com.biblioteca.search.Searcher;
 import com.biblioteca.visitor.Visitor;
+
+import static com.biblioteca.constants.Constants.SUCCESS_MOVIE_RETURN;
 
 public class CheckedoutMovie extends Movie {
 
@@ -20,6 +23,7 @@ public class CheckedoutMovie extends Movie {
 
     @Override
     public Movie returnBorrowable(User user) {
+        listener.update(SUCCESS_MOVIE_RETURN);
         return new AvailableMovie(this);
     }
 
