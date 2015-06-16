@@ -72,6 +72,12 @@ public class Parser {
             case LIST_MOVIE_DEFAULTERS:
                 return new ListDefaulters(accounts, new BorrowableDefaulterVisitor(new CheckedoutMovieVisitor(new
                         ArrayList<>(), REGULAR_MOVIE_FORMAT), new HashMap<>()));
+            case INVALID:
+                return new Invalid();
+            case QUIT:
+                return new Quit();
+            case LOGOUT:
+                return new Logout();
             default:
                 return null;
         }

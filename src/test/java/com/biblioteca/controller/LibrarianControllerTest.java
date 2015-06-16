@@ -13,9 +13,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import static com.biblioteca.constants.Constants.EXIT_CODE;
-import static com.biblioteca.constants.Constants.LOGOUT_CODE;
-import static com.biblioteca.enums.LibrarianMenuItem.LOGOUT;
 import static com.biblioteca.enums.LibrarianMenuItem.QUIT;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -51,6 +48,7 @@ public class LibrarianControllerTest {
         MockitoAnnotations.initMocks(this);
         librarianController = new LibrarianController(menuView, parser);
         when(menuView.getChoice()).thenReturn(QUIT);
+        when(parser.getLibrarianAction(QUIT)).thenReturn(action);
         librarianController.addExitLogoutListener(listener);
     }
 
@@ -69,19 +67,17 @@ public class LibrarianControllerTest {
     }
 
     @Test
-    public void shouldUpdateIfMenuItemIsLogout() {
-        when(menuView.getChoice()).thenReturn(LOGOUT);
+    public void shouldAddListenerToCommand() {
         librarianController.execute(user);
 
-        verify(listener).update(LOGOUT_CODE);
+        verify(action).addExitLogoutListener(listener);
     }
 
     @Test
-    public void shouldUpdateIfMenuItemIsQuit() {
-        when(menuView.getChoice()).thenReturn(QUIT);
+    public void shouldExecuteActionSelectedByUser() {
         librarianController.execute(user);
 
-        verify(listener).update(EXIT_CODE);
+        verify(action).execute();
     }
 
 }

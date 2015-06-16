@@ -1,13 +1,11 @@
 package com.biblioteca.controller;
 
+import com.biblioteca.action.Action;
 import com.biblioteca.action.Parser;
 import com.biblioteca.enums.LibrarianMenuItem;
 import com.biblioteca.listener.ExitLogoutListener;
 import com.biblioteca.model.User;
 import com.biblioteca.view.LibrarianMenuView;
-
-import static com.biblioteca.constants.Constants.EXIT_CODE;
-import static com.biblioteca.constants.Constants.LOGOUT_CODE;
 
 public class LibrarianController implements Controller {
 
@@ -24,19 +22,9 @@ public class LibrarianController implements Controller {
     public void execute(User user) {
         menuView.displayMenu();
         LibrarianMenuItem selectedMenuItem = menuView.getChoice();
-
-        if (isInvalidChoice(selectedMenuItem))
-            return;
-        switch (selectedMenuItem) {
-            case QUIT:
-                listener.update(EXIT_CODE);
-                return;
-            case LOGOUT:
-                listener.update(LOGOUT_CODE);
-                return;
-        }
-
-        parser.getLibrarianAction(selectedMenuItem).execute();
+        Action librarianAction = parser.getLibrarianAction(selectedMenuItem);
+        librarianAction.addExitLogoutListener(listener);
+        librarianAction.execute();
     }
 
     private boolean isInvalidChoice(LibrarianMenuItem userChoice) {
