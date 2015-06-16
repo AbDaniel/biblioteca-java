@@ -1,5 +1,7 @@
 package com.biblioteca.view;
 
+import com.biblioteca.enums.LibrarianMenuItem;
+import com.biblioteca.enums.MenuItem;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -9,8 +11,11 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.AbstractMap;
+import java.util.Map;
 import java.util.Scanner;
 
+import static com.biblioteca.enums.MenuItem.LIST_BOOKS;
 import static org.junit.Assert.*;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -36,5 +41,14 @@ public class LibrarianMenuViewTest {
 
         assertEquals("1. List all Book defaulters\n" +
                 "2. List all Movie defaulters\n", outContent.toString());
+    }
+
+    @Test
+    public void shouldGetListBooksChoiceFromUser() {
+        systemInMock.provideText("1\n");
+        LibrarianMenuItem expected = LibrarianMenuItem.LIST_BOOK_DEFAULTERS;
+
+        LibrarianMenuItem actualItem = menuView.getChoice();
+        assertEquals(expected, actualItem);
     }
 }

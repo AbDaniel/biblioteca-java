@@ -18,7 +18,7 @@ public class LibrarianMenuView {
     }
 
 
-    private int getChoice() {
+    public LibrarianMenuItem getChoice() {
         int choice;
         try {
             choice = scanner.nextInt();
@@ -29,7 +29,7 @@ public class LibrarianMenuView {
             choice = INVALID_INPUT;
         }
         printInvalidMessage(choice);
-        return choice;
+        return LibrarianMenuItem.valueOf(choice);
     }
 
     private void printInvalidMessage(int choice) {
