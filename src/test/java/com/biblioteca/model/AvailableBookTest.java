@@ -80,9 +80,9 @@ public class AvailableBookTest {
 
     @Test
     public void shouldAddBorrowableToUser() {
-        book.checkoutBorrowable(user);
+        Book actualBook = book.checkoutBorrowable(user);
 
-        verify(user).addBorrowable(book);
+        verify(user).addBorrowable(actualBook);
     }
 
 }
