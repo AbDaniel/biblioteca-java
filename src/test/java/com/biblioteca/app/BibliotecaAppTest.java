@@ -56,7 +56,7 @@ public class BibliotecaAppTest {
         User user = new User("111-1111", "sauron", "onering", null);
         bibliotecaApp = new BibliotecaApp(WELCOME_TEXT, view, controllers, loginController);
         bibliotecaApp.update(EXIT_CODE);
-        bibliotecaApp.update(user);
+        bibliotecaApp.update(user, controller);
         when(controllers.get(user)).thenReturn(controller);
     }
 

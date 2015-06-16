@@ -49,7 +49,7 @@ public class BibliotecaApp implements ExitLogoutListener, LoginListener {
 
 
     @Override
-    public void update(User user) {
+    public void update(User user, Controller controller) {
         this.user = user;
     }
 }

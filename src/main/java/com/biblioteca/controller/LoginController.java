@@ -16,12 +16,14 @@ public class LoginController {
 
     private Login login;
     private View view;
+    private Map<User, Controller> controllers;
     private ExitLogoutListener exitLogoutListener;
     private LoginListener loginListener;
 
     public LoginController(Login login, View view, Map<User, Controller> controllers) {
         this.login = login;
         this.view = view;
+        this.controllers = controllers;
     }
 
     public User execute() {
@@ -36,8 +38,9 @@ public class LoginController {
                 view.displayMessage(INVALID_CREDENTIALS);
             }
         } while (user == null);
+        Controller controller = controllers.get(user);
         exitLogoutListener.update(RUNNING);
-        loginListener.update(user);
+        loginListener.update(user, controller);
         return user;
     }
 

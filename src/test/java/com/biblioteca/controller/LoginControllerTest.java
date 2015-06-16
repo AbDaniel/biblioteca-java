@@ -1,9 +1,11 @@
 package com.biblioteca.controller;
 
 import com.biblioteca.action.Login;
+import com.biblioteca.action.Parser;
 import com.biblioteca.listener.ExitLogoutListener;
 import com.biblioteca.listener.LoginListener;
 import com.biblioteca.model.User;
+import com.biblioteca.view.MenuView;
 import com.biblioteca.view.View;
 import org.junit.Before;
 import org.junit.Rule;
@@ -24,12 +26,10 @@ import java.util.Scanner;
 import static com.biblioteca.constants.Constants.ENTER_LIBRARY_NO;
 import static com.biblioteca.constants.Constants.RUNNING;
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
-public class LoginUserControllerTest {
+public class LoginControllerTest {
 
     LoginController loginController;
 
@@ -48,15 +48,20 @@ public class LoginUserControllerTest {
     @Mock
     Map<User, Controller> controllers;
 
+    @Mock
+    Parser parser;
+
+    @Mock
+    MenuView menuView;
+
     @Rule
     public final TextFromStandardInputStream systemInMock
             = TextFromStandardInputStream.emptyStandardInputStream();
 
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-
     private User user;
-
     private List<User> users;
+    private UserController userController;
 
     @Before
     public void setUp() throws Exception {
@@ -78,7 +83,7 @@ public class LoginUserControllerTest {
         loginController = new LoginController(login, view, controllers);
         loginController.addExitLogoutListener(listener);
         loginController.addLoginListener(loginListener);
-        Mockito.when(login.login(Mockito.anyString(), Mockito.anyString())).thenReturn(user);
+        when(login.login(Mockito.anyString(), Mockito.anyString())).thenReturn(user);
     }
 
     @Test
@@ -114,8 +119,18 @@ public class LoginUserControllerTest {
 
     @Test
     public void shouldUpdateLoginListenerWhenLoginIsSuccessful() {
+        userController = new UserController(menuView, parser);
+        when(controllers.get(user)).thenReturn(userController);
         loginController.execute();
 
-        verify(loginListener).update(user);
+        verify(loginListener).update(user, userController);
     }
+
+    @Test
+    public void shouldRetriveControllerCorrespondingToTheUser() {
+        loginController.execute();
+
+        verify(controllers).get(user);
+    }
+
 }
