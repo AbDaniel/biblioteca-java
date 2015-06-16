@@ -2,10 +2,7 @@ package com.biblioteca.action;
 
 import com.biblioteca.model.User;
 import com.biblioteca.repository.Library;
-import com.biblioteca.search.CheckedOutBookSearcher;
 import com.biblioteca.search.Searcher;
-
-import java.util.ArrayList;
 
 public class Return implements Action {
 
@@ -21,7 +18,7 @@ public class Return implements Action {
 
     @Override
     public void execute() {
-        library.returnItem(searcher.getSearchString(), user, searcher);
+        library.returnItem(user, searcher);
     }
 
     @Override

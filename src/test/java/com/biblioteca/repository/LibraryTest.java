@@ -20,7 +20,6 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
 
 public class LibraryTest {
@@ -63,22 +62,6 @@ public class LibraryTest {
         bookList.add(book);
         this.library = new Library(bookList);
         library.addListener(listener);
-    }
-
-    @Test
-    public void shouldReturnFalseIfBookIsValidButCheckStateIsFalseDuringReturn() {
-        setUpWithData();
-        String bookName = "Lord of the Rings";
-
-        assertFalse(library.returnItem(bookName, user, new CheckedOutBookSearcher(new ArrayList<>(), bookName)));
-    }
-
-    @Test
-    public void shouldReturnFalseIfBookIsInValidDuringReturn() {
-        setUpWithData();
-        String bookName = "1234";
-
-        assertFalse(library.returnItem(bookName, user, new CheckedOutBookSearcher(new ArrayList<>(), bookName)));
     }
 
     @Test
@@ -150,7 +133,7 @@ public class LibraryTest {
         ArrayList<CheckedOutBook> books = new ArrayList<>();
         books.add(checkedOutBook);
         checkedOutBook.addListener(listener);
-        library.returnItem(bookName, user, new CheckedOutBookSearcher(books, bookName));
+        library.returnItem(user, new CheckedOutBookSearcher(books, bookName));
 
         verify(bookList).remove(checkedOutBook);
     }
@@ -164,7 +147,7 @@ public class LibraryTest {
         books.add(checkedoutBook);
         checkedoutBook.addListener(listener);
         availableBook.addListener(listener);
-        library.returnItem(bookName, user, new CheckedOutBookSearcher(books, bookName));
+        library.returnItem(user, new CheckedOutBookSearcher(books, bookName));
 
         verify(bookList).add(availableBook);
     }

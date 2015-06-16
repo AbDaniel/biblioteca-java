@@ -37,7 +37,7 @@ public class Library {
         }
     }
 
-    public boolean returnItem(String itemName, User user, Searcher searcher) {
+    public void returnItem(User user, Searcher searcher) {
         borrowables.forEach(borrowable -> borrowable.match(searcher));
         Borrowable borrowable = searcher.searchResults().stream().findFirst().orElse(null);
         if (borrowable == null)
@@ -46,7 +46,6 @@ public class Library {
             borrowables.remove(borrowable);
             borrowables.add(borrowable.returnBorrowable(user));
         }
-        return false;
     }
 
     public void addListener(Listener listener) {

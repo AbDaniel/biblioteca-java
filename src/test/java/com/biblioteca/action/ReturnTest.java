@@ -46,7 +46,7 @@ public class ReturnTest {
 
         command.execute();
 
-        verify(library).returnItem(eq(bookName), Matchers.any(User.class), eq(searcher));
+        verify(library).returnItem(Matchers.any(User.class), eq(searcher));
     }
 
     @Test
