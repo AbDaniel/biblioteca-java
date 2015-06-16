@@ -77,9 +77,9 @@ public class AvailableMovieTest {
 
     @Test
     public void shouldAddBorrowableToUser() {
-        movie.checkoutBorrowable(user);
+        Movie actualMovie = movie.checkoutBorrowable(user);
 
-        verify(user).addBorrowable(movie);
+        verify(user).addBorrowable(actualMovie);
     }
 
 }
