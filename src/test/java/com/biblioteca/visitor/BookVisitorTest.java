@@ -3,7 +3,6 @@ package com.biblioteca.visitor;
 import com.biblioteca.model.AvailableBook;
 import com.biblioteca.model.AvailableMovie;
 import com.biblioteca.model.Book;
-import com.biblioteca.model.Movie;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -41,7 +40,7 @@ public class BookVisitorTest {
 
     @Test
     public void shouldReturnBookAsString() {
-        String actualString = visitor.visitables();
+        String actualString = visitor.visitablesAsString();
 
         String expectedString = "";
 

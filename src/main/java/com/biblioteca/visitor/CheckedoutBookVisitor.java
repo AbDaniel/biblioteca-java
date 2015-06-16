@@ -8,12 +8,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 
-public class CheckedoutBookVisitor implements Visitor {
+public class CheckedoutBookVisitor implements Visitor<CheckedOutBook> {
 
-    private List<Book> books;
+    private List<CheckedOutBook> books;
     private Function<Book, String> format;
 
-    public CheckedoutBookVisitor(List<Book> books, Function<Book, String> format) {
+    public CheckedoutBookVisitor(List<CheckedOutBook> books, Function<Book, String> format) {
         this.format = format;
         this.books = books;
     }
@@ -24,14 +24,20 @@ public class CheckedoutBookVisitor implements Visitor {
     }
 
     @Override
-    public String visitables() {
+    public String visitablesAsString() {
         StringBuilder builder = new StringBuilder();
         books.forEach(book -> builder.append(book.toString(format)).append("\n"));
         return builder.toString();
     }
 
-    public int size() {
-        return books.size();
+    @Override
+    public List<CheckedOutBook> visitables() {
+        return books;
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return books.isEmpty();
     }
 
 }

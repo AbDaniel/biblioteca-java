@@ -21,7 +21,7 @@ public class Library {
 
     public List<? extends Borrowable> allAvailableItems(Visitor visitor) {
         borrowables.forEach(borrowable -> borrowable.accept(visitor));
-        listener.update(visitor.visitables());
+        listener.update(visitor.visitablesAsString());
         return null;
     }
 

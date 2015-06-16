@@ -2,9 +2,13 @@ package com.biblioteca.visitor;
 
 import com.biblioteca.model.*;
 
-public interface Visitor {
+import java.util.List;
 
-    String visitables();
+public interface Visitor<T extends Visitable> {
+
+    String visitablesAsString();
+
+    List<T> visitables();
 
     default void visit(AvailableBook book) {
 
@@ -24,10 +28,6 @@ public interface Visitor {
     }
 
     default void visit(Book book) {
-
-    }
-
-    default void visit(User user) {
 
     }
 

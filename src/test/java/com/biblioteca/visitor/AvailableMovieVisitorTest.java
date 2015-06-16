@@ -20,7 +20,7 @@ public class AvailableMovieVisitorTest {
     AvailableMovieVisitor visitor;
 
     @Mock
-    List<Movie> movies;
+    List<AvailableMovie> movies;
 
     @Before
     public void setUp() throws Exception {
@@ -37,7 +37,7 @@ public class AvailableMovieVisitorTest {
 
     @Test
     public void shouldReturnBookAsString() {
-        String actualString = visitor.visitables();
+        String actualString = visitor.visitablesAsString();
 
         String expectedString = "name='The Matrix', director='The Wachowskis', year=1999, rating=10\n";
 

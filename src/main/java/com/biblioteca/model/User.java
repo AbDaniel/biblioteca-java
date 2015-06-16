@@ -1,5 +1,8 @@
 package com.biblioteca.model;
 
+import com.biblioteca.visitor.Visitable;
+import com.biblioteca.visitor.Visitor;
+
 import java.util.List;
 
 public class User {
@@ -41,5 +44,9 @@ public class User {
 
     public boolean isValidCredential(String libraryNo, String password) {
         return this.libraryNo.equals(libraryNo) && this.password.equals(password);
+    }
+
+    public void accept(Visitor visitor) {
+
     }
 }

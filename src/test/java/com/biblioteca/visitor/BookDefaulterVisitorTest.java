@@ -7,10 +7,9 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import java.util.List;
 import java.util.Map;
 
-import static org.junit.Assert.*;
-import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -29,6 +28,9 @@ public class BookDefaulterVisitorTest {
     @Mock
     User user;
 
+    @Mock
+    List<Visitable> visitables;
+
     @Before
     public void setUp() throws Exception {
         userVisitor = new BookDefaulterVisitor(bookVisitor, defaultedBooks);
@@ -36,9 +38,9 @@ public class BookDefaulterVisitorTest {
 
     @Test
     public void shouldAddTheVisitedObjectToDefaultedBooks() {
-        when(bookVisitor.visitables()).thenReturn("Visitables");
-        userVisitor.visit(user);
-        String books = bookVisitor.visitables();
+        when(bookVisitor.visitablesAsString()).thenReturn("Visitables");
+        userVisitor.visit(user, visitables);
+        String books = bookVisitor.visitablesAsString();
 
         verify(defaultedBooks).put(user, books);
     }

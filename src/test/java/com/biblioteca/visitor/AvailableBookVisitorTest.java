@@ -12,7 +12,6 @@ import java.util.List;
 
 import static com.biblioteca.model.Book.REGULAR_BOOK_FORMAT;
 import static junit.framework.TestCase.assertEquals;
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -21,7 +20,7 @@ public class AvailableBookVisitorTest {
     AvailableBookVisitor visitor;
 
     @Mock
-    List<Book> books;
+    List<AvailableBook> books;
 
     @Before
     public void setUp() throws Exception {
@@ -38,7 +37,7 @@ public class AvailableBookVisitorTest {
 
     @Test
     public void shouldReturnBookAsString() {
-        String actualString = visitor.visitables();
+        String actualString = visitor.visitablesAsString();
 
         String expectedString = "name='Lord of the Rings', author='JR Toliken', year=1930\n" +
                 "name='Harry Potter', author='JK Rowling', year=1992\n" +

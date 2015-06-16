@@ -1,19 +1,17 @@
 package com.biblioteca.visitor;
 
-import com.biblioteca.model.AvailableBook;
 import com.biblioteca.model.AvailableMovie;
 import com.biblioteca.model.Movie;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 
-public class AvailableMovieVisitor implements Visitor {
+public class AvailableMovieVisitor implements Visitor<AvailableMovie> {
 
-    private List<Movie> movies;
+    private List<AvailableMovie> movies;
     private Function<Movie, String> format;
 
-    public AvailableMovieVisitor(List<Movie> movies, Function<Movie, String> format) {
+    public AvailableMovieVisitor(List<AvailableMovie> movies, Function<Movie, String> format) {
         this.format = format;
         this.movies = movies;
     }
@@ -24,10 +22,15 @@ public class AvailableMovieVisitor implements Visitor {
     }
 
     @Override
-    public String visitables() {
+    public String visitablesAsString() {
         StringBuilder builder = new StringBuilder();
         movies.forEach(book -> builder.append(book.toString(format)).append("\n"));
         return builder.toString();
+    }
+
+    @Override
+    public List<AvailableMovie> visitables() {
+        return movies;
     }
 
     public int size() {

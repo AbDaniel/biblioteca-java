@@ -3,34 +3,41 @@ package com.biblioteca.visitor;
 import com.biblioteca.model.User;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import static com.biblioteca.model.Book.REGULAR_BOOK_FORMAT;
 
-public class BookDefaulterVisitor implements Visitor {
+public class BookDefaulterVisitor implements DefaulterVisitor {
 
-    CheckedoutBookVisitor visitor;
+    CheckedoutBookVisitor bookVisitor;
     Map<User, String> userBooks;
 
-    public BookDefaulterVisitor(CheckedoutBookVisitor visitor, Map<User, String> userBooks) {
-        this.visitor = visitor;
+    public BookDefaulterVisitor(CheckedoutBookVisitor bookVisitor, Map<User, String> userBooks) {
+        this.bookVisitor = bookVisitor;
         this.userBooks = userBooks;
     }
 
     @Override
-    public void visit(User user) {
-        userBooks.put(user, visitor.visitables());
-        visitor = new CheckedoutBookVisitor(new ArrayList<>(), REGULAR_BOOK_FORMAT);
+    public void visit(User user, List<Visitable> visitables) {
+        visitables.forEach(visitable -> visitable.accept(bookVisitor));
+        userBooks.put(user, bookVisitor.visitablesAsString());
+        bookVisitor = new CheckedoutBookVisitor(new ArrayList<>(), REGULAR_BOOK_FORMAT);
     }
 
     @Override
-    public String visitables() {
+    public String visitablesAsString() {
         return userBooks.toString();
     }
 
     @Override
-    public boolean isEmpty() {
-        return userBooks.isEmpty();
+    public List<? extends Visitable> visitables() {
+        return null;
+    }
+
+    @Override
+    public boolean borrowablesFound() {
+        return !userBooks.isEmpty();
     }
 
 }
