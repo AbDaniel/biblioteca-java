@@ -74,4 +74,11 @@ public class CheckedOutBookTest {
         verify(listener).update(Constants.SUCCESSFUL_BOOK_RETURN);
     }
 
+    @Test
+    public void shouldRemoveBorrowableFromUserDuringCheckout() {
+        book.returnBorrowable(user);
+
+        verify(user).removeBorrowable(book);
+    }
+
 }

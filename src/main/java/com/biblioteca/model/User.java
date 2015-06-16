@@ -38,7 +38,7 @@ public class User {
         ownables.add(ownable);
     }
 
-    public void removeOwnable(Borrowable ownable) {
+    public void removeBorrowable(Borrowable ownable) {
         ownables.remove(ownable);
     }
 

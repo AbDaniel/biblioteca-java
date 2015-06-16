@@ -22,6 +22,7 @@ public class CheckedOutBook extends Book {
 
     @Override
     public Book returnBorrowable(User user) {
+        user.removeBorrowable(this);
         listener.update(SUCCESSFUL_BOOK_RETURN);
         return new AvailableBook(this);
     }

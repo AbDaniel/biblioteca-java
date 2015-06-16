@@ -41,7 +41,7 @@ public class UserTest {
         Book book = new AvailableBook("I'm Damned", "Myself", 2025);
         ownables.add(book);
 
-        user.removeOwnable(book);
+        user.removeBorrowable(book);
         int actualSize = ownables.size();
 
         assertEquals(0, actualSize);
