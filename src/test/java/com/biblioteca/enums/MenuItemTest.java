@@ -5,6 +5,7 @@ import org.junit.Test;
 import static com.biblioteca.enums.MenuItem.INVALID;
 import static com.biblioteca.enums.MenuItem.LIST_BOOKS;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 public class MenuItemTest {
 
@@ -29,6 +30,13 @@ public class MenuItemTest {
         String actualString = INVALID.getText();
 
         assertEquals("", actualString);
+    }
+
+    @Test
+    public void shouldReturnFalseForIsValidMenuItemIfCodeIsLessThanZero() {
+        boolean actual = INVALID.isValidMenuItem();
+
+        assertFalse(actual);
     }
 
 }

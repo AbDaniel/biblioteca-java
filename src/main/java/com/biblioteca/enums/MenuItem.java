@@ -57,7 +57,7 @@ public enum MenuItem {
         return "";
     }
 
-    private boolean isValidMenuItem() {
+    public boolean isValidMenuItem() {
         return code > 0;
     }
 

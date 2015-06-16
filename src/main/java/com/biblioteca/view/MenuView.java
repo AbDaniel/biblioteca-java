@@ -36,12 +36,6 @@ public class MenuView extends View {
         return null;
     }
 
-    public int getUserChoice() {
-        int choice;
-        choice = getChoice();
-        return choice;
-    }
-
     private int getChoice() {
         int choice;
         try {
@@ -64,7 +58,8 @@ public class MenuView extends View {
 
     public void displayMenu() {
         for (MenuItem menuItem : values()) {
-            System.out.println(menuItem.getText());
+            if (menuItem.isValidMenuItem())
+                System.out.println(menuItem.getText());
         }
     }
 
