@@ -57,6 +57,8 @@ public class Parser {
                 return new Invalid();
             case QUIT:
                 return new Quit();
+            case LOGOUT:
+                return new Logout();
             default:
                 return null;
         }

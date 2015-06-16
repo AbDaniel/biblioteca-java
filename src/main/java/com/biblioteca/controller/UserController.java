@@ -9,8 +9,6 @@ import com.biblioteca.view.MenuView;
 
 import java.util.Map;
 
-import static com.biblioteca.constants.Constants.LOGOUT_CODE;
-
 public class UserController implements Controller {
 
     private MenuView menuView;
@@ -26,12 +24,6 @@ public class UserController implements Controller {
     public void execute(User user) {
         menuView.displayMenu();
         Map.Entry<MenuItem, String> userChoice = menuView.getUserChoiceAsEntry();
-        MenuItem selectedMenuItem = userChoice.getKey();
-        switch (selectedMenuItem) {
-            case LOGOUT:
-                listener.update(LOGOUT_CODE);
-                return;
-        }
         Action action = parser.getAction(userChoice, user);
         action.addExitLogoutListener(listener);
         action.execute();

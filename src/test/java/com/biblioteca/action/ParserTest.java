@@ -153,6 +153,16 @@ public class ParserTest {
         assertTrue(actualAction instanceof Invalid);
     }
 
+    @Test
+    public void shouldReturnLogoutActionIfSelectedMenuItemIsNotCheckoutReturnOrList() {
+        MenuItem item = LOGOUT;
+        userChoice = new SimpleEntry<>(item, null);
+
+        Action actualAction = parser.getAction(userChoice, user);
+
+        assertTrue(actualAction instanceof Logout);
+    }
+
 
     @Test
     public void shouldReturnListBookDefaulterActionIfLibrarianSelectsListDefaulters() {
