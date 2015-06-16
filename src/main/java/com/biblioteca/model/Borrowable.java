@@ -8,8 +8,6 @@ import java.util.function.Function;
 
 public interface Borrowable<T> extends Visitable, Listenable, Searchable {
 
-    boolean isEqualTo(String itemName);
-
     boolean checkout(User user);
 
     boolean returnItem(User user);

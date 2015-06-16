@@ -66,11 +66,6 @@ public abstract class Book implements Borrowable<Book> {
     }
 
     @Override
-    public boolean isEqualTo(String itemName) {
-        return name.equals(itemName);
-    }
-
-    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;

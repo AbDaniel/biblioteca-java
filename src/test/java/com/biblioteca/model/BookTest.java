@@ -77,16 +77,6 @@ public class BookTest {
     }
 
     @Test
-    public void shouldReturnFalseIfBookNameIsNotValid() {
-        assertFalse(book.isEqualTo("aasd"));
-    }
-
-    @Test
-    public void shouldReturnTrueIfBookNameIsValid() {
-        assertTrue(book.isEqualTo("Lord of the Rings"));
-    }
-
-    @Test
     public void shouldAddBookToUserOnCheckout() {
         book.checkout(user);
 

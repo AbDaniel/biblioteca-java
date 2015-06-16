@@ -56,11 +56,6 @@ public abstract class Movie implements Borrowable<Movie> {
     }
 
     @Override
-    public boolean isEqualTo(String itemName) {
-        return name.equals(itemName);
-    }
-
-    @Override
     public boolean checkout(User user) {
         if (checkedOut) {
             listener.update(MOVIE_IS_NOT_PRESENT);

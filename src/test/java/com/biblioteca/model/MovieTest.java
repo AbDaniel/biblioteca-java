@@ -84,16 +84,6 @@ public class MovieTest {
     }
 
     @Test
-    public void shouldReturnFalseIfMovieNameIsNotValid() {
-        assertFalse(movie.isEqualTo("aasd"));
-    }
-
-    @Test
-    public void shouldReturnTrueIfMovieNameIsValid() {
-        assertTrue(movie.isEqualTo("The Matrix"));
-    }
-
-    @Test
     public void shouldAddMovieToUserOnCheckout() {
         movie.checkout(user);
 
