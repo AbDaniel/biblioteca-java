@@ -84,6 +84,9 @@ public class BookDefaulterVisitorTest {
 
         assertEquals("libraryNo='111-1111', name='sauron'\n" +
                 "name='Lord of the Rings', author='JR Toliken', year=1930\n" +
+                "name='Winds of Winter', author='RR Martin', year=1930\n" +
+                "libraryNo='111-1113', name='sauron'\n" +
+                "name='Lord of the Rings', author='JR Toliken', year=1930\n" +
                 "name='Winds of Winter', author='RR Martin', year=1930\n", userBooks);
     }
 

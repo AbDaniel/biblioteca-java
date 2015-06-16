@@ -1,7 +1,6 @@
 package com.biblioteca.action;
 
-import com.biblioteca.constants.Constants;
-import com.biblioteca.controller.Controller;
+import com.biblioteca.controller.UserController;
 import com.biblioteca.enums.MenuItem;
 import com.biblioteca.listener.ExitLogoutListener;
 import com.biblioteca.model.User;
@@ -21,7 +20,7 @@ import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.*;
 
-public class ControllerTest {
+public class UserControllerTest {
 
     @Mock
     private MenuView menuView;
@@ -41,7 +40,7 @@ public class ControllerTest {
     @Mock
     private Parser parser;
 
-    private Controller controller;
+    private UserController userController;
 
     private SimpleEntry<MenuItem, String> userChoice;
 
@@ -51,30 +50,30 @@ public class ControllerTest {
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        controller = new Controller(menuView, parser);
+        userController = new UserController(menuView, parser);
         userChoice = new SimpleEntry<>(LIST_BOOKS, null);
         when(menuView.getUserChoiceAsEntry()).thenReturn(userChoice);
         when(parser.getAction(userChoice, user)).thenReturn(action);
-        controller.addListener(listener);
+        userController.addListener(listener);
     }
 
     @Test
     public void shouldListAllMenuOptions() {
-        controller.execute(user);
+        userController.execute(user);
 
         verify(menuView).displayMenu();
     }
 
     @Test
     public void shouldGetMenuOptionFromUser() {
-        controller.execute(user);
+        userController.execute(user);
 
         verify(menuView).getUserChoiceAsEntry();
     }
 
     @Test
     public void shouldGetCommandAssociatedWithMenuItem() {
-        controller.execute(user);
+        userController.execute(user);
 
         verify(parser).getAction(eq(userChoice), any(User.class));
     }
@@ -83,7 +82,7 @@ public class ControllerTest {
     public void shouldNotCallDispatchIfMenuItemIsQuit() {
         SimpleEntry<MenuItem, String> choice = new SimpleEntry<>(QUIT, null);
         when(menuView.getUserChoiceAsEntry()).thenReturn(choice);
-        controller.execute(user);
+        userController.execute(user);
 
         verify(parser, times(0)).getAction(eq(choice), any(User.class));
     }
@@ -92,7 +91,7 @@ public class ControllerTest {
     public void shouldNotCallDispatchIfMenuItemIsLogout() {
         SimpleEntry<MenuItem, String> choice = new SimpleEntry<>(LOGOUT, null);
         when(menuView.getUserChoiceAsEntry()).thenReturn(choice);
-        controller.execute(user);
+        userController.execute(user);
 
         verify(parser, times(0)).getAction(eq(choice), any(User.class));
     }
@@ -101,7 +100,7 @@ public class ControllerTest {
     public void shouldUpdateListenerIfMenuItemIsQuit() {
         SimpleEntry<MenuItem, String> choice = new SimpleEntry<>(QUIT, null);
         when(menuView.getUserChoiceAsEntry()).thenReturn(choice);
-        controller.execute(user);
+        userController.execute(user);
 
         verify(listener).update(EXIT_CODE);
     }
@@ -110,7 +109,7 @@ public class ControllerTest {
     public void shouldUpdateIfMenuItemIsLogout() {
         SimpleEntry<MenuItem, String> choice = new SimpleEntry<>(LOGOUT, null);
         when(menuView.getUserChoiceAsEntry()).thenReturn(choice);
-        controller.execute(user);
+        userController.execute(user);
 
         verify(listener).update(LOGOUT_CODE);
     }
@@ -118,7 +117,7 @@ public class ControllerTest {
     @Test
     public void shouldExecuteActionSelectedByUser() {
         when(parser.getAction(userChoice, user)).thenReturn(action);
-        controller.execute(user);
+        userController.execute(user);
 
         verify(action).execute();
     }

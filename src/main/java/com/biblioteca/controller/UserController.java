@@ -11,13 +11,13 @@ import java.util.Map;
 import static com.biblioteca.constants.Constants.EXIT_CODE;
 import static com.biblioteca.constants.Constants.LOGOUT_CODE;
 
-public class Controller {
+public class UserController {
 
     private MenuView menuView;
     private Parser parser;
     private ExitLogoutListener listener;
 
-    public Controller(MenuView menuView, Parser parser) {
+    public UserController(MenuView menuView, Parser parser) {
         this.menuView = menuView;
         this.parser = parser;
     }

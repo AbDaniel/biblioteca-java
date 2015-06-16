@@ -41,7 +41,9 @@ public class LibrarianMenuViewTest {
         menuView.displayMenu();
 
         assertEquals("1. List all Book defaulters\n" +
-                "2. List all Movie defaulters\n", outContent.toString());
+                "2. List all Movie defaulters\n" +
+                "3. Logout\n" +
+                "4. Quit\n", outContent.toString());
     }
 
     @Test

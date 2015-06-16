@@ -5,7 +5,9 @@ import java.util.Map;
 
 public enum LibrarianMenuItem {
     LIST_BOOK_DEFAULTERS(1, "List all Book defaulters"),
-    LIST_MOVIE_DEFAULTERS(2, "List all Movie defaulters");
+    LIST_MOVIE_DEFAULTERS(2, "List all Movie defaulters"),
+    LOGOUT(3, "Logout"),
+    QUIT(4, "Quit");
 
     private int code;
     private String text;
