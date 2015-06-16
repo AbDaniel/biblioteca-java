@@ -63,4 +63,11 @@ public class UserTest {
         assertTrue(user.isValidCredential(userName, password));
     }
 
+    @Test
+    public void shouldReturnStateAsStringOnToString() {
+        String acutalString = user.toString();
+
+        assertEquals("libraryNo='111-1111', name='Sauron'", acutalString);
+    }
+
 }

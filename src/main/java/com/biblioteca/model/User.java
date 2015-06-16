@@ -49,4 +49,10 @@ public class User {
     public void accept(Visitor visitor) {
 
     }
+
+    @Override
+    public String toString() {
+        return "libraryNo='" + libraryNo + '\'' +
+                ", name='" + name + '\'';
+    }
 }
