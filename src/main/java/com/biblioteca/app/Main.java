@@ -2,17 +2,18 @@ package com.biblioteca.app;
 
 import com.biblioteca.action.Login;
 import com.biblioteca.action.Parser;
+import com.biblioteca.controller.Controller;
+import com.biblioteca.controller.LibrarianController;
 import com.biblioteca.controller.UserController;
 import com.biblioteca.controller.LoginController;
 import com.biblioteca.model.*;
 import com.biblioteca.repository.Library;
+import com.biblioteca.view.LibrarianMenuView;
 import com.biblioteca.view.MenuView;
 import com.biblioteca.view.SubMenuView;
 import com.biblioteca.view.View;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 import static com.biblioteca.constants.Constants.WELCOME_TEXT;
 
@@ -22,6 +23,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         View view = new View(scanner);
         SubMenuView subMenuView = new SubMenuView(scanner);
+        LibrarianMenuView librarianMenuView = new LibrarianMenuView(scanner);
         MenuView menuView = new MenuView(scanner, subMenuView);
 
         Library bookLibrary = new Library(loadBorrowables(view));
@@ -31,10 +33,13 @@ public class Main {
 
         Parser parser = new Parser(bookLibrary, movieLibrary);
 
-        Login login = new Login(loadUsers());
+        List<User> users = loadUsers();
+        Login login = new Login(users);
 
         UserController userController = new UserController(menuView, parser);
         LoginController loginController = new LoginController(login, view);
+
+        Map<User, Controller> controllers = loadControllers(users, userController, librarianMenuView, parser);
 
         BibliotecaApp bibliotecaApp = new BibliotecaApp(WELCOME_TEXT, view, userController, loginController);
         bibliotecaApp.start();
@@ -65,6 +70,19 @@ public class Main {
         availables.add(new AvailableMovie("Seven Samurai", "Akira Kurosawa", 1950, 10));
         availables.forEach(borrowable -> borrowable.addListener(view));
         return availables;
+    }
+
+    private static Map<User, Controller> loadControllers(List<User> users, Controller controller, LibrarianMenuView
+            menuView, Parser parser) {
+        Map<User, Controller> controllers = new HashMap<>();
+        for (User user : users) {
+            controllers.put(user, controller);
+        }
+        User librarian = new User("000-0000", "Libraian", "damnit", new ArrayList<>());
+        users.add(librarian);
+        Controller librarianController = new LibrarianController(menuView, parser);
+        controllers.put(librarian, librarianController);
+        return controllers;
     }
 
 }
