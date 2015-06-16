@@ -1,6 +1,6 @@
 package com.biblioteca.app;
 
-import com.biblioteca.controller.Controller;
+import com.biblioteca.controller.UserController;
 import com.biblioteca.controller.LoginController;
 import com.biblioteca.listener.ExitLogoutListener;
 import com.biblioteca.listener.LoginListener;
@@ -14,18 +14,18 @@ public class BibliotecaApp implements ExitLogoutListener, LoginListener {
 
     private String welcomeMessage;
     private View view;
-    private Controller controller;
+    private UserController userController;
     private LoginController loginController;
     private int EXIT_LOGOUT = 0;
     private User user;
 
     public BibliotecaApp(String welcomeMessage, View view,
-                         Controller controller, LoginController loginController) {
+                         UserController userController, LoginController loginController) {
         this.welcomeMessage = welcomeMessage;
         this.view = view;
-        this.controller = controller;
+        this.userController = userController;
         this.loginController = loginController;
-        this.controller.addListener(this);
+        this.userController.addListener(this);
         this.loginController.addLoginListener(this);
         this.loginController.addExitLogoutListener(this);
     }
@@ -35,7 +35,7 @@ public class BibliotecaApp implements ExitLogoutListener, LoginListener {
         do {
             loginController.execute();
             do {
-                controller.execute(user);
+                userController.execute(user);
             } while (EXIT_LOGOUT != EXIT_CODE && EXIT_LOGOUT != LOGOUT_CODE);
         } while (EXIT_LOGOUT == LOGOUT_CODE);
     }

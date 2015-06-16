@@ -2,7 +2,7 @@ package com.biblioteca.app;
 
 import com.biblioteca.action.Login;
 import com.biblioteca.action.Parser;
-import com.biblioteca.controller.Controller;
+import com.biblioteca.controller.UserController;
 import com.biblioteca.controller.LoginController;
 import com.biblioteca.model.*;
 import com.biblioteca.repository.Library;
@@ -33,10 +33,10 @@ public class Main {
 
         Login login = new Login(loadUsers());
 
-        Controller controller = new Controller(menuView, parser);
+        UserController userController = new UserController(menuView, parser);
         LoginController loginController = new LoginController(login, view);
 
-        BibliotecaApp bibliotecaApp = new BibliotecaApp(WELCOME_TEXT, view, controller, loginController);
+        BibliotecaApp bibliotecaApp = new BibliotecaApp(WELCOME_TEXT, view, userController, loginController);
         bibliotecaApp.start();
     }
 

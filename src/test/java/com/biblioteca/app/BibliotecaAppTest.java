@@ -1,10 +1,9 @@
 package com.biblioteca.app;
 
 import com.biblioteca.action.Parser;
-import com.biblioteca.constants.Constants;
 import com.biblioteca.model.User;
 import com.biblioteca.view.View;
-import com.biblioteca.controller.Controller;
+import com.biblioteca.controller.UserController;
 import com.biblioteca.controller.LoginController;
 import com.biblioteca.repository.Library;
 import org.junit.Before;
@@ -17,12 +16,10 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import static com.biblioteca.constants.Constants.*;
 import static com.biblioteca.constants.Constants.WELCOME_TEXT;
-import static com.biblioteca.enums.MenuItem.*;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class BibliotecaAppTest {
@@ -40,7 +37,7 @@ public class BibliotecaAppTest {
     Parser parser;
 
     @Mock
-    Controller controller;
+    UserController userController;
 
     @Mock
     LoginController loginController;
@@ -50,7 +47,7 @@ public class BibliotecaAppTest {
     @Before
     public void setUp() {
         User user = new User("111-1111", "sauron", "onering", null);
-        bibliotecaApp = new BibliotecaApp(WELCOME_TEXT, view, controller, loginController);
+        bibliotecaApp = new BibliotecaApp(WELCOME_TEXT, view, userController, loginController);
         bibliotecaApp.update(EXIT_CODE);
         bibliotecaApp.update(user);
     }
@@ -66,14 +63,14 @@ public class BibliotecaAppTest {
     public void shouldStartController() {
         bibliotecaApp.start();
 
-        verify(controller).execute(any(User.class));
+        verify(userController).execute(any(User.class));
     }
 
     @Test
     public void shouldExitApp() {
         bibliotecaApp.start();
 
-        verify(controller, times(1)).execute(any(User.class));
+        verify(userController, times(1)).execute(any(User.class));
     }
 
     @Test
