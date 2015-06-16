@@ -3,6 +3,7 @@ package com.biblioteca.visitor;
 import com.biblioteca.model.CheckedOutBook;
 import com.biblioteca.model.User;
 import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -93,8 +94,8 @@ public class BorrowableDefaulterVisitorTest {
 
     @Test
     public void shouldVerifyEqualsContract() {
-        EqualsVerifier.forClass(AvailableBookVisitor.class).usingGetClass().verify();
+        EqualsVerifier.forClass(BorrowableDefaulterVisitor.class).usingGetClass().suppress(Warning.NONFINAL_FIELDS)
+                .suppress(Warning.NO_EXAMPLE_FOR_CACHED_HASHCODE).verify();
     }
-
 
 }

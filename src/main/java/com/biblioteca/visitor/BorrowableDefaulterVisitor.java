@@ -57,8 +57,7 @@ public class BorrowableDefaulterVisitor implements DefaulterVisitor {
     }
 
     @Override
-    public final int hashCode() {
-        return 0;
+    public int hashCode() {
+        return borrowableVisitor != null ? borrowableVisitor.hashCode() : 0;
     }
-
 }

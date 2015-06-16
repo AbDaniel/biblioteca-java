@@ -15,7 +15,6 @@ import java.util.List;
 
 import static com.biblioteca.model.Book.REGULAR_BOOK_FORMAT;
 import static junit.framework.TestCase.assertEquals;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
 
@@ -67,6 +66,6 @@ public class BookVisitorTest {
 
     @Test
     public void shouldVerifyEqualsContract() {
-        EqualsVerifier.forClass(AvailableBookVisitor.class).usingGetClass().verify();
+        EqualsVerifier.forClass(BookVisitor.class).usingGetClass().verify();
     }
 }

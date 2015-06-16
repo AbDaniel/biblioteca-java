@@ -57,7 +57,7 @@ public class CheckedoutBookVisitorTest {
 
     @Test
     public void shouldVerifyEqualsContract() {
-        EqualsVerifier.forClass(AvailableBookVisitor.class).usingGetClass().verify();
+        EqualsVerifier.forClass(CheckedoutBookVisitor.class).usingGetClass().verify();
     }
 
 }

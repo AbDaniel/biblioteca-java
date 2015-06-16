@@ -64,6 +64,6 @@ public class AvailableMovieVisitorTest {
 
     @Test
     public void shouldVerifyEqualsContract() {
-        EqualsVerifier.forClass(AvailableBookVisitor.class).usingGetClass().verify();
+        EqualsVerifier.forClass(AvailableMovieVisitor.class).usingGetClass().verify();
     }
 }
