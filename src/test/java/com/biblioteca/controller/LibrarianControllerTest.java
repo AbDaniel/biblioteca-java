@@ -14,6 +14,8 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import static com.biblioteca.constants.Constants.LOGOUT_CODE;
+import static com.biblioteca.enums.LibrarianMenuItem.LOGOUT;
 import static com.biblioteca.enums.LibrarianMenuItem.QUIT;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -64,5 +66,13 @@ public class LibrarianControllerTest {
         librarianController.execute(user);
 
         verify(menuView).getChoice();
+    }
+
+    @Test
+    public void shouldUpdateIfMenuItemIsLogout() {
+        when(menuView.getChoice()).thenReturn(LOGOUT);
+        librarianController.execute(user);
+
+        verify(listener).update(LOGOUT_CODE);
     }
 }

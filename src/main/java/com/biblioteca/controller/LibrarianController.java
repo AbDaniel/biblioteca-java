@@ -23,6 +23,17 @@ public class LibrarianController {
     public void execute(User user) {
         menuView.displayMenu();
         LibrarianMenuItem selectedMenuItem = menuView.getChoice();
+
+        if (isInvalidChoice(selectedMenuItem))
+            return;
+        switch (selectedMenuItem) {
+            case QUIT:
+                listener.update(EXIT_CODE);
+                return;
+            case LOGOUT:
+                listener.update(LOGOUT_CODE);
+                return;
+        }
     }
 
     private boolean isInvalidChoice(LibrarianMenuItem userChoice) {
