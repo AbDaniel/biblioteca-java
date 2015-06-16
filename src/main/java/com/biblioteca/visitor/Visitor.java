@@ -31,5 +31,9 @@ public interface Visitor {
 
     }
 
+    default boolean isEmpty() {
+        return true;
+    }
+
 }
 

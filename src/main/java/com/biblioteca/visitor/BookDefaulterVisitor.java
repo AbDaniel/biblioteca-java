@@ -1,6 +1,5 @@
 package com.biblioteca.visitor;
 
-import com.biblioteca.model.Book;
 import com.biblioteca.model.User;
 
 import java.util.ArrayList;
@@ -27,6 +26,11 @@ public class BookDefaulterVisitor implements Visitor {
     @Override
     public String visitables() {
         return userBooks.toString();
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return userBooks.isEmpty();
     }
 
 }
