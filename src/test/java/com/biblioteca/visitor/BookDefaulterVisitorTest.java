@@ -68,7 +68,7 @@ public class BookDefaulterVisitorTest {
     }
 
     @Test
-    public void shouldReturnVisitUserOnlyIfUserHasANonEmptyBorrowables() {
+    public void shouldReturnVisitedUserAsStringOnlyIfUserHasANonEmptyBorrowables() {
         user = new User("111-1111", "sauron", "onering", new ArrayList<>());
         List<CheckedOutBook> checkedOutBooks = new ArrayList<>();
         checkedOutBooks.add(new CheckedOutBook("Lord of the Rings", "JR Toliken", 1930));

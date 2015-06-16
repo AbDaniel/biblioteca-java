@@ -22,6 +22,10 @@ public interface Visitor<T extends Visitable> {
 
     }
 
+    default void visit(CheckedoutMovie movie) {
+
+    }
+
 
     default void visit(Movie movie) {
 
