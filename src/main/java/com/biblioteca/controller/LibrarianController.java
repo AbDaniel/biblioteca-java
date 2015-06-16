@@ -41,6 +41,7 @@ public class LibrarianController implements Controller {
         return userChoice == null;
     }
 
+    @Override
     public void addListener(ExitLogoutListener listener) {
         this.listener = listener;
     }

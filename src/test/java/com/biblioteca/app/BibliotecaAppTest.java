@@ -1,9 +1,10 @@
 package com.biblioteca.app;
 
 import com.biblioteca.action.Parser;
+import com.biblioteca.controller.Controller;
+import com.biblioteca.controller.UserController;
 import com.biblioteca.model.User;
 import com.biblioteca.view.View;
-import com.biblioteca.controller.UserController;
 import com.biblioteca.controller.LoginController;
 import com.biblioteca.repository.Library;
 import org.junit.Before;
@@ -14,12 +15,15 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import java.util.Map;
+
 import static com.biblioteca.constants.Constants.*;
 import static com.biblioteca.constants.Constants.WELCOME_TEXT;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class BibliotecaAppTest {
@@ -37,19 +41,23 @@ public class BibliotecaAppTest {
     Parser parser;
 
     @Mock
-    UserController userController;
+    Map<User, Controller> controllers;
 
     @Mock
     LoginController loginController;
+
+    @Mock
+    UserController controller;
 
     BibliotecaApp bibliotecaApp;
 
     @Before
     public void setUp() {
         User user = new User("111-1111", "sauron", "onering", null);
-        bibliotecaApp = new BibliotecaApp(WELCOME_TEXT, view, userController, loginController);
+        bibliotecaApp = new BibliotecaApp(WELCOME_TEXT, view, controllers, loginController);
         bibliotecaApp.update(EXIT_CODE);
         bibliotecaApp.update(user);
+        when(controllers.get(user)).thenReturn(controller);
     }
 
     @Test
@@ -63,14 +71,14 @@ public class BibliotecaAppTest {
     public void shouldStartController() {
         bibliotecaApp.start();
 
-        verify(userController).execute(any(User.class));
+        verify(controller).execute(any(User.class));
     }
 
     @Test
     public void shouldExitApp() {
         bibliotecaApp.start();
 
-        verify(userController, times(1)).execute(any(User.class));
+        verify(controller, times(1)).execute(any(User.class));
     }
 
     @Test

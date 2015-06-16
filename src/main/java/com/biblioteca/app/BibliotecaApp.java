@@ -1,11 +1,13 @@
 package com.biblioteca.app;
 
-import com.biblioteca.controller.UserController;
+import com.biblioteca.controller.Controller;
 import com.biblioteca.controller.LoginController;
 import com.biblioteca.listener.ExitLogoutListener;
 import com.biblioteca.listener.LoginListener;
 import com.biblioteca.model.User;
 import com.biblioteca.view.View;
+
+import java.util.Map;
 
 import static com.biblioteca.constants.Constants.EXIT_CODE;
 import static com.biblioteca.constants.Constants.LOGOUT_CODE;
@@ -14,18 +16,18 @@ public class BibliotecaApp implements ExitLogoutListener, LoginListener {
 
     private String welcomeMessage;
     private View view;
-    private UserController userController;
+    private Map<User, Controller> controllers;
     private LoginController loginController;
     private int EXIT_LOGOUT = 0;
     private User user;
 
     public BibliotecaApp(String welcomeMessage, View view,
-                         UserController userController, LoginController loginController) {
+                         Map<User, Controller> controllers, LoginController loginController) {
         this.welcomeMessage = welcomeMessage;
         this.view = view;
-        this.userController = userController;
+        this.controllers = controllers;
         this.loginController = loginController;
-        this.userController.addListener(this);
+        this.controllers.forEach((user1, controller) -> controller.addListener(this));
         this.loginController.addLoginListener(this);
         this.loginController.addExitLogoutListener(this);
     }
@@ -35,7 +37,7 @@ public class BibliotecaApp implements ExitLogoutListener, LoginListener {
         do {
             loginController.execute();
             do {
-                userController.execute(user);
+                controllers.get(user).execute(user);
             } while (EXIT_LOGOUT != EXIT_CODE && EXIT_LOGOUT != LOGOUT_CODE);
         } while (EXIT_LOGOUT == LOGOUT_CODE);
     }

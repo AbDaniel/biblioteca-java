@@ -41,7 +41,7 @@ public class Main {
 
         Map<User, Controller> controllers = loadControllers(users, userController, librarianMenuView, parser);
 
-        BibliotecaApp bibliotecaApp = new BibliotecaApp(WELCOME_TEXT, view, userController, loginController);
+        BibliotecaApp bibliotecaApp = new BibliotecaApp(WELCOME_TEXT, view, controllers, loginController);
         bibliotecaApp.start();
     }
 
