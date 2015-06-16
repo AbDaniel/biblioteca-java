@@ -15,6 +15,7 @@ import java.util.AbstractMap;
 import java.util.Map;
 import java.util.Scanner;
 
+import static com.biblioteca.constants.Constants.INVALID_INPUT_TEXT;
 import static com.biblioteca.enums.MenuItem.LIST_BOOKS;
 import static org.junit.Assert.*;
 
@@ -51,4 +52,22 @@ public class LibrarianMenuViewTest {
         LibrarianMenuItem actualItem = menuView.getChoice();
         assertEquals(expected, actualItem);
     }
+
+    @Test
+    public void shouldReturnInvalidInputIfUserInputsAInvalidNumber() {
+        systemInMock.provideText("10\n");
+
+        LibrarianMenuItem actualItem = menuView.getChoice();
+        assertNull(actualItem);
+    }
+
+    @Test
+    public void shouldDisplayInvalidInputMessageOnInvalidInput() {
+        systemInMock.provideText("10\n");
+
+        menuView.getChoice();
+
+        assertEquals(INVALID_INPUT_TEXT + "\n", outContent.toString());
+    }
+
 }
