@@ -58,4 +58,11 @@ public class LibrarianControllerTest {
 
         verify(menuView).displayMenu();
     }
+
+    @Test
+    public void shouldGetMenuOptionFromUser() {
+        librarianController.execute(user);
+
+        verify(menuView).getChoice();
+    }
 }
