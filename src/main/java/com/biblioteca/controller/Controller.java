@@ -1,13 +1,15 @@
 package com.biblioteca.controller;
 
 import com.biblioteca.action.Parser;
-import com.biblioteca.constants.Constants;
 import com.biblioteca.enums.MenuItem;
 import com.biblioteca.listener.ExitLogoutListener;
 import com.biblioteca.model.User;
 import com.biblioteca.view.MenuView;
 
 import java.util.Map;
+
+import static com.biblioteca.constants.Constants.EXIT_CODE;
+import static com.biblioteca.constants.Constants.LOGOUT_CODE;
 
 public class Controller {
 
@@ -29,10 +31,10 @@ public class Controller {
         MenuItem selectedMenuItem = userChoice.getKey();
         switch (selectedMenuItem) {
             case QUIT:
-                listener.update(Constants.EXIT_CODE);
+                listener.update(EXIT_CODE);
                 return;
             case LOGOUT:
-                listener.update(Constants.LOGOUT_CODE);
+                listener.update(LOGOUT_CODE);
                 return;
         }
 

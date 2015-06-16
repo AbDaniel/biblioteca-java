@@ -56,37 +56,6 @@ public abstract class Movie implements Borrowable<Movie> {
     }
 
     @Override
-    public boolean checkout(User user) {
-        if (checkedOut) {
-            listener.update(MOVIE_IS_NOT_PRESENT);
-            return false;
-        } else {
-            checkedOut = true;
-            user.addBorrowable(this);
-            listener.update(SUCCESS_MOVIE_CHECKOUT);
-            return true;
-        }
-    }
-
-    @Override
-    public boolean returnItem(User user) {
-        if (checkedOut) {
-            checkedOut = false;
-            user.removeOwnable(this);
-            listener.update(SUCCESS_MOVIE_RETURN);
-            return true;
-        } else {
-            listener.update(MOVIE_IS_NOT_VALID);
-            return false;
-        }
-    }
-
-    @Override
-    public boolean isCheckedOut() {
-        return checkedOut;
-    }
-
-    @Override
     public String toString(Function<? super Movie, String> format) {
         return format.apply(this);
     }

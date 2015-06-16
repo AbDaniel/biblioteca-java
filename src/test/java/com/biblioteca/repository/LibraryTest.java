@@ -58,7 +58,6 @@ public class LibraryTest {
         bookList.forEach(borrowable -> borrowable.addListener(listener));
         Book book = new AvailableBook("1984", "George Orwell", 1950);
         book.addListener(listener);
-        book.checkout(user);
         bookList.add(book);
         this.library = new Library(bookList);
         library.addListener(listener);

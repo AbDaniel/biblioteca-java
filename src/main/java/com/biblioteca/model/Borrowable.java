@@ -8,12 +8,6 @@ import java.util.function.Function;
 
 public interface Borrowable<T> extends Visitable, Listenable, Searchable {
 
-    boolean checkout(User user);
-
-    boolean returnItem(User user);
-
-    boolean isCheckedOut();
-
     String toString(Function<? super T, String> format);
 
     default Borrowable checkoutBorrowable(User user) {
