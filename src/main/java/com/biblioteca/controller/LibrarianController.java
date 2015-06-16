@@ -27,10 +27,6 @@ public class LibrarianController implements Controller {
         librarianAction.execute();
     }
 
-    private boolean isInvalidChoice(LibrarianMenuItem userChoice) {
-        return userChoice == null;
-    }
-
     @Override
     public void addExitLogoutListener(ExitLogoutListener listener) {
         this.listener = listener;

@@ -208,4 +208,14 @@ public class ParserTest {
         TestCase.assertTrue(actualAction instanceof Quit);
     }
 
+
+    @Test
+    public void shouldReturnLogoutActionIfLibrarianSelectsLogout() {
+        LibrarianMenuItem item = LibrarianMenuItem.LOGOUT;
+
+        Action actualAction = parser.getLibrarianAction(item);
+
+        TestCase.assertTrue(actualAction instanceof Logout);
+    }
+
 }

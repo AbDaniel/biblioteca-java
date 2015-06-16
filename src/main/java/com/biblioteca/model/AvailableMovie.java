@@ -1,6 +1,5 @@
 package com.biblioteca.model;
 
-import com.biblioteca.constants.Constants;
 import com.biblioteca.search.Searcher;
 import com.biblioteca.visitor.Visitor;
 
