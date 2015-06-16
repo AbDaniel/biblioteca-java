@@ -20,12 +20,6 @@ public class MenuView extends View {
         this.subMenuView = subMenuView;
     }
 
-    public int getUserChoice() {
-        int choice;
-        choice = getChoice();
-        return choice;
-    }
-
     public Entry<MenuItem, String> getUserChoiceAsEntry() {
         int choice;
         choice = getChoice();
@@ -40,6 +34,12 @@ public class MenuView extends View {
         if (choice != INVALID_INPUT)
             return valueOf(choice);
         return null;
+    }
+
+    public int getUserChoice() {
+        int choice;
+        choice = getChoice();
+        return choice;
     }
 
     private int getChoice() {

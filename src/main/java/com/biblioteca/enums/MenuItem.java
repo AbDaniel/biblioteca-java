@@ -54,7 +54,7 @@ public enum MenuItem {
         return code + ". " + text;
     }
 
-     private static Map<Integer, MenuItem> map = new HashMap<>();
+    private static Map<Integer, MenuItem> map = new HashMap<>();
 
     static {
         for (MenuItem menuItem : MenuItem.values()) {
