@@ -1,13 +1,13 @@
 package com.biblioteca.visitor;
 
-import com.biblioteca.model.Book;
+import com.biblioteca.model.Borrowable;
 import com.biblioteca.model.User;
 
 import java.util.List;
 
-public interface DefaulterVisitor<T extends Visitable> extends Visitor<T> {
+public interface DefaulterVisitor extends Visitor {
 
-    void visit(User user, List<T> visitables);
+    void visit(User user, List<? extends Borrowable> visitables);
 
     default boolean borrowablesFound() {
         return false;

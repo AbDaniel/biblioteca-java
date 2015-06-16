@@ -20,9 +20,9 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
-public class BookDefaulterVisitorTest {
+public class BorrowableDefaulterVisitorTest {
 
-    private BookDefaulterVisitor userVisitor;
+    private BorrowableDefaulterVisitor userVisitor;
 
     @Mock
     private CheckedoutBookVisitor bookVisitor;
@@ -38,7 +38,7 @@ public class BookDefaulterVisitorTest {
 
     @Before
     public void setUp() throws Exception {
-        userVisitor = new BookDefaulterVisitor(bookVisitor, defaultedBooks);
+        userVisitor = new BorrowableDefaulterVisitor(bookVisitor, defaultedBooks);
     }
 
     @Test
@@ -57,7 +57,7 @@ public class BookDefaulterVisitorTest {
         checkedOutBooks.add(new CheckedOutBook("Lord of the Rings", "JR Toliken", 1930));
         checkedOutBooks.add(new CheckedOutBook("Winds of Winter", "RR Martin", 1930));
         bookVisitor = new CheckedoutBookVisitor(new ArrayList<>(), REGULAR_BOOK_FORMAT);
-        userVisitor = new BookDefaulterVisitor(bookVisitor, new HashMap<>());
+        userVisitor = new BorrowableDefaulterVisitor(bookVisitor, new HashMap<>());
         userVisitor.visit(user, checkedOutBooks);
 
         String userBooks = userVisitor.visitablesAsString();
@@ -74,7 +74,7 @@ public class BookDefaulterVisitorTest {
         checkedOutBooks.add(new CheckedOutBook("Lord of the Rings", "JR Toliken", 1930));
         checkedOutBooks.add(new CheckedOutBook("Winds of Winter", "RR Martin", 1930));
         bookVisitor = new CheckedoutBookVisitor(new ArrayList<>(), REGULAR_BOOK_FORMAT);
-        userVisitor = new BookDefaulterVisitor(bookVisitor, new HashMap<>());
+        userVisitor = new BorrowableDefaulterVisitor(bookVisitor, new HashMap<>());
         userVisitor.visit(user, checkedOutBooks);
         user = new User("111-1112", "sauron", "onering", new ArrayList<>());
         userVisitor.visit(user, new ArrayList<>());

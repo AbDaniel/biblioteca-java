@@ -45,7 +45,7 @@ public class ParserTest {
     @Mock
     Accounts accounts;
 
-    BookDefaulterVisitor bookDefaulterVisitor;
+    BorrowableDefaulterVisitor borrowableDefaulterVisitor;
 
     @Mock
     CheckedoutBookVisitor checkedoutBookVisitor;
@@ -144,9 +144,9 @@ public class ParserTest {
 
     @Test
     public void shouldReturnListBookDefaulterActionIfLibrarianSelectsListDefaulters() {
-        bookDefaulterVisitor = new BookDefaulterVisitor(checkedoutBookVisitor, new HashMap<>());
+        borrowableDefaulterVisitor = new BorrowableDefaulterVisitor(checkedoutBookVisitor, new HashMap<>());
         LibrarianMenuItem item = LIST_BOOK_DEFAULTERS;
-        Action expected = new ListDefaulters(accounts, bookDefaulterVisitor);
+        Action expected = new ListDefaulters(accounts, borrowableDefaulterVisitor);
 
         Action actualAction = parser.getLibrarianAction(item);
 

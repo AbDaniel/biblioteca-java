@@ -13,7 +13,7 @@ import com.biblioteca.search.CheckedOutMovieSearcher;
 import com.biblioteca.view.ListView;
 import com.biblioteca.visitor.AvailableBookVisitor;
 import com.biblioteca.visitor.AvailableMovieVisitor;
-import com.biblioteca.visitor.BookDefaulterVisitor;
+import com.biblioteca.visitor.BorrowableDefaulterVisitor;
 import com.biblioteca.visitor.CheckedoutBookVisitor;
 
 import java.util.ArrayList;
@@ -64,7 +64,7 @@ public class Parser {
     public Action getLibrarianAction(LibrarianMenuItem menuItem) {
         switch (menuItem) {
             case LIST_BOOK_DEFAULTERS:
-                return new ListDefaulters(accounts, new BookDefaulterVisitor(new CheckedoutBookVisitor(new
+                return new ListDefaulters(accounts, new BorrowableDefaulterVisitor(new CheckedoutBookVisitor(new
                         ArrayList<>(), Book.REGULAR_BOOK_FORMAT), new HashMap<>()));
             default:
                 return null;
