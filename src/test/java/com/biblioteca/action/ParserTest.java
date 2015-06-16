@@ -197,4 +197,15 @@ public class ParserTest {
 
         TestCase.assertTrue(actualAction instanceof Invalid);
     }
+
+
+    @Test
+    public void shouldReturnQuitActionIfLibrarianSelectsQuit() {
+        LibrarianMenuItem item = LibrarianMenuItem.QUIT;
+
+        Action actualAction = parser.getLibrarianAction(item);
+
+        TestCase.assertTrue(actualAction instanceof Quit);
+    }
+
 }
