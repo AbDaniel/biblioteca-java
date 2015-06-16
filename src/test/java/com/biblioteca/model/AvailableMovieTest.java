@@ -75,4 +75,11 @@ public class AvailableMovieTest {
         verify(listener).update(SUCCESS_MOVIE_CHECKOUT);
     }
 
+    @Test
+    public void shouldAddBorrowableToUser() {
+        movie.checkoutBorrowable(user);
+
+        verify(user).addBorrowable(movie);
+    }
+
 }

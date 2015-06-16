@@ -29,6 +29,7 @@ public class AvailableMovie extends Movie {
 
     @Override
     public Movie checkoutBorrowable(User user) {
+        user.addBorrowable(this);
         listener.update(SUCCESS_MOVIE_CHECKOUT);
         return new CheckedoutMovie(this);
     }
