@@ -2,7 +2,6 @@ package com.biblioteca.controller;
 
 import com.biblioteca.action.Action;
 import com.biblioteca.action.Parser;
-import com.biblioteca.enums.LibrarianMenuItem;
 import com.biblioteca.listener.ExitLogoutListener;
 import com.biblioteca.model.User;
 import com.biblioteca.repository.Library;

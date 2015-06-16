@@ -11,7 +11,7 @@ import java.util.Map;
 import static com.biblioteca.constants.Constants.EXIT_CODE;
 import static com.biblioteca.constants.Constants.LOGOUT_CODE;
 
-public class UserController {
+public class UserController implements Controller {
 
     private MenuView menuView;
     private Parser parser;
@@ -22,6 +22,7 @@ public class UserController {
         this.parser = parser;
     }
 
+    @Override
     public void execute(User user) {
         menuView.displayMenu();
         Map.Entry<MenuItem, String> userChoice = menuView.getUserChoiceAsEntry();

@@ -9,7 +9,7 @@ import com.biblioteca.view.LibrarianMenuView;
 import static com.biblioteca.constants.Constants.EXIT_CODE;
 import static com.biblioteca.constants.Constants.LOGOUT_CODE;
 
-public class LibrarianController {
+public class LibrarianController implements Controller {
 
     private LibrarianMenuView menuView;
     private Parser parser;
@@ -20,6 +20,7 @@ public class LibrarianController {
         this.parser = parser;
     }
 
+    @Override
     public void execute(User user) {
         menuView.displayMenu();
         LibrarianMenuItem selectedMenuItem = menuView.getChoice();
