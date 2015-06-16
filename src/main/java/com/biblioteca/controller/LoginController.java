@@ -26,7 +26,7 @@ public class LoginController {
         this.controllers = controllers;
     }
 
-    public User execute() {
+    public void execute() {
         User user;
         do {
             view.displayMessage(ENTER_LIBRARY_NO);
@@ -41,7 +41,6 @@ public class LoginController {
         Controller controller = controllers.get(user);
         exitLogoutListener.update(RUNNING);
         loginListener.update(user, controller);
-        return user;
     }
 
     public void addExitLogoutListener(ExitLogoutListener listener) {

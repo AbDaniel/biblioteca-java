@@ -46,7 +46,7 @@ public class Main {
 
         LoginController loginController = new LoginController(login, view, controllers);
 
-        BibliotecaApp bibliotecaApp = new BibliotecaApp(WELCOME_TEXT, view, controllers, loginController);
+        BibliotecaApp bibliotecaApp = new BibliotecaApp(WELCOME_TEXT, view, loginController);
         bibliotecaApp.start();
     }
 

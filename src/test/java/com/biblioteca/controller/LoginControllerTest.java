@@ -25,7 +25,6 @@ import java.util.Scanner;
 
 import static com.biblioteca.constants.Constants.ENTER_LIBRARY_NO;
 import static com.biblioteca.constants.Constants.RUNNING;
-import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -100,14 +99,6 @@ public class LoginControllerTest {
         loginController.execute();
 
         verify(view, times(2)).getString();
-    }
-
-    @Test
-    public void shouldTryToLoginWithCredentials() {
-        User actualUser = loginController.execute();
-        User expectedUser = new User("111-1111", "sauron", "", null);
-
-        assertEquals(expectedUser, actualUser);
     }
 
     @Test
