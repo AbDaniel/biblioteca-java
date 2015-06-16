@@ -6,8 +6,6 @@ public interface Visitor {
 
     String visitables();
 
-    void reset();
-
     default void visit(AvailableBook book) {
 
     }

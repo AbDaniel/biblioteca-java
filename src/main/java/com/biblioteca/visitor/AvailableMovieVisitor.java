@@ -30,11 +30,6 @@ public class AvailableMovieVisitor implements Visitor {
         return builder.toString();
     }
 
-    @Override
-    public void reset() {
-        movies = new ArrayList<>();
-    }
-
     public int size() {
         return movies.size();
     }

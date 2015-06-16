@@ -30,11 +30,6 @@ public class CheckedoutBookVisitor implements Visitor {
         return builder.toString();
     }
 
-    @Override
-    public void reset() {
-        books = new ArrayList<>();
-    }
-
     public int size() {
         return books.size();
     }

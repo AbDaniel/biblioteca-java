@@ -1,8 +1,12 @@
 package com.biblioteca.visitor;
 
+import com.biblioteca.model.Book;
 import com.biblioteca.model.User;
 
+import java.util.ArrayList;
 import java.util.Map;
+
+import static com.biblioteca.model.Book.REGULAR_BOOK_FORMAT;
 
 public class BookDefaulterVisitor implements Visitor {
 
@@ -17,17 +21,12 @@ public class BookDefaulterVisitor implements Visitor {
     @Override
     public void visit(User user) {
         userBooks.put(user, visitor.visitables());
-        visitor.reset();
+        visitor = new CheckedoutBookVisitor(new ArrayList<>(), REGULAR_BOOK_FORMAT);
     }
 
     @Override
     public String visitables() {
         return userBooks.toString();
-    }
-
-    @Override
-    public void reset() {
-
     }
 
 }

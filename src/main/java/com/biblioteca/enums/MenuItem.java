@@ -69,5 +69,4 @@ public enum MenuItem {
     public String getPromptText() {
         return promptText;
     }
-
 }

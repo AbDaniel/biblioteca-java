@@ -43,11 +43,4 @@ public class BookDefaulterVisitorTest {
         verify(defaultedBooks).put(user, books);
     }
 
-    @Test
-    public void shouldResetTheBookVisitorAfterUserIsVisited() {
-        userVisitor.visit(user);
-
-        verify(bookVisitor).reset();
-    }
-
 }

@@ -74,15 +74,6 @@ public class LibraryTest {
     }
 
     @Test
-    public void shouldResetVistorBeforeMakingItVisit() {
-        setUpWithData();
-
-        library.allAvailableItems(visitor);
-
-        verify(visitor).reset();
-    }
-
-    @Test
     public void shouldUpdateListenerWithAvailableBorrowablesOnList() {
         setUpWithData();
         listener = mock(Listener.class);
