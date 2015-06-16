@@ -25,6 +25,10 @@ public interface Searcher {
 
     }
 
+    default void visit(CheckedoutMovie movie) {
+
+    }
+
 
     default void visit(Movie movie) {
 
