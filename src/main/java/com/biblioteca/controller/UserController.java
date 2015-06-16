@@ -26,9 +26,6 @@ public class UserController implements Controller {
     public void execute(User user) {
         menuView.displayMenu();
         Map.Entry<MenuItem, String> userChoice = menuView.getUserChoiceAsEntry();
-
-        if (isInvalidChoice(userChoice))
-            return;
         MenuItem selectedMenuItem = userChoice.getKey();
         switch (selectedMenuItem) {
             case QUIT:
@@ -36,6 +33,8 @@ public class UserController implements Controller {
                 return;
             case LOGOUT:
                 listener.update(LOGOUT_CODE);
+                return;
+            case INVALID:
                 return;
         }
 

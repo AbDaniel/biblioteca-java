@@ -24,16 +24,12 @@ public class MenuView extends View {
         int choice;
         choice = getChoice();
         MenuItem item = getMenuItem(choice);
-        if (item == null)
-            return null;
         String name = subMenuView.getItemName(item);
         return new SimpleEntry<>(item, name);
     }
 
     private MenuItem getMenuItem(int choice) {
-        if (choice != INVALID_INPUT)
-            return valueOf(choice);
-        return null;
+        return valueOf(choice);
     }
 
     private int getChoice() {

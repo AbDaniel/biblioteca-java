@@ -17,9 +17,9 @@ import java.util.Map.Entry;
 import java.util.Scanner;
 
 import static com.biblioteca.constants.Constants.INVALID_INPUT_TEXT;
+import static com.biblioteca.enums.MenuItem.INVALID;
 import static com.biblioteca.enums.MenuItem.LIST_BOOKS;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
 
 @RunWith(MockitoJUnitRunner.class)
 public class MenuViewTest {
@@ -53,17 +53,19 @@ public class MenuViewTest {
     @Test
     public void shouldReturnNullIfUserInputsNotANumber() {
         systemInMock.provideText("Gondor\n");
+        Entry<MenuItem, String> expected = new SimpleEntry<>(INVALID, null);
 
         Entry<MenuItem, String> actualEntry = menuView.getUserChoiceAsEntry();
-        assertNull(actualEntry);
+        assertEquals(expected, actualEntry);
     }
 
     @Test
     public void shouldReturnInvalidInputIfUserInputsAInvalidNumber() {
         systemInMock.provideText("10\n");
+        Entry<MenuItem, String> expected = new SimpleEntry<>(INVALID, null);
 
         Entry<MenuItem, String> actualEntry = menuView.getUserChoiceAsEntry();
-        assertNull(actualEntry);
+        assertEquals(expected, actualEntry);
     }
 
     @Test
