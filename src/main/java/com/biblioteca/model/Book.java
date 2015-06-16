@@ -26,6 +26,7 @@ public abstract class Book implements Borrowable<Book> {
         this.author = book.author;
         this.year = book.year;
         this.checkedOut = book.isCheckedOut();
+        this.listener = book.listener;
     }
 
     @Override
