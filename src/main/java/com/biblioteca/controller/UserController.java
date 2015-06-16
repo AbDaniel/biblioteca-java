@@ -1,5 +1,6 @@
 package com.biblioteca.controller;
 
+import com.biblioteca.action.Action;
 import com.biblioteca.action.Parser;
 import com.biblioteca.enums.MenuItem;
 import com.biblioteca.listener.ExitLogoutListener;
@@ -38,7 +39,9 @@ public class UserController implements Controller {
                 return;
         }
 
-        parser.getAction(userChoice, user).execute();
+        Action action = parser.getAction(userChoice, user);
+        action.addExitLogoutListener(listener);
+        action.execute();
     }
 
     @Override

@@ -53,6 +53,10 @@ public class Parser {
             case RETURN_MOVIE:
                 return new Return(movieLibrary, user, new CheckedOutMovieSearcher(new
                         ArrayList<>(), userChoice.getValue()));
+            case INVALID:
+                return new Invalid();
+            case QUIT:
+                return new Quit();
             default:
                 return null;
         }

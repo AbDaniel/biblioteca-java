@@ -13,9 +13,9 @@ import org.mockito.MockitoAnnotations;
 
 import java.util.AbstractMap.SimpleEntry;
 
-import static com.biblioteca.constants.Constants.*;
+import static com.biblioteca.constants.Constants.EXIT_CODE;
+import static com.biblioteca.constants.Constants.LOGOUT_CODE;
 import static com.biblioteca.enums.MenuItem.*;
-import static junit.framework.TestCase.assertNull;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.*;
@@ -120,6 +120,14 @@ public class UserControllerTest {
         userController.execute(user);
 
         verify(action).execute();
+    }
+
+    @Test
+    public void shouldAddListenerToCommand() {
+        when(parser.getAction(userChoice, user)).thenReturn(action);
+        userController.execute(user);
+
+        verify(action).addExitLogoutListener(listener);
     }
 
 }
