@@ -1,6 +1,7 @@
 package com.biblioteca.visitor;
 
 import com.biblioteca.model.Book;
+import com.biblioteca.model.Movie;
 
 import java.util.ArrayList;
 import java.util.List;

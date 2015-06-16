@@ -1,5 +1,6 @@
 package com.biblioteca.visitor;
 
+import com.biblioteca.model.CheckedOutBook;
 import com.biblioteca.model.User;
 
 import java.util.ArrayList;
@@ -8,7 +9,7 @@ import java.util.Map;
 
 import static com.biblioteca.model.Book.REGULAR_BOOK_FORMAT;
 
-public class BookDefaulterVisitor implements DefaulterVisitor {
+public class BookDefaulterVisitor implements DefaulterVisitor<CheckedOutBook> {
 
     CheckedoutBookVisitor bookVisitor;
     Map<User, String> userBooks;
@@ -19,19 +20,21 @@ public class BookDefaulterVisitor implements DefaulterVisitor {
     }
 
     @Override
-    public void visit(User user, List<Visitable> visitables) {
-        visitables.forEach(visitable -> visitable.accept(bookVisitor));
+    public String visitablesAsString() {
+        StringBuilder builder = new StringBuilder();
+        userBooks.forEach((user, s) -> builder.append(user.toString()).append("\n").append(s));
+        return builder.toString();
+    }
+
+    @Override
+    public void visit(User user, List<CheckedOutBook> visitables) {
+        visitables.forEach(p -> p.accept(bookVisitor));
         userBooks.put(user, bookVisitor.visitablesAsString());
         bookVisitor = new CheckedoutBookVisitor(new ArrayList<>(), REGULAR_BOOK_FORMAT);
     }
 
     @Override
-    public String visitablesAsString() {
-        return userBooks.toString();
-    }
-
-    @Override
-    public List<? extends Visitable> visitables() {
+    public List<CheckedOutBook> visitables() {
         return null;
     }
 
