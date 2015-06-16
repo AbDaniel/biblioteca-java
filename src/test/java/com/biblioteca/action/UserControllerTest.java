@@ -54,7 +54,7 @@ public class UserControllerTest {
         userChoice = new SimpleEntry<>(LIST_BOOKS, null);
         when(menuView.getUserChoiceAsEntry()).thenReturn(userChoice);
         when(parser.getAction(userChoice, user)).thenReturn(action);
-        userController.addListener(listener);
+        userController.addExitLogoutListener(listener);
     }
 
     @Test

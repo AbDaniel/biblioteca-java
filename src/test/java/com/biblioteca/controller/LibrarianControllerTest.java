@@ -51,7 +51,7 @@ public class LibrarianControllerTest {
         MockitoAnnotations.initMocks(this);
         librarianController = new LibrarianController(menuView, parser);
         when(menuView.getChoice()).thenReturn(QUIT);
-        librarianController.addListener(listener);
+        librarianController.addExitLogoutListener(listener);
     }
 
     @Test

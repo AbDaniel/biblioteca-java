@@ -42,9 +42,9 @@ public class Main {
         Login login = new Login(users);
 
         UserController userController = new UserController(menuView, parser);
-        LoginController loginController = new LoginController(login, view);
-
         Map<User, Controller> controllers = loadControllers(users, userController, librarianMenuView, parser);
+
+        LoginController loginController = new LoginController(login, view, controllers);
 
         BibliotecaApp bibliotecaApp = new BibliotecaApp(WELCOME_TEXT, view, controllers, loginController);
         bibliotecaApp.start();

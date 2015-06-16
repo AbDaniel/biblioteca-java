@@ -27,7 +27,7 @@ public class BibliotecaApp implements ExitLogoutListener, LoginListener {
         this.view = view;
         this.controllers = controllers;
         this.loginController = loginController;
-        this.controllers.forEach((user1, controller) -> controller.addListener(this));
+        this.controllers.forEach((user1, controller) -> controller.addExitLogoutListener(this));
         this.loginController.addLoginListener(this);
         this.loginController.addExitLogoutListener(this);
     }

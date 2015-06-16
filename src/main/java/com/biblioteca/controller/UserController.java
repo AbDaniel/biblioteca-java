@@ -47,7 +47,7 @@ public class UserController implements Controller {
     }
 
     @Override
-    public void addListener(ExitLogoutListener listener) {
+    public void addExitLogoutListener(ExitLogoutListener listener) {
         this.listener = listener;
     }
 

@@ -6,6 +6,8 @@ import com.biblioteca.listener.LoginListener;
 import com.biblioteca.view.View;
 import com.biblioteca.model.User;
 
+import java.util.Map;
+
 import static com.biblioteca.constants.Constants.*;
 import static com.biblioteca.constants.Constants.ENTER_LIBRARY_NO;
 import static com.biblioteca.constants.Constants.ENTER_PASSWORD;
@@ -17,7 +19,7 @@ public class LoginController {
     private ExitLogoutListener exitLogoutListener;
     private LoginListener loginListener;
 
-    public LoginController(Login login, View view) {
+    public LoginController(Login login, View view, Map<User, Controller> controllers) {
         this.login = login;
         this.view = view;
     }
