@@ -29,5 +29,9 @@ public interface Visitor {
 
     }
 
+    default void visit(User user) {
+
+    }
+
 }
 
