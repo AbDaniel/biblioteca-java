@@ -37,7 +37,7 @@ public class Library {
         }
     }
 
-    public boolean returnItem(String itemName, User user) {
+    public boolean returnItem(String itemName, User user, Searcher searcher) {
         Borrowable borrowable = borrowables.stream().filter(p -> p.isEqualTo(itemName)).findFirst().orElse(null);
         return borrowable != null && borrowable.returnItem(user);
     }

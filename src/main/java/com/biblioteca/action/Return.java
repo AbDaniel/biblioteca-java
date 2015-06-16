@@ -2,12 +2,15 @@ package com.biblioteca.action;
 
 import com.biblioteca.model.User;
 import com.biblioteca.repository.Library;
+import com.biblioteca.search.CheckedOutBookSearcher;
+
+import java.util.ArrayList;
 
 public class Return implements Action {
 
     private final Library library;
     private final User user;
-    private String itemName;
+    private final String itemName;
 
     public Return(Library library, User user, String itemName) {
         this.library = library;
@@ -17,7 +20,7 @@ public class Return implements Action {
 
     @Override
     public void execute() {
-        library.returnItem(itemName, user);
+        library.returnItem(itemName, user, new CheckedOutBookSearcher(new ArrayList<>(), itemName));
     }
 
     @Override
@@ -28,14 +31,14 @@ public class Return implements Action {
         Return aReturn = (Return) o;
 
         if (library != null ? !library.equals(aReturn.library) : aReturn.library != null) return false;
-        return !(user != null ? !user.equals(aReturn.user) : aReturn.user != null);
+        return !(itemName != null ? !itemName.equals(aReturn.itemName) : aReturn.itemName != null);
 
     }
 
     @Override
     public int hashCode() {
         int result = library != null ? library.hashCode() : 0;
-        result = 31 * result + (user != null ? user.hashCode() : 0);
+        result = 31 * result + (itemName != null ? itemName.hashCode() : 0);
         return result;
     }
 }

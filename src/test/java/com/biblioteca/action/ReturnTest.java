@@ -1,8 +1,8 @@
 package com.biblioteca.action;
 
-import com.biblioteca.constants.Constants;
 import com.biblioteca.model.User;
 import com.biblioteca.repository.Library;
+import com.biblioteca.search.CheckedOutBookSearcher;
 import com.biblioteca.view.View;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.Before;
@@ -11,10 +11,11 @@ import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import java.util.ArrayList;
+
 import static nl.jqno.equalsverifier.Warning.NULL_FIELDS;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 public class ReturnTest {
 
@@ -29,6 +30,7 @@ public class ReturnTest {
 
     private Return command;
     private String bookName;
+    private CheckedOutBookSearcher searcher;
 
     @Before
     public void setUp() throws Exception {
@@ -41,7 +43,9 @@ public class ReturnTest {
     public void shouldCallReturnBookWithGivenInput() {
         command.execute();
 
-        verify(library).returnItem(eq(bookName), Matchers.any(User.class));
+        searcher = new CheckedOutBookSearcher(new ArrayList<>
+                (), bookName);
+        verify(library).returnItem(eq(bookName), Matchers.any(User.class), eq(searcher));
     }
 
     @Test

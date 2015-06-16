@@ -3,6 +3,7 @@ package com.biblioteca.repository;
 import com.biblioteca.listener.Listener;
 import com.biblioteca.model.*;
 import com.biblioteca.search.AvailableBookSearcher;
+import com.biblioteca.search.CheckedOutBookSearcher;
 import com.biblioteca.visitor.AvailableBookVisitor;
 import com.biblioteca.visitor.Visitor;
 import org.junit.Before;
@@ -63,7 +64,7 @@ public class LibraryTest {
         setUpWithData();
         String bookName = "Lord of the Rings";
 
-        assertFalse(library.returnItem(bookName, user));
+        assertFalse(library.returnItem(bookName, user, new CheckedOutBookSearcher(new ArrayList<>(), bookName)));
     }
 
     @Test
@@ -71,7 +72,7 @@ public class LibraryTest {
         setUpWithData();
         String bookName = "1234";
 
-        assertFalse(library.returnItem(bookName, user));
+        assertFalse(library.returnItem(bookName, user, new CheckedOutBookSearcher(new ArrayList<>(), bookName)));
     }
 
     @Test
@@ -79,7 +80,7 @@ public class LibraryTest {
         setUpWithData();
         String name = "1984";
 
-        assertTrue(library.returnItem(name, user));
+        assertTrue(library.returnItem(name, user, new CheckedOutBookSearcher(new ArrayList<>(), name)));
     }
 
     @Test
