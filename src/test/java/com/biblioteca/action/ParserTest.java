@@ -23,8 +23,8 @@ import static com.biblioteca.enums.LibrarianMenuItem.LIST_MOVIE_DEFAULTERS;
 import static com.biblioteca.enums.MenuItem.*;
 import static com.biblioteca.model.Book.REGULAR_BOOK_FORMAT;
 import static com.biblioteca.model.Movie.REGULAR_MOVIE_FORMAT;
+import static junit.framework.Assert.assertTrue;
 import static junit.framework.TestCase.assertEquals;
-import static junit.framework.TestCase.assertNull;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ParserTest {
@@ -133,13 +133,24 @@ public class ParserTest {
     }
 
     @Test
-    public void shouldReturnNullIfSelectedMenuItemIsNotCheckoutReturnOrList() {
+    public void shouldReturnQuitIfSelectedMenuItemIsNotCheckoutReturnOrList() {
         MenuItem item = QUIT;
+        userChoice = new SimpleEntry<>(item, null);
+        Quit expected = new Quit();
+
+        Action actualAction = parser.getAction(userChoice, user);
+
+        assertEquals(expected, actualAction);
+    }
+
+    @Test
+    public void shouldReturnInvalidActionIfSelectedMenuItemIsNotCheckoutReturnOrList() {
+        MenuItem item = INVALID;
         userChoice = new SimpleEntry<>(item, null);
 
         Action actualAction = parser.getAction(userChoice, user);
 
-        assertNull(actualAction);
+        assertTrue(actualAction instanceof Invalid);
     }
 
 

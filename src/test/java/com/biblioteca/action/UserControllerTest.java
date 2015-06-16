@@ -13,7 +13,6 @@ import org.mockito.MockitoAnnotations;
 
 import java.util.AbstractMap.SimpleEntry;
 
-import static com.biblioteca.constants.Constants.EXIT_CODE;
 import static com.biblioteca.constants.Constants.LOGOUT_CODE;
 import static com.biblioteca.enums.MenuItem.*;
 import static org.mockito.Matchers.any;
@@ -79,30 +78,12 @@ public class UserControllerTest {
     }
 
     @Test
-    public void shouldNotCallDispatchIfMenuItemIsQuit() {
-        SimpleEntry<MenuItem, String> choice = new SimpleEntry<>(QUIT, null);
-        when(menuView.getUserChoiceAsEntry()).thenReturn(choice);
-        userController.execute(user);
-
-        verify(parser, times(0)).getAction(eq(choice), any(User.class));
-    }
-
-    @Test
     public void shouldNotCallDispatchIfMenuItemIsLogout() {
         SimpleEntry<MenuItem, String> choice = new SimpleEntry<>(LOGOUT, null);
         when(menuView.getUserChoiceAsEntry()).thenReturn(choice);
         userController.execute(user);
 
         verify(parser, times(0)).getAction(eq(choice), any(User.class));
-    }
-
-    @Test
-    public void shouldUpdateListenerIfMenuItemIsQuit() {
-        SimpleEntry<MenuItem, String> choice = new SimpleEntry<>(QUIT, null);
-        when(menuView.getUserChoiceAsEntry()).thenReturn(choice);
-        userController.execute(user);
-
-        verify(listener).update(EXIT_CODE);
     }
 
     @Test

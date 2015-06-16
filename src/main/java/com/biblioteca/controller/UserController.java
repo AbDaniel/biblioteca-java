@@ -9,7 +9,6 @@ import com.biblioteca.view.MenuView;
 
 import java.util.Map;
 
-import static com.biblioteca.constants.Constants.EXIT_CODE;
 import static com.biblioteca.constants.Constants.LOGOUT_CODE;
 
 public class UserController implements Controller {
@@ -29,16 +28,10 @@ public class UserController implements Controller {
         Map.Entry<MenuItem, String> userChoice = menuView.getUserChoiceAsEntry();
         MenuItem selectedMenuItem = userChoice.getKey();
         switch (selectedMenuItem) {
-            case QUIT:
-                listener.update(EXIT_CODE);
-                return;
             case LOGOUT:
                 listener.update(LOGOUT_CODE);
                 return;
-            case INVALID:
-                return;
         }
-
         Action action = parser.getAction(userChoice, user);
         action.addExitLogoutListener(listener);
         action.execute();

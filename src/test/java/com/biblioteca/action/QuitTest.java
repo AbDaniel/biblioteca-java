@@ -1,6 +1,7 @@
 package com.biblioteca.action;
 
 import com.biblioteca.listener.ExitLogoutListener;
+import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -29,6 +30,11 @@ public class QuitTest {
         quit.execute();
 
         verify(listener).update(EXIT_CODE);
+    }
+
+    @Test
+    public void shouldVerifyEqualsContract() {
+        EqualsVerifier.forClass(Quit.class).usingGetClass().verify();
     }
 
 }
