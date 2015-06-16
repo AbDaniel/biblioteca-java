@@ -43,10 +43,10 @@ public class Parser {
                 return new Checkout(movieLibrary, user, new AvailableMovieSearcher(new
                         ArrayList<>(), userChoice.getValue()));
             case RETURN_BOOK:
-                return new Return(bookLibrary, user, userChoice.getValue(), new CheckedOutBookSearcher(new
+                return new Return(bookLibrary, user, new CheckedOutBookSearcher(new
                         ArrayList<>(), userChoice.getValue()));
             case RETURN_MOVIE:
-                return new Return(movieLibrary, user, userChoice.getValue(), new CheckedOutMovieSearcher(new
+                return new Return(movieLibrary, user, new CheckedOutMovieSearcher(new
                         ArrayList<>(), userChoice.getValue()));
             default:
                 return null;

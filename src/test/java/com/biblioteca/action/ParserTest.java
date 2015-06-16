@@ -4,9 +4,7 @@ import com.biblioteca.enums.MenuItem;
 import com.biblioteca.model.Book;
 import com.biblioteca.model.User;
 import com.biblioteca.repository.Library;
-import com.biblioteca.search.AvailableBookSearcher;
-import com.biblioteca.search.AvailableMovieSearcher;
-import com.biblioteca.search.Searcher;
+import com.biblioteca.search.*;
 import com.biblioteca.view.ListView;
 import com.biblioteca.visitor.AvailableBookVisitor;
 import com.biblioteca.visitor.AvailableMovieVisitor;
@@ -89,12 +87,11 @@ public class ParserTest {
     @Test
     public void shouldReturnCheckoutActionActionWhenUserSelectsCheckoutMovies() {
         MenuItem item = CHECKOUT_MOVIE;
-        userChoice = new SimpleEntry<>(item, null);
-
         userChoice = new SimpleEntry<>(item, "Lord of the Rings");
         Searcher searcher = new AvailableMovieSearcher(new ArrayList<>(), "Lord of the Rings");
-        Action actualAction = parser.getAction(userChoice, user);
         Checkout expected = new Checkout(movieLibray, user, searcher);
+
+        Action actualAction = parser.getAction(userChoice, user);
 
         assertEquals(expected, actualAction);
     }
@@ -102,8 +99,9 @@ public class ParserTest {
     @Test
     public void shouldReturnReturnActionActionWhenUserSelectsReturnBook() {
         MenuItem item = RETURN_BOOK;
-        userChoice = new SimpleEntry<>(item, null);
-        Return expected = new Return(bookLibrary, user, bookName, searcher);
+        userChoice = new SimpleEntry<>(item, "Lord of the Rings");
+        Searcher searcher = new CheckedOutBookSearcher(new ArrayList<>(), "Lord of the Rings");
+        Return expected = new Return(bookLibrary, user, searcher);
 
         Action actualAction = parser.getAction(userChoice, user);
 
@@ -114,8 +112,9 @@ public class ParserTest {
     @Test
     public void shouldReturnReturnActionActionWhenUserSelectsReturnMovies() {
         MenuItem item = RETURN_MOVIE;
-        userChoice = new SimpleEntry<>(item, null);
-        Return expected = new Return(movieLibray, user, bookName, searcher);
+        userChoice = new SimpleEntry<>(item, "Lord of the Rings");
+        Searcher searcher = new CheckedOutMovieSearcher(new ArrayList<>(), "Lord of the Rings");
+        Return expected = new Return(movieLibray, user, searcher);
 
         Action actualAction = parser.getAction(userChoice, user);
 
