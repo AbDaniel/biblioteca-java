@@ -8,6 +8,7 @@ import com.biblioteca.repository.Library;
 import com.biblioteca.search.*;
 import com.biblioteca.view.ListView;
 import com.biblioteca.visitor.*;
+import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -134,7 +135,7 @@ public class ParserTest {
 
     @Test
     public void shouldReturnQuitIfSelectedMenuItemIsNotCheckoutReturnOrList() {
-        MenuItem item = QUIT;
+        MenuItem item = MenuItem.QUIT;
         userChoice = new SimpleEntry<>(item, null);
         Quit expected = new Quit();
 
@@ -145,7 +146,7 @@ public class ParserTest {
 
     @Test
     public void shouldReturnInvalidActionIfSelectedMenuItemIsNotCheckoutReturnOrList() {
-        MenuItem item = INVALID;
+        MenuItem item = MenuItem.INVALID;
         userChoice = new SimpleEntry<>(item, null);
 
         Action actualAction = parser.getAction(userChoice, user);
@@ -155,7 +156,7 @@ public class ParserTest {
 
     @Test
     public void shouldReturnLogoutActionIfSelectedMenuItemIsNotCheckoutReturnOrList() {
-        MenuItem item = LOGOUT;
+        MenuItem item = MenuItem.LOGOUT;
         userChoice = new SimpleEntry<>(item, null);
 
         Action actualAction = parser.getAction(userChoice, user);
@@ -186,5 +187,14 @@ public class ParserTest {
         Action actualAction = parser.getLibrarianAction(item);
 
         assertEquals(expected, actualAction);
+    }
+
+    @Test
+    public void shouldReturnInvalidActionIfLibrarianSelectsInvalidInput() {
+        LibrarianMenuItem item = LibrarianMenuItem.INVALID;
+
+        Action actualAction = parser.getLibrarianAction(item);
+
+        TestCase.assertTrue(actualAction instanceof Invalid);
     }
 }
