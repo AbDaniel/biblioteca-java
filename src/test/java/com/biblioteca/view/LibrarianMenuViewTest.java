@@ -1,7 +1,6 @@
 package com.biblioteca.view;
 
 import com.biblioteca.enums.LibrarianMenuItem;
-import com.biblioteca.enums.MenuItem;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -11,13 +10,10 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.util.AbstractMap;
-import java.util.Map;
 import java.util.Scanner;
 
 import static com.biblioteca.constants.Constants.INVALID_INPUT_TEXT;
-import static com.biblioteca.enums.MenuItem.LIST_BOOKS;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 @RunWith(MockitoJUnitRunner.class)
 public class LibrarianMenuViewTest {
@@ -52,15 +48,18 @@ public class LibrarianMenuViewTest {
         LibrarianMenuItem expected = LibrarianMenuItem.LIST_BOOK_DEFAULTERS;
 
         LibrarianMenuItem actualItem = menuView.getChoice();
+
         assertEquals(expected, actualItem);
     }
 
     @Test
     public void shouldReturnInvalidInputIfUserInputsAInvalidNumber() {
         systemInMock.provideText("10\n");
+        LibrarianMenuItem expected = LibrarianMenuItem.INVALID;
 
         LibrarianMenuItem actualItem = menuView.getChoice();
-        assertNull(actualItem);
+
+        assertEquals(expected, actualItem);
     }
 
     @Test

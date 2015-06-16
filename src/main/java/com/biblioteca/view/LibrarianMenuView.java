@@ -17,7 +17,6 @@ public class LibrarianMenuView {
         this.scanner = scanner;
     }
 
-
     public LibrarianMenuItem getChoice() {
         int choice;
         try {
@@ -40,7 +39,8 @@ public class LibrarianMenuView {
 
     public void displayMenu() {
         for (LibrarianMenuItem menuItem : values()) {
-            System.out.println(menuItem.getText());
+            if (menuItem.isValidMenuItem())
+                System.out.println(menuItem.getText());
         }
     }
 

@@ -4,6 +4,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import static com.biblioteca.enums.LibrarianMenuItem.INVALID;
 import static com.biblioteca.enums.LibrarianMenuItem.LIST_BOOK_DEFAULTERS;
 import static org.junit.Assert.*;
 
@@ -24,6 +25,20 @@ public class LibrarianMenuItemTest {
         LibrarianMenuItem actualMenuItem = LibrarianMenuItem.valueOf(code);
 
         assertEquals(LIST_BOOK_DEFAULTERS, actualMenuItem);
+    }
+
+    @Test
+    public void shouldReturnEmptyStringForInvalidItem() {
+        String actualString = INVALID.getText();
+
+        assertEquals("", actualString);
+    }
+
+    @Test
+    public void shouldReturnFalseForIsValidMenuItemIfCodeIsLessThanZero() {
+        boolean actual = INVALID.isValidMenuItem();
+
+        assertFalse(actual);
     }
 
 }

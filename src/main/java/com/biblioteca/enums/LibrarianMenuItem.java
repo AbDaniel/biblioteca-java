@@ -7,7 +7,8 @@ public enum LibrarianMenuItem {
     LIST_BOOK_DEFAULTERS(1, "List all Book defaulters"),
     LIST_MOVIE_DEFAULTERS(2, "List all Movie defaulters"),
     LOGOUT(3, "Logout"),
-    QUIT(4, "Quit");
+    QUIT(4, "Quit"),
+    INVALID(-1, "");
 
     private int code;
     private String text;
@@ -18,7 +19,13 @@ public enum LibrarianMenuItem {
     }
 
     public String getText() {
-        return code + ". " + text;
+        if (isValidMenuItem())
+            return code + ". " + text;
+        return "";
+    }
+
+    public boolean isValidMenuItem() {
+        return code > 0;
     }
 
     public static boolean isInvalidMenuItem(int code) {
