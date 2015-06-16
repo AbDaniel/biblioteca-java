@@ -1,12 +1,12 @@
 package com.biblioteca.action;
 
 import com.biblioteca.enums.MenuItem;
-import com.biblioteca.model.Book;
-import com.biblioteca.model.Movie;
 import com.biblioteca.model.User;
 import com.biblioteca.repository.Library;
 import com.biblioteca.search.AvailableBookSearcher;
 import com.biblioteca.search.AvailableMovieSearcher;
+import com.biblioteca.search.CheckedOutBookSearcher;
+import com.biblioteca.search.CheckedOutMovieSearcher;
 import com.biblioteca.view.ListView;
 import com.biblioteca.visitor.AvailableBookVisitor;
 import com.biblioteca.visitor.AvailableMovieVisitor;
@@ -43,9 +43,11 @@ public class Parser {
                 return new Checkout(movieLibrary, user, new AvailableMovieSearcher(new
                         ArrayList<>(), userChoice.getValue()));
             case RETURN_BOOK:
-                return new Return(bookLibrary, user, userChoice.getValue());
+                return new Return(bookLibrary, user, userChoice.getValue(), new CheckedOutBookSearcher(new
+                        ArrayList<>(), userChoice.getValue()));
             case RETURN_MOVIE:
-                return new Return(movieLibrary, user, userChoice.getValue());
+                return new Return(movieLibrary, user, userChoice.getValue(), new CheckedOutMovieSearcher(new
+                        ArrayList<>(), userChoice.getValue()));
             default:
                 return null;
         }

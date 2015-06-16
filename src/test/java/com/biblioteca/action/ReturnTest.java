@@ -36,15 +36,16 @@ public class ReturnTest {
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
         bookName = "Lord of the Rings";
-        command = new Return(library, user, bookName);
+        command = new Return(library, user, bookName, searcher);
     }
 
     @Test
     public void shouldCallReturnBookWithGivenInput() {
+        searcher = new CheckedOutBookSearcher(new ArrayList<>(), bookName);
+        command = new Return(library, user, bookName, searcher);
+
         command.execute();
 
-        searcher = new CheckedOutBookSearcher(new ArrayList<>
-                (), bookName);
         verify(library).returnItem(eq(bookName), Matchers.any(User.class), eq(searcher));
     }
 

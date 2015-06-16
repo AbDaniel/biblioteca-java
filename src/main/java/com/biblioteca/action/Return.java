@@ -3,6 +3,7 @@ package com.biblioteca.action;
 import com.biblioteca.model.User;
 import com.biblioteca.repository.Library;
 import com.biblioteca.search.CheckedOutBookSearcher;
+import com.biblioteca.search.Searcher;
 
 import java.util.ArrayList;
 
@@ -11,16 +12,18 @@ public class Return implements Action {
     private final Library library;
     private final User user;
     private final String itemName;
+    private Searcher searcher;
 
-    public Return(Library library, User user, String itemName) {
+    public Return(Library library, User user, String itemName, Searcher searcher) {
         this.library = library;
         this.user = user;
         this.itemName = itemName;
+        this.searcher = searcher;
     }
 
     @Override
     public void execute() {
-        library.returnItem(itemName, user, new CheckedOutBookSearcher(new ArrayList<>(), itemName));
+        library.returnItem(itemName, user, searcher);
     }
 
     @Override

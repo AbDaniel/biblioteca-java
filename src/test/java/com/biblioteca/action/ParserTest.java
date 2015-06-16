@@ -2,7 +2,6 @@ package com.biblioteca.action;
 
 import com.biblioteca.enums.MenuItem;
 import com.biblioteca.model.Book;
-import com.biblioteca.model.Movie;
 import com.biblioteca.model.User;
 import com.biblioteca.repository.Library;
 import com.biblioteca.search.AvailableBookSearcher;
@@ -104,7 +103,7 @@ public class ParserTest {
     public void shouldReturnReturnActionActionWhenUserSelectsReturnBook() {
         MenuItem item = RETURN_BOOK;
         userChoice = new SimpleEntry<>(item, null);
-        Return expected = new Return(bookLibrary, user, bookName);
+        Return expected = new Return(bookLibrary, user, bookName, searcher);
 
         Action actualAction = parser.getAction(userChoice, user);
 
@@ -116,7 +115,7 @@ public class ParserTest {
     public void shouldReturnReturnActionActionWhenUserSelectsReturnMovies() {
         MenuItem item = RETURN_MOVIE;
         userChoice = new SimpleEntry<>(item, null);
-        Return expected = new Return(movieLibray, user, bookName);
+        Return expected = new Return(movieLibray, user, bookName, searcher);
 
         Action actualAction = parser.getAction(userChoice, user);
 
