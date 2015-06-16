@@ -21,7 +21,8 @@ public enum MenuItem {
     CHECKOUT_MOVIE(5, "Checkout a Movie", new View(scanner), ENTER_MOVIE_NAME),
     RETURN_MOVIE(6, "Return a Movie", new View(scanner), ENTER_MOVIE_NAME),
     LOGOUT(7, "Logout", new View(scanner), null),
-    QUIT(8, "Quit Biblioteca", new View(scanner), null);
+    QUIT(8, "Quit Biblioteca", new View(scanner), null),
+    INVALID(-1, "", new View(scanner), null);
 
     private final int code;
     private final String text;
@@ -51,7 +52,13 @@ public enum MenuItem {
     }
 
     public String getText() {
-        return code + ". " + text;
+        if (isValidMenuItem())
+            return code + ". " + text;
+        return "";
+    }
+
+    private boolean isValidMenuItem() {
+        return code > 0;
     }
 
     private static Map<Integer, MenuItem> map = new HashMap<>();

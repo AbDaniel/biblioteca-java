@@ -2,6 +2,7 @@ package com.biblioteca.enums;
 
 import org.junit.Test;
 
+import static com.biblioteca.enums.MenuItem.INVALID;
 import static com.biblioteca.enums.MenuItem.LIST_BOOKS;
 import static org.junit.Assert.assertEquals;
 
@@ -21,6 +22,13 @@ public class MenuItemTest {
         MenuItem actualMenuItem = MenuItem.valueOf(code);
 
         assertEquals(LIST_BOOKS, actualMenuItem);
+    }
+
+    @Test
+    public void shouldReturnEmptyStringForInvalidItem() {
+        String actualString = INVALID.getText();
+
+        assertEquals("", actualString);
     }
 
 }
