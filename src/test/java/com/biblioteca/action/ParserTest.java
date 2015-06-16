@@ -8,10 +8,7 @@ import com.biblioteca.repository.Accounts;
 import com.biblioteca.repository.Library;
 import com.biblioteca.search.*;
 import com.biblioteca.view.ListView;
-import com.biblioteca.visitor.AvailableBookVisitor;
-import com.biblioteca.visitor.AvailableMovieVisitor;
-import com.biblioteca.visitor.BookDefaulterVisitor;
-import com.biblioteca.visitor.DefaulterVisitor;
+import com.biblioteca.visitor.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,6 +17,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import static com.biblioteca.enums.LibrarianMenuItem.LIST_BOOK_DEFAULTERS;
 import static com.biblioteca.enums.MenuItem.*;
@@ -47,8 +45,10 @@ public class ParserTest {
     @Mock
     Accounts accounts;
 
-    @Mock
     BookDefaulterVisitor bookDefaulterVisitor;
+
+    @Mock
+    CheckedoutBookVisitor checkedoutBookVisitor;
 
     private String bookName;
 
@@ -144,6 +144,7 @@ public class ParserTest {
 
     @Test
     public void shouldReturnListBookDefaulterActionIfLibrarianSelectsListDefaulters() {
+        bookDefaulterVisitor = new BookDefaulterVisitor(checkedoutBookVisitor, new HashMap<>());
         LibrarianMenuItem item = LIST_BOOK_DEFAULTERS;
         Action expected = new ListDefaulters(accounts, bookDefaulterVisitor);
 

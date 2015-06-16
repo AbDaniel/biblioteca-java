@@ -35,6 +35,8 @@ public class Main {
         List<User> users = loadUsers();
 
         Accounts accounts = new Accounts(users);
+        accounts.addListener(view);
+
         Parser parser = new Parser(bookLibrary, movieLibrary, accounts);
 
         Login login = new Login(users);

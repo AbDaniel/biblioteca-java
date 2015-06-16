@@ -9,7 +9,7 @@ import java.util.List;
 
 public class Accounts implements Listenable {
 
-    private List<User> users;
+    private final List<User> users;
     private Listener listener;
 
     public Accounts(List<User> users) {
@@ -24,5 +24,21 @@ public class Accounts implements Listenable {
     @Override
     public void addListener(Listener listener) {
         this.listener = listener;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Accounts accounts = (Accounts) o;
+
+        return !(users != null ? !users.equals(accounts.users) : accounts.users != null);
+
+    }
+
+    @Override
+    public int hashCode() {
+        return users != null ? users.hashCode() : 0;
     }
 }

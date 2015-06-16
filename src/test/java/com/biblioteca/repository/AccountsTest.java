@@ -3,6 +3,7 @@ package com.biblioteca.repository;
 import com.biblioteca.listener.Listener;
 import com.biblioteca.model.User;
 import com.biblioteca.visitor.DefaulterVisitor;
+import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -41,5 +42,10 @@ public class AccountsTest {
         accounts.listDefaulter(visitor);
 
         verify(listener).update("Visitables");
+    }
+
+    @Test
+    public void shouldVerifyEqualsContract() {
+        EqualsVerifier.forClass(Accounts.class).usingGetClass().verify();
     }
 }

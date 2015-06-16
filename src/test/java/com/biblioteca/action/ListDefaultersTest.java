@@ -2,6 +2,7 @@ package com.biblioteca.action;
 
 import com.biblioteca.repository.Accounts;
 import com.biblioteca.visitor.DefaulterVisitor;
+import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -32,6 +33,11 @@ public class ListDefaultersTest {
         listDefaulters.execute();
 
         verify(accounts).listDefaulter(visitor);
+    }
+
+    @Test
+    public void shouldVerifyEqualsContract() {
+        EqualsVerifier.forClass(ListDefaulters.class).usingGetClass().verify();
     }
 
 }
