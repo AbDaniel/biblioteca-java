@@ -2,7 +2,6 @@ package com.biblioteca.action;
 
 import com.biblioteca.enums.LibrarianMenuItem;
 import com.biblioteca.enums.MenuItem;
-import com.biblioteca.model.Book;
 import com.biblioteca.model.User;
 import com.biblioteca.repository.Accounts;
 import com.biblioteca.repository.Library;
@@ -11,16 +10,14 @@ import com.biblioteca.search.AvailableMovieSearcher;
 import com.biblioteca.search.CheckedOutBookSearcher;
 import com.biblioteca.search.CheckedOutMovieSearcher;
 import com.biblioteca.view.ListView;
-import com.biblioteca.visitor.AvailableBookVisitor;
-import com.biblioteca.visitor.AvailableMovieVisitor;
-import com.biblioteca.visitor.BorrowableDefaulterVisitor;
-import com.biblioteca.visitor.CheckedoutBookVisitor;
+import com.biblioteca.visitor.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.biblioteca.enums.MenuItem.*;
+import static com.biblioteca.enums.MenuItem.LIST_BOOKS;
+import static com.biblioteca.enums.MenuItem.LIST_MOVIES;
 import static com.biblioteca.model.Book.REGULAR_BOOK_FORMAT;
 import static com.biblioteca.model.Movie.REGULAR_MOVIE_FORMAT;
 
@@ -65,7 +62,10 @@ public class Parser {
         switch (menuItem) {
             case LIST_BOOK_DEFAULTERS:
                 return new ListDefaulters(accounts, new BorrowableDefaulterVisitor(new CheckedoutBookVisitor(new
-                        ArrayList<>(), Book.REGULAR_BOOK_FORMAT), new HashMap<>()));
+                        ArrayList<>(), REGULAR_BOOK_FORMAT), new HashMap<>()));
+            case LIST_MOVIE_DEFAULTERS:
+                return new ListDefaulters(accounts, new BorrowableDefaulterVisitor(new CheckedoutMovieVisitor(new
+                        ArrayList<>(), REGULAR_MOVIE_FORMAT), new HashMap<>()));
             default:
                 return null;
         }

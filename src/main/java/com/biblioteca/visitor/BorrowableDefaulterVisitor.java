@@ -46,11 +46,14 @@ public class BorrowableDefaulterVisitor implements DefaulterVisitor {
     }
 
     @Override
-    public final boolean equals(Object o) {
+    public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null) return false;
+        if (o == null || getClass() != o.getClass()) return false;
 
-        return getClass() == o.getClass();
+        BorrowableDefaulterVisitor that = (BorrowableDefaulterVisitor) o;
+
+        return !(borrowableVisitor != null ? !borrowableVisitor.equals(that.borrowableVisitor) : that.borrowableVisitor != null);
+
     }
 
     @Override

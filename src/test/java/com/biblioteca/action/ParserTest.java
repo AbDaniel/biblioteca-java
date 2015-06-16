@@ -2,7 +2,6 @@ package com.biblioteca.action;
 
 import com.biblioteca.enums.LibrarianMenuItem;
 import com.biblioteca.enums.MenuItem;
-import com.biblioteca.model.Book;
 import com.biblioteca.model.User;
 import com.biblioteca.repository.Accounts;
 import com.biblioteca.repository.Library;
@@ -20,7 +19,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import static com.biblioteca.enums.LibrarianMenuItem.LIST_BOOK_DEFAULTERS;
+import static com.biblioteca.enums.LibrarianMenuItem.LIST_MOVIE_DEFAULTERS;
 import static com.biblioteca.enums.MenuItem.*;
+import static com.biblioteca.model.Book.REGULAR_BOOK_FORMAT;
 import static com.biblioteca.model.Movie.REGULAR_MOVIE_FORMAT;
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNull;
@@ -63,7 +64,7 @@ public class ParserTest {
     public void shouldReturnListBookActionWhenUserSelectsListBook() {
         userChoice = new SimpleEntry<>(LIST_BOOKS, null);
         ListLibrary expected = new ListLibrary(bookLibrary, (ListView) userChoice.getKey().view(),
-                new AvailableBookVisitor(new ArrayList<>(), Book.REGULAR_BOOK_FORMAT));
+                new AvailableBookVisitor(new ArrayList<>(), REGULAR_BOOK_FORMAT));
 
         Action actualAction = parser.getAction(userChoice, user);
 
@@ -144,8 +145,21 @@ public class ParserTest {
 
     @Test
     public void shouldReturnListBookDefaulterActionIfLibrarianSelectsListDefaulters() {
+        checkedoutBookVisitor = new CheckedoutBookVisitor(new ArrayList<>(), REGULAR_BOOK_FORMAT);
         borrowableDefaulterVisitor = new BorrowableDefaulterVisitor(checkedoutBookVisitor, new HashMap<>());
         LibrarianMenuItem item = LIST_BOOK_DEFAULTERS;
+        Action expected = new ListDefaulters(accounts, borrowableDefaulterVisitor);
+
+        Action actualAction = parser.getLibrarianAction(item);
+
+        assertEquals(expected, actualAction);
+    }
+
+    @Test
+    public void shouldReturnListMovieDefaulterActionIfLibrarianSelectsListDefaulters() {
+        CheckedoutMovieVisitor checkedoutMovieVisitor = new CheckedoutMovieVisitor(new ArrayList<>(), REGULAR_MOVIE_FORMAT);
+        borrowableDefaulterVisitor = new BorrowableDefaulterVisitor(checkedoutMovieVisitor, new HashMap<>());
+        LibrarianMenuItem item = LIST_MOVIE_DEFAULTERS;
         Action expected = new ListDefaulters(accounts, borrowableDefaulterVisitor);
 
         Action actualAction = parser.getLibrarianAction(item);
