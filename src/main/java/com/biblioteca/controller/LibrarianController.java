@@ -35,6 +35,8 @@ public class LibrarianController implements Controller {
                 listener.update(LOGOUT_CODE);
                 return;
         }
+
+        parser.getLibrarianAction(selectedMenuItem).execute();
     }
 
     private boolean isInvalidChoice(LibrarianMenuItem userChoice) {

@@ -1,5 +1,6 @@
 package com.biblioteca.model;
 
+import com.biblioteca.visitor.DefaulterVisitor;
 import com.biblioteca.visitor.Visitable;
 import com.biblioteca.visitor.Visitor;
 
@@ -46,8 +47,8 @@ public class User {
         return this.libraryNo.equals(libraryNo) && this.password.equals(password);
     }
 
-    public void accept(Visitor visitor) {
-
+    public void accept(DefaulterVisitor visitor) {
+        visitor.visit(this, ownables);
     }
 
     @Override
