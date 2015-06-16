@@ -29,7 +29,8 @@ public class BookDefaulterVisitor implements DefaulterVisitor<CheckedOutBook> {
     @Override
     public void visit(User user, List<CheckedOutBook> visitables) {
         visitables.forEach(p -> p.accept(bookVisitor));
-        userBooks.put(user, bookVisitor.visitablesAsString());
+        if (!bookVisitor.isEmpty())
+            userBooks.put(user, bookVisitor.visitablesAsString());
         bookVisitor = new CheckedoutBookVisitor(new ArrayList<>(), REGULAR_BOOK_FORMAT);
     }
 

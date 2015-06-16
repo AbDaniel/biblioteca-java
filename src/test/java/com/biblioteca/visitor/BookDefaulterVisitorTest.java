@@ -1,6 +1,5 @@
 package com.biblioteca.visitor;
 
-import com.biblioteca.model.Book;
 import com.biblioteca.model.CheckedOutBook;
 import com.biblioteca.model.User;
 import org.junit.Before;
@@ -16,14 +15,13 @@ import java.util.Map;
 
 import static com.biblioteca.model.Book.REGULAR_BOOK_FORMAT;
 import static junit.framework.TestCase.assertEquals;
-import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class BookDefaulterVisitorTest {
 
-    BookDefaulterVisitor userVisitor;
+    private BookDefaulterVisitor userVisitor;
 
     @Mock
     private CheckedoutBookVisitor bookVisitor;
@@ -67,5 +65,27 @@ public class BookDefaulterVisitorTest {
                 "name='Lord of the Rings', author='JR Toliken', year=1930\n" +
                 "name='Winds of Winter', author='RR Martin', year=1930\n", userBooks);
     }
+
+    @Test
+    public void shouldReturnVisitUserOnlyIfUserHasANonEmptyBorrowables() {
+        user = new User("111-1111", "sauron", "onering", new ArrayList<>());
+        List<CheckedOutBook> checkedOutBooks = new ArrayList<>();
+        checkedOutBooks.add(new CheckedOutBook("Lord of the Rings", "JR Toliken", 1930));
+        checkedOutBooks.add(new CheckedOutBook("Winds of Winter", "RR Martin", 1930));
+        bookVisitor = new CheckedoutBookVisitor(new ArrayList<>(), REGULAR_BOOK_FORMAT);
+        userVisitor = new BookDefaulterVisitor(bookVisitor, new HashMap<>());
+        userVisitor.visit(user, checkedOutBooks);
+        user = new User("111-1112", "sauron", "onering", new ArrayList<>());
+        userVisitor.visit(user, new ArrayList<>());
+        user = new User("111-1113", "sauron", "onering", new ArrayList<>());
+        userVisitor.visit(user, checkedOutBooks);
+
+        String userBooks = userVisitor.visitablesAsString();
+
+        assertEquals("libraryNo='111-1111', name='sauron'\n" +
+                "name='Lord of the Rings', author='JR Toliken', year=1930\n" +
+                "name='Winds of Winter', author='RR Martin', year=1930\n", userBooks);
+    }
+
 
 }
