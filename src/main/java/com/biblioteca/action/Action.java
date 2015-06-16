@@ -1,8 +1,13 @@
 package com.biblioteca.action;
 
-@FunctionalInterface
+import com.biblioteca.listener.ExitLogoutListener;
+
 public interface Action {
 
     void execute();
+
+    default void addExitLogoutListener(ExitLogoutListener exitLogoutListener) {
+
+    }
 
 }

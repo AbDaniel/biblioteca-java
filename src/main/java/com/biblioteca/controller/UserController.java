@@ -41,10 +41,6 @@ public class UserController implements Controller {
         parser.getAction(userChoice, user).execute();
     }
 
-    private boolean isInvalidChoice(Map.Entry<MenuItem, String> userChoice) {
-        return userChoice == null;
-    }
-
     @Override
     public void addExitLogoutListener(ExitLogoutListener listener) {
         this.listener = listener;
