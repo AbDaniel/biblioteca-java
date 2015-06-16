@@ -75,4 +75,11 @@ public class CheckedoutMovieTest {
         verify(listener).update(SUCCESS_MOVIE_RETURN);
     }
 
+    @Test
+    public void shouldRemoveBorrowableFromUserDuringCheckout() {
+        movie.returnBorrowable(user);
+
+        verify(user).removeBorrowable(movie);
+    }
+
 }
