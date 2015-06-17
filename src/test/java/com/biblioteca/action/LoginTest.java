@@ -1,17 +1,27 @@
 package com.biblioteca.action;
 
 import com.biblioteca.model.User;
+import com.biblioteca.search.UserSearcher;
+import com.biblioteca.search.ValidUserSearcher;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
+@RunWith(MockitoJUnitRunner.class)
 public class LoginTest {
 
     Login login;
+
+    @Mock
+    UserSearcher searcher;
 
     @Before
     public void setUp() throws Exception {
@@ -38,6 +48,24 @@ public class LoginTest {
 
         User expectedUser = new User("111-1111", "", "", null);
         assertEquals(actualUser, expectedUser);
+    }
+
+    @Test
+    public void shouldReturnNullOnInvalidLoginUsingSearcher() {
+        UserSearcher searcher = new ValidUserSearcher(new ArrayList<>(), "111-111", "onering");
+
+        User user = login.login(searcher);
+
+        assertNull(user);
+    }
+
+    @Test
+    public void shouldReturnUserOnValidLoginOnSearcher() {
+        UserSearcher searcher = new ValidUserSearcher(new ArrayList<>(), "111-1111", "onering");
+        User actualUser = login.login(searcher);
+
+        User expectedUser = new User("111-1111", "", "", null);
+        assertEquals(expectedUser, actualUser);
     }
 
 }
