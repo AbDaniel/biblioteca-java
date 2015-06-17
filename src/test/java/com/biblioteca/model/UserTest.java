@@ -1,18 +1,28 @@
 package com.biblioteca.model;
 
+import com.biblioteca.search.UserSearcher;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
+@RunWith(MockitoJUnitRunner.class)
 public class UserTest {
 
     User user;
     List<Borrowable> ownables;
+
+    @Mock
+    UserSearcher searcher;
 
     @Before
     public void setUp() {
@@ -68,6 +78,16 @@ public class UserTest {
         String acutalString = user.toString();
 
         assertEquals("libraryNo='111-1111', name='Sauron'", acutalString);
+    }
+
+    @Test
+    public void shouldAddAcceptTheSearcherIfCredentialsAreValid() {
+        when(searcher.getUserName()).thenReturn("111-1111");
+        when(searcher.getPassword()).thenReturn("onering");
+
+        user.accept(searcher);
+
+        verify(searcher).visit(user);
     }
 
 }

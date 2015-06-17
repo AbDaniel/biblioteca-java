@@ -1,8 +1,7 @@
 package com.biblioteca.model;
 
+import com.biblioteca.search.UserSearcher;
 import com.biblioteca.visitor.DefaulterVisitor;
-import com.biblioteca.visitor.Visitable;
-import com.biblioteca.visitor.Visitor;
 
 import java.util.List;
 
@@ -55,5 +54,10 @@ public class User {
     public String toString() {
         return "libraryNo='" + libraryNo + '\'' +
                 ", name='" + name + '\'';
+    }
+
+    public void accept(UserSearcher searcher) {
+        if (searcher.getUserName().equals(libraryNo) && searcher.getPassword().equals(password))
+            searcher.visit(this);
     }
 }
