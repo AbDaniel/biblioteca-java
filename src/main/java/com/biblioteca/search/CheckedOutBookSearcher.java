@@ -1,5 +1,6 @@
 package com.biblioteca.search;
 
+import com.biblioteca.constants.Constants;
 import com.biblioteca.listener.Listener;
 import com.biblioteca.model.CheckedOutBook;
 
@@ -28,6 +29,8 @@ public class CheckedOutBookSearcher implements Searcher {
 
     @Override
     public List<CheckedOutBook> searchResults() {
+        if (books.isEmpty())
+            listener.update(Constants.NOT_A_VALID_BOOK_RETURN);
         return books;
     }
 

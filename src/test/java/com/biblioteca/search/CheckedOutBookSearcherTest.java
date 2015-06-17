@@ -1,5 +1,6 @@
 package com.biblioteca.search;
 
+import com.biblioteca.listener.Listener;
 import com.biblioteca.model.CheckedOutBook;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.Before;
@@ -8,18 +9,23 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import static com.biblioteca.constants.Constants.NOT_A_VALID_BOOK_RETURN;
 import static junit.framework.Assert.assertFalse;
 import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CheckedOutBookSearcherTest {
 
-    CheckedOutBookSearcher searcher;
+    private CheckedOutBookSearcher searcher;
 
     @Mock
     private List<CheckedOutBook> books;
+
+    @Mock
+    private Listener listener;
 
     @Before
     public void setUp() {
@@ -43,6 +49,16 @@ public class CheckedOutBookSearcherTest {
         boolean isEmpty = searcher.searchResults().isEmpty();
 
         assertFalse(isEmpty);
+    }
+
+    @Test
+    public void shouldUpdateLisitenerIfSearchResultsIsEmpty() {
+        searcher = new CheckedOutBookSearcher(new ArrayList<>(), "Winds of Winter");
+        searcher.addListener(listener);
+
+        searcher.searchResults();
+
+        verify(listener).update(NOT_A_VALID_BOOK_RETURN);
     }
 
     @Test

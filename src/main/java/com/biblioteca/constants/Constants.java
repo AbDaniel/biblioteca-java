@@ -26,4 +26,5 @@ public interface Constants {
     int RUNNING = 0;
     String ITEM_NOT_PRESENT = "That item is either not present of invalid";
 
+    String NOT_A_VALID_BOOK_RETURN = "That is a not a valid book to return";
 }
