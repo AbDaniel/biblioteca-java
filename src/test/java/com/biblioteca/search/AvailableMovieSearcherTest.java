@@ -1,8 +1,7 @@
 package com.biblioteca.search;
 
-import com.biblioteca.model.AvailableBook;
+import com.biblioteca.listener.Listener;
 import com.biblioteca.model.AvailableMovie;
-import com.biblioteca.model.Book;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.Before;
 import org.junit.Test;
@@ -10,8 +9,10 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import static com.biblioteca.constants.Constants.MOVIE_IS_NOT_PRESENT;
 import static junit.framework.Assert.assertFalse;
 import static org.mockito.Mockito.verify;
 
@@ -22,6 +23,9 @@ public class AvailableMovieSearcherTest {
 
     @Mock
     private List<AvailableMovie> movies;
+
+    @Mock
+    private Listener listener;
 
     @Before
     public void setUp() {
@@ -46,6 +50,17 @@ public class AvailableMovieSearcherTest {
 
         assertFalse(isEmpty);
     }
+
+    @Test
+    public void shouldUpdateLisitenerIfSearchResultsIsEmpty() {
+        searcher = new AvailableMovieSearcher(new ArrayList<>(), "Winds of Winter");
+        searcher.addListener(listener);
+
+        searcher.searchResults();
+
+        verify(listener).update(MOVIE_IS_NOT_PRESENT);
+    }
+
 
     @Test
     public void shouldVerifyEqualsContract() {

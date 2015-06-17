@@ -5,6 +5,8 @@ import com.biblioteca.model.CheckedoutMovie;
 
 import java.util.List;
 
+import static com.biblioteca.constants.Constants.MOVIE_IS_NOT_VALID;
+
 public class CheckedOutMovieSearcher implements Searcher {
 
     private List<CheckedoutMovie> movies;
@@ -28,6 +30,8 @@ public class CheckedOutMovieSearcher implements Searcher {
 
     @Override
     public List<CheckedoutMovie> searchResults() {
+        if(movies.isEmpty())
+            listener.update(MOVIE_IS_NOT_VALID);
         return movies;
     }
 

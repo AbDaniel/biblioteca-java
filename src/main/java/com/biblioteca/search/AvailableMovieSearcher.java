@@ -5,6 +5,8 @@ import com.biblioteca.model.AvailableMovie;
 
 import java.util.List;
 
+import static com.biblioteca.constants.Constants.MOVIE_IS_NOT_PRESENT;
+
 public class AvailableMovieSearcher implements Searcher {
 
     private List<AvailableMovie> movies;
@@ -28,6 +30,8 @@ public class AvailableMovieSearcher implements Searcher {
 
     @Override
     public List<AvailableMovie> searchResults() {
+        if (movies.isEmpty())
+            listener.update(MOVIE_IS_NOT_PRESENT);
         return movies;
     }
 
