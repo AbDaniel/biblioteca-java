@@ -14,7 +14,6 @@ import org.mockito.Mock;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.biblioteca.constants.Constants.ITEM_NOT_PRESENT;
 import static com.biblioteca.model.Book.REGULAR_BOOK_FORMAT;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -59,16 +58,6 @@ public class LibraryTest {
         bookList.add(book);
         this.library = new Library(bookList);
         library.addListener(listener);
-    }
-
-    @Test
-    public void shouldUpdateListenerWhenItemIsNotFound() {
-        setUpWithData();
-        String bookName = "1234";
-        library.addListener(listener);
-        library.checkout(user, new AvailableBookSearcher(new ArrayList<>(), bookName));
-
-        verify(listener).update(ITEM_NOT_PRESENT);
     }
 
     @Test
@@ -153,6 +142,5 @@ public class LibraryTest {
 
         verify(searcher).addListener(listener);
     }
-
 
 }

@@ -30,7 +30,7 @@ public class CheckedOutMovieSearcher implements Searcher {
 
     @Override
     public List<CheckedoutMovie> searchResults() {
-        if(movies.isEmpty())
+        if (movies.isEmpty())
             listener.update(MOVIE_IS_NOT_VALID);
         return movies;
     }
