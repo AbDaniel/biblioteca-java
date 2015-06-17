@@ -5,6 +5,8 @@ import com.biblioteca.model.AvailableBook;
 
 import java.util.List;
 
+import static com.biblioteca.constants.Constants.BOOK_NOT_PRESENT_TEXT;
+
 public class AvailableBookSearcher implements Searcher {
 
     private List<AvailableBook> books;
@@ -28,6 +30,8 @@ public class AvailableBookSearcher implements Searcher {
 
     @Override
     public List<AvailableBook> searchResults() {
+        if (books.isEmpty())
+            listener.update(BOOK_NOT_PRESENT_TEXT);
         return books;
     }
 
