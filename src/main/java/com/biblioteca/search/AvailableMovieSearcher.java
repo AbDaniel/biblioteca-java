@@ -1,6 +1,6 @@
 package com.biblioteca.search;
 
-import com.biblioteca.model.AvailableBook;
+import com.biblioteca.listener.Listener;
 import com.biblioteca.model.AvailableMovie;
 
 import java.util.List;
@@ -9,6 +9,7 @@ public class AvailableMovieSearcher implements Searcher {
 
     private List<AvailableMovie> movies;
     private final String searchString;
+    private Listener listener;
 
     public AvailableMovieSearcher(List<AvailableMovie> movies, String searchString) {
         this.movies = movies;
@@ -39,6 +40,11 @@ public class AvailableMovieSearcher implements Searcher {
 
         return !(searchString != null ? !searchString.equals(that.searchString) : that.searchString != null);
 
+    }
+
+    @Override
+    public void addListener(Listener listener) {
+        this.listener = listener;
     }
 
     @Override

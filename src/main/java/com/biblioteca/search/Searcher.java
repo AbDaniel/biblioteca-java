@@ -1,5 +1,6 @@
 package com.biblioteca.search;
 
+import com.biblioteca.listener.Listener;
 import com.biblioteca.model.*;
 
 import java.util.List;
@@ -35,5 +36,7 @@ public interface Searcher {
     }
 
     List<? extends Borrowable> searchResults();
+
+    void addListener(Listener listener);
 
 }

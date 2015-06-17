@@ -1,7 +1,7 @@
 package com.biblioteca.search;
 
+import com.biblioteca.listener.Listener;
 import com.biblioteca.model.AvailableBook;
-import com.biblioteca.model.Book;
 
 import java.util.List;
 
@@ -9,6 +9,7 @@ public class AvailableBookSearcher implements Searcher {
 
     private List<AvailableBook> books;
     private final String searchString;
+    private Listener listener;
 
     public AvailableBookSearcher(List<AvailableBook> books, String searchString) {
         this.books = books;
@@ -28,6 +29,11 @@ public class AvailableBookSearcher implements Searcher {
     @Override
     public List<AvailableBook> searchResults() {
         return books;
+    }
+
+    @Override
+    public void addListener(Listener listener) {
+        this.listener = listener;
     }
 
     @Override

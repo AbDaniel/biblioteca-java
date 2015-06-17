@@ -1,5 +1,6 @@
 package com.biblioteca.search;
 
+import com.biblioteca.listener.Listener;
 import com.biblioteca.model.CheckedoutMovie;
 
 import java.util.List;
@@ -8,6 +9,7 @@ public class CheckedOutMovieSearcher implements Searcher {
 
     private List<CheckedoutMovie> movies;
     private final String searchString;
+    private Listener listener;
 
     public CheckedOutMovieSearcher(List<CheckedoutMovie> movies, String searchString) {
         this.movies = movies;
@@ -30,6 +32,11 @@ public class CheckedOutMovieSearcher implements Searcher {
     }
 
     @Override
+    public void addListener(Listener listener) {
+        this.listener = listener;
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -44,4 +51,5 @@ public class CheckedOutMovieSearcher implements Searcher {
     public int hashCode() {
         return searchString != null ? searchString.hashCode() : 0;
     }
+
 }
