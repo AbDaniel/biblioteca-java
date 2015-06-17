@@ -16,8 +16,6 @@ import java.util.List;
 
 import static com.biblioteca.constants.Constants.ITEM_NOT_PRESENT;
 import static com.biblioteca.model.Book.REGULAR_BOOK_FORMAT;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.MockitoAnnotations.initMocks;
@@ -140,6 +138,13 @@ public class LibraryTest {
         library.returnItem(user, new CheckedOutBookSearcher(books, bookName));
 
         verify(bookList).add(availableBook);
+    }
+
+    @Test
+    public void shouldAddLisitenerToSearcherDuringCheckout() {
+        library.checkout(user, searcher);
+
+        verify(searcher).addListener(listener);
     }
 
 
