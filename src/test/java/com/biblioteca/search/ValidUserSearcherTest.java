@@ -11,6 +11,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import java.util.ArrayList;
 import java.util.List;
 
+import static junit.framework.Assert.assertNotNull;
 import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -33,6 +34,18 @@ public class ValidUserSearcherTest {
         searcher.visit(user);
 
         verify(users).add(user);
+    }
+
+    @Test
+    public void shouldFindTheUserMatchingTheCredentials() {
+        users = new ArrayList<>();
+        searcher = new ValidUserSearcher(users, "111-1111", "onering");
+        User user = new User("111-1111", "sauron", "onering", new ArrayList<>());
+
+        searcher.visit(user);
+        User actual = searcher.result();
+
+        assertNotNull(actual);
     }
 
     @Test

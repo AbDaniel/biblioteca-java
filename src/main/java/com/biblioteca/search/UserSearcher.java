@@ -17,4 +17,5 @@ public interface UserSearcher {
 
     void addListener(Listener listener);
 
+    User result();
 }

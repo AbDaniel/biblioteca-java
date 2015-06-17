@@ -9,13 +9,13 @@ import static com.biblioteca.constants.Constants.BOOK_NOT_PRESENT_TEXT;
 
 public class ValidUserSearcher implements UserSearcher {
 
-    private List<User> user;
+    private List<User> users;
     private final String userName;
     private final String password;
     private Listener listener;
 
-    public ValidUserSearcher(List<User> user, String userName, String password) {
-        this.user = user;
+    public ValidUserSearcher(List<User> users, String userName, String password) {
+        this.users = users;
         this.userName = userName;
         this.password = password;
     }
@@ -32,19 +32,24 @@ public class ValidUserSearcher implements UserSearcher {
 
     @Override
     public void visit(User user) {
-        this.user.add(user);
+        this.users.add(user);
     }
 
     @Override
     public List<User> searchResults() {
-        if (user.isEmpty())
+        if (users.isEmpty())
             listener.update(BOOK_NOT_PRESENT_TEXT);
-        return user;
+        return users;
     }
 
     @Override
     public void addListener(Listener listener) {
         this.listener = listener;
+    }
+
+    @Override
+    public User result() {
+        return users.stream().findFirst().orElse(null);
     }
 
     @Override
