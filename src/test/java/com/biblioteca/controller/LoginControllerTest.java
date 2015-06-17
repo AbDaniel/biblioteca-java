@@ -1,7 +1,7 @@
 package com.biblioteca.controller;
 
 import com.biblioteca.action.Login;
-import com.biblioteca.action.Parser;
+import com.biblioteca.parser.Parser;
 import com.biblioteca.listener.ExitLogoutListener;
 import com.biblioteca.listener.LoginListener;
 import com.biblioteca.model.User;

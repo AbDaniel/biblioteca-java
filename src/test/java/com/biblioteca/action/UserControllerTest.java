@@ -4,6 +4,7 @@ import com.biblioteca.controller.UserController;
 import com.biblioteca.enums.MenuItem;
 import com.biblioteca.listener.ExitLogoutListener;
 import com.biblioteca.model.User;
+import com.biblioteca.parser.Parser;
 import com.biblioteca.repository.Library;
 import com.biblioteca.view.MenuView;
 import org.junit.Before;
