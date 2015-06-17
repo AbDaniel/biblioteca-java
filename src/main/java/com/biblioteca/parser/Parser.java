@@ -24,13 +24,11 @@ import static com.biblioteca.model.Movie.REGULAR_MOVIE_FORMAT;
 
 public class Parser {
 
-    Library bookLibrary;
-    private Library movieLibrary;
+    private Library borrowableLibrary;
     private Accounts accounts;
 
-    public Parser(Library bookLibrary, Library movieLibrary, Accounts accounts) {
-        this.bookLibrary = bookLibrary;
-        this.movieLibrary = movieLibrary;
+    public Parser(Library borrowableLibrary, Accounts accounts) {
+        this.borrowableLibrary = borrowableLibrary;
         this.accounts = accounts;
     }
 
@@ -38,22 +36,22 @@ public class Parser {
         MenuItem selectedMenuItem = userChoice.getKey();
         switch (selectedMenuItem) {
             case LIST_BOOKS:
-                return new ListLibrary(bookLibrary, (ListView) LIST_BOOKS.view(), new AvailableBookVisitor(
+                return new ListLibrary(borrowableLibrary, (ListView) LIST_BOOKS.view(), new AvailableBookVisitor(
                         new ArrayList<>(), REGULAR_BOOK_FORMAT));
             case LIST_MOVIES:
-                return new ListLibrary(movieLibrary, (ListView) LIST_MOVIES.view(), new AvailableMovieVisitor(
+                return new ListLibrary(borrowableLibrary, (ListView) LIST_MOVIES.view(), new AvailableMovieVisitor(
                         new ArrayList<>(), REGULAR_MOVIE_FORMAT));
             case CHECKOUT_BOOK:
-                return new Checkout(bookLibrary, user, new AvailableBookSearcher(new
+                return new Checkout(borrowableLibrary, user, new AvailableBookSearcher(new
                         ArrayList<>(), userChoice.getValue()));
             case CHECKOUT_MOVIE:
-                return new Checkout(movieLibrary, user, new AvailableMovieSearcher(new
+                return new Checkout(borrowableLibrary, user, new AvailableMovieSearcher(new
                         ArrayList<>(), userChoice.getValue()));
             case RETURN_BOOK:
-                return new Return(bookLibrary, user, new CheckedOutBookSearcher(new
+                return new Return(borrowableLibrary, user, new CheckedOutBookSearcher(new
                         ArrayList<>(), userChoice.getValue()));
             case RETURN_MOVIE:
-                return new Return(movieLibrary, user, new CheckedOutMovieSearcher(new
+                return new Return(borrowableLibrary, user, new CheckedOutMovieSearcher(new
                         ArrayList<>(), userChoice.getValue()));
             case INVALID:
                 return new Invalid();

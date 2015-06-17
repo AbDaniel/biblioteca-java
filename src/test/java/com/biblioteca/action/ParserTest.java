@@ -31,27 +31,24 @@ import static junit.framework.TestCase.assertEquals;
 @RunWith(MockitoJUnitRunner.class)
 public class ParserTest {
 
-    Parser parser;
+    private Parser parser;
 
     @Mock
-    Library bookLibrary;
+    private Library borrowableLibrary;
 
     @Mock
-    Library movieLibray;
+    private User user;
 
     @Mock
-    User user;
+    private Searcher searcher;
 
     @Mock
-    Searcher searcher;
+    private Accounts accounts;
 
     @Mock
-    Accounts accounts;
+    private CheckedoutBookVisitor checkedoutBookVisitor;
 
-    BorrowableDefaulterVisitor borrowableDefaulterVisitor;
-
-    @Mock
-    CheckedoutBookVisitor checkedoutBookVisitor;
+    private BorrowableDefaulterVisitor borrowableDefaulterVisitor;
 
     private String bookName;
 
@@ -59,13 +56,13 @@ public class ParserTest {
 
     @Before
     public void setUp() throws Exception {
-        parser = new Parser(bookLibrary, movieLibray, accounts);
+        parser = new Parser(borrowableLibrary, accounts);
     }
 
     @Test
     public void shouldReturnListBookActionWhenUserSelectsListBook() {
         userChoice = new SimpleEntry<>(LIST_BOOKS, null);
-        ListLibrary expected = new ListLibrary(bookLibrary, (ListView) userChoice.getKey().view(),
+        ListLibrary expected = new ListLibrary(borrowableLibrary, (ListView) userChoice.getKey().view(),
                 new AvailableBookVisitor(new ArrayList<>(), REGULAR_BOOK_FORMAT));
 
         Action actualAction = parser.getAction(userChoice, user);
@@ -78,7 +75,7 @@ public class ParserTest {
     public void shouldReturnListMoviesActionWhenUserSelectsListBook() {
         MenuItem item = LIST_MOVIES;
         userChoice = new SimpleEntry<>(item, null);
-        ListLibrary expected = new ListLibrary(movieLibray, (ListView) item.view(),
+        ListLibrary expected = new ListLibrary(borrowableLibrary, (ListView) item.view(),
                 new AvailableMovieVisitor(new ArrayList<>(), REGULAR_MOVIE_FORMAT));
 
         Action actualAction = parser.getAction(userChoice, user);
@@ -91,7 +88,7 @@ public class ParserTest {
         MenuItem item = CHECKOUT_BOOK;
         userChoice = new SimpleEntry<>(item, "Lord of the Rings");
         Searcher searcher = new AvailableBookSearcher(new ArrayList<>(), "Lord of the Rings");
-        Checkout expected = new Checkout(bookLibrary, user, searcher);
+        Checkout expected = new Checkout(borrowableLibrary, user, searcher);
 
         Action actualAction = parser.getAction(userChoice, user);
 
@@ -103,7 +100,7 @@ public class ParserTest {
         MenuItem item = CHECKOUT_MOVIE;
         userChoice = new SimpleEntry<>(item, "Lord of the Rings");
         Searcher searcher = new AvailableMovieSearcher(new ArrayList<>(), "Lord of the Rings");
-        Checkout expected = new Checkout(movieLibray, user, searcher);
+        Checkout expected = new Checkout(borrowableLibrary, user, searcher);
 
         Action actualAction = parser.getAction(userChoice, user);
 
@@ -115,7 +112,7 @@ public class ParserTest {
         MenuItem item = RETURN_BOOK;
         userChoice = new SimpleEntry<>(item, "Lord of the Rings");
         Searcher searcher = new CheckedOutBookSearcher(new ArrayList<>(), "Lord of the Rings");
-        Return expected = new Return(bookLibrary, user, searcher);
+        Return expected = new Return(borrowableLibrary, user, searcher);
 
         Action actualAction = parser.getAction(userChoice, user);
 
@@ -127,7 +124,7 @@ public class ParserTest {
         MenuItem item = RETURN_MOVIE;
         userChoice = new SimpleEntry<>(item, "Lord of the Rings");
         Searcher searcher = new CheckedOutMovieSearcher(new ArrayList<>(), "Lord of the Rings");
-        Return expected = new Return(movieLibray, user, searcher);
+        Return expected = new Return(borrowableLibrary, user, searcher);
 
         Action actualAction = parser.getAction(userChoice, user);
 

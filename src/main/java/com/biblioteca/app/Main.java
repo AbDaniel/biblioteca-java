@@ -27,23 +27,12 @@ public class Main {
         LibrarianMenuView librarianMenuView = new LibrarianMenuView(scanner);
         MenuView menuView = new MenuView(scanner, subMenuView);
 
-        Library bookLibrary = new Library(loadBorrowables(view));
-        Library movieLibrary = new Library(loadMovie(view));
-        bookLibrary.addListener(view);
-        movieLibrary.addListener(view);
-
         List<User> users = loadUsers();
-
-        Accounts accounts = new Accounts(users);
-        accounts.addListener(view);
-
-        Parser parser = new Parser(bookLibrary, movieLibrary, accounts);
-
+        Parser parser = loadParser(view, users);
         Login login = new Login(users);
 
         UserController userController = new UserController(menuView, parser);
         Map<User, Controller> controllers = loadControllers(users, userController, librarianMenuView, parser);
-
         LoginController loginController = new LoginController(login, view, controllers);
 
         BibliotecaApp bibliotecaApp = new BibliotecaApp(WELCOME_TEXT, view, loginController);
@@ -57,18 +46,20 @@ public class Main {
         return users;
     }
 
+    private static Parser loadParser(View view, List<User> users) {
+        Accounts accounts = new Accounts(users);
+        accounts.addListener(view);
+        Library borrowableLibrary = new Library(loadBorrowables(view));
+        borrowableLibrary.addListener(view);
+        return new Parser(borrowableLibrary, accounts);
+    }
+
     private static List<Borrowable> loadBorrowables(View view) {
         List<Borrowable> availables = new ArrayList<>();
         availables.add(new AvailableBook("Lord of the Rings", "JR Toliken", 1930));
         availables.add(new AvailableBook("Harry Potter", "JK Rowling", 1992));
         availables.add(new AvailableBook("Catch-22", "Joesph Heller", 1950));
         availables.add(new AvailableBook("Winds of Winter", "George RR Martin", 2017));
-        availables.forEach(borrowable -> borrowable.addListener(view));
-        return availables;
-    }
-
-    private static List<Borrowable> loadMovie(View view) {
-        List<Borrowable> availables = new ArrayList<>();
         availables.add(new AvailableMovie("The Matrix", "The Wachowskis", 1999, 10));
         availables.add(new AvailableMovie("Departed", "Martin Scorsese", 2005, 8));
         availables.add(new AvailableMovie("The Dark Knight", "Nolan", 2008, 10));
