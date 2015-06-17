@@ -147,5 +147,12 @@ public class LibraryTest {
         verify(searcher).addListener(listener);
     }
 
+    @Test
+    public void shouldAddLisitenerToSearcherDuringReturn() {
+        library.returnItem(user, searcher);
+
+        verify(searcher).addListener(listener);
+    }
+
 
 }
