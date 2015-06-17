@@ -3,9 +3,12 @@ package com.biblioteca.controller;
 import com.biblioteca.action.Login;
 import com.biblioteca.listener.ExitLogoutListener;
 import com.biblioteca.listener.LoginListener;
+import com.biblioteca.search.UserSearcher;
+import com.biblioteca.search.ValidUserSearcher;
 import com.biblioteca.view.View;
 import com.biblioteca.model.User;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 import static com.biblioteca.constants.Constants.*;
@@ -33,7 +36,8 @@ public class LoginController {
             String libraryNo = view.getString();
             view.displayMessage(ENTER_PASSWORD);
             String password = view.getString();
-            user = login.login(libraryNo, password);
+            UserSearcher searcher = new ValidUserSearcher(new ArrayList<>(), libraryNo, password);
+            user = login.login(searcher);
             if (user == null) {
                 view.displayMessage(INVALID_CREDENTIALS);
             }

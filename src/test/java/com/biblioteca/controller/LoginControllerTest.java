@@ -1,10 +1,12 @@
 package com.biblioteca.controller;
 
 import com.biblioteca.action.Login;
-import com.biblioteca.parser.Parser;
 import com.biblioteca.listener.ExitLogoutListener;
 import com.biblioteca.listener.LoginListener;
 import com.biblioteca.model.User;
+import com.biblioteca.parser.Parser;
+import com.biblioteca.search.UserSearcher;
+import com.biblioteca.search.ValidUserSearcher;
 import com.biblioteca.view.MenuView;
 import com.biblioteca.view.View;
 import org.junit.Before;
@@ -13,7 +15,6 @@ import org.junit.Test;
 import org.junit.contrib.java.lang.system.TextFromStandardInputStream;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import java.io.ByteArrayOutputStream;
@@ -82,7 +83,7 @@ public class LoginControllerTest {
         loginController = new LoginController(login, view, controllers);
         loginController.addExitLogoutListener(listener);
         loginController.addLoginListener(loginListener);
-        when(login.login(Mockito.anyString(), Mockito.anyString())).thenReturn(user);
+        when(login.login(any(UserSearcher.class))).thenReturn(user);
     }
 
     @Test
@@ -122,6 +123,22 @@ public class LoginControllerTest {
         loginController.execute();
 
         verify(controllers).get(user);
+    }
+
+    @Test
+    public void shouldRequestLoginToProvideUserUsingSearcher() {
+        systemInMock.provideText("111-1111\nonering\n");
+        login = mock(Login.class);
+        View view = new View(new Scanner(System.in));
+        loginController = new LoginController(login, view, controllers);
+        loginController.addExitLogoutListener(listener);
+        loginController.addLoginListener(loginListener);
+        UserSearcher searcher = new ValidUserSearcher(new ArrayList<>(), "111-1111", "onering");
+        when(login.login(any(UserSearcher.class))).thenReturn(user);
+
+        loginController.execute();
+
+        verify(login).login(searcher);
     }
 
 }

@@ -38,10 +38,11 @@ public class Parser {
         MenuItem selectedMenuItem = userChoice.getKey();
         switch (selectedMenuItem) {
             case LIST_BOOKS:
-                return new ListLibrary(bookLibrary, (ListView) LIST_BOOKS.view(), new AvailableBookVisitor(new ArrayList<>(), REGULAR_BOOK_FORMAT));
+                return new ListLibrary(bookLibrary, (ListView) LIST_BOOKS.view(), new AvailableBookVisitor(
+                        new ArrayList<>(), REGULAR_BOOK_FORMAT));
             case LIST_MOVIES:
-                return new ListLibrary(movieLibrary, (ListView) LIST_MOVIES.view(), new AvailableMovieVisitor(new
-                        ArrayList<>(), REGULAR_MOVIE_FORMAT));
+                return new ListLibrary(movieLibrary, (ListView) LIST_MOVIES.view(), new AvailableMovieVisitor(
+                        new ArrayList<>(), REGULAR_MOVIE_FORMAT));
             case CHECKOUT_BOOK:
                 return new Checkout(bookLibrary, user, new AvailableBookSearcher(new
                         ArrayList<>(), userChoice.getValue()));
